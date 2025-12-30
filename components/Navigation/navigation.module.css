@@ -1,0 +1,39 @@
+.navigation {
+  width: 100%;
+  height: calc(100% - 50px);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.navigation li {
+  margin-bottom: 40px;
+}
+.navigation li a {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  grid-gap: 25px;
+}
+.navigation li:last-child a {
+  margin-bottom: 0;
+}
+.navigation li:hover,
+.navigation li:hover a svg {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+.navigation li p {
+  font-size: 16px;
+  line-height: 20px;
+}
+.navigation li.active {
+  color: var(--primary-color);
+}
+.navigation li svg,
+.navigation li a svg {
+  width: 25px;
+  height: 25px;
+  color: var(--icon-color);
+}
+.navigation li.active svg {
+  color: var(--primary-color);
+}

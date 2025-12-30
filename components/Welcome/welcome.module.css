@@ -1,0 +1,24 @@
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 50px 150px;
+}
+.welcome p {
+  text-align: left;
+  font-size: 16px;
+  color: var(--icon-color);
+  margin-bottom: 16px;
+}
+.title {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 48px;
+  line-height: 54.5px;
+  margin-bottom: 35px;
+}
+.title span {
+  color: var(--green-color);
+}

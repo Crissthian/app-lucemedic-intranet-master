@@ -1,0 +1,47 @@
+.searchFilters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 5px;
+  grid-column-gap: 10px;
+  margin-bottom: 20px;
+}
+input.textField {
+  width: 100%;
+  background: var(--white-color);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  outline: none;
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 20px;
+  transition: all .2s ease-in-out;
+}
+/* input.textField:hover,
+input.textField:active {
+  background: var(--white-color);
+  color: var(--text-color);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  transition: all .2s ease-in-out;
+} */
+select.selectField {
+  width: 100%;
+  border: none;
+  outline: none;
+  box-sizing: none;
+  padding: 15px 16px;
+  background: var(--white-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 5px 0;
+}
+/* select.selectField:hover,
+select.selectField:active {
+  background: var(--white-color);
+  color: var(--text-color);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  transition: all .2s ease-in-out;
+} */

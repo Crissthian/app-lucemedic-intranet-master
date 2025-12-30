@@ -1,0 +1,138 @@
+.backButton {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.417px;
+  line-height: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: var(--table-header-color);
+  max-width: 90px;
+}
+
+.backButton:hover {
+  color: var(--blue-color);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.patientName {
+  font-size: 20px;
+  line-height: 40px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--table-header-color);
+}
+
+.dataTable {
+  max-width: 600px;
+  margin: 25px auto 0 auto;
+  max-height: 650px;
+}
+
+.dataTableHeader {
+  background: var(--bg-color);
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  color: var(--table-header-color);
+  text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 0.417px;
+  font-size: 12px;
+}
+
+.dataTableHeader div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dataTableHeader div svg {
+  margin-right: 5px;
+}
+
+.dataTableBody {
+  margin: 5px 0;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.dataTableBody::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dataTableBody::-webkit-scrollbar-track {
+  padding: 2px 0;
+  background: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.dataTableBody::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.dataTableRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px dashed #A2C0D4;
+  margin: 0 15px;
+  font-size: 12px;
+}
+
+.dataTableRow:last-child {
+  border-bottom: none;
+}
+
+.dataTableRow div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dataTableRow div:last-child {
+  padding-left: 25px;
+}
+
+.dataTableRow div svg {
+  width: 28px;
+  height: 28px;
+  color: var(--icon-color);
+}
+
+.dataTableRow div svg:hover {
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.empty svg {
+  width: 40px;
+  height: 40px;
+  margin: 10px auto;
+}
+
+.empty p {
+  color: #0064D2;
+  font-size: 16px;
+  text-transform: uppercase;
+}

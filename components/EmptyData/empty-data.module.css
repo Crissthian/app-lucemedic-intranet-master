@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+.container svg {
+  width: 28px;
+  height: 32px;
+}

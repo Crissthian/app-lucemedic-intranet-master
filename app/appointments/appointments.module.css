@@ -1,0 +1,73 @@
+.main {
+  display: grid;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 20px;
+  padding: 0 5rem;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+}
+
+.title span {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.container {
+  padding: 50px 120px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  max-width: 250px;
+  text-align: left;
+  cursor: pointer;
+  background: var(--primary-color);
+  padding: 20px 20px 20px 30px;
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.button svg {
+  font-size: 30px;
+  margin-right: 15px;
+  color: #1EE67D;
+}
+
+.button:hover {
+  background: var(--primary-color-hover);
+  transition: all 0.3s ease;
+}
+
+.footer {
+  margin: 25px auto;
+  text-align: center;
+}
+
+.message {
+  margin: 10px auto;
+}
+
+.message > p:first-child {
+  font-size: 18px;
+  color: var(--primary-color);
+}

@@ -1,0 +1,91 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr .8fr;
+  min-height: 100vh;
+}
+.leftPanel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  flex-direction: column;
+  padding: 10rem 0 3rem 0;
+}
+.rightPanel {
+  padding: 0 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--primary-color);
+}
+.title {
+  font-weight: 700;
+  margin-bottom: 65px;
+}
+.title h3 {
+  font-size: 24px;
+  color: white;
+  text-transform: uppercase;
+}
+.formAuth {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+}
+.formAuth button {
+  margin: 20px auto;
+  width: 200px;
+  cursor: pointer;
+  border: none;
+  border-radius: 24px;
+  padding: 16px;
+  font-size: 20px;
+  background: var(--green-color);
+  opacity: 1;
+  transition: all .2s;
+  color: #fff;
+  text-transform: uppercase;
+}
+.formAuth button:hover {
+  cursor: pointer;
+  opacity: .7;
+  transition: all .2s;
+}
+.formFooter {
+  margin-top: 40px;
+}
+.formFooter p {
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+}
+.formPhone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formPhone div {
+  margin-left: 10px
+}
+.formPhone div p:first-child {
+  font-size: 20px;
+}
+.formPhone div p:nth-child(2) {
+  font-size: 16px;
+}
+.formPhone div p {
+  color: #fff;
+  text-transform: uppercase;
+}
+.formFooterLabel {
+  margin-top: 10px;
+  padding: 0 50px;
+  font-size: 14px;
+}
+.formPhone svg {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}

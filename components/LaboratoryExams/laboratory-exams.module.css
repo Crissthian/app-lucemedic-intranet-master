@@ -1,0 +1,63 @@
+.container {
+  max-width: 370px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+  display: grid;
+  grid-template-columns: 55px 1fr;
+}
+.icon {
+  background: var(--green-color-light);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon svg {
+  color: #fff;
+  width: 30px;
+  height: 30px;
+}
+.info {
+  padding-left: 14px;
+}
+.info h2 {
+  font-size: 16px;
+  letter-spacing: 0.1px;
+  margin-bottom: 15px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.card {
+  padding: 14px 16px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+}
+.card div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card div svg {
+  color: var(--red-color);
+  width: 25px;
+  height: 25px;
+}
+.card div p {
+  color: var(--blue-color);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 40px;
+}
+.card p {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 15.5px;
+  letter-spacing: 0.1px;
+  text-align: center;
+}

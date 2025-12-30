@@ -1,0 +1,29 @@
+.textField {
+  width: 100%;
+  background: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--input-color);
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  margin: 7.5px auto;
+}
+.textField input {
+  width: 100%;
+  font-size: 16px;
+  margin-left: 10px;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  color: var(--input-color);
+  font-weight: 500;
+  line-height: 20px;
+  background: #fff;
+}
+.textField input::placeholder {
+  text-transform: uppercase;
+  color: var(--input-color);
+}

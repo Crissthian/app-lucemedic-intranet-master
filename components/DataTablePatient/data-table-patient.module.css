@@ -1,0 +1,119 @@
+.container {
+  max-height: 650px;
+}
+
+.header {
+  background: var(--bg-color);
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 600px repeat(4, 1fr);
+  gap: 5px;
+  align-items: center;
+  color: var(--table-header-color);
+  text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 0.417px;
+  font-size: 12px;
+}
+
+.header svg {
+  margin-right: 3px;
+}
+
+.body {
+  margin: 5px 0;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.body::-webkit-scrollbar-track {
+  padding: 2px 0;
+  background: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.dataTableItem {
+  display: grid;
+  grid-template-columns: 600px repeat(4, 1fr);
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px dashed #a2c0d4;
+  margin: 0 15px;
+}
+.dataTableItem:last-child {
+  border-bottom: none;
+}
+.dataTableItem div svg {
+  width: 28px;
+  height: 28px;
+  color: var(--icon-color);
+}
+.dataTableItem div svg:hover {
+  cursor: pointer;
+}
+.title {
+  font-size: 18px;
+  line-height: 20px;
+}
+.subtitle {
+  text-transform: uppercase;
+  margin: 5px 0;
+  font-size: 11px;
+}
+.subtitle span {
+  font-size: 10px;
+  margin: 5px 7px;
+}
+.subtitle span:first-child {
+  margin-left: 0;
+}
+.dataTableFooter {
+  margin: 15px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+.dataTableItemActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.status {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.417px;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 12px;
+  letter-spacing: 0.417px;
+  color: var(--table-header-color);
+}
+
+.empresa {
+  font-size: 11px;
+}
+
+.sede {
+  font-size: 11px;
+  letter-spacing: 0.417px;
+  color: var(--table-header-color);
+  padding-left: 10px;
+}

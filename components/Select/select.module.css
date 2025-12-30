@@ -1,0 +1,28 @@
+.selectField {
+  background: var(--white-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='8' viewBox='0 0 13 8' fill='none'%3E%3Cpath d='M12.4609 1.3164C12.5156 1.38932 12.5429 1.47135 12.5429 1.5625C12.5429 1.65364 12.5156 1.72656 12.4609 1.78125L6.74608 7.52342C6.67316 7.57811 6.59113 7.60545 6.49999 7.60545C6.40884 7.60545 6.33592 7.57811 6.28124 7.52342L0.539062 1.78125C0.484375 1.72656 0.457031 1.65364 0.457031 1.5625C0.457031 1.47135 0.484375 1.38932 0.539062 1.3164L1.08594 0.769531C1.14062 0.714844 1.21354 0.6875 1.30469 0.6875C1.39583 0.6875 1.47786 0.714844 1.55078 0.769531L6.49999 5.71874L11.4492 0.769531C11.5221 0.714844 11.6041 0.6875 11.6953 0.6875C11.7864 0.6875 11.8593 0.714844 11.914 0.769531L12.4609 1.3164Z' fill='%23A2C0D4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  border-radius: 8px;
+  border: 1px solid var(--white-color);
+  box-shadow: none;
+  outline: none;
+  padding: 10px 16px;
+  color: var(--table-header-color);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 40px;
+  transition: all .2s;
+}
+
+.selectField:hover,
+.selectField:active,
+.selectField:focus {
+  border: 1px solid var(--green-color);
+  transition: all .2s;
+}

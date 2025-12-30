@@ -1,0 +1,52 @@
+.container {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 20px;
+}
+
+.overview {
+  display: grid;
+  gap: 20px;
+}
+
+.backButton {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.417px;
+  line-height: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: var(--table-header-color);
+  max-width: 90px;
+}
+
+.backButton:hover {
+  color: var(--blue-color);
+}
+
+.patientName {
+  margin: 10px auto;
+  font-size: 20px;
+  line-height: 40px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--table-header-color);
+}
+
+.footer {
+  width: 100%;
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.footerPatient {
+
+  width: 100%;
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}

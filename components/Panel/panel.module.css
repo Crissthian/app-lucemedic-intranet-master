@@ -1,0 +1,52 @@
+.panelWrapper {
+  padding-bottom: 50px;
+  min-height: 650px;
+  height: auto;
+}
+.panel {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+  overflow-y: scroll;
+  height: 100%;
+}
+.panel::-webkit-scrollbar {
+  width: 8px;
+}
+.panel::-webkit-scrollbar-track {
+  padding: 2px 0;
+  background: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.panel::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+.loaderContainer {
+  width: 100%;
+  height: 100%;
+  min-height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.loaderContainer > p {
+  color: var(--icon-color);
+  font-size: 13px;
+  animation: loading 1s infinite;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

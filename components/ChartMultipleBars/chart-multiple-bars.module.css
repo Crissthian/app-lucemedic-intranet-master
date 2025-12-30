@@ -1,0 +1,46 @@
+.graphContainer {
+  margin-top: 10px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.bar {
+  background: #F1F5F8;
+  border-radius: 5px;
+  height: 250px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.inner {
+  background: #0073ED;
+  width: 100%;
+  border-radius: 7px;
+}
+.innerGreen {
+  background: #8E3DBA;
+  width: 100%;
+  border-radius: 7px;
+}
+.graphFooter {
+  margin-bottom: 5px;
+  display: grid;
+  gap: 10px;
+}
+.graphFooter > p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #4F4F4F;
+}
+.graphFooter > p > span {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 10px;
+  color: #414D55;
+  display: block;
+  margin-top: 5px;
+}

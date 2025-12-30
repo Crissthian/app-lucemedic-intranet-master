@@ -1,0 +1,77 @@
+.main {
+  display: grid;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 20px;
+  padding: 0 5rem;
+}
+h1.title {
+  font-size: 24px;
+  color: var(--primary-color);
+  line-height: 40px;
+  text-transform: uppercase;
+  text-align: right;
+}
+.settings {
+  padding: 0 60px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+.account {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.rowInput {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+.rowInput label {
+  font-size: 14px;
+  color: var(--table-header-color);
+  margin-bottom: 10px;
+}
+.logout {
+  font-size: 14px;
+  color: var(--table-header-color);
+}
+.logout:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+.dragAndDropArea {
+  cursor: pointer;
+  border-radius: 20px;
+  width: 400px;
+  height: 400px;
+  background: #FAFBFD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all .3s;
+}
+.dragAndDropArea svg {
+  opacity: .5;
+}
+.dragAndDropArea p {
+  margin-top: 10px;
+  color: var(--table-header-color);
+  opacity: .5;
+}
+.dragAndDropArea:hover {
+  background: #F0F2F5;
+  transition: all .3s;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

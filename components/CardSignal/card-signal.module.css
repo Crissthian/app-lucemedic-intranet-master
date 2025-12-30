@@ -1,0 +1,39 @@
+.cardSignal {
+  max-width: 178px;
+  padding: 18px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.cardSignal > div:first-child {
+  border-radius: 8px;
+  background: var(--green-color-light);
+  padding: 25px 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardSignal > div:first-child > svg {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+}
+.cardSignal > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 0 16px;
+}
+.cardSignal > div:nth-child(2) > p:first-child {
+  font-size: 20px;
+  color: var(--blue-color);
+  line-height: 40px;
+  font-weight: 300;
+}
+.cardSignal > div:nth-child(2) > p:nth-child(2) {
+  font-size: 13px;
+  color: var(--table-header-color);
+}
