@@ -39,3 +39,4 @@ yarn.lock
 .env
 /temp/
 app.log
+.npm-cache/
