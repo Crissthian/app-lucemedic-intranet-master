@@ -9,13 +9,15 @@ export interface User {
   ruc: number
   empresa: string
   photoUrl?: string
+  cmp?: string
+  phone?: string
+  birthDate?: string
 }
 
 const useUserProfile = () => {
-  const [userProfile, setUserProfile] = useState<User | null>(null) // Inicializamos el perfil como null
+  const [userProfile, setUserProfile] = useState<User | null>(null)
 
   useEffect(() => {
-    // Obtener el perfil de usuario desde localStorage al montar el componente
     const profile = localStorage.getItem('profileLogged')
     if (profile) {
       try {
@@ -25,10 +27,13 @@ const useUserProfile = () => {
           lastName: parsedProfile.last_name || '',
           dni: parsedProfile.dni || '',
           email: parsedProfile.email || '',
-          profile: parsedProfile.profile ?? -1, // fallback para el perfil numérico
+          profile: parsedProfile.profile ?? -1,
           ruc: parsedProfile.ruc || 0,
           empresa: parsedProfile.business_name || '',
-          photoUrl: parsedProfile.photo_url || ''
+          photoUrl: parsedProfile.photo_url || '',
+          cmp: parsedProfile.cmp || '',
+          phone: parsedProfile.phone || '',
+          birthDate: parsedProfile.birth_date || ''
         })
       } catch (error) {
         console.error('Error parsing user profile:', error)

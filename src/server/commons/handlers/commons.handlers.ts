@@ -286,7 +286,7 @@ export async function handleUploadPhoto(
     )
     const localFile = await commonsService.getPhoto(fileName)
 
-    await commonsService.updatePhotoURL(localFile, String(auth.user.sub ?? ''))
+    await commonsService.updatePhotoURL(fileName, String(auth.user.sub ?? ''))
 
     return NextResponse.json(
       {
@@ -356,6 +356,51 @@ export async function handleGetPhoto(
       {
         status: false,
         message: 'Error while trying to download photo.'
+      },
+      { status: 500 }
+    )
+  }
+}
+
+export async function handleDeletePhoto(
+  request: NextRequest,
+  photoId: string | undefined
+): Promise<NextResponse> {
+  const auth = authenticateRequest(request)
+
+  if (!auth.ok) {
+    return auth.response
+  }
+
+  if (!photoId) {
+    return NextResponse.json(
+      {
+        status: false,
+        message: 'Missing photo id'
+      },
+      { status: 400 }
+    )
+  }
+
+  try {
+    logger.info(`Deleting photo: ${photoId}`)
+
+    await commonsService.deletePhoto(photoId)
+
+    return NextResponse.json(
+      {
+        status: true,
+        message: 'Photo deleted successfully.'
+      },
+      { status: 200 }
+    )
+  } catch (error: unknown) {
+    logger.error((error as Error).message)
+
+    return NextResponse.json(
+      {
+        status: false,
+        message: 'Error while trying to delete photo.'
       },
       { status: 500 }
     )

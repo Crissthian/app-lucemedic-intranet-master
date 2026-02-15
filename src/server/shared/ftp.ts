@@ -80,6 +80,16 @@ export class FTPClient {
         `Connected to FTP ${hostToUse}. Uploading to: ftp://${hostToUse}${remoteFilePath}`
       )
 
+      // Ensure the remote directory exists before uploading
+      const remoteDir = remoteFilePath.substring(
+        0,
+        remoteFilePath.lastIndexOf('/')
+      )
+      if (remoteDir) {
+        await client.ensureDir(remoteDir)
+        await client.cd('/')
+      }
+
       await client.uploadFrom(localFilePath, remoteFilePath)
 
       logger.info(`File uploaded: ${localFilePath} | ${remoteFilePath}`)
@@ -87,6 +97,39 @@ export class FTPClient {
       return true
     } catch (error: unknown) {
       logger.error(`FTP Error while uploading file ${remoteFilePath}: ${error}`)
+      throw error
+    } finally {
+      client.close()
+    }
+  }
+
+  async deleteFile(remoteFilePath: string): Promise<boolean> {
+    const client = new ftp.Client()
+    client.ftp.verbose = true
+
+    try {
+      const hostToUse = FTP_HOST
+      const userToUse = FTP_USER
+      const passwordToUse = FTP_PASSWORD
+
+      await client.access({
+        host: hostToUse,
+        user: userToUse,
+        password: passwordToUse,
+        secure: false
+      })
+
+      logger.info(
+        `Connected to FTP ${hostToUse}. Deleting: ftp://${hostToUse}${remoteFilePath}`
+      )
+
+      await client.remove(remoteFilePath)
+
+      logger.info(`File deleted: ${remoteFilePath}`)
+
+      return true
+    } catch (error: unknown) {
+      logger.error(`FTP Error while deleting file ${remoteFilePath}: ${error}`)
       throw error
     } finally {
       client.close()

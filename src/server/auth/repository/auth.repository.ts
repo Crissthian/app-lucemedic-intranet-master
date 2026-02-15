@@ -61,13 +61,25 @@ export default class AuthRepository implements IAuthRepository {
 
   async update(dni: string, data: UserUpdateDTO): Promise<boolean> {
     try {
-      const query = `UPDATE m_User_Intranet SET usr_apellidos='${data.lastName}',usr_nombres='${data.firstName}', usr_mail='${data.email}', usr_foto='',CMP='${data.cmp}' where dni='${dni}'`
+      const query = `UPDATE m_User_Intranet SET usr_apellidos='${data.lastName}',usr_nombres='${data.firstName}', usr_mail='${data.email}', CMP='${data.cmp}' WHERE dni='${dni}'`
 
       await this.database.query<User>(query)
 
       return true
     } catch (error: unknown) {
-      throw new Error('Error al obtener los datos del usuario')
+      throw new Error('Error al actualizar los datos del usuario')
+    }
+  }
+
+  async updatePhoto(dni: string, photoFileName: string): Promise<boolean> {
+    try {
+      const query = `UPDATE m_User_Intranet SET usr_foto='${photoFileName}' WHERE dni='${dni}'`
+
+      await this.database.query<User>(query)
+
+      return true
+    } catch (error: unknown) {
+      throw new Error('Error al actualizar la foto del usuario')
     }
   }
 }

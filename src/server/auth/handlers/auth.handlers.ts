@@ -202,7 +202,11 @@ export async function handleUpdateProfilePhoto(
       )
     }
 
-    await authService.updatePhoto(upload.originalFilename, upload.localFilePath)
+    await authService.updatePhoto(
+      String(auth.user.sub ?? ''),
+      upload.originalFilename,
+      upload.localFilePath
+    )
 
     return NextResponse.json(
       {

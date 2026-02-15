@@ -39,7 +39,9 @@ export default class AuthService {
       email: patient.usr_mail,
       profile: patient.usr_perfil,
       ruc: patient.usr_ruc,
-      business_name: patient.empresa
+      business_name: patient.empresa,
+      cmp: patient.cmp || '',
+      photo_url: patient.usr_foto || ''
     }
 
     return {
@@ -64,6 +66,7 @@ export default class AuthService {
   }
 
   async updatePhoto(
+    dni: string,
     originalFilename: string,
     localFilePath: string
   ): Promise<boolean> {
@@ -72,6 +75,9 @@ export default class AuthService {
     logger.info(`Uploading photo ${localFilePath} to ${remoteFilePath}`)
 
     await this.sambaClient.uploadFile(localFilePath, remoteFilePath)
+
+    // Persist the photo filename in the database
+    await this.repository.updatePhoto(dni, originalFilename)
 
     return true
   }

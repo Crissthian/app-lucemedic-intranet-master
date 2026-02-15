@@ -71,15 +71,10 @@ export default class CommonsService {
 
   async uploadPhoto(localFilePath: string, mimetype: string): Promise<string> {
     try {
-      let fileName = localFilePath.split('/').pop() || `photo_${Date.now()}`
+      const fileName = localFilePath.split('/').pop() || `photo_${Date.now()}`
 
-      if (mimetype === 'image/png') {
-        fileName += '.png'
-      }
-
-      if (mimetype === 'image/jpeg') {
-        fileName += '.jpeg'
-      }
+      // The temp file already has the correct extension from getUploadData,
+      // so we don't need to append another one based on mimetype.
 
       const remoteFilePath = `/FOTOUS/${fileName}`
 
@@ -131,6 +126,24 @@ export default class CommonsService {
       return this.repository.uploadPhoto(photoURL, dni)
     } catch (error: unknown) {
       throw error
+    }
+  }
+
+  async deletePhoto(photoId: string): Promise<boolean> {
+    try {
+      const path = `/FOTOUS/${photoId}`
+
+      logger.info(`Deleting photo from: ${path}`)
+
+      await this.sambaClient.deleteFile(path)
+
+      logger.info(`Photo deleted successfully: ${photoId}`)
+
+      return true
+    } catch (error: unknown) {
+      logger.error((error as Error).message)
+
+      throw new Error('Error while trying to delete photo.')
     }
   }
 }

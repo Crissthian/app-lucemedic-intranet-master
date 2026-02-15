@@ -3,6 +3,4 @@ export interface UserUpdateDTO {
   readonly lastName: string
   readonly cmp: string
   readonly email: string
-  readonly phone: string
-  readonly birthDate: string
 }

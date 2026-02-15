@@ -67,7 +67,20 @@ const Header: React.FC = (props) => {
         />
       </Link>
       <div className={styles.currentUser}>
-        <div className={styles.profilePicture}></div>
+        <div className={styles.profilePicture}>
+          {currentUser?.photoUrl && (
+            <img
+              src={`/api/photos/${currentUser.photoUrl}`}
+              alt='Profile'
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '10%'
+              }}
+            />
+          )}
+        </div>
         <div className={styles.personalData}>
           <h2 className={roboto500.className}>
             {getFullName(

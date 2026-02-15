@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { handleGetPhoto } from '@/src/server/commons/handlers/commons.handlers'
+import {
+  handleGetPhoto,
+  handleDeletePhoto
+} from '@/src/server/commons/handlers/commons.handlers'
 
 type RouteContext = {
   params: {
@@ -15,4 +18,11 @@ export async function GET(
   { params }: RouteContext
 ): Promise<NextResponse> {
   return handleGetPhoto(request, params.photoId)
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: RouteContext
+): Promise<NextResponse> {
+  return handleDeletePhoto(request, params.photoId)
 }

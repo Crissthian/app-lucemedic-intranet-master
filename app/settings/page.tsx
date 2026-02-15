@@ -29,6 +29,7 @@ export default function Settings() {
   const [birthDate, setBirthDate] = useState<string>('')
   const [selectedFile, setSelectedFile] = useState<File | undefined>()
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null)
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null)
 
   const handleFileChange = (e: any) => {
     const target = e.target as HTMLInputElement & {
@@ -48,6 +49,8 @@ export default function Settings() {
 
   const handleRemoveImage = () => {
     setPreview(null)
+    setSelectedFile(undefined)
+    setPhotoUrl(null)
   }
 
   const handleLogout = () => {
@@ -56,8 +59,41 @@ export default function Settings() {
     window.location.reload()
   }
 
-  const handleUploadPhoto = async () => {
+  const handleDeletePhoto = async (photoIdToDelete: string) => {
     try {
+      const response = await fetch(
+        `/api/commons/users/photo/${photoIdToDelete}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          }
+        }
+      )
+
+      const result: BaseApi = await response.json()
+
+      if (!result.status) {
+        console.error('Error al eliminar la foto anterior')
+      }
+
+      return result.status
+    } catch (error: unknown) {
+      console.error(
+        'Error al eliminar la foto anterior:',
+        (error as Error).message
+      )
+      return false
+    }
+  }
+
+  const handleUploadPhoto = async (oldPhotoUrl: string | null) => {
+    try {
+      // Delete the old photo from FTP server if it exists
+      if (oldPhotoUrl) {
+        await handleDeletePhoto(oldPhotoUrl)
+      }
+
       const formData = new FormData()
       formData.append('file', selectedFile || '')
 
@@ -76,7 +112,17 @@ export default function Settings() {
       }
 
       if (result.status) {
-        console.log(result.data)
+        // Update photoUrl in localStorage
+        const profile = localStorage.getItem('profileLogged')
+        if (profile && result.data?.file?.fileName) {
+          try {
+            const parsedProfile = JSON.parse(profile)
+            parsedProfile.photo_url = result.data.file.fileName
+            localStorage.setItem('profileLogged', JSON.stringify(parsedProfile))
+          } catch (e) {
+            console.error('Error updating photo in localStorage:', e)
+          }
+        }
         alert('Foto subida con éxito')
         window.location.reload()
       }
@@ -87,6 +133,7 @@ export default function Settings() {
 
   const handleUpdateChanges = async () => {
     try {
+      // Only send fields that exist in the DB table
       const data = await fetch(`/api/users/${dni}`, {
         method: 'PUT',
         headers: {
@@ -97,9 +144,7 @@ export default function Settings() {
           firstName,
           lastName,
           cmp,
-          email,
-          phone,
-          birthDate
+          email
         })
       })
 
@@ -110,16 +155,46 @@ export default function Settings() {
       }
 
       if (result.status) {
+        // Save phone and birthDate to localStorage (not in DB table)
+        const profile = localStorage.getItem('profileLogged')
+        if (profile) {
+          try {
+            const parsedProfile = JSON.parse(profile)
+            parsedProfile.first_name = firstName
+            parsedProfile.last_name = lastName
+            parsedProfile.email = email
+            parsedProfile.cmp = cmp
+            parsedProfile.phone = phone
+            parsedProfile.birth_date = birthDate
+            localStorage.setItem('profileLogged', JSON.stringify(parsedProfile))
+          } catch (e) {
+            console.error('Error updating localStorage:', e)
+          }
+        }
         alert('Datos actualizados con éxito')
       }
 
-      if (preview) {
-        handleUploadPhoto()
+      // If there's a new photo selected, upload it (and delete the old one)
+      if (preview && selectedFile) {
+        await handleUploadPhoto(photoUrl)
       }
     } catch (error: unknown) {
       console.log((error as Error).message)
     }
   }
+
+  useEffect(() => {
+    if (currentUser) {
+      setDni(currentUser.dni || '')
+      setFirstName(currentUser.firstName || '')
+      setLastName(currentUser.lastName || '')
+      setEmail(currentUser.email || '')
+      setPhone(currentUser.phone || '')
+      setBirthDate(currentUser.birthDate || '')
+      setCmp(currentUser.cmp || '')
+      setPhotoUrl(currentUser.photoUrl || null)
+    }
+  }, [currentUser])
 
   useEffect(() => {
     const jwt = localStorage.getItem('accessToken') || ''
@@ -138,14 +213,18 @@ export default function Settings() {
           <h1 className={`${rubik.className} ${styles.title}`}>Mi cuenta</h1>
           <div className={styles.settings}>
             <div
-              className={`${styles.dragAndDropArea} ${preview && styles.withImage}`}
+              className={`${styles.dragAndDropArea} ${(preview || photoUrl) && styles.withImage}`}
               style={{
-                backgroundImage: `url(${preview})`,
+                backgroundImage: preview
+                  ? `url(${preview})`
+                  : photoUrl
+                    ? `url(/api/photos/${photoUrl})`
+                    : 'none',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover'
               }}
             >
-              {!preview && (
+              {!preview && !photoUrl && (
                 <>
                   <FontAwesomeIcon icon={faImage} width={20} />
                   <input
@@ -157,7 +236,7 @@ export default function Settings() {
                   <p>Arrastra y suelta tu foto de perfil aquí</p>
                 </>
               )}
-              {preview && (
+              {(preview || photoUrl) && (
                 <button
                   className={styles.removeImageButton}
                   onClick={handleRemoveImage}
