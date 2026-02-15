@@ -29,7 +29,7 @@ export default class AuthRepository implements IAuthRepository {
 
   async findByDniAndPass(dni: string, pass: string): Promise<User | null> {
     try {
-      const query = `SELECT UI.dni,UI.usr_apellidos,UI.usr_nombres,UI.usr_mail,UI.usr_foto,UI.usr_perfil,UI.usr_ruc,RTRIM(LTRIM(VC.DES_CLI)) AS empresa from m_User_Intranet UI, vclientes VC where UI.usr_ruc=VC.RUC_CLI AND UI.dni='${dni}' AND UI.usr_pass='${pass}'`
+      const query = `SELECT UI.dni,UI.usr_apellidos,UI.usr_nombres,UI.usr_mail,UI.usr_foto,UI.usr_perfil,UI.usr_ruc,RTRIM(LTRIM(VC.DES_CLI)) AS empresa, RTRIM(LTRIM(UI.cmp)) AS cmp from m_User_Intranet UI, vclientes VC where UI.usr_ruc=VC.RUC_CLI AND UI.dni='${dni}' AND UI.usr_pass='${pass}'`
 
       const result = await this.database.query<User>(query)
 
@@ -45,7 +45,7 @@ export default class AuthRepository implements IAuthRepository {
 
   async findByDni(dni: string): Promise<User | null> {
     try {
-      const query = `SELECT UI.dni,UI.usr_apellidos,UI.usr_nombres,UI.usr_mail,UI.usr_foto,UI.usr_perfil,UI.usr_ruc,RTRIM(LTRIM(VC.DES_CLI)) AS empresa, ui.cmp from m_User_Intranet UI, vclientes VC where UI.usr_ruc=VC.RUC_CLI AND UI.dni='${dni}' and ui.usr_swt=0`
+      const query = `SELECT UI.dni,UI.usr_apellidos,UI.usr_nombres,UI.usr_mail,UI.usr_foto,UI.usr_perfil,UI.usr_ruc,RTRIM(LTRIM(VC.DES_CLI)) AS empresa, RTRIM(LTRIM(ui.cmp)) as cmp from m_User_Intranet UI, vclientes VC where UI.usr_ruc=VC.RUC_CLI AND UI.dni='${dni}' and ui.usr_swt=0`
 
       const result = await this.database.query<User>(query)
 
@@ -61,7 +61,7 @@ export default class AuthRepository implements IAuthRepository {
 
   async update(dni: string, data: UserUpdateDTO): Promise<boolean> {
     try {
-      const query = `UPDATE m_User_Intranet SET usr_apellidos='${data.lastName}',usr_nombres='${data.firstName}', usr_mail='${data.email}', CMP='${data.cmp}' WHERE dni='${dni}'`
+      const query = `UPDATE m_User_Intranet SET usr_apellidos='${data.lastName}',usr_nombres='${data.firstName}', usr_mail='${data.email}', cmp='${data.cmp}' WHERE dni='${dni}'`
 
       await this.database.query<User>(query)
 

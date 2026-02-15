@@ -37,7 +37,6 @@ import {
   faChevronLeft,
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
-import useAccessToken from '@/hooks/useAccessToken'
 
 const rubik = Rubik({ weight: '500', subsets: ['latin'] })
 
@@ -45,7 +44,6 @@ export default function HomePage() {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
   const { currentUser } = useAppSelector((state) => state.authReducer)
-  const accessToken = useAccessToken()
 
   const [fullName, setFullName] = useState<string>('')
   const [dni, setDni] = useState<string>('')
@@ -80,15 +78,9 @@ export default function HomePage() {
   )
 
   const handleSubmit = async () => {
-    dispatch(toggleLoading())
-
-    const queryParams = new URLSearchParams()
-
     const fields = [dni, fullName, examType, sede, startDate, endDate]
 
     if (fields.every((field) => field === '' || field === null)) {
-      dispatch(toggleLoading())
-      // alert('Debe ingresar al menos un filtro para realizar la búsqueda.')
       toast.warn('Debes seleccionar un rango de fechas.', {
         position: 'top-center',
         autoClose: 5000,
@@ -103,69 +95,84 @@ export default function HomePage() {
       return
     }
 
-    if (dni) {
-      queryParams.append('dni', dni)
-    }
+    dispatch(toggleLoading())
 
-    if (fullName) {
-      queryParams.append('lastName', fullName)
-    }
+    try {
+      const queryParams = new URLSearchParams()
 
-    if (examType) {
-      queryParams.append('examType', examType)
-    }
-
-    if (sede) {
-      queryParams.append('sede', sede)
-    }
-
-    if (startDate && endDate) {
-      queryParams.append('startDate', startDate)
-      queryParams.append('endDate', endDate)
-    }
-
-    const url = `/api/medical-exams?${queryParams.toString()}`
-
-    const data = await fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json'
+      if (dni) {
+        queryParams.append('dni', dni)
       }
-    })
 
-    const result: BaseApi = await data.json()
+      if (fullName) {
+        queryParams.append('lastName', fullName)
+      }
 
-    if (result.error) {
-      localStorage.removeItem('accessToken')
-      router.push('/auth')
-    }
+      if (examType) {
+        queryParams.append('examType', examType)
+      }
 
-    if (!result.status) {
-      // alert('Ocurrió un error al obtener los datos.')
-    }
+      if (sede) {
+        queryParams.append('sede', sede)
+      }
 
-    if (result.status) {
-      dispatch(toggleLoading())
+      if (startDate && endDate) {
+        queryParams.append('startDate', startDate)
+        queryParams.append('endDate', endDate)
+      }
+
+      const url = `/api/medical-exams?${queryParams.toString()}`
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const result: BaseApi<MedicalExams[]> = await response.json()
+
+      if (result.error) {
+        localStorage.removeItem('accessToken')
+        router.push('/auth')
+        return
+      }
+
+      if (!result.status) {
+        toast.error('Ocurrió un error al obtener los datos.', {
+          position: 'top-center',
+          autoClose: 5000,
+          theme: 'light',
+          transition: Bounce
+        })
+        return
+      }
+
       setMedicalExams(result.data)
-
-      if (result.data.length === 0) {
-        setIsEmpty(true)
-      } else {
-        setIsEmpty(false)
-      }
+      setIsEmpty(result.data.length === 0)
+    } catch {
+      toast.error('Error de conexión. Inténtalo de nuevo.', {
+        position: 'top-center',
+        autoClose: 5000,
+        theme: 'light',
+        transition: Bounce
+      })
+    } finally {
+      dispatch(toggleLoading())
     }
   }
 
   const clearFilters = () => {
-    window.location.reload()
-
-    // setFullName('')
-    // setDni('')
-    // setExamType('')
-    // setSede('')
-    // setStartDate('')
-    // setEndDate('')
+    setFullName('')
+    setDni('')
+    setExamType('')
+    setSede('')
+    setStartDate('')
+    setEndDate('')
+    setMedicalExams([])
+    setIsEmpty(undefined)
+    setCurrentPage(1)
   }
 
   const renderPageNumbers = () => {
@@ -383,17 +390,6 @@ export default function HomePage() {
                     </ul>
                   )}
                 </div>
-                {/* <div className={styles.pagination}>
-                  {medicalExams.length > itemsPerPage && (
-                    <ul className={styles.pageNumbers}>
-                      {Array.from({ length: Math.ceil(medicalExams.length / itemsPerPage) }).map((_, index) => (
-                        <li key={index} className={currentPage === index + 1 ? styles.active : ''}>
-                          <button className={rubik.className} onClick={() => paginate(index + 1)}>{index + 1}</button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div> */}
               </Panel>
             </>
           )}

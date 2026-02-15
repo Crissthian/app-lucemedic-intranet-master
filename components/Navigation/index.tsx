@@ -2,6 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import {
   faCalendar,
   faChartPie,
@@ -28,59 +29,59 @@ const Navigation: React.FC = () => {
       {currentUser?.profile === ROLES_TYPES.DOCTOR && (
         <>
           <li className={`${pathname === '/' ? styles.active : ''}`}>
-            <a href='/'>
+            <Link href='/'>
               <FontAwesomeIcon icon={faStethoscope} width={'28px'} />
               <p className={roboto400.className}>
                 Exámenes <br />
                 Médicos
               </p>
-            </a>
+            </Link>
           </li>
           <li
             className={`${pathname.includes('/statistics') ? styles.active : ''}`}
           >
-            <a href='/statistics'>
+            <Link href='/statistics'>
               <FontAwesomeIcon icon={faChartPie} width={'28px'} />
               <p className={roboto400.className}>
                 Data <br />
                 Estadística
               </p>
-            </a>
+            </Link>
           </li>
           <li
             className={`${
               pathname.includes('/epidemiological-report') ? styles.active : ''
             }`}
           >
-            <a href='/epidemiological-report'>
+            <Link href='/epidemiological-report'>
               <FontAwesomeIcon icon={faFileAlt} height={'28px'} />
               <p className={roboto400.className}>
                 Informe <br />
                 Epidemiológico
               </p>
-            </a>
+            </Link>
           </li>
           <li
             className={`${pathname.includes('/tracking') ? styles.active : ''}`}
           >
-            <a href='/tracking'>
+            <Link href='/tracking'>
               <FontAwesomeIcon icon={faUsers} width={'28px'} />
               <p className={roboto400.className}>
                 Seguimiento <br />
                 de atención
               </p>
-            </a>
+            </Link>
           </li>
           <li
             className={`${pathname.includes('/appointments') ? styles.active : ''}`}
           >
-            <a href='/appointments'>
+            <Link href='/appointments'>
               <FontAwesomeIcon icon={faCalendar} height={'28px'} />
               <p className={roboto400.className}>
                 Programador <br />
                 de citas
               </p>
-            </a>
+            </Link>
           </li>
         </>
       )}
@@ -88,56 +89,56 @@ const Navigation: React.FC = () => {
       {currentUser?.profile === ROLES_TYPES.RH && (
         <>
           <li className={`${pathname === '/' ? styles.active : ''}`}>
-            <a href='/'>
+            <Link href='/'>
               <FontAwesomeIcon icon={faStethoscope} width={'28px'} />
               <p className={roboto400.className}>
                 Exámenes <br />
                 Médicos
               </p>
-            </a>
+            </Link>
           </li>
           <li
             className={`${pathname.includes('/tracking') ? styles.active : ''}`}
           >
-            <a href='/tracking'>
+            <Link href='/tracking'>
               <FontAwesomeIcon icon={faUsers} width={'28px'} />
               <p className={roboto400.className}>
                 Seguimiento <br />
                 de atención
               </p>
-            </a>
+            </Link>
           </li>
           <li
             className={`${pathname.includes('/appointments') ? styles.active : ''}`}
           >
-            <a href='/appointments'>
+            <Link href='/appointments'>
               <FontAwesomeIcon icon={faCalendar} height={'28px'} />
               <p className={roboto400.className}>
                 Programador <br />
                 de citas
               </p>
-            </a>
+            </Link>
           </li>
         </>
       )}
 
       {currentUser?.profile === ROLES_TYPES.PATIENT && (
         <li className={`${pathname === '/' ? styles.active : ''}`}>
-          <a href='/'>
+          <Link href='/'>
             <FontAwesomeIcon icon={faHospitalUser} width={'28px'} />
             <p className={roboto400.className}>
               Mis <br />
               Resultados
             </p>
-          </a>
+          </Link>
         </li>
       )}
 
       <li className={`${pathname.includes('/settings') ? styles.active : ''}`}>
-        <a href='/settings'>
+        <Link href='/settings'>
           <FontAwesomeIcon icon={faSliders} width={'20px'} />
           <p className={roboto400.className}>Ajustes</p>
-        </a>
+        </Link>
       </li>
     </ul>
   )

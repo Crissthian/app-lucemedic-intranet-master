@@ -16,14 +16,16 @@ interface InputProps {
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const [inputType, setInputType] = useState<string>(props.type)
+  const [inputType, setInputType] = useState<string>(
+    props.type === 'date' && !props.value ? 'text' : props.type
+  )
 
   const handleFocusDate = () => {
     if (props.type === 'date') setInputType('date')
   }
 
   const handleBlurDate = () => {
-    if (props.type === 'date') setInputType('text')
+    if (props.type === 'date' && !props.value) setInputType('text')
   }
 
   return (

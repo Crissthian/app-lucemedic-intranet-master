@@ -47,9 +47,7 @@ const Welcome: React.FC = () => {
           height={370}
           priority
         />
-      ) : (
-        ''
-      )}
+      ) : null}
 
       {currentUser?.profile === ROLES_TYPES.RH ? (
         <Image
@@ -59,9 +57,7 @@ const Welcome: React.FC = () => {
           height={370}
           priority
         />
-      ) : (
-        ''
-      )}
+      ) : null}
 
       {currentUser?.profile === ROLES_TYPES.PATIENT ? (
         <Image
@@ -71,9 +67,7 @@ const Welcome: React.FC = () => {
           height={250}
           priority
         />
-      ) : (
-        ''
-      )}
+      ) : null}
 
       <Button label='Comenzar' onClick={() => dispatch(toggleWelcome())} />
     </div>

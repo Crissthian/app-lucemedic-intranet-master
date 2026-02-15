@@ -17,7 +17,7 @@ import useUserProfile from '@/hooks/useUserProfile'
 const roboto500 = Roboto({ weight: '500', subsets: ['latin'] })
 const roboto400 = Roboto({ weight: '400', subsets: ['latin'] })
 
-const Header: React.FC = (props) => {
+const Header: React.FC = () => {
   const router = useRouter()
 
   const currentUser = useUserProfile()
@@ -41,18 +41,13 @@ const Header: React.FC = (props) => {
   }
 
   const handleActions = () => {
-    if (!showActions) {
-      setShowActions(true)
-      return
-    }
-
-    setShowActions(false)
+    setShowActions((prev) => !prev)
   }
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('profileLogged')
-    window.location.reload()
+    router.push('/auth')
   }
 
   return (
