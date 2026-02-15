@@ -1,6 +1,6 @@
 # Intranet Lucemedic (Unificado)
 
-Aplicacion unificada en Next.js 13 (App Router) que consolida:
+Aplicacion unificada en Next.js 16 (App Router) que consolida:
 
 - Frontend `app-lucemedic-intranet-master`
 - API Auth `api-lucemedic-intranet-auth-master`
@@ -8,7 +8,7 @@ Aplicacion unificada en Next.js 13 (App Router) que consolida:
 
 ## Requisitos
 
-- Node.js 18+
+- Node.js 24.x
 - npm
 
 ## Instalacion
