@@ -10,6 +10,9 @@ type RouteContext = {
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-export async function POST(request: NextRequest, { params }: RouteContext): Promise<NextResponse> {
+export async function POST(
+  request: NextRequest,
+  { params }: RouteContext
+): Promise<NextResponse> {
   return handleDownloadCertificado(request, params.uid)
 }

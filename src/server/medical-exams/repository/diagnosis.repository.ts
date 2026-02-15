@@ -4,7 +4,7 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database,
+  Database
 } from '../../shared'
 import { Diagnosis } from './entity'
 import { IDiagnosisRepository } from './interfaces/diagnosis.repository.interface'
@@ -21,8 +21,8 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
@@ -170,4 +170,3 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
     }
   }
 }
-

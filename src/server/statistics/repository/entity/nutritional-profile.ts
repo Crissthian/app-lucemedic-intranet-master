@@ -1,5 +1,4 @@
 export interface NutritionalProfile {
-  categoria: string;
-  cantidad: number;
+  categoria: string
+  cantidad: number
 }
-

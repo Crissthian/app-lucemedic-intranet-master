@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    unoptimized: true
   },
-  transpilePackages: ['@mui/x-charts'],
+  transpilePackages: ['@mui/x-charts']
 }
 
 module.exports = nextConfig

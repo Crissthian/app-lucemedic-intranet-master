@@ -37,7 +37,7 @@
   line-height: 20px;
   font-weight: 500;
   padding: 10px 20px;
-  filter: drop-shadow(0px 1px 8px rgba(142, 169, 186, 0.40));
+  filter: drop-shadow(0px 1px 8px rgba(142, 169, 186, 0.4));
   font-size: 12px;
   text-transform: uppercase;
   color: var(--white-color);
@@ -60,7 +60,7 @@
   font-size: 14px;
   line-height: 20px;
   border: 1px solid var(--white-color);
-  transition: all .2s;
+  transition: all 0.2s;
 }
 .datePicker::placeholder {
   color: var(--table-header-color);
@@ -69,7 +69,7 @@
 .datePicker:active,
 .datePicker:focus {
   border: 1px solid var(--green-color);
-  transition: all .2s;
+  transition: all 0.2s;
 }
 .emptyData {
   text-align: center;

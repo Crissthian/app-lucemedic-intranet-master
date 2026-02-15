@@ -1,5 +1,4 @@
 export interface Age {
-  rango_edad: string;
-  cantidad: number;
+  rango_edad: string
+  cantidad: number
 }
-

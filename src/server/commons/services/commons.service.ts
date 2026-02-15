@@ -42,7 +42,7 @@ export default class CommonsService {
   }
 
   async findEpidemiologicalReport(
-    ruc: string,
+    ruc: string
   ): Promise<EpidemiologicalReport[]> {
     try {
       return this.repository.findEpidemiologicalReport(ruc)
@@ -60,7 +60,7 @@ export default class CommonsService {
       return this.sambaClient.downloadFile(
         path,
         undefined,
-        'INFORMEEPIDEMIOLOGICO',
+        'INFORMEEPIDEMIOLOGICO'
       )
     } catch (error: unknown) {
       logger.error((error as Error).message)
@@ -87,11 +87,11 @@ export default class CommonsService {
 
       const sambaResult = await this.sambaClient.uploadFile(
         localFilePath,
-        remoteFilePath,
+        remoteFilePath
       )
 
       logger.info(
-        `SambaClient.uploadFile result: ${JSON.stringify(sambaResult)}`,
+        `SambaClient.uploadFile result: ${JSON.stringify(sambaResult)}`
       )
 
       return fileName
@@ -113,7 +113,7 @@ export default class CommonsService {
         path,
         undefined,
         'FOTOUS',
-        extension,
+        extension
       )
 
       logger.info(`File: ${file}`)
@@ -134,4 +134,3 @@ export default class CommonsService {
     }
   }
 }
-

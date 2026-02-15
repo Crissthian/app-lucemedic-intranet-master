@@ -45,8 +45,8 @@ const CareTracking: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -80,8 +80,8 @@ const CareTracking: React.FC = () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -106,7 +106,7 @@ const CareTracking: React.FC = () => {
       <section className={styles.searchFilters}>
         <div className={styles.filters}>
           <Select
-            placeholder="Sede"
+            placeholder='Sede'
             options={HEADQUARTERS_OPTIONS}
             onChange={(e) => setSede(e.target.value)}
           />
@@ -133,23 +133,18 @@ const CareTracking: React.FC = () => {
           </button>
         </div>
       </section>
-      {
-        attentionMonitoring.length === 0 && (
-          <Panel>
-            <EmtpyData />
-          </Panel>
-        )
-      }
-      {
-        attentionMonitoring.length > 0 && (
-          <Panel>
-            <TableTracking data={attentionMonitoring} />
-          </Panel>
-        )
-      }
+      {attentionMonitoring.length === 0 && (
+        <Panel>
+          <EmtpyData />
+        </Panel>
+      )}
+      {attentionMonitoring.length > 0 && (
+        <Panel>
+          <TableTracking data={attentionMonitoring} />
+        </Panel>
+      )}
     </div>
   )
 }
 
 export default CareTracking
-

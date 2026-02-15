@@ -1,9 +1,8 @@
 export interface UserUpdateDTO {
-  readonly firstName: string;
-  readonly lastName: string;
-  readonly cmp: string;
-  readonly email: string;
-  readonly phone: string;
-  readonly birthDate: string;
+  readonly firstName: string
+  readonly lastName: string
+  readonly cmp: string
+  readonly email: string
+  readonly phone: string
+  readonly birthDate: string
 }
-

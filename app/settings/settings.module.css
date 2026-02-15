@@ -51,24 +51,24 @@ h1.title {
   border-radius: 20px;
   width: 400px;
   height: 400px;
-  background: #FAFBFD;
+  background: #fafbfd;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .dragAndDropArea svg {
-  opacity: .5;
+  opacity: 0.5;
 }
 .dragAndDropArea p {
   margin-top: 10px;
   color: var(--table-header-color);
-  opacity: .5;
+  opacity: 0.5;
 }
 .dragAndDropArea:hover {
-  background: #F0F2F5;
-  transition: all .3s;
+  background: #f0f2f5;
+  transition: all 0.3s;
 }
 .withImage {
   position: relative;

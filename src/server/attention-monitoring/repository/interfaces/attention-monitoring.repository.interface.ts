@@ -2,6 +2,8 @@ import { AttentionMonitoringQueryDTO } from '../../dto/attention-monitoring.quer
 import { AttentionMonitoring } from '../entity/attention-monitoring'
 
 export interface IAttentionMonitoringRepository {
-  find(params: AttentionMonitoringQueryDTO, ruc: string): Promise<AttentionMonitoring[]>;
+  find(
+    params: AttentionMonitoringQueryDTO,
+    ruc: string
+  ): Promise<AttentionMonitoring[]>
 }
-

@@ -10,7 +10,10 @@ export default class AttentionMonitoringService {
     this.repository = new AttentionMonitoringRepository()
   }
 
-  async find(params: AttentionMonitoringQueryDTO, ruc: string): Promise<AttentionMonitoring[]> {
+  async find(
+    params: AttentionMonitoringQueryDTO,
+    ruc: string
+  ): Promise<AttentionMonitoring[]> {
     return this.repository.find(params, ruc)
   }
 }

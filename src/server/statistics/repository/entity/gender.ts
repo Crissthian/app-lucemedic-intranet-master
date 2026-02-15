@@ -1,6 +1,5 @@
 export interface Gender {
-  masculino: number;
-  femenino: number;
-  total: number;
+  masculino: number
+  femenino: number
+  total: number
 }
-

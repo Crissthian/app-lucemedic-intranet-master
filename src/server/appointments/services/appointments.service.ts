@@ -6,11 +6,15 @@ import { logger } from '../../shared'
 moment.tz.setDefault('America/Lima')
 
 export default class AppointmentsService {
-  private readonly EMAIL_APPOINTMENTS_HOST: string = process.env.EMAIL_APPOINTMENTS_HOST || ''
-  private readonly EMAIL_APPOINTMENTS: string = process.env.EMAIL_APPOINTMENTS || ''
-  private readonly EMAIL_APPOINTMENTS_PASSWORD: string = process.env.EMAIL_APPOINTMENTS_PASSWORD || ''
-  private readonly EMAIL_APPOINTMENTS_SUBJECT: string = process.env.EMAIL_APPOINTMENTS_SUBJECT || ''
-  
+  private readonly EMAIL_APPOINTMENTS_HOST: string =
+    process.env.EMAIL_APPOINTMENTS_HOST || ''
+  private readonly EMAIL_APPOINTMENTS: string =
+    process.env.EMAIL_APPOINTMENTS || ''
+  private readonly EMAIL_APPOINTMENTS_PASSWORD: string =
+    process.env.EMAIL_APPOINTMENTS_PASSWORD || ''
+  private readonly EMAIL_APPOINTMENTS_SUBJECT: string =
+    process.env.EMAIL_APPOINTMENTS_SUBJECT || ''
+
   async createAppointment(file: Buffer, dni: string): Promise<void> {
     try {
       const transporter = nodemailer.createTransport({
@@ -19,8 +23,8 @@ export default class AppointmentsService {
         secure: true,
         auth: {
           user: this.EMAIL_APPOINTMENTS,
-          pass: this.EMAIL_APPOINTMENTS_PASSWORD,
-        },
+          pass: this.EMAIL_APPOINTMENTS_PASSWORD
+        }
       })
 
       const filename = `citas_${moment().format('YYYY-MM-DD')}.xlsx`
@@ -37,8 +41,8 @@ export default class AppointmentsService {
         attachments: [
           {
             filename,
-            content: file,
-          },
+            content: file
+          }
         ]
       })
 

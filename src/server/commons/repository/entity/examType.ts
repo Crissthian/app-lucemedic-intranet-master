@@ -1,4 +1,4 @@
 export interface ExamType {
-  des_item: string;
-  cod_item: string;
+  des_item: string
+  cod_item: string
 }

@@ -1,7 +1,11 @@
 'use client'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faDownload, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  faChevronLeft,
+  faDownload,
+  faUserAlt
+} from '@fortawesome/free-solid-svg-icons'
 import { Rubik } from 'next/font/google'
 import Panel from '../Panel'
 import PanelIcon from '../PanelIcon'
@@ -56,8 +60,8 @@ const MedicalHistory: React.FC = () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -81,8 +85,8 @@ const MedicalHistory: React.FC = () => {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-              'Content-Type': 'application/json',
-            },
+              'Content-Type': 'application/json'
+            }
           })
 
           const data = await result.blob()
@@ -105,8 +109,8 @@ const MedicalHistory: React.FC = () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -130,8 +134,8 @@ const MedicalHistory: React.FC = () => {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-              'Content-Type': 'application/json',
-            },
+              'Content-Type': 'application/json'
+            }
           })
 
           const data = await result.blob()
@@ -191,7 +195,9 @@ const MedicalHistory: React.FC = () => {
                   <strong>Radiografía de Tórax</strong>
                 </p>
                 <p>Tipo de exámen: {radiologyDetails[index]?.t_examen || ''}</p>
-                <p>Fecha: {radiologyDetails[index]?.fec_fmed.slice(0, 10) || ''}</p>
+                <p>
+                  Fecha: {radiologyDetails[index]?.fec_fmed.slice(0, 10) || ''}
+                </p>
               </div>
             ))}
           </section>
@@ -210,8 +216,12 @@ const MedicalHistory: React.FC = () => {
                 <p>
                   <strong>{audiometryDetails[index]?.obs_audio || ''}</strong>
                 </p>
-                <p>Tipo de exámen: {audiometryDetails[index]?.t_examen || ''}</p>
-                <p>Fecha: {audiometryDetails[index]?.fec_fmed.slice(0, 10) || ''}</p>
+                <p>
+                  Tipo de exámen: {audiometryDetails[index]?.t_examen || ''}
+                </p>
+                <p>
+                  Fecha: {audiometryDetails[index]?.fec_fmed.slice(0, 10) || ''}
+                </p>
               </div>
             ))}
           </section>
@@ -228,32 +238,38 @@ const MedicalHistory: React.FC = () => {
           <ChartLaboratoryExams dni={details.num_dni} />
         </PanelIcon>
       </Panel>
-      {
-        showModal && (
-          <Modal title={''}>
-            {
-              radiologyImage && radiologyImage[modalActive] && (
-                <>
-                  <div className={styles.modalActions}>
-                    <p onClick={() => setShowModal(false)}><FontAwesomeIcon icon={faChevronLeft} /> VOLVER</p>
-                    <p><FontAwesomeIcon icon={faDownload} onClick={() => downloadImage(URL.createObjectURL(radiologyImage[modalActive]))} /></p>
-                  </div>
-                  <Image
-                    src={URL.createObjectURL(radiologyImage[modalActive])}
-                    width={1000}
-                    height={850}
-                    priority
-                    alt={''}
+      {showModal && (
+        <Modal title={''}>
+          {radiologyImage && radiologyImage[modalActive] && (
+            <>
+              <div className={styles.modalActions}>
+                <p onClick={() => setShowModal(false)}>
+                  <FontAwesomeIcon icon={faChevronLeft} /> VOLVER
+                </p>
+                <p>
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    onClick={() =>
+                      downloadImage(
+                        URL.createObjectURL(radiologyImage[modalActive])
+                      )
+                    }
                   />
-                </>
-              )
-            }
-          </Modal>
-        )
-      }
+                </p>
+              </div>
+              <Image
+                src={URL.createObjectURL(radiologyImage[modalActive])}
+                width={1000}
+                height={850}
+                priority
+                alt={''}
+              />
+            </>
+          )}
+        </Modal>
+      )}
     </>
   )
 }
 
 export default MedicalHistory
-

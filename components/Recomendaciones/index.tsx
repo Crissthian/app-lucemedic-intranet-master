@@ -6,7 +6,14 @@ import moment from 'moment'
 import { AppDispatch, useAppSelector } from '@/redux/store'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faChevronLeft, faCircleInfo, faFile, faFilePdf, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBell,
+  faChevronLeft,
+  faCircleInfo,
+  faFile,
+  faFilePdf,
+  faUserAlt
+} from '@fortawesome/free-solid-svg-icons'
 import { toggleRecomendaciones } from '@/redux/features/medical-exams.slice'
 import { Rubik } from 'next/font/google'
 import Panel from '../Panel'
@@ -39,8 +46,8 @@ const Recomendaciones: React.FC = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -54,30 +61,29 @@ const Recomendaciones: React.FC = () => {
     }
 
     if (result.status) {
-
       const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const blob = await data.blob()
 
-      const file = new File([blob], result.data.file, { type: 'application/pdf' })
+      const file = new File([blob], result.data.file, {
+        type: 'application/pdf'
+      })
 
       const urlFile = window.URL.createObjectURL(file)
 
       window.open(urlFile)
-      
     }
   }
 
   useEffect(() => {
-
     const jwt = localStorage.getItem('accessToken') || ''
 
     if (jwt.length <= 0) {
@@ -91,11 +97,11 @@ const Recomendaciones: React.FC = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          }
         })
         const result: BaseApi = await response.json()
-        
+
         if (result.error) {
           localStorage.removeItem('accessToken')
           router.push('/auth')
@@ -108,7 +114,6 @@ const Recomendaciones: React.FC = () => {
 
       getRecommendations()
     }
-
   }, [router, details.cdg_fmed])
 
   return (
@@ -133,49 +138,56 @@ const Recomendaciones: React.FC = () => {
             {formatFullName(`${details.nombres} ${details.apellidos}`)}
           </p>
         </div>
-        {
-          recommendations.length === 0 && (
-            <>
-              <div className={`${rubik400.className} ${styles.empty}`}>
-                <FontAwesomeIcon icon={faBell} color='#1EE67D' />
-                <p>Su evaluación no <br />requiere recomendaciones</p>
+        {recommendations.length === 0 && (
+          <>
+            <div className={`${rubik400.className} ${styles.empty}`}>
+              <FontAwesomeIcon icon={faBell} color='#1EE67D' />
+              <p>
+                Su evaluación no <br />
+                requiere recomendaciones
+              </p>
+            </div>
+          </>
+        )}
+        {recommendations.length > 0 && (
+          <div className={styles.dataTable}>
+            <div className={`${rubik400.className} ${styles.dataTableHeader}`}>
+              <div>
+                <FontAwesomeIcon icon={faCircleInfo} /> Recomendación
               </div>
-            </>
-          )
-        }
-        {
-          recommendations.length > 0 && (
-            <div className={styles.dataTable}>
-          <div className={`${rubik400.className} ${styles.dataTableHeader}`}>
-            <div><FontAwesomeIcon icon={faCircleInfo} /> Recomendación</div>
-            <div><FontAwesomeIcon icon={faFile} />Descargar</div>
-          </div>
-          <div className={styles.dataTableBody}>
-            {
-              recommendations.length > 0 ? (
+              <div>
+                <FontAwesomeIcon icon={faFile} />
+                Descargar
+              </div>
+            </div>
+            <div className={styles.dataTableBody}>
+              {recommendations.length > 0 ? (
                 <>
-                  {
-                    recommendations.map((recommendation, index) => (
-                      <div key={index} className={`${rubik400.className} ${styles.dataTableRow}`}>
-                        <div>{recommendation.descripcion}</div>
-                        <div>
-                          <FontAwesomeIcon icon={faFilePdf} width={'10px'} onClick={() => handleDownload(recommendation.cdg_reg)} />
-                        </div>
+                  {recommendations.map((recommendation, index) => (
+                    <div
+                      key={index}
+                      className={`${rubik400.className} ${styles.dataTableRow}`}
+                    >
+                      <div>{recommendation.descripcion}</div>
+                      <div>
+                        <FontAwesomeIcon
+                          icon={faFilePdf}
+                          width={'10px'}
+                          onClick={() => handleDownload(recommendation.cdg_reg)}
+                        />
                       </div>
-                    ))
-                  }
+                    </div>
+                  ))}
                 </>
-              ) : ('')
-            }
+              ) : (
+                ''
+              )}
+            </div>
           </div>
-        </div>
-          )
-        }
-        
+        )}
       </Panel>
     </>
   )
 }
 
 export default Recomendaciones
-

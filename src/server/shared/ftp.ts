@@ -13,7 +13,7 @@ export class FTPClient {
     remoteFilePath: string,
     host?: string,
     _subfolder?: string,
-    extension?: string,
+    extension?: string
   ): Promise<string> {
     const client = new ftp.Client()
     client.ftp.verbose = true
@@ -35,11 +35,11 @@ export class FTPClient {
         host: hostToUse,
         user: userToUse,
         password: passwordToUse,
-        secure: false,
+        secure: false
       })
 
       logger.info(
-        `Connected to FTP ${hostToUse}. Downloading: ftp://${hostToUse}${remoteFilePath}`,
+        `Connected to FTP ${hostToUse}. Downloading: ftp://${hostToUse}${remoteFilePath}`
       )
 
       await client.downloadTo(localFilePath, remoteFilePath)
@@ -49,7 +49,7 @@ export class FTPClient {
       return fileName
     } catch (error: unknown) {
       logger.error(
-        `FTP Error while downloading file ${remoteFilePath}: ${error}`,
+        `FTP Error while downloading file ${remoteFilePath}: ${error}`
       )
       throw error
     } finally {
@@ -59,7 +59,7 @@ export class FTPClient {
 
   async uploadFile(
     localFilePath: string,
-    remoteFilePath: string,
+    remoteFilePath: string
   ): Promise<boolean> {
     const client = new ftp.Client()
     client.ftp.verbose = true
@@ -73,11 +73,11 @@ export class FTPClient {
         host: hostToUse,
         user: userToUse,
         password: passwordToUse,
-        secure: false,
+        secure: false
       })
 
       logger.info(
-        `Connected to FTP ${hostToUse}. Uploading to: ftp://${hostToUse}${remoteFilePath}`,
+        `Connected to FTP ${hostToUse}. Uploading to: ftp://${hostToUse}${remoteFilePath}`
       )
 
       await client.uploadFrom(localFilePath, remoteFilePath)
@@ -86,14 +86,10 @@ export class FTPClient {
 
       return true
     } catch (error: unknown) {
-      logger.error(
-        `FTP Error while uploading file ${remoteFilePath}: ${error}`,
-      )
+      logger.error(`FTP Error while uploading file ${remoteFilePath}: ${error}`)
       throw error
     } finally {
       client.close()
     }
   }
 }
-
-

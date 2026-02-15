@@ -38,7 +38,7 @@ export default class AttachmentsService {
         host: this.FTP_HOST,
         user: this.FTP_USER,
         password: this.FTP_PASSWORD,
-        secure: false,
+        secure: false
       })
 
       const files: string[] = []
@@ -48,7 +48,6 @@ export default class AttachmentsService {
       }
 
       for (const file of files) {
-
         let remotePath = './'
         let localPath = './temp/'
 
@@ -61,11 +60,13 @@ export default class AttachmentsService {
           remotePath += `EMO/${file}`
           localPath += `emo_${file}`
         }
-        
+
         // const remotePath = `./prueba _ftp/empresas/certificado/${file}`;
         // const localPath = `./temp/certificado_${file}`;
 
-        logger.info(`AttachmentsService.downloadAttachment | init | ${remotePath}`)
+        logger.info(
+          `AttachmentsService.downloadAttachment | init | ${remotePath}`
+        )
 
         const result = await this.client.downloadTo(localPath, remotePath)
 
@@ -83,9 +84,8 @@ export default class AttachmentsService {
       const zip = new AdmZip()
 
       for (const file of files) {
-
         if (payload.type === AttachmentType.CERTIFICADO) {
-          zip.addLocalFile(`./temp/certificado_${file}`)  
+          zip.addLocalFile(`./temp/certificado_${file}`)
         }
 
         if (payload.type === AttachmentType.EMO) {
@@ -116,4 +116,3 @@ export default class AttachmentsService {
     }
   }
 }
-

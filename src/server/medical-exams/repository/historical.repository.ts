@@ -4,13 +4,13 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database,
+  Database
 } from '../../shared'
 import {
   Audiometry,
   IMCReport,
   LaboratoryExamsReport,
-  Radiology,
+  Radiology
 } from './entity'
 import { CardiologyReport } from './entity/cardiology-report'
 import { IHistoricalRepository } from './interfaces/historical.repository.interface'
@@ -27,8 +27,8 @@ export default class HistoricalRepository implements IHistoricalRepository {
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
@@ -128,4 +128,3 @@ export default class HistoricalRepository implements IHistoricalRepository {
     }
   }
 }
-

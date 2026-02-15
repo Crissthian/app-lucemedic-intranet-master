@@ -10,13 +10,11 @@ export default function Statistics() {
   const router = useRouter()
 
   useEffect(() => {
-
     const jwt = localStorage.getItem('accessToken') || ''
 
     if (jwt.length <= 0) {
       router.push('/auth')
     }
-
   }, [router])
 
   return (

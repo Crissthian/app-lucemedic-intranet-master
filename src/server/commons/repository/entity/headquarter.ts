@@ -1,4 +1,4 @@
 export interface Headquarter {
-  nombre_sede: string;
-  cod_sede: string;
+  nombre_sede: string
+  cod_sede: string
 }

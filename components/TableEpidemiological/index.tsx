@@ -2,7 +2,11 @@
 import { Rubik } from 'next/font/google'
 import styles from './table-epidemiological.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays, faClinicMedical, faFile } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCalendarDays,
+  faClinicMedical,
+  faFile
+} from '@fortawesome/free-solid-svg-icons'
 import Button from '../Button'
 import { useEffect, useState } from 'react'
 import { EpidemiologicalReport } from '@/models/epidemiological-report'
@@ -20,8 +24,8 @@ const TableEpidemiological: React.FC = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -35,30 +39,29 @@ const TableEpidemiological: React.FC = () => {
     }
 
     if (result.status) {
-
       const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const blob = await data.blob()
 
-      const file = new File([blob], result.data.file, { type: 'application/pdf' })
+      const file = new File([blob], result.data.file, {
+        type: 'application/pdf'
+      })
 
       const urlFile = window.URL.createObjectURL(file)
 
       window.open(urlFile)
-      
     }
   }
 
   useEffect(() => {
-
     const fetchData = async () => {
       const url = '/api/commons/epidemiological-report'
 
@@ -66,8 +69,8 @@ const TableEpidemiological: React.FC = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
       })
 
       const result: BaseApi = await data.json()
@@ -82,25 +85,42 @@ const TableEpidemiological: React.FC = () => {
     }
 
     fetchData()
-
   }, [])
   return (
     <div className={styles.table}>
       <div className={styles.header}>
-        <div className={rubik400.className}><span><FontAwesomeIcon icon={faCalendarDays} size={'1x'} /></span> Periodo</div>
-        <div className={rubik400.className}><span><FontAwesomeIcon icon={faClinicMedical} size={'1x'} /></span> Tipo</div>
-        <div className={rubik400.className}><span><FontAwesomeIcon icon={faFile} size={'1x'} /></span> Informe</div>
+        <div className={rubik400.className}>
+          <span>
+            <FontAwesomeIcon icon={faCalendarDays} size={'1x'} />
+          </span>{' '}
+          Periodo
+        </div>
+        <div className={rubik400.className}>
+          <span>
+            <FontAwesomeIcon icon={faClinicMedical} size={'1x'} />
+          </span>{' '}
+          Tipo
+        </div>
+        <div className={rubik400.className}>
+          <span>
+            <FontAwesomeIcon icon={faFile} size={'1x'} />
+          </span>{' '}
+          Informe
+        </div>
       </div>
       <div className={styles.body}>
-        {
-          data.map((item, index) => (
-            <div key={index} className={styles.row}>
-              <span>{item.periodo}</span>
-              <span>{item.tipo}</span>
-              <span><Button label={'Ver'} onClick={() => handleDownload(item.cdg_reg)} /></span>
-            </div>
-          ))
-        }
+        {data.map((item, index) => (
+          <div key={index} className={styles.row}>
+            <span>{item.periodo}</span>
+            <span>{item.tipo}</span>
+            <span>
+              <Button
+                label={'Ver'}
+                onClick={() => handleDownload(item.cdg_reg)}
+              />
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   )

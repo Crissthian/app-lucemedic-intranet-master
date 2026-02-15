@@ -10,9 +10,9 @@ const commonsService = new CommonsService()
 const TEMP_DIR = path.join(process.cwd(), 'temp')
 
 type UploadData = {
-  filepath: string;
-  mimetype: string;
-};
+  filepath: string
+  mimetype: string
+}
 
 function getFileContentType(fileName: string): string {
   const extension = fileName.split('.').pop()?.toLowerCase()
@@ -51,11 +51,13 @@ async function getUploadData(request: NextRequest): Promise<UploadData | null> {
 
   return {
     filepath: fullFilePath.replace(/\\/g, '/'),
-    mimetype: file.type,
+    mimetype: file.type
   }
 }
 
-export async function handleHeadquarters(request: NextRequest): Promise<NextResponse> {
+export async function handleHeadquarters(
+  request: NextRequest
+): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -70,9 +72,9 @@ export async function handleHeadquarters(request: NextRequest): Promise<NextResp
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -80,14 +82,16 @@ export async function handleHeadquarters(request: NextRequest): Promise<NextResp
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying get all headquarters',
+        message: 'Error while trying get all headquarters'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
-export async function handleExamTypes(request: NextRequest): Promise<NextResponse> {
+export async function handleExamTypes(
+  request: NextRequest
+): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -102,9 +106,9 @@ export async function handleExamTypes(request: NextRequest): Promise<NextRespons
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -112,15 +116,15 @@ export async function handleExamTypes(request: NextRequest): Promise<NextRespons
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying get all exam types',
+        message: 'Error while trying get all exam types'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleEpidemiologicalReport(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -129,18 +133,19 @@ export async function handleEpidemiologicalReport(
   }
 
   try {
-    const epidemiological_report = await commonsService.findEpidemiologicalReport(
-      String(auth.user.ruc ?? ''),
-    )
+    const epidemiological_report =
+      await commonsService.findEpidemiologicalReport(
+        String(auth.user.ruc ?? '')
+      )
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          epidemiological_report,
-        },
+          epidemiological_report
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -148,16 +153,16 @@ export async function handleEpidemiologicalReport(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying find epidemiological report.',
+        message: 'Error while trying find epidemiological report.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleDownloadEpidemiologicalReport(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -169,9 +174,9 @@ export async function handleDownloadEpidemiologicalReport(
     return NextResponse.json(
       {
         status: false,
-        message: 'Missing report id',
+        message: 'Missing report id'
       },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -184,10 +189,10 @@ export async function handleDownloadEpidemiologicalReport(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -195,16 +200,16 @@ export async function handleDownloadEpidemiologicalReport(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download epidemiological report.',
+        message: 'Error while trying download epidemiological report.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleDownloadFile(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -216,9 +221,9 @@ export async function handleDownloadFile(
     return NextResponse.json(
       {
         status: false,
-        message: 'Missing file id',
+        message: 'Missing file id'
       },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -235,8 +240,8 @@ export async function handleDownloadFile(
       headers: {
         'Content-Type': contentType,
         'Content-Disposition': `attachment; filename=${uid}`,
-        'Content-length': file.length.toString(),
-      },
+        'Content-length': file.length.toString()
+      }
     })
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -244,14 +249,16 @@ export async function handleDownloadFile(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download file',
+        message: 'Error while trying download file'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
-export async function handleUploadPhoto(request: NextRequest): Promise<NextResponse> {
+export async function handleUploadPhoto(
+  request: NextRequest
+): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -267,13 +274,16 @@ export async function handleUploadPhoto(request: NextRequest): Promise<NextRespo
       return NextResponse.json(
         {
           status: false,
-          message: 'No files uploaded.',
+          message: 'No files uploaded.'
         },
-        { status: 400 },
+        { status: 400 }
       )
     }
 
-    const fileName = await commonsService.uploadPhoto(upload.filepath, upload.mimetype)
+    const fileName = await commonsService.uploadPhoto(
+      upload.filepath,
+      upload.mimetype
+    )
     const localFile = await commonsService.getPhoto(fileName)
 
     await commonsService.updatePhotoURL(localFile, String(auth.user.sub ?? ''))
@@ -284,12 +294,12 @@ export async function handleUploadPhoto(request: NextRequest): Promise<NextRespo
         data: {
           file: {
             fileName,
-            localFile,
-          },
+            localFile
+          }
         },
-        message: 'File uploaded successfully.',
+        message: 'File uploaded successfully.'
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -297,16 +307,16 @@ export async function handleUploadPhoto(request: NextRequest): Promise<NextRespo
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to upload photo',
+        message: 'Error while trying to upload photo'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleGetPhoto(
   request: NextRequest,
-  photoId: string | undefined,
+  photoId: string | undefined
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -318,9 +328,9 @@ export async function handleGetPhoto(
     return NextResponse.json(
       {
         status: false,
-        message: 'Missing photo id',
+        message: 'Missing photo id'
       },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -333,11 +343,11 @@ export async function handleGetPhoto(
       {
         status: true,
         data: {
-          file,
+          file
         },
-        message: 'Photo downloaded successfully.',
+        message: 'Photo downloaded successfully.'
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -345,9 +355,9 @@ export async function handleGetPhoto(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to download photo.',
+        message: 'Error while trying to download photo.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

@@ -1,5 +1,4 @@
 export interface BaseStatistics {
-  categoria: string;
-  cantidad: number;
+  categoria: string
+  cantidad: number
 }
-

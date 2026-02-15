@@ -5,7 +5,7 @@ import {
   DB_PASS,
   DB_USER,
   Database,
-  logger,
+  logger
 } from '../../shared'
 import { StatisticsQueryDTO } from '../dto/statistics.query.dto'
 import {
@@ -24,7 +24,7 @@ import {
   Electrocardiogram,
   Psychology,
   StructuralHeight,
-  Odontology,
+  Odontology
 } from './entity'
 import { IStatisticsRepository } from './interfaces/statistics.repository.interface'
 
@@ -42,19 +42,19 @@ export default class StatisticsRepository implements IStatisticsRepository {
       pool: {
         max: 10,
         min: 0,
-        idleTimeoutMillis: 60000,
+        idleTimeoutMillis: 60000
       },
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
   async findGenders(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<Gender[]> {
     try {
       let data: Gender[] = []
@@ -101,7 +101,8 @@ export default class StatisticsRepository implements IStatisticsRepository {
         query += ` AND F.tip_exa='${params.examType}'`
       }
 
-      query += ' GROUP BY CASE WHEN P.edad BETWEEN 18 AND 39 THEN \'18-39 años\' WHEN P.edad BETWEEN 40 AND 49 THEN \'40-49 años\' WHEN P.edad >= 50 THEN \'50 años o más\' END'
+      query +=
+        " GROUP BY CASE WHEN P.edad BETWEEN 18 AND 39 THEN '18-39 años' WHEN P.edad BETWEEN 40 AND 49 THEN '40-49 años' WHEN P.edad >= 50 THEN '50 años o más' END"
 
       const result = await this.database.query<Age>(query)
 
@@ -119,7 +120,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findMedicalFitness(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<MedicalFitness[]> {
     try {
       let data: MedicalFitness[] = []
@@ -152,7 +153,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findNutritionalProfile(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<NutritionalProfile[]> {
     try {
       let data: NutritionalProfile[] = []
@@ -186,7 +187,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findBloodPressure(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<BloodPressure[]> {
     try {
       let data: BloodPressure[] = []
@@ -220,7 +221,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findOsteoMuscularPathologies(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<OsteoMuscularPathologies[]> {
     try {
       let data: OsteoMuscularPathologies[] = []
@@ -276,8 +277,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
       where ${where}`
 
-      const result =
-        await this.database.query<OsteoMuscularPathologies>(query)
+      const result = await this.database.query<OsteoMuscularPathologies>(query)
 
       if (!result.success) {
         return data
@@ -355,7 +355,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findAudiometry(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<Audiometry[]> {
     try {
       let data: Audiometry[] = []
@@ -504,7 +504,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findSpirometry(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<Spirometry[]> {
     try {
       let data: Spirometry[] = []
@@ -612,7 +612,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findVisualAcuity(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<VisualAcuity[]> {
     try {
       let data: VisualAcuity[] = []
@@ -720,7 +720,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findOtherConditions(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<OtherConditions[]> {
     try {
       let data: OtherConditions[] = []
@@ -872,7 +872,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findChestXRay(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<ChestXRay[]> {
     try {
       let data: ChestXRay[] = []
@@ -939,7 +939,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findElectrocardiogram(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<Electrocardiogram[]> {
     try {
       let data: Electrocardiogram[] = []
@@ -1008,7 +1008,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findPsychology(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<Psychology[]> {
     try {
       let data: Psychology[] = []
@@ -1077,7 +1077,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findStructuralHeight(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<StructuralHeight[]> {
     try {
       let data: StructuralHeight[] = []
@@ -1142,7 +1142,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async findOdontology(
     params: StatisticsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<Odontology[]> {
     try {
       let data: Odontology[] = []
@@ -1323,4 +1323,3 @@ export default class StatisticsRepository implements IStatisticsRepository {
     }
   }
 }
-

@@ -15,7 +15,6 @@ export default function TrackingPage() {
     if (jwt.length <= 0) {
       router.push('/auth')
     }
-
   }, [router])
 
   return (

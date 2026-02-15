@@ -9,4 +9,3 @@ export * from './laboratory-exams-report'
 export * from './consultations'
 export * from './recommendations'
 export * from './epidemiological-report'
-

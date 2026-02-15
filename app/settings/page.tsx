@@ -1,20 +1,20 @@
 'use client'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import Header from '@/components/Header'
 import styles from './settings.module.css'
 import Navigation from '@/components/Navigation'
 import Panel from '@/components/Panel'
-import {Rubik} from 'next/font/google'
+import { Rubik } from 'next/font/google'
 import Input from '@/components/Input'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faImage, faLock} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faImage, faLock } from '@fortawesome/free-solid-svg-icons'
 import Button from '@/components/Button'
-import {BaseApi} from '@/models/base'
-import {ROLES_TYPES} from '@/shared/constants'
+import { BaseApi } from '@/models/base'
+import { ROLES_TYPES } from '@/shared/constants'
 import useUserProfile from '@/hooks/useUserProfile'
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
-const rubik = Rubik({weight: '600', subsets: ['latin']})
+const rubik = Rubik({ weight: '600', subsets: ['latin'] })
 
 export default function Settings() {
   const router = useRouter()
@@ -32,12 +32,12 @@ export default function Settings() {
 
   const handleFileChange = (e: any) => {
     const target = e.target as HTMLInputElement & {
-      files: FileList;
+      files: FileList
     }
 
     setSelectedFile(target.files[0])
 
-    const file = new FileReader
+    const file = new FileReader()
 
     file.onload = () => {
       setPreview(file.result)
@@ -64,7 +64,7 @@ export default function Settings() {
       const data = await fetch('/api/commons/users/photo', {
         method: 'PATCH',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         },
         body: formData
       })
@@ -91,7 +91,7 @@ export default function Settings() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify({
           firstName,
@@ -131,30 +131,37 @@ export default function Settings() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <main className={styles.main}>
-        <Navigation/>
+        <Navigation />
         <Panel>
           <h1 className={`${rubik.className} ${styles.title}`}>Mi cuenta</h1>
           <div className={styles.settings}>
             <div
               className={`${styles.dragAndDropArea} ${preview && styles.withImage}`}
-              style={{backgroundImage: `url(${preview})`, backgroundPosition: 'center', backgroundSize: 'cover'}}
+              style={{
+                backgroundImage: `url(${preview})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover'
+              }}
             >
               {!preview && (
                 <>
-                  <FontAwesomeIcon icon={faImage} width={20}/>
+                  <FontAwesomeIcon icon={faImage} width={20} />
                   <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
+                    type='file'
+                    name='image'
+                    accept='image/*'
                     onChange={handleFileChange}
                   />
                   <p>Arrastra y suelta tu foto de perfil aquí</p>
                 </>
               )}
               {preview && (
-                <button className={styles.removeImageButton} onClick={handleRemoveImage}>
+                <button
+                  className={styles.removeImageButton}
+                  onClick={handleRemoveImage}
+                >
                   Remover Imagen
                 </button>
               )}
@@ -162,49 +169,77 @@ export default function Settings() {
             <div className={styles.account}>
               <div>
                 <div className={styles.rowInput}>
-                  <label htmlFor="firstName">Nombres</label>
-                  <Input placeholder={''} type="text" onChange={(e) => setFirstName(e.target.value)}
-                         value={firstName || currentUser?.firstName}/>
+                  <label htmlFor='firstName'>Nombres</label>
+                  <Input
+                    placeholder={''}
+                    type='text'
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName || currentUser?.firstName}
+                  />
                 </div>
-                {
-                  currentUser?.profile === ROLES_TYPES.DOCTOR && (
-                    <div className={styles.rowInput}>
-                      <label htmlFor="cmp">CMP</label>
-                      <Input placeholder={''} type="text" onChange={(e) => setCmp(e.target.value)} value={cmp || ''}/>
-                    </div>
-                  )
-                }
+                {currentUser?.profile === ROLES_TYPES.DOCTOR && (
+                  <div className={styles.rowInput}>
+                    <label htmlFor='cmp'>CMP</label>
+                    <Input
+                      placeholder={''}
+                      type='text'
+                      onChange={(e) => setCmp(e.target.value)}
+                      value={cmp || ''}
+                    />
+                  </div>
+                )}
                 <div className={styles.rowInput}>
-                  <label htmlFor="phone">Teléfono</label>
-                  <Input placeholder={''} type="text" onChange={(e) => setPhone(e.target.value)} value={phone || ''}/>
+                  <label htmlFor='phone'>Teléfono</label>
+                  <Input
+                    placeholder={''}
+                    type='text'
+                    onChange={(e) => setPhone(e.target.value)}
+                    value={phone || ''}
+                  />
                 </div>
               </div>
               <div>
                 <div className={styles.rowInput}>
-                  <label htmlFor="lastName">Apellidos</label>
-                  <Input placeholder={''} type="text" onChange={(e) => setLastName(e.target.value)}
-                         value={lastName || currentUser?.lastName}/>
+                  <label htmlFor='lastName'>Apellidos</label>
+                  <Input
+                    placeholder={''}
+                    type='text'
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName || currentUser?.lastName}
+                  />
                 </div>
                 <div className={styles.rowInput}>
-                  <label htmlFor="email">Correo</label>
-                  <Input placeholder={''} type="text" onChange={(e) => setEmail(e.target.value)}
-                         value={email || currentUser?.email}/>
+                  <label htmlFor='email'>Correo</label>
+                  <Input
+                    placeholder={''}
+                    type='text'
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email || currentUser?.email}
+                  />
                 </div>
                 <div className={styles.rowInput}>
-                  <label htmlFor="birthDate">Fecha de Nacimiento</label>
-                  <Input placeholder={''} type="date" onChange={(e) => setBirthDate(e.target.value)}
-                         value={birthDate || ''}/>
+                  <label htmlFor='birthDate'>Fecha de Nacimiento</label>
+                  <Input
+                    placeholder={''}
+                    type='date'
+                    onChange={(e) => setBirthDate(e.target.value)}
+                    value={birthDate || ''}
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div className={styles.footer}>
             <p>
-              <a href="#javascript" onClick={handleLogout} className={styles.logout}>
-                <FontAwesomeIcon icon={faLock} width={20}/> Cerrar sesión
+              <a
+                href='#javascript'
+                onClick={handleLogout}
+                className={styles.logout}
+              >
+                <FontAwesomeIcon icon={faLock} width={20} /> Cerrar sesión
               </a>
             </p>
-            <Button label="Actualizar cambios" onClick={handleUpdateChanges}/>
+            <Button label='Actualizar cambios' onClick={handleUpdateChanges} />
           </div>
         </Panel>
       </main>

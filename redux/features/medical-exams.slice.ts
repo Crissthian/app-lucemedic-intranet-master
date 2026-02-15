@@ -13,11 +13,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 // }
 
 type InitialState = {
-  showDetail: boolean,
-  showMedicalHistory: boolean,
-  showInterconsultas: boolean,
-  showRecomendaciones: boolean,
-  data: MedicalExams[],
+  showDetail: boolean
+  showMedicalHistory: boolean
+  showInterconsultas: boolean
+  showRecomendaciones: boolean
+  data: MedicalExams[]
   details: MedicalExamsDetails
 }
 
@@ -91,5 +91,11 @@ export const medicalExams = createSlice({
   }
 })
 
-export const { getDetail, toggleDetail, toggleMedicalHistory, toggleInterconsultas, toggleRecomendaciones } = medicalExams.actions
+export const {
+  getDetail,
+  toggleDetail,
+  toggleMedicalHistory,
+  toggleInterconsultas,
+  toggleRecomendaciones
+} = medicalExams.actions
 export default medicalExams.reducer

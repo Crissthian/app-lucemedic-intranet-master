@@ -23,7 +23,7 @@ import MedicalHistory from '@/components/MedicalHistory'
 import {
   EXAMS_TYPES_OPTIONS,
   HEADQUARTERS_OPTIONS,
-  ROLES_TYPES,
+  ROLES_TYPES
 } from '@/shared/constants'
 import DataTablePatient from '@/components/DataTablePatient'
 import DataTableRH from '@/components/DataTableRH'
@@ -35,7 +35,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBell,
   faChevronLeft,
-  faChevronRight,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons'
 import useAccessToken from '@/hooks/useAccessToken'
 
@@ -65,20 +65,18 @@ export default function HomePage() {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
-  const showWelcome = useAppSelector(
-    (state) => state.globalReducer.showWelcome,
-  )
+  const showWelcome = useAppSelector((state) => state.globalReducer.showWelcome)
   const showViewDetail = useAppSelector(
-    (state) => state.medicalExamsReducer.showDetail,
+    (state) => state.medicalExamsReducer.showDetail
   )
   const showMedicalHistory = useAppSelector(
-    (state) => state.medicalExamsReducer.showMedicalHistory,
+    (state) => state.medicalExamsReducer.showMedicalHistory
   )
   const showInterconsultas = useAppSelector(
-    (state) => state.medicalExamsReducer.showInterconsultas,
+    (state) => state.medicalExamsReducer.showInterconsultas
   )
   const showRecomendaciones = useAppSelector(
-    (state) => state.medicalExamsReducer.showRecomendaciones,
+    (state) => state.medicalExamsReducer.showRecomendaciones
   )
 
   const handleSubmit = async () => {
@@ -100,7 +98,7 @@ export default function HomePage() {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Bounce,
+        transition: Bounce
       })
       return
     }
@@ -132,8 +130,8 @@ export default function HomePage() {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await data.json()
@@ -246,24 +244,24 @@ export default function HomePage() {
                   {currentUser.profile === ROLES_TYPES.DOCTOR && (
                     <>
                       <Input
-                        placeholder="Apellidos"
-                        type="text"
+                        placeholder='Apellidos'
+                        type='text'
                         onChange={(e) => setFullName(e?.target.value)}
                         value={fullName}
                       />
                       <Input
-                        placeholder="D.N.I."
-                        type="text"
+                        placeholder='D.N.I.'
+                        type='text'
                         onChange={(event) => setDni(event?.target.value)}
                         value={dni}
                       />
                       <Select
-                        placeholder="Tipo de examen"
+                        placeholder='Tipo de examen'
                         options={EXAMS_TYPES_OPTIONS}
                         onChange={(e) => setExamType(e.target.value)}
                       />
                       <Select
-                        placeholder="Sede"
+                        placeholder='Sede'
                         options={HEADQUARTERS_OPTIONS}
                         onChange={(e) => setSede(e.target.value)}
                       />
@@ -272,38 +270,38 @@ export default function HomePage() {
                   {currentUser.profile === ROLES_TYPES.RH && (
                     <>
                       <Input
-                        placeholder="Nombres y Apellidos"
-                        type="text"
+                        placeholder='Nombres y Apellidos'
+                        type='text'
                         onChange={(e) => setFullName(e?.target.value)}
                         value={fullName}
                       />
                       <Input
-                        placeholder="D.N.I."
-                        type="text"
+                        placeholder='D.N.I.'
+                        type='text'
                         onChange={(event) => setDni(event?.target.value)}
                         value={dni}
                       />
                       <Select
-                        placeholder="Tipo de examen"
+                        placeholder='Tipo de examen'
                         options={EXAMS_TYPES_OPTIONS}
                         onChange={(e) => setExamType(e.target.value)}
                       />
                       <Select
-                        placeholder="Sede"
+                        placeholder='Sede'
                         options={HEADQUARTERS_OPTIONS}
                         onChange={(e) => setSede(e.target.value)}
                       />
                     </>
                   )}
                   <Input
-                    placeholder="Desde"
-                    type="date"
+                    placeholder='Desde'
+                    type='date'
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                   />
                   <Input
-                    placeholder="Hasta"
-                    type="date"
+                    placeholder='Hasta'
+                    type='date'
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                   />
@@ -324,7 +322,7 @@ export default function HomePage() {
                     <FontAwesomeIcon
                       icon={faBell}
                       color={'#1EE67D'}
-                      size="2x"
+                      size='2x'
                     />
                     <p className={rubik.className}>
                       No se han encontrado <br />

@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 export interface User {
-  firstName: string;
-  lastName: string;
-  dni: string;
-  email: string;
-  profile: number;
-  ruc: number;
-  empresa: string;
-  photoUrl?: string;
+  firstName: string
+  lastName: string
+  dni: string
+  email: string
+  profile: number
+  ruc: number
+  empresa: string
+  photoUrl?: string
 }
 
 const useUserProfile = () => {

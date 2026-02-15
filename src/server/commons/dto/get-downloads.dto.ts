@@ -1,4 +1,4 @@
 export interface GetDownloadsDTO {
-  type: number;
-  ids: string[];
+  type: number
+  ids: string[]
 }

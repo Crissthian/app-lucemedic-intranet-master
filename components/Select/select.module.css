@@ -17,12 +17,12 @@
   appearance: none;
   width: 100%;
   height: 40px;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .selectField:hover,
 .selectField:active,
 .selectField:focus {
   border: 1px solid var(--green-color);
-  transition: all .2s;
+  transition: all 0.2s;
 }

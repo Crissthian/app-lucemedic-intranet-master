@@ -4,18 +4,18 @@ import Navigation from '@/components/Navigation'
 import Panel from '@/components/Panel'
 import styles from './appointments.module.css'
 import Image from 'next/image'
-import {useEffect, useState} from 'react'
-import {useRouter} from 'next/navigation'
-import {useDispatch} from 'react-redux'
-import {AppDispatch} from '@/redux/store'
-import {BaseApi} from '@/models/base'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faDownload, faUpload} from '@fortawesome/free-solid-svg-icons'
-import {Rubik} from 'next/font/google'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '@/redux/store'
+import { BaseApi } from '@/models/base'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { Rubik } from 'next/font/google'
 import Button from '@/components/Button'
-import {toggleLoading} from '@/redux/features/global.slice'
+import { toggleLoading } from '@/redux/features/global.slice'
 
-const rubik500 = Rubik({weight: '500', subsets: ['latin']})
+const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
 
 export default function Appointments() {
   const router = useRouter()
@@ -56,9 +56,9 @@ export default function Appointments() {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         },
-        body: formData,
+        body: formData
       })
 
       const result: BaseApi = await response.json()
@@ -78,49 +78,69 @@ export default function Appointments() {
   }
 
   useEffect(() => {
-
     const jwt = localStorage.getItem('accessToken') || ''
 
     if (jwt.length <= 0) {
       router.push('/auth')
     }
-
   }, [router])
 
   return (
     <>
-      <Header/>
+      <Header />
       <main className={styles.main}>
-        <Navigation/>
+        <Navigation />
         <Panel>
-          <p className={styles.title}>Programa las citas de tus colaboradores de manera rápida en solo <span>3 simples pasos.</span>
+          <p className={styles.title}>
+            Programa las citas de tus colaboradores de manera rápida en solo{' '}
+            <span>3 simples pasos.</span>
           </p>
           <div className={styles.container}>
-            <Image src={'/caption-citas.png'} alt={'Citas'} width={500} height={500} priority/>
+            <Image
+              src={'/caption-citas.png'}
+              alt={'Citas'}
+              width={500}
+              height={500}
+              priority
+            />
             <div className={styles.buttonsContainer}>
-              <div className={`${rubik500.className} ${styles.button}`} onClick={handleDownloadTemplate}>
-                <FontAwesomeIcon icon={faDownload} fill="#1EE67D"/> Descargar formato de programación
+              <div
+                className={`${rubik500.className} ${styles.button}`}
+                onClick={handleDownloadTemplate}
+              >
+                <FontAwesomeIcon icon={faDownload} fill='#1EE67D' /> Descargar
+                formato de programación
               </div>
-              <Image src={'/capture.png'} alt={'Excel'} width={300} height={200} priority/>
-              <div className={`${rubik500.className} ${styles.button}`} onClick={handleSelectFile}><FontAwesomeIcon
-                icon={faUpload} fill="#1EE67D"/> Importar formato de programación
+              <Image
+                src={'/capture.png'}
+                alt={'Excel'}
+                width={300}
+                height={200}
+                priority
+              />
+              <div
+                className={`${rubik500.className} ${styles.button}`}
+                onClick={handleSelectFile}
+              >
+                <FontAwesomeIcon icon={faUpload} fill='#1EE67D' /> Importar
+                formato de programación
               </div>
             </div>
           </div>
           <div className={styles.footer}>
-            {
-              selectedFile && (
-                <Button label="Enviar" onClick={() => handleUpload()}/>
-              )
-            }
-            {
-              success && (
-                <div className={styles.message}>
-                  <p><strong>¡Listo! Tus citas han sido enviadas.</strong></p>
-                  <p><small>Un asesor comercial se comunicará contigo.</small></p>
-                </div>
-              )
-            }
+            {selectedFile && (
+              <Button label='Enviar' onClick={() => handleUpload()} />
+            )}
+            {success && (
+              <div className={styles.message}>
+                <p>
+                  <strong>¡Listo! Tus citas han sido enviadas.</strong>
+                </p>
+                <p>
+                  <small>Un asesor comercial se comunicará contigo.</small>
+                </p>
+              </div>
+            )}
           </div>
         </Panel>
       </main>

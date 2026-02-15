@@ -6,7 +6,7 @@ import { logger } from '@/src/server/shared'
 const appointmentsService = new AppointmentsService()
 
 export async function handleCreateAppointment(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -22,9 +22,9 @@ export async function handleCreateAppointment(
       return NextResponse.json(
         {
           status: false,
-          message: 'No files uploaded.',
+          message: 'No files uploaded.'
         },
-        { status: 400 },
+        { status: 400 }
       )
     }
 
@@ -32,15 +32,18 @@ export async function handleCreateAppointment(
 
     const fileBuffer = Buffer.from(await file.arrayBuffer())
 
-    await appointmentsService.createAppointment(fileBuffer, String(auth.user.sub))
+    await appointmentsService.createAppointment(
+      fileBuffer,
+      String(auth.user.sub)
+    )
 
     return NextResponse.json(
       {
         status: true,
         data: {},
-        message: 'Appointment created successfully.',
+        message: 'Appointment created successfully.'
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error('Error while trying to create an appointment.')
@@ -49,9 +52,9 @@ export async function handleCreateAppointment(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to create appointment.',
+        message: 'Error while trying to create appointment.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

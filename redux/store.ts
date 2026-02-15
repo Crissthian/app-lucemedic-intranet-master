@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: {
     globalReducer,
     authReducer,
-    medicalExamsReducer,
+    medicalExamsReducer
   }
 })
 

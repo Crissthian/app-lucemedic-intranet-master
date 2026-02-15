@@ -17,7 +17,7 @@ function ensureAuth(request: NextRequest): NextResponse | null {
 
 export async function handleHistoricalRadiology(
   request: NextRequest,
-  dni: string | undefined,
+  dni: string | undefined
 ): Promise<NextResponse> {
   const authResponse = ensureAuth(request)
   if (authResponse) {
@@ -27,12 +27,14 @@ export async function handleHistoricalRadiology(
   if (!dni) {
     return NextResponse.json(
       { status: false, message: 'Missing dni.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
   try {
-    logger.info(`Executing get radiology images of user: ${JSON.stringify(dni)}`)
+    logger.info(
+      `Executing get radiology images of user: ${JSON.stringify(dni)}`
+    )
 
     const { localFiles: files, radiologies } =
       await historicalService.downloadRadiologyImages(dni)
@@ -44,10 +46,10 @@ export async function handleHistoricalRadiology(
         status: true,
         data: {
           radiologies,
-          files,
-        },
+          files
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -55,16 +57,16 @@ export async function handleHistoricalRadiology(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get radiology images',
+        message: 'Error while trying to get radiology images'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleHistoricalAudiometry(
   request: NextRequest,
-  dni: string | undefined,
+  dni: string | undefined
 ): Promise<NextResponse> {
   const authResponse = ensureAuth(request)
   if (authResponse) {
@@ -74,7 +76,7 @@ export async function handleHistoricalAudiometry(
   if (!dni) {
     return NextResponse.json(
       { status: false, message: 'Missing dni.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -91,10 +93,10 @@ export async function handleHistoricalAudiometry(
         status: true,
         data: {
           audiometries,
-          files,
-        },
+          files
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -102,16 +104,16 @@ export async function handleHistoricalAudiometry(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get audiometry images',
+        message: 'Error while trying to get audiometry images'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleHistoricalCardiology(
   request: NextRequest,
-  dni: string | undefined,
+  dni: string | undefined
 ): Promise<NextResponse> {
   const authResponse = ensureAuth(request)
   if (authResponse) {
@@ -121,7 +123,7 @@ export async function handleHistoricalCardiology(
   if (!dni) {
     return NextResponse.json(
       { status: false, message: 'Missing dni.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -133,10 +135,10 @@ export async function handleHistoricalCardiology(
       {
         status: true,
         data: {
-          cardiology_reports,
-        },
+          cardiology_reports
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to get cardiology report for user: ${dni}`)
@@ -144,16 +146,16 @@ export async function handleHistoricalCardiology(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get cardiology report',
+        message: 'Error while trying to get cardiology report'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleHistoricalImc(
   request: NextRequest,
-  dni: string | undefined,
+  dni: string | undefined
 ): Promise<NextResponse> {
   const authResponse = ensureAuth(request)
   if (authResponse) {
@@ -163,7 +165,7 @@ export async function handleHistoricalImc(
   if (!dni) {
     return NextResponse.json(
       { status: false, message: 'Missing dni.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -175,10 +177,10 @@ export async function handleHistoricalImc(
       {
         status: true,
         data: {
-          imc_reports,
-        },
+          imc_reports
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to get IMC report for user: ${dni}`)
@@ -186,16 +188,16 @@ export async function handleHistoricalImc(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get cardiology report',
+        message: 'Error while trying to get cardiology report'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleHistoricalLaboratoryExams(
   request: NextRequest,
-  dni: string | undefined,
+  dni: string | undefined
 ): Promise<NextResponse> {
   const authResponse = ensureAuth(request)
   if (authResponse) {
@@ -205,7 +207,7 @@ export async function handleHistoricalLaboratoryExams(
   if (!dni) {
     return NextResponse.json(
       { status: false, message: 'Missing dni.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -218,22 +220,22 @@ export async function handleHistoricalLaboratoryExams(
       {
         status: true,
         data: {
-          laboratory_exams_reports,
-        },
+          laboratory_exams_reports
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(
-      `Error while trying to get laboratory exams report for user: ${dni}`,
+      `Error while trying to get laboratory exams report for user: ${dni}`
     )
 
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get cardiology report',
+        message: 'Error while trying to get cardiology report'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

@@ -7,7 +7,9 @@ import { logger } from '@/src/server/shared'
 
 const medicalExamsService = new MedicalExamsService()
 
-async function parseJsonBody(request: NextRequest): Promise<Record<string, unknown>> {
+async function parseJsonBody(
+  request: NextRequest
+): Promise<Record<string, unknown>> {
   try {
     return (await request.json()) as Record<string, unknown>
   } catch {
@@ -25,7 +27,10 @@ function getQueryObject(request: NextRequest): Record<string, string> {
   return result
 }
 
-function getAuthUser(request: NextRequest): { response?: NextResponse; user?: UserToken } {
+function getAuthUser(request: NextRequest): {
+  response?: NextResponse
+  user?: UserToken
+} {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -36,7 +41,7 @@ function getAuthUser(request: NextRequest): { response?: NextResponse; user?: Us
 }
 
 export async function handleMedicalExamsQuery(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -54,9 +59,9 @@ export async function handleMedicalExamsQuery(
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to execute query: ${query}`)
@@ -65,15 +70,15 @@ export async function handleMedicalExamsQuery(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to verify user',
+        message: 'Error while trying to verify user'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleFindMedicalExams(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = getAuthUser(request)
   if (auth.response || !auth.user) {
@@ -90,9 +95,9 @@ export async function handleFindMedicalExams(
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying medical exams ${JSON.stringify(query)}`)
@@ -101,16 +106,16 @@ export async function handleFindMedicalExams(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying medical exams.',
+        message: 'Error while trying medical exams.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleFindMedicalExam(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -120,7 +125,7 @@ export async function handleFindMedicalExam(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -132,9 +137,9 @@ export async function handleFindMedicalExam(
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying medical exam details: ${uid}`)
@@ -143,16 +148,16 @@ export async function handleFindMedicalExam(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying medical exams.',
+        message: 'Error while trying medical exams.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleDownloadEMO(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const auth = getAuthUser(request)
   if (auth.response || !auth.user) {
@@ -162,7 +167,7 @@ export async function handleDownloadEMO(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -175,10 +180,10 @@ export async function handleDownloadEMO(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying download EMO: ${uid}`)
@@ -187,16 +192,16 @@ export async function handleDownloadEMO(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download EMO.',
+        message: 'Error while trying download EMO.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleDownloadCertificado(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const auth = getAuthUser(request)
   if (auth.response || !auth.user) {
@@ -206,7 +211,7 @@ export async function handleDownloadCertificado(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -219,10 +224,10 @@ export async function handleDownloadCertificado(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying download certificado: ${uid}`)
@@ -231,16 +236,16 @@ export async function handleDownloadCertificado(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download certificado.',
+        message: 'Error while trying download certificado.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleFindDiagnosis(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -250,7 +255,7 @@ export async function handleFindDiagnosis(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -261,10 +266,10 @@ export async function handleFindDiagnosis(
       {
         status: true,
         data: {
-          diagnosis,
-        },
+          diagnosis
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -272,16 +277,16 @@ export async function handleFindDiagnosis(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying find diagnosis.',
+        message: 'Error while trying find diagnosis.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleDownloadDiagnosis(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const auth = getAuthUser(request)
   if (auth.response || !auth.user) {
@@ -294,7 +299,7 @@ export async function handleDownloadDiagnosis(
   if (!uid || Number.isNaN(diagnosisType)) {
     return NextResponse.json(
       { status: false, message: 'Invalid diagnosis request.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -308,28 +313,30 @@ export async function handleDownloadDiagnosis(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
-    logger.error(`Error while trying download diagnosis: ${JSON.stringify(body)}`)
+    logger.error(
+      `Error while trying download diagnosis: ${JSON.stringify(body)}`
+    )
     logger.error((error as Error).message)
 
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download diagnosis.',
+        message: 'Error while trying download diagnosis.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleDownloadDiagnosisXray(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -339,7 +346,7 @@ export async function handleDownloadDiagnosisXray(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -352,10 +359,10 @@ export async function handleDownloadDiagnosisXray(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -363,16 +370,16 @@ export async function handleDownloadDiagnosisXray(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download diagnosis xray.',
+        message: 'Error while trying download diagnosis xray.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleFindConsultations(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -382,7 +389,7 @@ export async function handleFindConsultations(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -393,10 +400,10 @@ export async function handleFindConsultations(
       {
         status: true,
         data: {
-          consultations,
-        },
+          consultations
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -404,9 +411,9 @@ export async function handleFindConsultations(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying find consultations.',
+        message: 'Error while trying find consultations.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
@@ -414,7 +421,7 @@ export async function handleFindConsultations(
 export async function handleDownloadConsultation(
   request: NextRequest,
   uid: string | undefined,
-  fileId: string | undefined,
+  fileId: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -424,7 +431,7 @@ export async function handleDownloadConsultation(
   if (!uid || !fileId) {
     return NextResponse.json(
       { status: false, message: 'Missing consultation params.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -437,10 +444,10 @@ export async function handleDownloadConsultation(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -448,16 +455,16 @@ export async function handleDownloadConsultation(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download consultation.',
+        message: 'Error while trying download consultation.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleFindRecommendations(
   request: NextRequest,
-  uid: string | undefined,
+  uid: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -467,7 +474,7 @@ export async function handleFindRecommendations(
   if (!uid) {
     return NextResponse.json(
       { status: false, message: 'Missing medical exam id.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -478,10 +485,10 @@ export async function handleFindRecommendations(
       {
         status: true,
         data: {
-          recommendations,
-        },
+          recommendations
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -489,9 +496,9 @@ export async function handleFindRecommendations(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying find recommendations.',
+        message: 'Error while trying find recommendations.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
@@ -499,7 +506,7 @@ export async function handleFindRecommendations(
 export async function handleDownloadRecommendation(
   request: NextRequest,
   uid: string | undefined,
-  fileId: string | undefined,
+  fileId: string | undefined
 ): Promise<NextResponse> {
   const { response } = getAuthUser(request)
   if (response) {
@@ -509,7 +516,7 @@ export async function handleDownloadRecommendation(
   if (!uid || !fileId) {
     return NextResponse.json(
       { status: false, message: 'Missing recommendation params.' },
-      { status: 400 },
+      { status: 400 }
     )
   }
 
@@ -522,10 +529,10 @@ export async function handleDownloadRecommendation(
       {
         status: true,
         data: {
-          file,
-        },
+          file
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -533,9 +540,9 @@ export async function handleDownloadRecommendation(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying download recommendation.',
+        message: 'Error while trying download recommendation.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

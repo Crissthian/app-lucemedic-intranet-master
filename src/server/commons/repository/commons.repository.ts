@@ -6,7 +6,7 @@ import {
   DB_PASS,
   DB_USER,
   Database,
-  logger,
+  logger
 } from '../../shared'
 import { ExamType } from './entity/examType'
 import { Headquarter } from './entity/headquarter'
@@ -25,8 +25,8 @@ export default class CommonsRepository implements ICommonsRepository {
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
@@ -34,7 +34,8 @@ export default class CommonsRepository implements ICommonsRepository {
     let data: Headquarter[] = []
 
     try {
-      const query = 'SELECT LTRIM(RTRIM(d_tablas.des_item)) AS nombre_sede, d_tablas.num_item AS cod_sede FROM d_tablas WHERE cdg_tab = \'SDT\' AND swt_item = 1 ORDER BY nombre_sede'
+      const query =
+        "SELECT LTRIM(RTRIM(d_tablas.des_item)) AS nombre_sede, d_tablas.num_item AS cod_sede FROM d_tablas WHERE cdg_tab = 'SDT' AND swt_item = 1 ORDER BY nombre_sede"
 
       const result = await this.database.query<Headquarter>(query)
 
@@ -54,7 +55,8 @@ export default class CommonsRepository implements ICommonsRepository {
     let data: ExamType[] = []
 
     try {
-      const query = 'SELECT LTRIM(RTRIM(des_item)) AS des_item, num_item AS cod_item FROM d_tablas WHERE cdg_tab=\'EXA\' AND swt_item=1 ORDER BY des_item'
+      const query =
+        "SELECT LTRIM(RTRIM(des_item)) AS des_item, num_item AS cod_item FROM d_tablas WHERE cdg_tab='EXA' AND swt_item=1 ORDER BY des_item"
 
       const result = await this.database.query<ExamType>(query)
 
@@ -71,7 +73,7 @@ export default class CommonsRepository implements ICommonsRepository {
   }
 
   async findEpidemiologicalReport(
-    ruc: string,
+    ruc: string
   ): Promise<EpidemiologicalReport[]> {
     try {
       const query = `select cdg_reg,periodo,tipo from m_informe_ipidemiologico where ruc_cli='${ruc}'`
@@ -97,7 +99,7 @@ export default class CommonsRepository implements ICommonsRepository {
       const result = await this.database.query<User>(query)
 
       logger.info(
-        `Updating photo for user: ${dni} | Photo: ${photoURL} end | Result: ${result.data}`,
+        `Updating photo for user: ${dni} | Photo: ${photoURL} end | Result: ${result.data}`
       )
 
       if (!result.success) {
@@ -110,4 +112,3 @@ export default class CommonsRepository implements ICommonsRepository {
     }
   }
 }
-

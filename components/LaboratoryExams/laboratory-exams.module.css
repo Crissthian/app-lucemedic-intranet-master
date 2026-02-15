@@ -2,7 +2,7 @@
   max-width: 370px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.1);
   display: grid;
   grid-template-columns: 55px 1fr;
 }
@@ -35,7 +35,7 @@
   padding: 14px 16px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.1);
 }
 .card div {
   display: flex;

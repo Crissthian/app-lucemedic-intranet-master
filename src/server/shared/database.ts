@@ -1,8 +1,8 @@
 import { config, connect, ConnectionPool } from 'mssql'
 
 export interface QueryResult<T> {
-  success: boolean;
-  data: T[];
+  success: boolean
+  data: T[]
 }
 
 declare global {
@@ -39,7 +39,7 @@ export class Database {
     try {
       const result: QueryResult<T> = {
         success: false,
-        data: [],
+        data: []
       }
       const pool = await this.getPool()
 
@@ -56,4 +56,3 @@ export class Database {
     }
   }
 }
-

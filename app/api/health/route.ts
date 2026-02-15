@@ -10,7 +10,7 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
   return new NextResponse('OK', {
     status: 200,
     headers: {
-      'Content-Type': 'text/plain; charset=utf-8',
-    },
+      'Content-Type': 'text/plain; charset=utf-8'
+    }
   })
 }

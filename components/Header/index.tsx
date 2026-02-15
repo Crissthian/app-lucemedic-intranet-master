@@ -7,7 +7,7 @@ import {
   faChevronDown,
   faChevronUp,
   faSignOut,
-  faUser,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -57,23 +57,23 @@ const Header: React.FC = (props) => {
 
   return (
     <div className={styles.header}>
-      <Link href="/" as={'/'}>
+      <Link href='/' as={'/'}>
         <Image
-          src="/lucemedic-logo.svg"
-          alt="Lucemedic"
+          src='/lucemedic-logo.svg'
+          alt='Lucemedic'
           width={300}
           height={66}
           priority
         />
       </Link>
       <div className={styles.currentUser}>
-        <div
-          className={styles.profilePicture}
-        ></div>
+        <div className={styles.profilePicture}></div>
         <div className={styles.personalData}>
           <h2 className={roboto500.className}>
-            {getFullName(currentUser?.firstName || '', currentUser?.lastName || '') ||
-              'Nombres y Apellidos'}
+            {getFullName(
+              currentUser?.firstName || '',
+              currentUser?.lastName || ''
+            ) || 'Nombres y Apellidos'}
           </h2>
           <h3 className={roboto500.className}>
             {currentUser?.empresa || 'Empresa'}
@@ -84,9 +84,9 @@ const Header: React.FC = (props) => {
         </div>
         <div className={styles.actions} onClick={handleActions}>
           {showActions ? (
-            <FontAwesomeIcon icon={faChevronUp} color="#BBCDD9" />
+            <FontAwesomeIcon icon={faChevronUp} color='#BBCDD9' />
           ) : (
-            <FontAwesomeIcon icon={faChevronDown} color="#BBCDD9" />
+            <FontAwesomeIcon icon={faChevronDown} color='#BBCDD9' />
           )}
         </div>
       </div>

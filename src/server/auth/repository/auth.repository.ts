@@ -4,7 +4,7 @@ import {
   DB_PASS,
   DB_USER,
   DB_INSTANCE,
-  Database,
+  Database
 } from '../../shared'
 import { UserUpdateDTO } from '../dto/user-update.dto'
 import { User } from '../models/user'
@@ -22,8 +22,8 @@ export default class AuthRepository implements IAuthRepository {
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
@@ -71,5 +71,3 @@ export default class AuthRepository implements IAuthRepository {
     }
   }
 }
-
-

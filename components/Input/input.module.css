@@ -9,7 +9,7 @@
   font-size: 14px;
   line-height: 20px;
   border: 1px solid var(--white-color);
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .input::placeholder {
@@ -20,5 +20,5 @@
 .input:active,
 .input:focus {
   border: 1px solid var(--green-color);
-  transition: all .2s;
+  transition: all 0.2s;
 }

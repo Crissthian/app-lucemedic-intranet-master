@@ -9,11 +9,11 @@ import {
   faHospitalUser,
   faSliders,
   faStethoscope,
-  faUsers,
+  faUsers
 } from '@fortawesome/free-solid-svg-icons'
 import { Roboto } from 'next/font/google'
 import styles from './navigation.module.css'
-import {ROLES_TYPES} from '@/shared/constants'
+import { ROLES_TYPES } from '@/shared/constants'
 import useUserProfile from '@/hooks/useUserProfile'
 
 const roboto400 = Roboto({ weight: '400', subsets: ['latin'] })
@@ -28,19 +28,21 @@ const Navigation: React.FC = () => {
       {currentUser?.profile === ROLES_TYPES.DOCTOR && (
         <>
           <li className={`${pathname === '/' ? styles.active : ''}`}>
-            <a href="/">
-              <FontAwesomeIcon icon={faStethoscope} width={'28px'}/>
+            <a href='/'>
+              <FontAwesomeIcon icon={faStethoscope} width={'28px'} />
               <p className={roboto400.className}>
-                Exámenes <br/>
+                Exámenes <br />
                 Médicos
               </p>
             </a>
           </li>
-          <li className={`${pathname.includes('/statistics') ? styles.active : ''}`}>
-            <a href="/statistics">
-              <FontAwesomeIcon icon={faChartPie} width={'28px'}/>
+          <li
+            className={`${pathname.includes('/statistics') ? styles.active : ''}`}
+          >
+            <a href='/statistics'>
+              <FontAwesomeIcon icon={faChartPie} width={'28px'} />
               <p className={roboto400.className}>
-                Data <br/>
+                Data <br />
                 Estadística
               </p>
             </a>
@@ -50,19 +52,21 @@ const Navigation: React.FC = () => {
               pathname.includes('/epidemiological-report') ? styles.active : ''
             }`}
           >
-            <a href="/epidemiological-report">
-              <FontAwesomeIcon icon={faFileAlt} height={'28px'}/>
+            <a href='/epidemiological-report'>
+              <FontAwesomeIcon icon={faFileAlt} height={'28px'} />
               <p className={roboto400.className}>
-                Informe <br/>
+                Informe <br />
                 Epidemiológico
               </p>
             </a>
           </li>
-          <li className={`${pathname.includes('/tracking') ? styles.active : ''}`}>
-            <a href="/tracking">
-              <FontAwesomeIcon icon={faUsers} width={'28px'}/>
+          <li
+            className={`${pathname.includes('/tracking') ? styles.active : ''}`}
+          >
+            <a href='/tracking'>
+              <FontAwesomeIcon icon={faUsers} width={'28px'} />
               <p className={roboto400.className}>
-                Seguimiento <br/>
+                Seguimiento <br />
                 de atención
               </p>
             </a>
@@ -70,10 +74,10 @@ const Navigation: React.FC = () => {
           <li
             className={`${pathname.includes('/appointments') ? styles.active : ''}`}
           >
-            <a href="/appointments">
-              <FontAwesomeIcon icon={faCalendar} height={'28px'}/>
+            <a href='/appointments'>
+              <FontAwesomeIcon icon={faCalendar} height={'28px'} />
               <p className={roboto400.className}>
-                Programador <br/>
+                Programador <br />
                 de citas
               </p>
             </a>
@@ -84,19 +88,21 @@ const Navigation: React.FC = () => {
       {currentUser?.profile === ROLES_TYPES.RH && (
         <>
           <li className={`${pathname === '/' ? styles.active : ''}`}>
-            <a href="/">
-              <FontAwesomeIcon icon={faStethoscope} width={'28px'}/>
+            <a href='/'>
+              <FontAwesomeIcon icon={faStethoscope} width={'28px'} />
               <p className={roboto400.className}>
-                Exámenes <br/>
+                Exámenes <br />
                 Médicos
               </p>
             </a>
           </li>
-          <li className={`${pathname.includes('/tracking') ? styles.active : ''}`}>
-            <a href="/tracking">
-              <FontAwesomeIcon icon={faUsers} width={'28px'}/>
+          <li
+            className={`${pathname.includes('/tracking') ? styles.active : ''}`}
+          >
+            <a href='/tracking'>
+              <FontAwesomeIcon icon={faUsers} width={'28px'} />
               <p className={roboto400.className}>
-                Seguimiento <br/>
+                Seguimiento <br />
                 de atención
               </p>
             </a>
@@ -104,10 +110,10 @@ const Navigation: React.FC = () => {
           <li
             className={`${pathname.includes('/appointments') ? styles.active : ''}`}
           >
-            <a href="/appointments">
-              <FontAwesomeIcon icon={faCalendar} height={'28px'}/>
+            <a href='/appointments'>
+              <FontAwesomeIcon icon={faCalendar} height={'28px'} />
               <p className={roboto400.className}>
-                Programador <br/>
+                Programador <br />
                 de citas
               </p>
             </a>
@@ -117,10 +123,10 @@ const Navigation: React.FC = () => {
 
       {currentUser?.profile === ROLES_TYPES.PATIENT && (
         <li className={`${pathname === '/' ? styles.active : ''}`}>
-          <a href="/">
-            <FontAwesomeIcon icon={faHospitalUser} width={'28px'}/>
+          <a href='/'>
+            <FontAwesomeIcon icon={faHospitalUser} width={'28px'} />
             <p className={roboto400.className}>
-              Mis <br/>
+              Mis <br />
               Resultados
             </p>
           </a>
@@ -128,8 +134,8 @@ const Navigation: React.FC = () => {
       )}
 
       <li className={`${pathname.includes('/settings') ? styles.active : ''}`}>
-        <a href="/settings">
-          <FontAwesomeIcon icon={faSliders} width={'20px'}/>
+        <a href='/settings'>
+          <FontAwesomeIcon icon={faSliders} width={'20px'} />
           <p className={roboto400.className}>Ajustes</p>
         </a>
       </li>

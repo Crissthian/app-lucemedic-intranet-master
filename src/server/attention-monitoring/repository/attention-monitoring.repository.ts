@@ -4,7 +4,7 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database,
+  Database
 } from '../../shared'
 import { AttentionMonitoringQueryDTO } from '../dto/attention-monitoring.query.dto'
 import { AttentionMonitoring } from './entity/attention-monitoring'
@@ -22,14 +22,14 @@ export default class AttentionMonitoringRepository implements IAttentionMonitori
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
   async find(
     params: AttentionMonitoringQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<AttentionMonitoring[]> {
     try {
       let data: AttentionMonitoring[] = []
@@ -51,4 +51,3 @@ export default class AttentionMonitoringRepository implements IAttentionMonitori
     }
   }
 }
-

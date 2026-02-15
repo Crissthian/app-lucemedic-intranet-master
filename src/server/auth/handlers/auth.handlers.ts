@@ -10,7 +10,9 @@ import { logger } from '@/src/server/shared'
 const authService = new AuthService()
 const TEMP_DIR = path.join(process.cwd(), 'temp')
 
-async function parseJsonBody(request: NextRequest): Promise<Record<string, unknown>> {
+async function parseJsonBody(
+  request: NextRequest
+): Promise<Record<string, unknown>> {
   try {
     return (await request.json()) as Record<string, unknown>
   } catch {
@@ -19,7 +21,7 @@ async function parseJsonBody(request: NextRequest): Promise<Record<string, unkno
 }
 
 async function getUploadData(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<{ originalFilename: string; localFilePath: string } | null> {
   const formData = await request.formData()
   const file = formData.get('file')
@@ -40,7 +42,7 @@ async function getUploadData(
 
   return {
     originalFilename,
-    localFilePath: fullFilePath.replace(/\\/g, '/'),
+    localFilePath: fullFilePath.replace(/\\/g, '/')
   }
 }
 
@@ -57,9 +59,9 @@ export async function handleLogin(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to login user ${username}`)
@@ -68,14 +70,16 @@ export async function handleLogin(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to login user',
+        message: 'Error while trying to login user'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
-export async function handleVerify(request: NextRequest): Promise<NextResponse> {
+export async function handleVerify(
+  request: NextRequest
+): Promise<NextResponse> {
   const body = await parseJsonBody(request)
   const accessToken = String(body.accessToken ?? '')
   const username = String(body.username ?? '')
@@ -88,9 +92,9 @@ export async function handleVerify(request: NextRequest): Promise<NextResponse> 
     return NextResponse.json(
       {
         status: true,
-        data,
+        data
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to verify user ${username}`)
@@ -99,14 +103,16 @@ export async function handleVerify(request: NextRequest): Promise<NextResponse> 
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to verify user',
+        message: 'Error while trying to verify user'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
-export async function handleProfile(request: NextRequest): Promise<NextResponse> {
+export async function handleProfile(
+  request: NextRequest
+): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -119,9 +125,9 @@ export async function handleProfile(request: NextRequest): Promise<NextResponse>
     return NextResponse.json(
       {
         status: true,
-        data: user,
+        data: user
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to get profile: ${String(auth.user.sub)}`)
@@ -130,14 +136,16 @@ export async function handleProfile(request: NextRequest): Promise<NextResponse>
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying medical exams.',
+        message: 'Error while trying medical exams.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
-export async function handleUpdateUser(request: NextRequest): Promise<NextResponse> {
+export async function handleUpdateUser(
+  request: NextRequest
+): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -154,9 +162,9 @@ export async function handleUpdateUser(request: NextRequest): Promise<NextRespon
     return NextResponse.json(
       {
         status: true,
-        data: {},
+        data: {}
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(`Error while trying to update user ${auth.user.sub}`)
@@ -165,15 +173,15 @@ export async function handleUpdateUser(request: NextRequest): Promise<NextRespon
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to update user',
+        message: 'Error while trying to update user'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleUpdateProfilePhoto(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -188,9 +196,9 @@ export async function handleUpdateProfilePhoto(
       return NextResponse.json(
         {
           status: false,
-          message: 'No file found',
+          message: 'No file found'
         },
-        { status: 400 },
+        { status: 400 }
       )
     }
 
@@ -199,22 +207,22 @@ export async function handleUpdateProfilePhoto(
     return NextResponse.json(
       {
         status: true,
-        data: {},
+        data: {}
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error(
-      `Error while trying to update profile photo: ${String(auth.user.sub)}`,
+      `Error while trying to update profile photo: ${String(auth.user.sub)}`
     )
     logger.error((error as Error).message)
 
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to update profile photo.',
+        message: 'Error while trying to update profile photo.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

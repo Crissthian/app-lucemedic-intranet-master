@@ -6,8 +6,8 @@ import styles from './statistics-graph-card.module.css'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 
 interface StatisticsGraphCardProps {
-  children: React.ReactNode;
-  title?: string;
+  children: React.ReactNode
+  title?: string
 }
 
 const StatisticsGraphCard: React.FC<StatisticsGraphCardProps> = (props) => {
@@ -24,22 +24,25 @@ const StatisticsGraphCard: React.FC<StatisticsGraphCardProps> = (props) => {
       if (props.title) {
         const title = document.createElement('h2')
         title.innerText = props.title
-        containerRef.current.insertBefore(title, containerRef.current.firstChild)
+        containerRef.current.insertBefore(
+          title,
+          containerRef.current.firstChild
+        )
       }
 
       const options = {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFFFF'
       }
 
       const chartOptions = {
         fontFamily: 'Arial', // Cambia la fuente a Arial
         fontSize: 12, // Tamaño de fuente personalizado
-        fontWeight: 'bold', // Peso de la fuente
+        fontWeight: 'bold' // Peso de la fuente
       }
-  
+
       // Aplica las opciones a las etiquetas del gráfico
       const chartLabels = document.querySelectorAll('.recharts-text')
-  
+
       chartLabels.forEach((label) => {
         label.setAttribute('font-family', chartOptions.fontFamily)
         label.setAttribute('font-size', `${chartOptions.fontSize}`)
@@ -49,11 +52,11 @@ const StatisticsGraphCard: React.FC<StatisticsGraphCardProps> = (props) => {
       const chartOptions2 = {
         fontFamily: 'Arial', // Cambia la fuente a Arial
         fontSize: 11, // Tamaño de fuente personalizado
-        fontWeight: 'normal', // Peso de la fuente
+        fontWeight: 'normal' // Peso de la fuente
       }
 
       const chartLayers = document.querySelectorAll('.recharts-layer')
-  
+
       chartLayers.forEach((label) => {
         label.setAttribute('font-family', chartOptions2.fontFamily)
         label.setAttribute('font-size', `${chartOptions2.fontSize}`)
@@ -82,8 +85,17 @@ const StatisticsGraphCard: React.FC<StatisticsGraphCardProps> = (props) => {
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <div ref={downloadButtonRef} className={styles.downloadButton} onClick={downloadImageFromDiv}>
-        <FontAwesomeIcon icon={faDownload} width={16} height={17} color={'#1980EE'} />
+      <div
+        ref={downloadButtonRef}
+        className={styles.downloadButton}
+        onClick={downloadImageFromDiv}
+      >
+        <FontAwesomeIcon
+          icon={faDownload}
+          width={16}
+          height={17}
+          color={'#1980EE'}
+        />
       </div>
       {props.children}
     </div>

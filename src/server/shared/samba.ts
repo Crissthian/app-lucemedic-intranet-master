@@ -2,7 +2,11 @@ import SambaClient from 'samba-client'
 import crypto from 'crypto'
 import { existsSync, mkdirSync } from 'fs'
 import { logger } from './logger'
-import { FILE_SYSTEM_SERVER, FILE_SYSTEM_SERVER_PASSWORD, FILE_SYSTEM_SERVER_USERNAME } from './config'
+import {
+  FILE_SYSTEM_SERVER,
+  FILE_SYSTEM_SERVER_PASSWORD,
+  FILE_SYSTEM_SERVER_USERNAME
+} from './config'
 
 export class SMBClient {
   private connection: SambaClient
@@ -16,7 +20,12 @@ export class SMBClient {
     })
   }
 
-  async downloadFile(remoteFilePath: string, host?: string, subfolder?: string, extension?: string): Promise<string> {
+  async downloadFile(
+    remoteFilePath: string,
+    host?: string,
+    subfolder?: string,
+    extension?: string
+  ): Promise<string> {
     try {
       if (!existsSync('./temp')) {
         mkdirSync('./temp', { recursive: true })
@@ -26,9 +35,16 @@ export class SMBClient {
       const localFilePath = `./temp/${fileName}`
 
       if (host) {
-        const address = host === FILE_SYSTEM_SERVER ? `\\\\${FILE_SYSTEM_SERVER}\\empresas` : `\\\\${host}\\${subfolder}`
-        const username = host === FILE_SYSTEM_SERVER ? FILE_SYSTEM_SERVER_USERNAME : 'administrador'
-        const password = host === FILE_SYSTEM_SERVER ? FILE_SYSTEM_SERVER_PASSWORD : 'luc3'
+        const address =
+          host === FILE_SYSTEM_SERVER
+            ? `\\\\${FILE_SYSTEM_SERVER}\\empresas`
+            : `\\\\${host}\\${subfolder}`
+        const username =
+          host === FILE_SYSTEM_SERVER
+            ? FILE_SYSTEM_SERVER_USERNAME
+            : 'administrador'
+        const password =
+          host === FILE_SYSTEM_SERVER ? FILE_SYSTEM_SERVER_PASSWORD : 'luc3'
 
         const options = {
           address,
@@ -48,12 +64,17 @@ export class SMBClient {
 
       return fileName
     } catch (error: unknown) {
-      logger.error(`Samba Error while downloading file ${remoteFilePath}: ${error}`)
+      logger.error(
+        `Samba Error while downloading file ${remoteFilePath}: ${error}`
+      )
       throw error
     }
   }
 
-  async uploadFile(localFilePath: string, remoteFilePath: string): Promise<boolean> {
+  async uploadFile(
+    localFilePath: string,
+    remoteFilePath: string
+  ): Promise<boolean> {
     try {
       let success = true
 
@@ -67,5 +88,3 @@ export class SMBClient {
     }
   }
 }
-
-

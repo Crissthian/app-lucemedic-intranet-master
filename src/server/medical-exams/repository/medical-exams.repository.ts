@@ -5,14 +5,10 @@ import {
   DB_USER,
   DB_INSTANCE,
   Database,
-  logger,
+  logger
 } from '../../shared'
 import { MedicalExamsQueryDTO } from '../dto/medical-exams-query.dto'
-import {
-  Consultations,
-  EpidemiologicalReport,
-  Recommendations,
-} from './entity'
+import { Consultations, EpidemiologicalReport, Recommendations } from './entity'
 import { MedicalExams } from './entity/medical-exams'
 import { MedicalRecord } from './entity/medical-record'
 import { IMedicalExamsRepository } from './interfaces/medical-exams.repository.interface'
@@ -29,8 +25,8 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
@@ -44,7 +40,7 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findAll(
     params: MedicalExamsQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<MedicalExams[]> {
     try {
       // const query = `SELECT ficha.cdg_fmed, CONVERT(varchar(10), CONVERT(date,ficha.fec_fmed, 106), 103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci WHERE ficha.num_dni='${params.dni}'and PACI.APELLIDO_PERSONA LIKE '%${params.fullName}%' AND FICHA.fec_fmed BETWEEN '${params.fec_ini}' AND '${params.fec_fin}' AND FICHA.tip_exa='${params.t_examen}' AND FICHA.cdg_sede='${params.sede}' AND ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${params.ruc}' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc)`;
@@ -154,7 +150,7 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
   async findByDates(
     startDate: string,
     endDate: string,
-    ruc: string,
+    ruc: string
   ): Promise<MedicalExams[]> {
     try {
       const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) AS fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci WHERE FICHA.fec_fmed BETWEEN '${startDate}'AND '${endDate}' and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
@@ -245,7 +241,7 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
   }
 
   async findEpidemiologicalReport(
-    ruc: string,
+    ruc: string
   ): Promise<EpidemiologicalReport[]> {
     try {
       const query = `select cdg_reg,periodo,tipo from m_informe_ipidemiologico where ruc_cli='${ruc}'`
@@ -262,4 +258,3 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
     }
   }
 }
-

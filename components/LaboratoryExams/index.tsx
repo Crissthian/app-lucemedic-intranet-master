@@ -12,7 +12,7 @@ const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
 const LaboratoryExams: React.FC = () => {
   const details = useAppSelector((state) => state.medicalExamsReducer.details)
 
-  return(
+  return (
     <>
       <div className={styles.container}>
         <div className={styles.icon}>
@@ -24,28 +24,28 @@ const LaboratoryExams: React.FC = () => {
             <div className={styles.card}>
               <div>
                 <FontAwesomeIcon icon={faFireFlameSimple} width={'25px'} />
-                <p className={rubik300.className}>{ details.hemoglobina }</p>
+                <p className={rubik300.className}>{details.hemoglobina}</p>
               </div>
               <p className={rubik500.className}>Hemoglobina</p>
             </div>
             <div className={styles.card}>
               <div>
                 <FontAwesomeIcon icon={faFireFlameSimple} width={'25px'} />
-                <p className={rubik300.className}>{ details.colesterol }</p>
+                <p className={rubik300.className}>{details.colesterol}</p>
               </div>
               <p className={rubik500.className}>Colesterol</p>
             </div>
             <div className={styles.card}>
               <div>
                 <FontAwesomeIcon icon={faFireFlameSimple} width={'25px'} />
-                <p className={rubik300.className}>{ details.trigliceridos }</p>
+                <p className={rubik300.className}>{details.trigliceridos}</p>
               </div>
               <p className={rubik500.className}>Triglicéridos</p>
             </div>
             <div className={styles.card}>
               <div>
                 <FontAwesomeIcon icon={faFireFlameSimple} width={'25px'} />
-                <p className={rubik300.className}>{ details.glucosa }</p>
+                <p className={rubik300.className}>{details.glucosa}</p>
               </div>
               <p className={rubik500.className}>Glucosa</p>
             </div>

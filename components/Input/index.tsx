@@ -36,7 +36,8 @@ const Input: React.FC<InputProps> = (props) => {
         onFocus={handleFocusDate}
         onBlur={handleBlurDate}
         value={props.value ?? ''}
-        disabled={props.disabled} />
+        disabled={props.disabled}
+      />
     </>
   )
 }

@@ -17,7 +17,9 @@ function getQueryObject(request: NextRequest): Record<string, string> {
   return result
 }
 
-export async function handleSabana(request: NextRequest): Promise<NextResponse> {
+export async function handleSabana(
+  request: NextRequest
+): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
   if (!auth.ok) {
@@ -36,10 +38,10 @@ export async function handleSabana(request: NextRequest): Promise<NextResponse> 
       {
         status: true,
         data: {
-          sabana,
-        },
+          sabana
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error('Error while trying to get sabana.')
@@ -48,15 +50,15 @@ export async function handleSabana(request: NextRequest): Promise<NextResponse> 
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get sabana.',
+        message: 'Error while trying to get sabana.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleSabanaAptitud(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -76,10 +78,10 @@ export async function handleSabanaAptitud(
       {
         status: true,
         data: {
-          aptitudes,
-        },
+          aptitudes
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error('Error while trying to get aptitud médica.')
@@ -88,15 +90,15 @@ export async function handleSabanaAptitud(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get aptitud médica.',
+        message: 'Error while trying to get aptitud médica.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }
 
 export async function handleSabanaInterconsultations(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -112,17 +114,17 @@ export async function handleSabanaInterconsultations(
 
     const interconsultations = await sabanaService.findInterconsultations(
       query,
-      ruc,
+      ruc
     )
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          interconsultations,
-        },
+          interconsultations
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -130,9 +132,9 @@ export async function handleSabanaInterconsultations(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get interconsultations.',
+        message: 'Error while trying to get interconsultations.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

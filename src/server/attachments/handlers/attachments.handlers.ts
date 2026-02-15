@@ -5,7 +5,9 @@ import { logger } from '@/src/server/shared'
 
 const attachmentsService = new AttachmentsService()
 
-async function parseJsonBody(request: NextRequest): Promise<Record<string, unknown>> {
+async function parseJsonBody(
+  request: NextRequest
+): Promise<Record<string, unknown>> {
   try {
     return (await request.json()) as Record<string, unknown>
   } catch {
@@ -14,7 +16,7 @@ async function parseJsonBody(request: NextRequest): Promise<Record<string, unkno
 }
 
 export async function handleDownloadAttachment(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   try {
     const payload = (await parseJsonBody(request)) as unknown as GetDownloadsDTO
@@ -25,8 +27,8 @@ export async function handleDownloadAttachment(
       status: 200,
       headers: {
         'Content-Type': 'application/zip',
-        'Content-Disposition': `attachment; filename=${fileName}`,
-      },
+        'Content-Disposition': `attachment; filename=${fileName}`
+      }
     })
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -35,9 +37,9 @@ export async function handleDownloadAttachment(
       {
         status: false,
         message:
-          (error as Error).message || 'Error while trying download attachment',
+          (error as Error).message || 'Error while trying download attachment'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

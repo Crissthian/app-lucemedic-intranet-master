@@ -7,80 +7,81 @@ import { logger } from '@/src/server/shared'
 const statisticsService = new StatisticsService()
 
 type MetricConfig = {
-  responseKey: string;
-  resolve: (query: StatisticsQueryDTO, ruc: string) => Promise<unknown>;
-};
+  responseKey: string
+  resolve: (query: StatisticsQueryDTO, ruc: string) => Promise<unknown>
+}
 
 const metrics: Record<string, MetricConfig> = {
   genders: {
     responseKey: 'genders',
-    resolve: (query, ruc) => statisticsService.findGenders(query, ruc),
+    resolve: (query, ruc) => statisticsService.findGenders(query, ruc)
   },
   ages: {
     responseKey: 'ages',
-    resolve: (query, ruc) => statisticsService.findAges(query, ruc),
+    resolve: (query, ruc) => statisticsService.findAges(query, ruc)
   },
   'medical-fitness': {
     responseKey: 'medical_fitness',
-    resolve: (query, ruc) => statisticsService.findMedicalFitness(query, ruc),
+    resolve: (query, ruc) => statisticsService.findMedicalFitness(query, ruc)
   },
   'nutritional-profile': {
     responseKey: 'nutritional_profile',
-    resolve: (query, ruc) => statisticsService.findNutritionalProfile(query, ruc),
+    resolve: (query, ruc) =>
+      statisticsService.findNutritionalProfile(query, ruc)
   },
   'blood-pressure': {
     responseKey: 'blood_pressure',
-    resolve: (query, ruc) => statisticsService.findBloodPressure(query, ruc),
+    resolve: (query, ruc) => statisticsService.findBloodPressure(query, ruc)
   },
   'osteo-muscular-pathologies': {
     responseKey: 'osteo_muscular_pathologies',
     resolve: (query, ruc) =>
-      statisticsService.findOsteoMuscularPathologies(query, ruc),
+      statisticsService.findOsteoMuscularPathologies(query, ruc)
   },
   exams: {
     responseKey: 'exams',
-    resolve: (query, ruc) => statisticsService.findExams(query, ruc),
+    resolve: (query, ruc) => statisticsService.findExams(query, ruc)
   },
   audiometry: {
     responseKey: 'audiometry',
-    resolve: (query, ruc) => statisticsService.findAudiometry(query, ruc),
+    resolve: (query, ruc) => statisticsService.findAudiometry(query, ruc)
   },
   spirometry: {
     responseKey: 'spirometry',
-    resolve: (query, ruc) => statisticsService.findSpirometry(query, ruc),
+    resolve: (query, ruc) => statisticsService.findSpirometry(query, ruc)
   },
   'visual-acuity': {
     responseKey: 'visual_acuity',
-    resolve: (query, ruc) => statisticsService.findVisualAcuity(query, ruc),
+    resolve: (query, ruc) => statisticsService.findVisualAcuity(query, ruc)
   },
   'other-conditions': {
     responseKey: 'other_conditions',
-    resolve: (query, ruc) => statisticsService.findOtherConditions(query, ruc),
+    resolve: (query, ruc) => statisticsService.findOtherConditions(query, ruc)
   },
   'chest-x-ray': {
     responseKey: 'chest_x_ray',
-    resolve: (query, ruc) => statisticsService.findChestXRay(query, ruc),
+    resolve: (query, ruc) => statisticsService.findChestXRay(query, ruc)
   },
   electrocardiogram: {
     responseKey: 'electrocardiogram',
-    resolve: (query, ruc) => statisticsService.findElectrocardiogram(query, ruc),
+    resolve: (query, ruc) => statisticsService.findElectrocardiogram(query, ruc)
   },
   psychology: {
     responseKey: 'psychology',
-    resolve: (query, ruc) => statisticsService.findPsychology(query, ruc),
+    resolve: (query, ruc) => statisticsService.findPsychology(query, ruc)
   },
   'structural-height': {
     responseKey: 'structural_height',
-    resolve: (query, ruc) => statisticsService.findStructuralHeight(query, ruc),
+    resolve: (query, ruc) => statisticsService.findStructuralHeight(query, ruc)
   },
   odontology: {
     responseKey: 'odontology',
-    resolve: (query, ruc) => statisticsService.findOdontology(query, ruc),
+    resolve: (query, ruc) => statisticsService.findOdontology(query, ruc)
   },
   check: {
     responseKey: 'check',
-    resolve: (query, ruc) => statisticsService.check(query, ruc),
-  },
+    resolve: (query, ruc) => statisticsService.check(query, ruc)
+  }
 }
 
 function getQueryObject(request: NextRequest): Record<string, string> {
@@ -95,7 +96,7 @@ function getQueryObject(request: NextRequest): Record<string, string> {
 
 export async function handleStatisticsMetric(
   request: NextRequest,
-  metric: string | undefined,
+  metric: string | undefined
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -109,9 +110,9 @@ export async function handleStatisticsMetric(
     return NextResponse.json(
       {
         status: false,
-        message: 'Route not found',
+        message: 'Route not found'
       },
-      { status: 404 },
+      { status: 404 }
     )
   }
 
@@ -119,7 +120,9 @@ export async function handleStatisticsMetric(
     const query = getQueryObject(request) as unknown as StatisticsQueryDTO
     const ruc = String(auth.user.ruc ?? '')
 
-    logger.info(`Gettings statistics ${metric} ${JSON.stringify(query)} | ${ruc}`)
+    logger.info(
+      `Gettings statistics ${metric} ${JSON.stringify(query)} | ${ruc}`
+    )
 
     const data = await metricConfig.resolve(query, ruc)
 
@@ -127,10 +130,10 @@ export async function handleStatisticsMetric(
       {
         status: true,
         data: {
-          [metricConfig.responseKey]: data,
-        },
+          [metricConfig.responseKey]: data
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error((error as Error).message)
@@ -138,9 +141,9 @@ export async function handleStatisticsMetric(
     return NextResponse.json(
       {
         status: false,
-        message: (error as Error).message,
+        message: (error as Error).message
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

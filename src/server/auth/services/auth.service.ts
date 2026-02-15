@@ -13,13 +13,13 @@ export default class AuthService {
     this.repository = new AuthRepository()
     this.sambaClient = new SMBClient()
     this.jwt = new JWT({
-      secret: JWT_SECRET,
+      secret: JWT_SECRET
     })
   }
 
   async login(username: string, password: string): Promise<object> {
     const patient = await this.repository.findByDniAndPass(username, password)
-    
+
     if (!patient) {
       throw new Error('Invalid credentials')
     }
@@ -29,7 +29,7 @@ export default class AuthService {
     const accessToken = this.jwt.sign({
       sub: patient.dni,
       profile: patient.usr_perfil,
-      ruc: patient.usr_ruc,
+      ruc: patient.usr_ruc
     })
 
     const user = {
@@ -45,9 +45,9 @@ export default class AuthService {
     return {
       token: {
         accessToken,
-        refreshToken: '',
+        refreshToken: ''
       },
-      user,
+      user
     }
   }
 
@@ -63,7 +63,10 @@ export default class AuthService {
     return this.repository.update(dni, data)
   }
 
-  async updatePhoto(originalFilename: string, localFilePath: string): Promise<boolean> {
+  async updatePhoto(
+    originalFilename: string,
+    localFilePath: string
+  ): Promise<boolean> {
     const remoteFilePath = `/FOTOUS/${originalFilename}`
 
     logger.info(`Uploading photo ${localFilePath} to ${remoteFilePath}`)
@@ -73,5 +76,3 @@ export default class AuthService {
     return true
   }
 }
-
-

@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { JWT_SECRET, logger } from '@/src/server/shared'
 
 export type AuthenticatedUser = Record<string, unknown> & {
-  sub: string;
-};
+  sub: string
+}
 
 export type AuthResult =
   | { ok: true; user: AuthenticatedUser }
-  | { ok: false; response: NextResponse };
+  | { ok: false; response: NextResponse }
 
 export function authenticateRequest(request: NextRequest): AuthResult {
   const authorization = request.headers.get('authorization')
@@ -18,8 +18,8 @@ export function authenticateRequest(request: NextRequest): AuthResult {
       ok: false,
       response: NextResponse.json(
         { error: 'Acceso no autorizado' },
-        { status: 401 },
-      ),
+        { status: 401 }
+      )
     }
   }
 
@@ -37,15 +37,15 @@ export function authenticateRequest(request: NextRequest): AuthResult {
 
     return {
       ok: true,
-      user,
+      user
     }
   } catch {
     return {
       ok: false,
       response: NextResponse.json(
         { error: 'Acceso no autorizado' },
-        { status: 401 },
-      ),
+        { status: 401 }
+      )
     }
   }
 }

@@ -17,7 +17,7 @@ function getQueryObject(request: NextRequest): Record<string, string> {
 }
 
 export async function handleFindAttentionMonitoring(
-  request: NextRequest,
+  request: NextRequest
 ): Promise<NextResponse> {
   const auth = authenticateRequest(request)
 
@@ -26,21 +26,28 @@ export async function handleFindAttentionMonitoring(
   }
 
   try {
-    const query = getQueryObject(request) as unknown as AttentionMonitoringQueryDTO
+    const query = getQueryObject(
+      request
+    ) as unknown as AttentionMonitoringQueryDTO
     const ruc = String(auth.user.ruc ?? '')
 
-    logger.info(`Getting attention monitoring: ${JSON.stringify(query)} | ${ruc}`)
+    logger.info(
+      `Getting attention monitoring: ${JSON.stringify(query)} | ${ruc}`
+    )
 
-    const attention_monitoring = await attentionMonitoringService.find(query, ruc)
+    const attention_monitoring = await attentionMonitoringService.find(
+      query,
+      ruc
+    )
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          attention_monitoring,
-        },
+          attention_monitoring
+        }
       },
-      { status: 200 },
+      { status: 200 }
     )
   } catch (error: unknown) {
     logger.error('Error while trying to get attention monitoring.')
@@ -49,9 +56,9 @@ export async function handleFindAttentionMonitoring(
     return NextResponse.json(
       {
         status: false,
-        message: 'Error while trying to get attention monitoring.',
+        message: 'Error while trying to get attention monitoring.'
       },
-      { status: 500 },
+      { status: 500 }
     )
   }
 }

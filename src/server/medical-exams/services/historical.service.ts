@@ -2,20 +2,20 @@ import { FTPClient, logger } from '../../shared'
 import {
   CardiologyReport,
   IMCReport,
-  LaboratoryExamsReport,
+  LaboratoryExamsReport
 } from '../repository/entity'
 import HistoricalRepository from '../repository/historical.repository'
 import { IHistoricalRepository } from '../repository/interfaces/historical.repository.interface'
 
 type RadiologyImagesResult = {
-  radiologies: { cdg_fmed: string }[];
-  localFiles: string[];
-};
+  radiologies: { cdg_fmed: string }[]
+  localFiles: string[]
+}
 
 type AudiometryImagesResult = {
-  audiometries: { cdg_reg: string; year: string; month: string }[];
-  localFiles: string[];
-};
+  audiometries: { cdg_reg: string; year: string; month: string }[]
+  localFiles: string[]
+}
 
 export default class HistoricalService {
   private readonly sambaClient: FTPClient
@@ -46,14 +46,14 @@ export default class HistoricalService {
           path,
           undefined,
           'empresas',
-          'jpg',
+          'jpg'
         )
         localFiles.push(file)
       }
 
       return {
         radiologies,
-        localFiles,
+        localFiles
       }
     } catch (error: unknown) {
       logger.error((error as Error).message)
@@ -83,14 +83,14 @@ export default class HistoricalService {
           path,
           '192.168.1.34',
           'graficosotorrino',
-          'png',
+          'png'
         )
         localFiles.push(file)
       }
 
       return {
         audiometries,
-        localFiles,
+        localFiles
       }
     } catch (error: unknown) {
       logger.error((error as Error).message)
@@ -181,4 +181,3 @@ export default class HistoricalService {
     return month
   }
 }
-

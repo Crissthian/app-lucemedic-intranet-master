@@ -37,11 +37,11 @@
   font-size: 10px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #22CB72;
+  color: #22cb72;
 }
 .stepStatus span {
   border-radius: 9px;
-  background: rgba(30, 230, 125, 0.20);
+  background: rgba(30, 230, 125, 0.2);
   padding: 5px 10px;
 }
 .stepStatusPending {
@@ -49,18 +49,18 @@
   font-size: 10px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #636D73;
+  color: #636d73;
 }
 .stepStatusPending span {
   border-radius: 9px;
-  background: rgba(99, 109, 115, 0.20);
+  background: rgba(99, 109, 115, 0.2);
   padding: 5px 10px;
 }
 .viewMore {
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  color: #6160D9;
+  color: #6160d9;
   font-size: 10px;
   line-height: 20px;
   text-decoration: underline;

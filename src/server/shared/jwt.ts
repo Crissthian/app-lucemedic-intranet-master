@@ -1,8 +1,8 @@
 import jwt, { SignOptions, Secret } from 'jsonwebtoken'
 
 interface JWTOptions {
-  secret: Secret;
-  expiresIn?: SignOptions['expiresIn'];
+  secret: Secret
+  expiresIn?: SignOptions['expiresIn']
 }
 
 export default class JWT {
@@ -17,7 +17,7 @@ export default class JWT {
   public sign(payload: Record<string, unknown>): string {
     try {
       const token = jwt.sign(payload, this.secret, {
-        expiresIn: this.expiresIn,
+        expiresIn: this.expiresIn
       })
 
       return token
@@ -40,4 +40,3 @@ export default class JWT {
     }
   }
 }
-

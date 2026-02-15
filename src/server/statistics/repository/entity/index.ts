@@ -14,4 +14,3 @@ export * from './electrocardiogram'
 export * from './psychology'
 export * from './structural-height'
 export * from './odontology'
-

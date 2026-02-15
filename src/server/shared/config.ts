@@ -15,5 +15,3 @@ export const FILE_SYSTEM_SERVER_PASSWORD =
 export const FTP_HOST = process.env.FTP_HOST || '192.168.1.50'
 export const FTP_USER = process.env.FTP_USER || 'lucemedic'
 export const FTP_PASSWORD = process.env.FTP_PASSWORD || 'Luce'
-
-

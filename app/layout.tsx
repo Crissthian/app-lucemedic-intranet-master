@@ -10,18 +10,18 @@ export const metadata: Metadata = {
   description: 'Portal Lucemedic',
   manifest: '/manifest.json',
   icons: {
-    apple: '/icon512_maskable.png',
+    apple: '/icon512_maskable.png'
   },
-  themeColor: '#2662F0',
+  themeColor: '#2662F0'
 }
 
 export default function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body suppressHydrationWarning={true} className={inter.className}>
         <ReduxProvider>{children}</ReduxProvider>
         <script
@@ -35,7 +35,7 @@ export default function RootLayout({
                     r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                     a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-            `,
+            `
           }}
         />
       </body>

@@ -10,7 +10,7 @@ import {
   toggleDetail,
   toggleInterconsultas,
   toggleMedicalHistory,
-  toggleRecomendaciones,
+  toggleRecomendaciones
 } from '@/redux/features/medical-exams.slice'
 import { formatFullName } from '@/shared/utils'
 import TableDiagnosis from '../TableDiagnosis'
@@ -45,20 +45,23 @@ const DetailExams: React.FC = () => {
     dispatch(toggleRecomendaciones())
   }
 
-  const handleDownloadDiagnosis = async (cdg_fmed: string, diagnosisType: number) => {
+  const handleDownloadDiagnosis = async (
+    cdg_fmed: string,
+    diagnosisType: number
+  ) => {
     const path = `/api/medical-exams/${cdg_fmed}/diagnosis`
 
     const body = {
-      diagnosisType,
+      diagnosisType
     }
 
     const options = {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body)
     }
 
     const response = await fetch(path, options)
@@ -82,8 +85,8 @@ const DetailExams: React.FC = () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const data = await response.blob()
@@ -151,10 +154,22 @@ const DetailExams: React.FC = () => {
       {currentUser.profile === ROLES_TYPES.PATIENT && (
         <>
           <div className={styles.footerPatient}>
-            <Button label={'Ver Informe Médico'} onClick={() => handleDownloadDiagnosis(details.cdg_fmed, 1)} />
-            <Button label={'Ver Laboratorio'} onClick={() => handleDownloadDiagnosis(details.cdg_fmed, 5)} />
-            <Button label={'Ver Recomendaciones'} onClick={handleShowRecomendaciones} />
-            <Button label={'Ver Interconsultas'} onClick={handleShowInterconsultas} />
+            <Button
+              label={'Ver Informe Médico'}
+              onClick={() => handleDownloadDiagnosis(details.cdg_fmed, 1)}
+            />
+            <Button
+              label={'Ver Laboratorio'}
+              onClick={() => handleDownloadDiagnosis(details.cdg_fmed, 5)}
+            />
+            <Button
+              label={'Ver Recomendaciones'}
+              onClick={handleShowRecomendaciones}
+            />
+            <Button
+              label={'Ver Interconsultas'}
+              onClick={handleShowInterconsultas}
+            />
           </div>
         </>
       )}
@@ -163,4 +178,3 @@ const DetailExams: React.FC = () => {
 }
 
 export default DetailExams
-

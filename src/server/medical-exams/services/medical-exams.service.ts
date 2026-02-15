@@ -10,9 +10,9 @@ import { IMedicalExamsRepository } from '../repository/interfaces/medical-exams.
 import MedicalExamsRepository from '../repository/medical-exams.repository'
 
 type DiagnosisItem = {
-  type: string;
-  data: string;
-};
+  type: string
+  data: string
+}
 
 export default class MedicalExamsService {
   private readonly repository: IMedicalExamsRepository
@@ -31,7 +31,7 @@ export default class MedicalExamsService {
 
   async find(
     query: MedicalExamsQueryDTO,
-    user: UserToken,
+    user: UserToken
   ): Promise<MedicalExams[]> {
     let data: MedicalExams[] = []
 
@@ -180,12 +180,11 @@ export default class MedicalExamsService {
     try {
       const diagnosis: DiagnosisItem[] = []
 
-      const medicinaDiagnosis =
-        await this.diagnosisRepository.findMedicina(uid)
+      const medicinaDiagnosis = await this.diagnosisRepository.findMedicina(uid)
       if (medicinaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Medicina',
-          data: medicinaDiagnosis[0].diagnostico || '-',
+          data: medicinaDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -194,16 +193,15 @@ export default class MedicalExamsService {
       if (oftalmologiaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Oftalmología',
-          data: oftalmologiaDiagnosis[0].diagnostico || '-',
+          data: oftalmologiaDiagnosis[0].diagnostico || '-'
         })
       }
 
-      const otorrinoDiagnosis =
-        await this.diagnosisRepository.findOtorrino(uid)
+      const otorrinoDiagnosis = await this.diagnosisRepository.findOtorrino(uid)
       if (otorrinoDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Otorrino',
-          data: otorrinoDiagnosis[0].diagnostico || '-',
+          data: otorrinoDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -212,7 +210,7 @@ export default class MedicalExamsService {
       if (radiologiaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Radiología',
-          data: radiologiaDiagnosis[0].diagnostico || '-',
+          data: radiologiaDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -221,7 +219,7 @@ export default class MedicalExamsService {
       if (laboratorioDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Laboratorio',
-          data: laboratorioDiagnosis[0].diagnostico || '-',
+          data: laboratorioDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -230,7 +228,7 @@ export default class MedicalExamsService {
       if (odontologiaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Odontología',
-          data: odontologiaDiagnosis[0].diagnostico || '-',
+          data: odontologiaDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -239,7 +237,7 @@ export default class MedicalExamsService {
       if (cardiologiaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Cardiología',
-          data: cardiologiaDiagnosis[0].diagnostico || '-',
+          data: cardiologiaDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -248,7 +246,7 @@ export default class MedicalExamsService {
       if (espirometriaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Espirometría',
-          data: espirometriaDiagnosis[0].diagnostico || '-',
+          data: espirometriaDiagnosis[0].diagnostico || '-'
         })
       }
 
@@ -257,35 +255,35 @@ export default class MedicalExamsService {
       if (psicologiaDiagnosis.length > 0) {
         diagnosis.push({
           type: 'Psicología',
-          data: psicologiaDiagnosis[0].diagnostico || '-',
+          data: psicologiaDiagnosis[0].diagnostico || '-'
         })
       }
 
       diagnosis.push(
         {
           type: 'Historia Ocupacional',
-          data: '_',
+          data: '_'
         },
         {
           type: 'Musculo Esquelética',
-          data: '_',
+          data: '_'
         },
         {
           type: 'Ficha 312',
-          data: '_',
+          data: '_'
         },
         {
           type: 'Anexo 16',
-          data: '_',
+          data: '_'
         },
         {
           type: 'Altura',
-          data: '_',
+          data: '_'
         },
         {
           type: 'Anexo 16A',
-          data: '_',
-        },
+          data: '_'
+        }
       )
 
       return diagnosis
@@ -338,4 +336,3 @@ export default class MedicalExamsService {
     }
   }
 }
-

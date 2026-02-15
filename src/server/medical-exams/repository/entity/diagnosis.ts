@@ -1,4 +1,3 @@
 export interface Diagnosis {
-  diagnostico: string;
+  diagnostico: string
 }
-

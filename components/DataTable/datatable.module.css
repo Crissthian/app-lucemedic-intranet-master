@@ -6,7 +6,7 @@
   padding: 15px 20px;
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 30px 1fr .2fr .2fr .2fr .2fr;
+  grid-template-columns: 30px 1fr 0.2fr 0.2fr 0.2fr 0.2fr;
   gap: 5px;
   align-items: center;
   color: var(--table-header-color);
@@ -42,12 +42,12 @@
 }
 .dataTableItem {
   display: grid;
-  grid-template-columns: 30px 1fr .2fr .2fr .2fr .2fr;
+  grid-template-columns: 30px 1fr 0.2fr 0.2fr 0.2fr 0.2fr;
   gap: 10px;
   justify-content: center;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px dashed #A2C0D4;
+  border-bottom: 1px dashed #a2c0d4;
   margin: 0 15px;
 }
 .dataTableItem:last-child {

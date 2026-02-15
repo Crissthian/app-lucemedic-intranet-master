@@ -17,7 +17,10 @@ export default class SabanaService {
     return this.repository.findAptitud(params, ruc)
   }
 
-  async findInterconsultations(params: SabanaQueryDTO, ruc: string): Promise<object[]> {
+  async findInterconsultations(
+    params: SabanaQueryDTO,
+    ruc: string
+  ): Promise<object[]> {
     return this.repository.findInterconsultations(params, ruc)
   }
 }

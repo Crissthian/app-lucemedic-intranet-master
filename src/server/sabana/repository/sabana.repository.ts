@@ -4,12 +4,12 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database,
+  Database
 } from '../../shared'
 import { AptitudQueryDTO } from '../dto/aptitud.query.dto'
 import { SabanaQueryDTO } from '../dto/sabana.query.dto'
 
-type SabanaRow = Record<string, unknown>;
+type SabanaRow = Record<string, unknown>
 
 export default class SabanaRepository {
   private readonly database: Database
@@ -23,8 +23,8 @@ export default class SabanaRepository {
       options: {
         encrypt: false,
         trustServerCertificate: true,
-        instanceName: DB_INSTANCE,
-      },
+        instanceName: DB_INSTANCE
+      }
     })
   }
 
@@ -453,7 +453,10 @@ export default class SabanaRepository {
     }
   }
 
-  async findAptitud(params: AptitudQueryDTO, ruc: string): Promise<SabanaRow[]> {
+  async findAptitud(
+    params: AptitudQueryDTO,
+    ruc: string
+  ): Promise<SabanaRow[]> {
     try {
       let data: SabanaRow[] = []
 
@@ -522,7 +525,7 @@ AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = pa
 
   async findInterconsultations(
     params: SabanaQueryDTO,
-    ruc: string,
+    ruc: string
   ): Promise<SabanaRow[]> {
     try {
       let data: SabanaRow[] = []
@@ -544,4 +547,3 @@ AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = pa
     }
   }
 }
-

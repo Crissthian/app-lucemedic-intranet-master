@@ -26,7 +26,7 @@ import {
   Electrocardiogram,
   Psychology,
   Odontology,
-  StructuralHeight,
+  StructuralHeight
 } from '@/models/statistics'
 import StatisticsGenders from '../StatisticsGenders'
 import { BaseApi } from '@/models/base'
@@ -56,7 +56,7 @@ const StatisticsPanel: React.FC = () => {
 
   const [genders, setGenders] = useState<Genders>({
     masculino: '',
-    femenino: '',
+    femenino: ''
   })
   const [ages, setAges] = useState<Ages[]>([])
   const [medicalFitness, setMedicalFitness] = useState<MedicalFitness[]>([])
@@ -100,8 +100,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -130,8 +130,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -160,8 +160,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -190,8 +190,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -216,8 +216,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -246,8 +246,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -276,8 +276,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -306,8 +306,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -336,8 +336,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -366,8 +366,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -396,8 +396,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -426,8 +426,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -456,8 +456,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -486,8 +486,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -516,8 +516,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -546,8 +546,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -578,8 +578,8 @@ const StatisticsPanel: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -606,7 +606,7 @@ const StatisticsPanel: React.FC = () => {
         getElectrocardiogram(),
         getPsychology(),
         getOdontology(),
-        getStructuralHeight(),
+        getStructuralHeight()
       ])
     }
 
@@ -630,12 +630,12 @@ const StatisticsPanel: React.FC = () => {
         <section className={styles.searchFilters}>
           <div className={styles.filters}>
             <Select
-              placeholder="Sede"
+              placeholder='Sede'
               options={HEADQUARTERS_OPTIONS}
               onChange={(e) => setSede(e.target.value)}
             />
             <Select
-              placeholder="Tipo de examen"
+              placeholder='Tipo de examen'
               options={EXAMS_TYPES_OPTIONS}
               onChange={(e) => setExamType(e.target.value)}
             />
@@ -667,7 +667,10 @@ const StatisticsPanel: React.FC = () => {
             <Panel>
               <div className={styles.emptyData}>
                 <FontAwesomeIcon icon={faBell} color={'#1EE67D'} />
-                <p className={rubik.className}>No se han encontrado <br/>resultados</p>
+                <p className={rubik.className}>
+                  No se han encontrado <br />
+                  resultados
+                </p>
               </div>
             </Panel>
           </>
@@ -686,7 +689,7 @@ const StatisticsPanel: React.FC = () => {
                         data={ages.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.rango_edad,
+                            label: item.rango_edad
                           }
                         })}
                       />
@@ -696,21 +699,21 @@ const StatisticsPanel: React.FC = () => {
                         data={[
                           {
                             value: medicalFitness[0]?.APTO || 0,
-                            label: 'Apto',
+                            label: 'Apto'
                           },
                           {
                             value:
                               medicalFitness[0]?.APTO_CON_RESTRICCIONES || 0,
-                            label: 'Apto con restricciones',
+                            label: 'Apto con restricciones'
                           },
                           {
                             value: medicalFitness[0]?.NO_APTO || 0,
-                            label: 'No apto',
+                            label: 'No apto'
                           },
                           {
                             value: medicalFitness[0]?.OBSERVADO || 0,
-                            label: 'Observado',
-                          },
+                            label: 'Observado'
+                          }
                         ]}
                       />
                     </div>
@@ -728,7 +731,7 @@ const StatisticsPanel: React.FC = () => {
                         data={bloodPressureData.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.categoria,
+                            label: item.categoria
                           }
                         })}
                       />
@@ -760,7 +763,7 @@ const StatisticsPanel: React.FC = () => {
                         data={visualAcuity.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.categoria,
+                            label: item.categoria
                           }
                         })}
                       />
@@ -776,7 +779,7 @@ const StatisticsPanel: React.FC = () => {
                         data={chestXRay.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.categoria,
+                            label: item.categoria
                           }
                         })}
                       />
@@ -789,7 +792,7 @@ const StatisticsPanel: React.FC = () => {
                         data={electrocardiogram.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.categoria,
+                            label: item.categoria
                           }
                         })}
                       />
@@ -802,7 +805,7 @@ const StatisticsPanel: React.FC = () => {
                         data={psychology.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.categoria,
+                            label: item.categoria
                           }
                         })}
                       />
@@ -817,7 +820,7 @@ const StatisticsPanel: React.FC = () => {
                         data={structuralHeight.map((item) => {
                           return {
                             value: item.cantidad,
-                            label: item.categoria,
+                            label: item.categoria
                           }
                         })}
                       />
@@ -837,4 +840,3 @@ const StatisticsPanel: React.FC = () => {
 }
 
 export default StatisticsPanel
-
