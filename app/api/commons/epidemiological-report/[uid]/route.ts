@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { handleDownloadEpidemiologicalReport } from '@/src/server/commons/handlers/commons.handlers'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     uid: string
-  }
+  }>
 }
 
 export const runtime = 'nodejs'
@@ -14,5 +14,8 @@ export async function GET(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleDownloadEpidemiologicalReport(request, params.uid)
+  const routeParams = await params
+
+  return handleDownloadEpidemiologicalReport(request, routeParams.uid)
 }
+

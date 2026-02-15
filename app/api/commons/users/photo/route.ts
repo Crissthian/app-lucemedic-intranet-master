@@ -7,3 +7,4 @@ export const dynamic = 'force-dynamic'
 export async function PATCH(request: NextRequest): Promise<NextResponse> {
   return handleUploadPhoto(request)
 }
+

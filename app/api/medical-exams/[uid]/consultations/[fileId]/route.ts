@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { handleDownloadConsultation } from '@/src/server/medical-exams/handlers/medical-exams.handlers'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     uid: string
     fileId: string
-  }
+  }>
 }
 
 export const runtime = 'nodejs'
@@ -15,5 +15,8 @@ export async function GET(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleDownloadConsultation(request, params.uid, params.fileId)
+  const routeParams = await params
+
+  return handleDownloadConsultation(request, routeParams.uid, routeParams.fileId)
 }
+

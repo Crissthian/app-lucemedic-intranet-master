@@ -11,9 +11,9 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { filename: string } }
+  { params }: { params: Promise<{ filename: string }> }
 ): Promise<NextResponse> {
-  const { filename } = params
+  const { filename } = await params
 
   // Clean filename to prevent path traversal
   const cleanFilename = path.basename(filename)
@@ -73,3 +73,4 @@ export async function GET(
     client.close()
   }
 }
+

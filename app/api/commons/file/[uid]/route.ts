@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { handleDownloadFile } from '@/src/server/commons/handlers/commons.handlers'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     uid: string
-  }
+  }>
 }
 
 export const runtime = 'nodejs'
@@ -14,5 +14,8 @@ export async function GET(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleDownloadFile(request, params.uid)
+  const routeParams = await params
+
+  return handleDownloadFile(request, routeParams.uid)
 }
+

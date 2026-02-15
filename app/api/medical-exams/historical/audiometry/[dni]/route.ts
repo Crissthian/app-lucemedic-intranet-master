@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { handleHistoricalAudiometry } from '@/src/server/medical-exams/handlers/historical.handlers'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     dni: string
-  }
+  }>
 }
 
 export const runtime = 'nodejs'
@@ -14,5 +14,8 @@ export async function GET(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleHistoricalAudiometry(request, params.dni)
+  const routeParams = await params
+
+  return handleHistoricalAudiometry(request, routeParams.dni)
 }
+

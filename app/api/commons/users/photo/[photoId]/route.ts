@@ -5,9 +5,9 @@ import {
 } from '@/src/server/commons/handlers/commons.handlers'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     photoId: string
-  }
+  }>
 }
 
 export const runtime = 'nodejs'
@@ -17,12 +17,17 @@ export async function GET(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleGetPhoto(request, params.photoId)
+  const routeParams = await params
+
+  return handleGetPhoto(request, routeParams.photoId)
 }
 
 export async function DELETE(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleDeletePhoto(request, params.photoId)
+  const routeParams = await params
+
+  return handleDeletePhoto(request, routeParams.photoId)
 }
+

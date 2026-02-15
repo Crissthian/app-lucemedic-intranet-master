@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { handleFindRecommendations } from '@/src/server/medical-exams/handlers/medical-exams.handlers'
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     uid: string
-  }
+  }>
 }
 
 export const runtime = 'nodejs'
@@ -14,5 +14,8 @@ export async function GET(
   request: NextRequest,
   { params }: RouteContext
 ): Promise<NextResponse> {
-  return handleFindRecommendations(request, params.uid)
+  const routeParams = await params
+
+  return handleFindRecommendations(request, routeParams.uid)
 }
+
