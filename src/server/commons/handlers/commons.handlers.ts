@@ -1,18 +1,9 @@
-import crypto from 'crypto'
-import path from 'path'
-import { mkdir, writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import CommonsService from '@/src/server/commons/services/commons.service'
 import { authenticateRequest } from '@/src/server/http/auth'
 import { logger } from '@/src/server/shared'
 
 const commonsService = new CommonsService()
-const TEMP_DIR = path.join(process.cwd(), 'temp')
-
-type UploadData = {
-  filepath: string
-  mimetype: string
-}
 
 function getFileContentType(fileName: string): string {
   const extension = fileName.split('.').pop()?.toLowerCase()
@@ -28,30 +19,6 @@ function getFileContentType(fileName: string): string {
       return 'image/jpeg'
     default:
       return 'application/octet-stream'
-  }
-}
-
-async function getUploadData(request: NextRequest): Promise<UploadData | null> {
-  const formData = await request.formData()
-  const file = formData.get('file')
-
-  if (!(file instanceof File)) {
-    return null
-  }
-
-  await mkdir(TEMP_DIR, { recursive: true })
-
-  const originalFilename = file.name || `${crypto.randomUUID()}.bin`
-  const extension = path.extname(originalFilename)
-  const tempFileName = `${crypto.randomUUID()}${extension}`
-  const fullFilePath = path.join(TEMP_DIR, tempFileName)
-  const bytes = Buffer.from(await file.arrayBuffer())
-
-  await writeFile(fullFilePath, bytes)
-
-  return {
-    filepath: fullFilePath.replace(/\\/g, '/'),
-    mimetype: file.type
   }
 }
 
@@ -183,17 +150,16 @@ export async function handleDownloadEpidemiologicalReport(
   try {
     logger.info(`Executing download epidemiological report: ${uid}`)
 
-    const file = await commonsService.downloadEpidemiologicalReport(uid)
+    const fileBuffer = await commonsService.downloadEpidemiologicalReport(uid)
 
-    return NextResponse.json(
-      {
-        status: true,
-        data: {
-          file
-        }
-      },
-      { status: 200 }
-    )
+    return new NextResponse(new Uint8Array(fileBuffer), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename=${uid}.pdf`,
+        'Content-Length': fileBuffer.length.toString()
+      }
+    })
   } catch (error: unknown) {
     logger.error((error as Error).message)
 
@@ -268,9 +234,10 @@ export async function handleUploadPhoto(
   try {
     logger.info(`User: ${JSON.stringify(auth.user)}`)
 
-    const upload = await getUploadData(request)
+    const formData = await request.formData()
+    const file = formData.get('file')
 
-    if (!upload) {
+    if (!(file instanceof File)) {
       return NextResponse.json(
         {
           status: false,
@@ -280,9 +247,13 @@ export async function handleUploadPhoto(
       )
     }
 
+    const buffer = Buffer.from(await file.arrayBuffer())
+    const originalFilename = file.name || `photo_${Date.now()}.jpg`
+
     const fileName = await commonsService.uploadPhoto(
-      upload.filepath,
-      upload.mimetype
+      buffer,
+      originalFilename,
+      file.type
     )
     const localFile = await commonsService.getPhoto(fileName)
 
@@ -335,7 +306,7 @@ export async function handleGetPhoto(
   }
 
   try {
-    const file = await commonsService.getPhoto(photoId)
+    const fileBuffer = await commonsService.getPhoto(photoId)
 
     logger.info('Photo downloaded successfully')
 
@@ -343,7 +314,7 @@ export async function handleGetPhoto(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer
         },
         message: 'Photo downloaded successfully.'
       },

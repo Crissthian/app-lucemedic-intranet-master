@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs'
 import { EpidemiologicalReport } from '../../medical-exams/repository/entity'
 import { FTPClient, logger } from '../../shared'
 import CommonsRepository from '../repository/commons.repository'
@@ -32,13 +31,15 @@ export default class CommonsService {
   }
 
   async downloadFile(uid: string): Promise<Buffer> {
-    const file = readFileSync(`./temp/${uid}`)
+    try {
+      const path = uid
+      logger.info(`Downloading file from FTP: ${path}`)
 
-    if (file.length > 0) {
-      return file
+      return this.sambaClient.downloadFile(path)
+    } catch (error: unknown) {
+      logger.error((error as Error).message)
+      throw new Error('Error while trying to download file.')
     }
-
-    return Buffer.from('')
   }
 
   async findEpidemiologicalReport(
@@ -51,7 +52,7 @@ export default class CommonsService {
     }
   }
 
-  async downloadEpidemiologicalReport(uid: string): Promise<string> {
+  async downloadEpidemiologicalReport(uid: string): Promise<Buffer> {
     try {
       const path = `INFORMEEPIDEMIOLOGICO/${uid}.pdf`
 
@@ -69,19 +70,18 @@ export default class CommonsService {
     }
   }
 
-  async uploadPhoto(localFilePath: string, mimetype: string): Promise<string> {
+  async uploadPhoto(
+    buffer: Buffer,
+    originalFilename: string,
+    _mimetype: string
+  ): Promise<string> {
     try {
-      const fileName = localFilePath.split('/').pop() || `photo_${Date.now()}`
-
-      // The temp file already has the correct extension from getUploadData,
-      // so we don't need to append another one based on mimetype.
-
-      const remoteFilePath = `/FOTOUS/${fileName}`
+      const remoteFilePath = `/FOTOUS/${originalFilename}`
 
       logger.info(`Uploading photo to: ${remoteFilePath}`)
 
       const sambaResult = await this.sambaClient.uploadFile(
-        localFilePath,
+        buffer,
         remoteFilePath
       )
 
@@ -89,7 +89,7 @@ export default class CommonsService {
         `SambaClient.uploadFile result: ${JSON.stringify(sambaResult)}`
       )
 
-      return fileName
+      return originalFilename
     } catch (error: unknown) {
       logger.error((error as Error).message)
 
@@ -97,23 +97,21 @@ export default class CommonsService {
     }
   }
 
-  async getPhoto(photoId: string): Promise<string> {
+  async getPhoto(photoId: string): Promise<Buffer> {
     try {
       const path = `FOTOUS/${photoId}`
-      const extension = photoId.split('.').pop() || 'jpg'
 
       logger.info(`Downloading file from: ${path}`)
 
-      const file = this.sambaClient.downloadFile(
+      const fileBuffer = await this.sambaClient.downloadFile(
         path,
         undefined,
-        'FOTOUS',
-        extension
+        'FOTOUS'
       )
 
-      logger.info(`File: ${file}`)
+      logger.info(`File downloaded: ${fileBuffer.length} bytes`)
 
-      return file
+      return fileBuffer
     } catch (error: unknown) {
       logger.error((error as Error).message)
 

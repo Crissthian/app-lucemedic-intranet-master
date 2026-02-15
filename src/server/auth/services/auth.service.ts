@@ -68,13 +68,13 @@ export default class AuthService {
   async updatePhoto(
     dni: string,
     originalFilename: string,
-    localFilePath: string
+    buffer: Buffer
   ): Promise<boolean> {
     const remoteFilePath = `/FOTOUS/${originalFilename}`
 
-    logger.info(`Uploading photo ${localFilePath} to ${remoteFilePath}`)
+    logger.info(`Uploading photo to ${remoteFilePath}`)
 
-    await this.sambaClient.uploadFile(localFilePath, remoteFilePath)
+    await this.sambaClient.uploadFile(buffer, remoteFilePath)
 
     // Persist the photo filename in the database
     await this.repository.updatePhoto(dni, originalFilename)

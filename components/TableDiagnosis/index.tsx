@@ -10,6 +10,7 @@ import { Diagnosis } from '@/models/diagnosis'
 import Image from 'next/image'
 import { useAppSelector } from '@/redux/store'
 import { ROLES_TYPES } from '@/shared/constants'
+import { openBase64InNewWindow } from '@/shared/base64'
 
 interface TableDiagnosisProps {
   uid: string
@@ -105,25 +106,11 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
     }
 
     if (result.status) {
-      const { file } = result.data
-
-      const url = `/api/commons/file/${file}`
-
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const data = await response.blob()
-
-      const blob = new File([data], file, { type: 'application/pdf' })
-
-      const urlBlob = URL.createObjectURL(blob)
-
-      window.open(urlBlob)
+      openBase64InNewWindow(
+        result.data.file,
+        `diagnosis_${type}.pdf`,
+        'application/pdf'
+      )
     }
   }
 
@@ -151,25 +138,11 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
     }
 
     if (result.status) {
-      const { file } = result.data
-
-      const url = `/api/commons/file/${file}`
-
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const data = await response.blob()
-
-      const blob = new File([data], file, { type: 'image/jpg' })
-
-      const urlBlob = URL.createObjectURL(blob)
-
-      window.open(urlBlob)
+      openBase64InNewWindow(
+        result.data.file,
+        `xray_${cdg_fmed}.jpg`,
+        'image/jpeg'
+      )
     }
   }
 

@@ -9,12 +9,12 @@ import { IHistoricalRepository } from '../repository/interfaces/historical.repos
 
 type RadiologyImagesResult = {
   radiologies: { cdg_fmed: string }[]
-  localFiles: string[]
+  localFiles: Buffer[]
 }
 
 type AudiometryImagesResult = {
   audiometries: { cdg_reg: string; year: string; month: string }[]
-  localFiles: string[]
+  localFiles: Buffer[]
 }
 
 export default class HistoricalService {
@@ -28,7 +28,7 @@ export default class HistoricalService {
 
   async downloadRadiologyImages(dni: string): Promise<RadiologyImagesResult> {
     try {
-      const localFiles: string[] = []
+      const localFiles: Buffer[] = []
       const paths: string[] = []
 
       const radiologies = await this.repository.findRadiology(dni)
@@ -64,7 +64,7 @@ export default class HistoricalService {
 
   async downloadAudiometryImages(dni: string): Promise<AudiometryImagesResult> {
     try {
-      const localFiles: string[] = []
+      const localFiles: Buffer[] = []
       const paths: string[] = []
 
       const audiometries = await this.repository.findAudiometry(dni)

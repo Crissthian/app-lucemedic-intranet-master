@@ -21,6 +21,7 @@ import { formatFullName } from '@/shared/utils'
 import styles from './recomendaciones.module.css'
 import { Recommendations } from '@/models/recommendations'
 import { BaseApi } from '@/models/base'
+import { openBase64InNewWindow } from '@/shared/base64'
 
 const rubik400 = Rubik({ weight: '400', subsets: ['latin'] })
 const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
@@ -61,25 +62,11 @@ const Recomendaciones: React.FC = () => {
     }
 
     if (result.status) {
-      const url = `/api/commons/file/${result.data.file}`
-
-      const data = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const blob = await data.blob()
-
-      const file = new File([blob], result.data.file, {
-        type: 'application/pdf'
-      })
-
-      const urlFile = window.URL.createObjectURL(file)
-
-      window.open(urlFile)
+      openBase64InNewWindow(
+        result.data.file,
+        `recommendation_${cdg_fmed}.pdf`,
+        'application/pdf'
+      )
     }
   }
 

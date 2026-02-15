@@ -1,5 +1,6 @@
 import { Client } from 'basic-ftp'
 import AdmZip from 'adm-zip'
+import { Writable } from 'stream'
 import { GetDownloadsDTO } from '../../commons/dto/get-downloads.dto'
 import { logger } from '../../shared'
 
@@ -9,16 +10,13 @@ enum AttachmentType {
 }
 
 export default class AttachmentsService {
-  private readonly client: Client
   private readonly FTP_HOST: string = process.env.FTP_HOST || ''
   private readonly FTP_USER: string = process.env.FTP_USER || ''
   private readonly FTP_PASSWORD: string = process.env.FTP_PASSWORD || ''
 
-  constructor() {
-    this.client = new Client()
-  }
-
   async downloadAttachment(payload: GetDownloadsDTO): Promise<Buffer> {
+    const client = new Client()
+
     try {
       logger.info(
         `Downloading ${payload.ids.length} total attachments from FTP server.`
@@ -32,87 +30,68 @@ export default class AttachmentsService {
         throw new Error('Cannot download more than 20 attachments at once.')
       }
 
-      this.client.ftp.verbose = false
+      client.ftp.verbose = false
 
-      await this.client.access({
+      await client.access({
         host: this.FTP_HOST,
         user: this.FTP_USER,
         password: this.FTP_PASSWORD,
         secure: false
       })
 
-      const files: string[] = []
+      const zip = new AdmZip()
 
-      for (const file of payload.ids) {
-        files.push(`${file}.pdf`)
-      }
-
-      for (const file of files) {
+      for (const id of payload.ids) {
+        const file = `${id}.pdf`
         let remotePath = './'
-        let localPath = './temp/'
+        let entryName = ''
 
         if (payload.type === AttachmentType.CERTIFICADO) {
           remotePath += `CERTIFICADO/${file}`
-          localPath += `certificado_${file}`
+          entryName = `certificado_${file}`
         }
 
         if (payload.type === AttachmentType.EMO) {
           remotePath += `EMO/${file}`
-          localPath += `emo_${file}`
+          entryName = `emo_${file}`
         }
-
-        // const remotePath = `./prueba _ftp/empresas/certificado/${file}`;
-        // const localPath = `./temp/certificado_${file}`;
 
         logger.info(
           `AttachmentsService.downloadAttachment | init | ${remotePath}`
         )
 
-        const result = await this.client.downloadTo(localPath, remotePath)
+        // Download directly to memory
+        const chunks: Buffer[] = []
+        const writableStream = new Writable({
+          write(chunk, _encoding, callback) {
+            chunks.push(Buffer.from(chunk))
+            callback()
+          }
+        })
+
+        await client.downloadTo(writableStream, remotePath)
+        const fileBuffer = Buffer.concat(chunks)
 
         logger.info('AttachmentsService.downloadAttachment | end download')
 
         logger.info(
-          `Downloaded ${file} from FTP server. ${JSON.stringify(result)}`
+          `Downloaded ${file} from FTP server (${fileBuffer.length} bytes).`
         )
+
+        // Add buffer directly to zip
+        zip.addFile(entryName, fileBuffer)
       }
 
-      this.client.close()
+      client.close()
 
       logger.info('All attachments downloaded successfully.')
 
-      const zip = new AdmZip()
-
-      for (const file of files) {
-        if (payload.type === AttachmentType.CERTIFICADO) {
-          zip.addLocalFile(`./temp/certificado_${file}`)
-        }
-
-        if (payload.type === AttachmentType.EMO) {
-          zip.addLocalFile(`./temp/emo_${file}`)
-        }
-
-        // zip.addLocalFile(`./temp/certificado_${file}`);
-      }
-
-      const zipBuffer = zip.toBuffer()
-
-      const timestamp = new Date().getTime()
-
-      if (payload.type === AttachmentType.CERTIFICADO) {
-        zip.writeZip(`./temp/certificados_${timestamp}.zip`)
-      }
-
-      if (payload.type === AttachmentType.EMO) {
-        zip.writeZip(`./temp/emos_${timestamp}.zip`)
-      }
-
-      // zip.writeZip(`./temp/certificados_${timestamp}.zip`);
-
-      return zipBuffer
+      return zip.toBuffer()
     } catch (error: unknown) {
       console.error(error)
       throw new Error(`${(error as Error).message}`)
+    } finally {
+      client.close()
     }
   }
 }

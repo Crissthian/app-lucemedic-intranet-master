@@ -1,6 +1,5 @@
 import * as ftp from 'basic-ftp'
-import crypto from 'crypto'
-import { existsSync, mkdirSync } from 'fs'
+import { Readable, Writable } from 'stream'
 import { logger } from './logger'
 import { FTP_HOST, FTP_PASSWORD, FTP_USER } from './config'
 
@@ -13,20 +12,12 @@ export class FTPClient {
     remoteFilePath: string,
     host?: string,
     _subfolder?: string,
-    extension?: string
-  ): Promise<string> {
+    _extension?: string
+  ): Promise<Buffer> {
     const client = new ftp.Client()
     client.ftp.verbose = true
 
     try {
-      // Ensure temp directory exists
-      if (!existsSync('./temp')) {
-        mkdirSync('./temp', { recursive: true })
-      }
-
-      const fileName = `${crypto.randomUUID().toString()}.${extension || 'pdf'}`
-      const localFilePath = `./temp/${fileName}`
-
       const hostToUse = host || FTP_HOST
       const userToUse = FTP_USER
       const passwordToUse = FTP_PASSWORD
@@ -42,11 +33,24 @@ export class FTPClient {
         `Connected to FTP ${hostToUse}. Downloading: ftp://${hostToUse}${remoteFilePath}`
       )
 
-      await client.downloadTo(localFilePath, remoteFilePath)
+      // Download directly to memory
+      const chunks: Buffer[] = []
+      const writableStream = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk))
+          callback()
+        }
+      })
 
-      logger.info(`File downloaded: ${remoteFilePath} | ${localFilePath}`)
+      await client.downloadTo(writableStream, remoteFilePath)
 
-      return fileName
+      const fileBuffer = Buffer.concat(chunks)
+
+      logger.info(
+        `File downloaded to memory: ${remoteFilePath} (${fileBuffer.length} bytes)`
+      )
+
+      return fileBuffer
     } catch (error: unknown) {
       logger.error(
         `FTP Error while downloading file ${remoteFilePath}: ${error}`
@@ -57,10 +61,7 @@ export class FTPClient {
     }
   }
 
-  async uploadFile(
-    localFilePath: string,
-    remoteFilePath: string
-  ): Promise<boolean> {
+  async uploadFile(buffer: Buffer, remoteFilePath: string): Promise<boolean> {
     const client = new ftp.Client()
     client.ftp.verbose = true
 
@@ -90,9 +91,11 @@ export class FTPClient {
         await client.cd('/')
       }
 
-      await client.uploadFrom(localFilePath, remoteFilePath)
+      // Upload from memory using a Readable stream
+      const readableStream = Readable.from(buffer)
+      await client.uploadFrom(readableStream, remoteFilePath)
 
-      logger.info(`File uploaded: ${localFilePath} | ${remoteFilePath}`)
+      logger.info(`File uploaded from memory to: ${remoteFilePath}`)
 
       return true
     } catch (error: unknown) {

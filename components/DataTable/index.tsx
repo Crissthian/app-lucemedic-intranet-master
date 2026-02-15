@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Button from '../Button'
 import { formatFullName } from '@/shared/utils'
+import { openBase64InNewWindow } from '@/shared/base64'
 import { getDetail, toggleDetail } from '@/redux/features/medical-exams.slice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/redux/store'
@@ -110,25 +111,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     }
 
     if (result.status) {
-      const url = `/api/commons/file/${result.data.file}`
-
-      const data = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const blob = await data.blob()
-
-      const file = new File([blob], result.data.file, {
-        type: 'application/pdf'
-      })
-
-      const urlFile = window.URL.createObjectURL(file)
-
-      window.open(urlFile)
+      openBase64InNewWindow(
+        result.data.file,
+        `certificado_${cdg_fmed}.pdf`,
+        'application/pdf'
+      )
     }
   }
 
@@ -154,25 +141,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     }
 
     if (result.status) {
-      const url = `/api/commons/file/${result.data.file}`
-
-      const data = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const blob = await data.blob()
-
-      const file = new File([blob], result.data.file, {
-        type: 'application/pdf'
-      })
-
-      const urlFile = window.URL.createObjectURL(file)
-
-      window.open(urlFile)
+      openBase64InNewWindow(
+        result.data.file,
+        `emo_${file}.pdf`,
+        'application/pdf'
+      )
     }
   }
 

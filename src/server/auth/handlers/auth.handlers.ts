@@ -1,6 +1,3 @@
-import crypto from 'crypto'
-import path from 'path'
-import { mkdir, writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import AuthService from '@/src/server/auth/services/auth.service'
 import { UserUpdateDTO } from '@/src/server/auth/dto/user-update.dto'
@@ -8,7 +5,6 @@ import { authenticateRequest } from '@/src/server/http/auth'
 import { logger } from '@/src/server/shared'
 
 const authService = new AuthService()
-const TEMP_DIR = path.join(process.cwd(), 'temp')
 
 async function parseJsonBody(
   request: NextRequest
@@ -17,32 +13,6 @@ async function parseJsonBody(
     return (await request.json()) as Record<string, unknown>
   } catch {
     return {}
-  }
-}
-
-async function getUploadData(
-  request: NextRequest
-): Promise<{ originalFilename: string; localFilePath: string } | null> {
-  const formData = await request.formData()
-  const file = formData.get('file')
-
-  if (!(file instanceof File)) {
-    return null
-  }
-
-  await mkdir(TEMP_DIR, { recursive: true })
-
-  const originalFilename = file.name || `${crypto.randomUUID()}.bin`
-  const extension = path.extname(originalFilename)
-  const tempFileName = `${crypto.randomUUID()}${extension}`
-  const fullFilePath = path.join(TEMP_DIR, tempFileName)
-  const bytes = Buffer.from(await file.arrayBuffer())
-
-  await writeFile(fullFilePath, bytes)
-
-  return {
-    originalFilename,
-    localFilePath: fullFilePath.replace(/\\/g, '/')
   }
 }
 
@@ -190,9 +160,10 @@ export async function handleUpdateProfilePhoto(
   }
 
   try {
-    const upload = await getUploadData(request)
+    const formData = await request.formData()
+    const file = formData.get('file')
 
-    if (!upload) {
+    if (!(file instanceof File)) {
       return NextResponse.json(
         {
           status: false,
@@ -202,10 +173,13 @@ export async function handleUpdateProfilePhoto(
       )
     }
 
+    const originalFilename = file.name || `photo_${Date.now()}.bin`
+    const buffer = Buffer.from(await file.arrayBuffer())
+
     await authService.updatePhoto(
       String(auth.user.sub ?? ''),
-      upload.originalFilename,
-      upload.localFilePath
+      originalFilename,
+      buffer
     )
 
     return NextResponse.json(

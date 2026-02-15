@@ -2,9 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import * as ftp from 'basic-ftp'
 import { FTP_HOST, FTP_USER, FTP_PASSWORD, logger } from '@/src/server/shared'
 import path from 'path'
-import { existsSync, mkdirSync } from 'fs'
-import fs from 'fs/promises'
-import crypto from 'crypto'
+import { Writable } from 'stream'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -21,15 +19,8 @@ export async function GET(
   const client = new ftp.Client()
   client.ftp.verbose = false
 
-  const tempDir = path.join(process.cwd(), 'temp')
-  if (!existsSync(tempDir)) {
-    mkdirSync(tempDir, { recursive: true })
-  }
-
-  const ext = path.extname(cleanFilename).substring(1)
-  const localFileName = `${crypto.randomUUID()}.${ext}`
-  const localFilePath = path.join(tempDir, localFileName)
   const remoteFilePath = `/FOTOUS/${cleanFilename}`
+  const ext = path.extname(cleanFilename).substring(1).toLowerCase()
 
   try {
     await client.access({
@@ -41,19 +32,25 @@ export async function GET(
 
     logger.info(`Downloading photo from: ftp://${FTP_HOST}${remoteFilePath}`)
 
-    await client.downloadTo(localFilePath, remoteFilePath)
+    // Download directly to memory using a buffer
+    const chunks: Buffer[] = []
+    const writableStream = new Writable({
+      write(chunk, encoding, callback) {
+        chunks.push(Buffer.from(chunk))
+        callback()
+      }
+    })
 
-    const fileBuffer = await fs.readFile(localFilePath)
+    await client.downloadTo(writableStream, remoteFilePath)
 
+    const fileBuffer = Buffer.concat(chunks)
+
+    // Determine content type based on extension
     let contentType = 'image/jpeg'
-    const lowerExt = ext?.toLowerCase()
-
-    if (lowerExt === 'png') contentType = 'image/png'
-    if (lowerExt === 'gif') contentType = 'image/gif'
-    if (lowerExt === 'webp') contentType = 'image/webp'
-    if (lowerExt === 'svg') contentType = 'image/svg+xml'
-
-    await fs.unlink(localFilePath).catch(() => {})
+    if (ext === 'png') contentType = 'image/png'
+    if (ext === 'gif') contentType = 'image/gif'
+    if (ext === 'webp') contentType = 'image/webp'
+    if (ext === 'svg') contentType = 'image/svg+xml'
 
     return new NextResponse(fileBuffer, {
       headers: {
@@ -63,14 +60,8 @@ export async function GET(
     })
   } catch (error: any) {
     logger.error(`Error serving photo ${filename}: ${error.message}`)
-
-    if (existsSync(localFilePath)) {
-      await fs.unlink(localFilePath).catch(() => {})
-    }
-
     return new NextResponse('Photo not found', { status: 404 })
   } finally {
     client.close()
   }
 }
-

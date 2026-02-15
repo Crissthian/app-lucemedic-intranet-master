@@ -36,8 +36,11 @@ export async function handleHistoricalRadiology(
       `Executing get radiology images of user: ${JSON.stringify(dni)}`
     )
 
-    const { localFiles: files, radiologies } =
+    const { localFiles, radiologies } =
       await historicalService.downloadRadiologyImages(dni)
+
+    // Convert Buffers to base64 for JSON transport
+    const files = localFiles.map((buf) => buf.toString('base64'))
 
     logger.info(`Files downloaded: ${files.length}`)
 
@@ -83,8 +86,11 @@ export async function handleHistoricalAudiometry(
   try {
     logger.info(`Executing get radiology images of user: ${dni}`)
 
-    const { localFiles: files, audiometries } =
+    const { localFiles, audiometries } =
       await historicalService.downloadAudiometryImages(dni)
+
+    // Convert Buffers to base64 for JSON transport
+    const files = localFiles.map((buf) => buf.toString('base64'))
 
     logger.info(`Files downloaded: ${files.length}`)
 

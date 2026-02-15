@@ -66,7 +66,7 @@ export default class MedicalExamsService {
     return result[0] ?? null
   }
 
-  async downloadEMO(user: UserToken, uid: string): Promise<string> {
+  async downloadEMO(user: UserToken, uid: string): Promise<Buffer> {
     try {
       logger.info(`${user.ruc}`)
 
@@ -82,7 +82,7 @@ export default class MedicalExamsService {
     }
   }
 
-  async downloadCertificado(user: UserToken, uid: string): Promise<string> {
+  async downloadCertificado(user: UserToken, uid: string): Promise<Buffer> {
     try {
       logger.info(`${user.ruc}`)
 
@@ -98,7 +98,7 @@ export default class MedicalExamsService {
     }
   }
 
-  async downloadDiagnosis(uid: string, diagnosisType: number): Promise<string> {
+  async downloadDiagnosis(uid: string, diagnosisType: number): Promise<Buffer> {
     try {
       let path = ''
 
@@ -162,7 +162,7 @@ export default class MedicalExamsService {
     }
   }
 
-  async downloadDiagnosisXray(uid: string): Promise<string> {
+  async downloadDiagnosisXray(uid: string): Promise<Buffer> {
     try {
       const path = `/rx/${uid}.jpg`
 
@@ -300,7 +300,7 @@ export default class MedicalExamsService {
     }
   }
 
-  async downloadConsultation(uid: string): Promise<string> {
+  async downloadConsultation(uid: string): Promise<Buffer> {
     try {
       const path = `INTERCONSULTA/${uid}.pdf`
 
@@ -322,7 +322,7 @@ export default class MedicalExamsService {
     }
   }
 
-  async downloadRecommendation(uid: string): Promise<string> {
+  async downloadRecommendation(uid: string): Promise<Buffer> {
     try {
       const path = `RECOMENDACIONES/${uid}.pdf`
 

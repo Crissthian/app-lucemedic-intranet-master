@@ -174,13 +174,13 @@ export async function handleDownloadEMO(
   try {
     logger.info(`Executing download EMO: ${uid}`)
 
-    const file = await medicalExamsService.downloadEMO(auth.user, uid)
+    const fileBuffer = await medicalExamsService.downloadEMO(auth.user, uid)
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer.toString('base64')
         }
       },
       { status: 200 }
@@ -218,13 +218,16 @@ export async function handleDownloadCertificado(
   try {
     logger.info(`Executing download certificado: ${uid}`)
 
-    const file = await medicalExamsService.downloadCertificado(auth.user, uid)
+    const fileBuffer = await medicalExamsService.downloadCertificado(
+      auth.user,
+      uid
+    )
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer.toString('base64')
         }
       },
       { status: 200 }
@@ -307,13 +310,16 @@ export async function handleDownloadDiagnosis(
     logger.info(`Executing download diagnosis: ${JSON.stringify(body)}`)
     logger.info(`User ${auth.user.sub} is downloading diagnosis ${uid}`)
 
-    const file = await medicalExamsService.downloadDiagnosis(uid, diagnosisType)
+    const fileBuffer = await medicalExamsService.downloadDiagnosis(
+      uid,
+      diagnosisType
+    )
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer.toString('base64')
         }
       },
       { status: 200 }
@@ -353,13 +359,13 @@ export async function handleDownloadDiagnosisXray(
   try {
     logger.info(`Executing download diagnosis xray: ${uid}`)
 
-    const file = await medicalExamsService.downloadDiagnosisXray(uid)
+    const fileBuffer = await medicalExamsService.downloadDiagnosisXray(uid)
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer.toString('base64')
         }
       },
       { status: 200 }
@@ -438,13 +444,13 @@ export async function handleDownloadConsultation(
   try {
     logger.info(`Executing download consultation: ${uid} - ${fileId}`)
 
-    const file = await medicalExamsService.downloadConsultation(fileId)
+    const fileBuffer = await medicalExamsService.downloadConsultation(fileId)
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer.toString('base64')
         }
       },
       { status: 200 }
@@ -523,13 +529,13 @@ export async function handleDownloadRecommendation(
   try {
     logger.info(`Executing download recommendation: ${uid} - ${fileId}`)
 
-    const file = await medicalExamsService.downloadRecommendation(fileId)
+    const fileBuffer = await medicalExamsService.downloadRecommendation(fileId)
 
     return NextResponse.json(
       {
         status: true,
         data: {
-          file
+          file: fileBuffer.toString('base64')
         }
       },
       { status: 200 }

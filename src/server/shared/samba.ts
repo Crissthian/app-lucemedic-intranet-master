@@ -1,90 +1,89 @@
-import SambaClient from 'samba-client'
-import crypto from 'crypto'
-import { existsSync, mkdirSync } from 'fs'
+import { Readable, Writable } from 'stream'
+import * as ftp from 'basic-ftp'
 import { logger } from './logger'
-import {
-  FILE_SYSTEM_SERVER,
-  FILE_SYSTEM_SERVER_PASSWORD,
-  FILE_SYSTEM_SERVER_USERNAME
-} from './config'
+import { FTP_HOST, FTP_PASSWORD, FTP_USER } from './config'
 
 export class SMBClient {
-  private connection: SambaClient
-
   constructor() {
-    this.connection = new SambaClient({
-      address: `\\\\${FILE_SYSTEM_SERVER}\\empresas`,
-      domain: 'WORKGROUP',
-      username: FILE_SYSTEM_SERVER_USERNAME,
-      password: FILE_SYSTEM_SERVER_PASSWORD
-    })
+    // Uses FTP protocol directly instead of Samba
   }
 
   async downloadFile(
     remoteFilePath: string,
-    host?: string,
-    subfolder?: string,
-    extension?: string
-  ): Promise<string> {
+    _host?: string,
+    _subfolder?: string,
+    _extension?: string
+  ): Promise<Buffer> {
+    const client = new ftp.Client()
+    client.ftp.verbose = false
+
     try {
-      if (!existsSync('./temp')) {
-        mkdirSync('./temp', { recursive: true })
-      }
+      await client.access({
+        host: FTP_HOST,
+        user: FTP_USER,
+        password: FTP_PASSWORD,
+        secure: false
+      })
 
-      const fileName = `${crypto.randomUUID().toString()}.${extension || 'pdf'}`
-      const localFilePath = `./temp/${fileName}`
+      logger.info(
+        `Connected to FTP ${FTP_HOST}. Downloading: ftp://${FTP_HOST}${remoteFilePath}`
+      )
 
-      if (host) {
-        const address =
-          host === FILE_SYSTEM_SERVER
-            ? `\\\\${FILE_SYSTEM_SERVER}\\empresas`
-            : `\\\\${host}\\${subfolder}`
-        const username =
-          host === FILE_SYSTEM_SERVER
-            ? FILE_SYSTEM_SERVER_USERNAME
-            : 'administrador'
-        const password =
-          host === FILE_SYSTEM_SERVER ? FILE_SYSTEM_SERVER_PASSWORD : 'luc3'
-
-        const options = {
-          address,
-          domain: 'WORKGROUP',
-          username,
-          password
+      // Download directly to memory
+      const chunks: Buffer[] = []
+      const writableStream = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk))
+          callback()
         }
+      })
 
-        logger.info(`Connecting options: ${JSON.stringify(options)}`)
+      await client.downloadTo(writableStream, remoteFilePath)
 
-        this.connection = new SambaClient(options)
-      }
+      const fileBuffer = Buffer.concat(chunks)
 
-      await this.connection.getFile(remoteFilePath, localFilePath)
+      logger.info(
+        `File downloaded to memory: ${remoteFilePath} (${fileBuffer.length} bytes)`
+      )
 
-      logger.info(`File downloaded: ${remoteFilePath} | ${localFilePath}`)
-
-      return fileName
+      return fileBuffer
     } catch (error: unknown) {
       logger.error(
-        `Samba Error while downloading file ${remoteFilePath}: ${error}`
+        `FTP Error while downloading file ${remoteFilePath}: ${error}`
       )
       throw error
+    } finally {
+      client.close()
     }
   }
 
-  async uploadFile(
-    localFilePath: string,
-    remoteFilePath: string
-  ): Promise<boolean> {
+  async uploadFile(buffer: Buffer, remoteFilePath: string): Promise<boolean> {
+    const client = new ftp.Client()
+    client.ftp.verbose = false
+
     try {
-      let success = true
+      await client.access({
+        host: FTP_HOST,
+        user: FTP_USER,
+        password: FTP_PASSWORD,
+        secure: false
+      })
 
-      await this.connection.sendFile(localFilePath, remoteFilePath)
+      logger.info(
+        `Connected to FTP ${FTP_HOST}. Uploading to: ftp://${FTP_HOST}${remoteFilePath}`
+      )
 
-      logger.info(`File uploaded: ${localFilePath} | ${remoteFilePath}`)
+      // Upload from memory using a Readable stream
+      const readableStream = Readable.from(buffer)
+      await client.uploadFrom(readableStream, remoteFilePath)
 
-      return success
+      logger.info(`File uploaded from memory to: ${remoteFilePath}`)
+
+      return true
     } catch (error: unknown) {
       throw new Error((error as Error).message)
+    } finally {
+      client.close()
     }
   }
 }

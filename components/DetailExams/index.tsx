@@ -19,6 +19,7 @@ import styles from './detail-exams.module.css'
 import { ROLES_TYPES } from '@/shared/constants'
 import { useEffect } from 'react'
 import { BaseApi } from '@/models/base'
+import { openBase64InNewWindow } from '@/shared/base64'
 
 const rubik400 = Rubik({ weight: '400', subsets: ['latin'] })
 const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
@@ -77,25 +78,11 @@ const DetailExams: React.FC = () => {
     }
 
     if (result.status) {
-      const { file } = result.data
-
-      const url = `/api/commons/file/${file}`
-
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const data = await response.blob()
-
-      const blob = new File([data], file, { type: 'application/pdf' })
-
-      const urlBlob = URL.createObjectURL(blob)
-
-      window.open(urlBlob)
+      openBase64InNewWindow(
+        result.data.file,
+        `diagnosis_${cdg_fmed}_${diagnosisType}.pdf`,
+        'application/pdf'
+      )
     }
   }
 

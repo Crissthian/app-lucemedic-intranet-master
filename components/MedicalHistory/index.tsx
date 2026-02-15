@@ -23,6 +23,7 @@ import ChartLaboratoryExams from '../ChartLaboratoryExams'
 import { Radiology } from '@/models/radiology'
 import { Audiometry } from '@/models/audiometry'
 import Modal from '@/components/Modal'
+import { base64ToFile } from '@/shared/base64'
 
 const rubik400 = Rubik({ weight: '400', subsets: ['latin'] })
 const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
@@ -76,30 +77,14 @@ const MedicalHistory: React.FC = () => {
 
       if (result.status) {
         setRadiologyDetails(result.data?.radiologies)
-        const radiologyImages = result.data?.files
+        const radiologyImages = result.data?.files // Array of base64 strings
 
-        for (const image of radiologyImages) {
-          const url = `/api/commons/file/${image}`
+        // Convert each base64 string to a File object
+        const files = radiologyImages.map((base64: string, index: number) =>
+          base64ToFile(base64, `radiology_${index}.jpg`, 'image/jpeg')
+        )
 
-          const result = await fetch(url, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-              'Content-Type': 'application/json'
-            }
-          })
-
-          const data = await result.blob()
-          const file = new File([data], image, { type: 'image/jpeg' })
-
-          setRadiologyImage((prevState) => {
-            if (prevState) {
-              return [...prevState, file]
-            } else {
-              return [file]
-            }
-          })
-        }
+        setRadiologyImage(files)
       }
     }
 
@@ -125,30 +110,14 @@ const MedicalHistory: React.FC = () => {
 
       if (result.status) {
         setAudiometryDetails(result.data.audiometries)
-        const audiometryImages = result.data?.files
+        const audiometryImages = result.data?.files // Array of base64 strings
 
-        for (const image of audiometryImages) {
-          const url = `/api/commons/file/${image}`
+        // Convert each base64 string to a File object
+        const files = audiometryImages.map((base64: string, index: number) =>
+          base64ToFile(base64, `audiometry_${index}.png`, 'image/png')
+        )
 
-          const result = await fetch(url, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-              'Content-Type': 'application/json'
-            }
-          })
-
-          const data = await result.blob()
-          const file = new File([data], image, { type: 'image/jpeg' })
-
-          setAudiometryImage((prevState) => {
-            if (prevState) {
-              return [...prevState, file]
-            } else {
-              return [file]
-            }
-          })
-        }
+        setAudiometryImage(files)
       }
     }
 
