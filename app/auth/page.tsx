@@ -18,7 +18,7 @@ export default function AuthPage() {
   const [password, setPassword] = useState('')
 
   const handleSubmit = async () => {
-    const url = `${process.env.API_BASE_PATH}/login`
+    const url = '/api/login'
 
     const data = await fetch(url, {
       method: 'POST',
@@ -102,3 +102,4 @@ export default function AuthPage() {
     </main>
   )
 }
+

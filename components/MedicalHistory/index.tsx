@@ -51,7 +51,7 @@ const MedicalHistory: React.FC = () => {
 
   useEffect(() => {
     const getRadiologyImages = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/radiology/${details.num_dni}`
+      const url = `/api/medical-exams/historical/radiology/${details.num_dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -75,7 +75,7 @@ const MedicalHistory: React.FC = () => {
         const radiologyImages = result.data?.files
 
         for (const image of radiologyImages) {
-          const url = `${process.env.API_BASE_PATH}/commons/file/${image}`
+          const url = `/api/commons/file/${image}`
 
           const result = await fetch(url, {
             method: 'GET',
@@ -100,7 +100,7 @@ const MedicalHistory: React.FC = () => {
     }
 
     const getAudiometryImages = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/audiometry/${details.num_dni}`
+      const url = `/api/medical-exams/historical/audiometry/${details.num_dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -124,7 +124,7 @@ const MedicalHistory: React.FC = () => {
         const audiometryImages = result.data?.files
 
         for (const image of audiometryImages) {
-          const url = `${process.env.API_BASE_PATH}/commons/file/${image}`
+          const url = `/api/commons/file/${image}`
 
           const result = await fetch(url, {
             method: 'GET',
@@ -256,3 +256,4 @@ const MedicalHistory: React.FC = () => {
 }
 
 export default MedicalHistory
+

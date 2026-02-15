@@ -38,6 +38,11 @@
 .row:last-child {
   border-bottom: none;
 }
+.body {
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #fff;
+}
 .fullName {
   font-weight: 400;
   font-size: 16px;

@@ -32,7 +32,11 @@ import Interconsultas from '@/components/Interconsultas'
 import Recomendaciones from '@/components/Recomendaciones'
 import 'react-toastify/dist/ReactToastify.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBell,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons'
 import useAccessToken from '@/hooks/useAccessToken'
 
 const rubik = Rubik({ weight: '500', subsets: ['latin'] })
@@ -42,7 +46,7 @@ export default function HomePage() {
   const dispatch = useDispatch<AppDispatch>()
   const { currentUser } = useAppSelector((state) => state.authReducer)
   const accessToken = useAccessToken()
-  
+
   const [fullName, setFullName] = useState<string>('')
   const [dni, setDni] = useState<string>('')
   const [examType, setExamType] = useState<string>('')
@@ -62,19 +66,19 @@ export default function HomePage() {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
   const showWelcome = useAppSelector(
-    (state) => state.globalReducer.showWelcome
+    (state) => state.globalReducer.showWelcome,
   )
   const showViewDetail = useAppSelector(
-    (state) => state.medicalExamsReducer.showDetail
+    (state) => state.medicalExamsReducer.showDetail,
   )
   const showMedicalHistory = useAppSelector(
-    (state) => state.medicalExamsReducer.showMedicalHistory
+    (state) => state.medicalExamsReducer.showMedicalHistory,
   )
   const showInterconsultas = useAppSelector(
-    (state) => state.medicalExamsReducer.showInterconsultas
+    (state) => state.medicalExamsReducer.showInterconsultas,
   )
   const showRecomendaciones = useAppSelector(
-    (state) => state.medicalExamsReducer.showRecomendaciones
+    (state) => state.medicalExamsReducer.showRecomendaciones,
   )
 
   const handleSubmit = async () => {
@@ -118,14 +122,11 @@ export default function HomePage() {
     }
 
     if (startDate && endDate) {
-
       queryParams.append('startDate', startDate)
       queryParams.append('endDate', endDate)
     }
 
-    const url = `${
-      process.env.API_BASE_PATH
-    }/medical-exams?${queryParams.toString()}`
+    const url = `/api/medical-exams?${queryParams.toString()}`
 
     const data = await fetch(url, {
       method: 'GET',
@@ -172,14 +173,14 @@ export default function HomePage() {
   const renderPageNumbers = () => {
     const totalPages = Math.ceil(medicalExams.length / itemsPerPage)
     const pageNumbers = []
-  
+
     if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i)
       }
     } else {
       pageNumbers.push(1, 2, 3)
-  
+
       if (currentPage > 3 && currentPage < totalPages - 2) {
         pageNumbers.push('...')
         pageNumbers.push(currentPage)
@@ -190,16 +191,18 @@ export default function HomePage() {
       } else {
         pageNumbers.push('...')
       }
-  
+
       pageNumbers.push(totalPages)
     }
-  
+
     return pageNumbers.map((number, index) => (
       <li key={index} className={currentPage === number ? styles.active : ''}>
         {typeof number === 'string' ? (
           <span className={rubik.className}>{number}</span>
         ) : (
-          <button className={rubik.className} onClick={() => paginate(number)}>{number}</button>
+          <button className={rubik.className} onClick={() => paginate(number)}>
+            {number}
+          </button>
         )}
       </li>
     ))
@@ -211,7 +214,6 @@ export default function HomePage() {
     if (jwt.length <= 0) {
       router.push('/auth')
     }
-
   }, [router])
 
   return (
@@ -273,11 +275,13 @@ export default function HomePage() {
                         placeholder="Nombres y Apellidos"
                         type="text"
                         onChange={(e) => setFullName(e?.target.value)}
+                        value={fullName}
                       />
                       <Input
                         placeholder="D.N.I."
                         type="text"
                         onChange={(event) => setDni(event?.target.value)}
+                        value={dni}
                       />
                       <Select
                         placeholder="Tipo de examen"
@@ -291,8 +295,18 @@ export default function HomePage() {
                       />
                     </>
                   )}
-                  <Input placeholder="Desde" type="date" onChange={(e) => setStartDate(e.target.value)}/>
-                  <Input placeholder="Hasta" type="date" onChange={(e) => setEndDate(e.target.value)}/>
+                  <Input
+                    placeholder="Desde"
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                  <Input
+                    placeholder="Hasta"
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
                 </div>
                 <div className={styles.actions}>
                   <Button label={'Buscar'} onClick={handleSubmit} />
@@ -305,23 +319,40 @@ export default function HomePage() {
                 </div>
               </section>
               <Panel>
-                {
-                  isEmpty && (
-                    <div className={styles.emptyData}>
-                      <FontAwesomeIcon icon={faBell} color={'#1EE67D'} size='2x' />
-                      <p className={rubik.className}>No se han encontrado <br/>resultados</p>
-                    </div>
-                  )
-                }
+                {isEmpty && (
+                  <div className={styles.emptyData}>
+                    <FontAwesomeIcon
+                      icon={faBell}
+                      color={'#1EE67D'}
+                      size="2x"
+                    />
+                    <p className={rubik.className}>
+                      No se han encontrado <br />
+                      resultados
+                    </p>
+                  </div>
+                )}
                 {currentUser.profile === ROLES_TYPES.DOCTOR && (
                   <DataTable
                     data={currentItems}
-                    startDate={startDate} endDate={endDate} lastName={fullName} dni={dni} examType={examType} sede={sede} 
+                    startDate={startDate}
+                    endDate={endDate}
+                    lastName={fullName}
+                    dni={dni}
+                    examType={examType}
+                    sede={sede}
                   />
                 )}
                 {currentUser.profile === ROLES_TYPES.RH && (
-                  <DataTableRH data={currentItems} startDate={moment(startDate).format('YYYY-MM-DD')}
-                  endDate={moment(endDate).format('YYYY-MM-DD')} lastName={fullName} dni={dni} examType={examType} sede={sede} />
+                  <DataTableRH
+                    data={currentItems}
+                    startDate={moment(startDate).format('YYYY-MM-DD')}
+                    endDate={moment(endDate).format('YYYY-MM-DD')}
+                    lastName={fullName}
+                    dni={dni}
+                    examType={examType}
+                    sede={sede}
+                  />
                 )}
                 {currentUser.profile === ROLES_TYPES.PATIENT && (
                   <DataTablePatient data={medicalExams} />
@@ -343,7 +374,10 @@ export default function HomePage() {
                         <button
                           className={rubik.className}
                           onClick={() => paginate(currentPage + 1)}
-                          disabled={currentPage === Math.ceil(medicalExams.length / itemsPerPage)}
+                          disabled={
+                            currentPage ===
+                            Math.ceil(medicalExams.length / itemsPerPage)
+                          }
                         >
                           <FontAwesomeIcon icon={faChevronRight} />
                         </button>

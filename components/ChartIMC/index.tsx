@@ -15,7 +15,7 @@ const ChartIMC: React.FC<ChartIMCProps> = (props) => {
 
   useEffect(() => {
     const getImcReport = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/imc/${props.dni}`
+      const url = `/api/medical-exams/historical/imc/${props.dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -134,3 +134,4 @@ const ChartIMC: React.FC<ChartIMCProps> = (props) => {
 }
 
 export default ChartIMC
+

@@ -39,7 +39,7 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
   const [selectAll, setSelectAll] = useState(false)
 
   const downloadCertificadoFile = async (cdg_fmed: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${cdg_fmed}/certificado`
+    const path = `/api/medical-exams/${cdg_fmed}/certificado`
 
     const response = await fetch(path, {
       method: 'POST',
@@ -61,7 +61,7 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
 
     if (result.status) {
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
+      const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
@@ -83,7 +83,7 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
 
   const handleDetail = async (fmed: string) => {
     dispatch(toggleLoading())
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${fmed}`
+    const url = `/api/medical-exams/${fmed}`
 
     const data = await fetch(url, {
       method: 'GET',
@@ -123,7 +123,7 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
 
     dispatch(toggleLoading())
     
-    let url = `${process.env.API_BASE_PATH}/sabana/aptitud?startDate=${props.startDate}&endDate=${props.endDate}`
+    let url = `/api/sabana/aptitud?startDate=${props.startDate}&endDate=${props.endDate}`
 
     if (props.lastName) {
       url += `&lastName=${props.lastName}`
@@ -243,7 +243,7 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
 
     try {
 
-      const url = `${process.env.API_BASE_PATH}/attachments/downloads`
+      const url = '/api/attachments/downloads'
 
       const params = {
         type: 0,
@@ -365,3 +365,4 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
 }
 
 export default DataTableRH
+

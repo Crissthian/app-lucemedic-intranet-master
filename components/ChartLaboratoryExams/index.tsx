@@ -26,7 +26,7 @@ const ChartLaboratoryExams: React.FC<ChartLaboratoryExamsProps> = (props) => {
 
   useEffect(() => {
     const getLaboratoryExamReport = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/laboratory-exams/${props.dni}`
+      const url = `/api/medical-exams/historical/laboratory-exams/${props.dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -134,3 +134,4 @@ const ChartLaboratoryExams: React.FC<ChartLaboratoryExamsProps> = (props) => {
 }
 
 export default ChartLaboratoryExams
+

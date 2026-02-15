@@ -24,7 +24,7 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
   const { currentUser } = useAppSelector((state) => state.authReducer)
 
   const handleDownloadDiagnosis = async (type: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${props.uid}/diagnosis`
+    const path = `/api/medical-exams/${props.uid}/diagnosis`
 
     let diagnosisType: number = 1
 
@@ -107,7 +107,7 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
     if (result.status) {
       const { file } = result.data
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${file}`
+      const url = `/api/commons/file/${file}`
 
       const response = await fetch(url, {
         method: 'GET',
@@ -128,7 +128,7 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
   }
 
   const handleDownloadRadiology = async (cdg_fmed: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${cdg_fmed}/diagnosis/xray`
+    const path = `/api/medical-exams/${cdg_fmed}/diagnosis/xray`
 
     const options = {
       method: 'GET',
@@ -153,7 +153,7 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
     if (result.status) {
       const { file } = result.data
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${file}`
+      const url = `/api/commons/file/${file}`
 
       const response = await fetch(url, {
         method: 'GET',
@@ -176,7 +176,7 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
   useEffect(() => {
     const getDiagnosis = async () => {
       setLoading(true)
-      const url = `${process.env.API_BASE_PATH}/medical-exams/${props.uid}/diagnosis`
+      const url = `/api/medical-exams/${props.uid}/diagnosis`
 
       const options = {
         method: 'GET',
@@ -269,3 +269,4 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
 }
 
 export default TableDiagnosis
+

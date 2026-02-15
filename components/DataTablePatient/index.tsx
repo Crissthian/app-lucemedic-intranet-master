@@ -29,7 +29,7 @@ const DataTablePatient: React.FC<DataTableProps> = (props) => {
 
   const handleDetail = async (fmed: string) => {
     dispatch(toggleLoading())
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${fmed}`
+    const url = `/api/medical-exams/${fmed}`
 
     const data = await fetch(url, {
       method: 'GET',
@@ -108,3 +108,4 @@ const getSede = (sede: string) => {
 }
 
 export default DataTablePatient
+

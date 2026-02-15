@@ -70,6 +70,24 @@ h1.title {
   background: #F0F2F5;
   transition: all .3s;
 }
+.withImage {
+  position: relative;
+  overflow: hidden;
+}
+.removeImageButton {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 9px;
+  padding: 10px 14px;
+  background: rgba(38, 98, 240, 0.9);
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.removeImageButton:hover {
+  background: var(--primary-color);
+}
 .footer {
   display: flex;
   justify-content: space-between;

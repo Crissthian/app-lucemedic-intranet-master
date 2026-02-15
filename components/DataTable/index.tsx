@@ -45,7 +45,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
   const handleDetail = async (fmed: string) => {
     dispatch(toggleLoading())
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${fmed}`
+    const url = `/api/medical-exams/${fmed}`
 
     const data = await fetch(url, {
       method: 'GET',
@@ -89,7 +89,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   }
 
   const downloadCertificadoFile = async (cdg_fmed: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${cdg_fmed}/certificado`
+    const path = `/api/medical-exams/${cdg_fmed}/certificado`
 
     const response = await fetch(path, {
       method: 'POST',
@@ -110,7 +110,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     }
 
     if (result.status) {
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
+      const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
@@ -133,7 +133,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   }
 
   const downloadEMOFile = async (file: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${file}/emo`
+    const path = `/api/medical-exams/${file}/emo`
 
     const response = await fetch(path, {
       method: 'POST',
@@ -154,7 +154,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     }
 
     if (result.status) {
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
+      const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
@@ -216,7 +216,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
     dispatch(toggleLoading())
 
-    let url = `${process.env.API_BASE_PATH}/sabana?startDate=${props.startDate}&endDate=${props.endDate}`
+    let url = `/api/sabana?startDate=${props.startDate}&endDate=${props.endDate}`
 
     if (props.lastName) {
       url += `&lastName=${props.lastName}`
@@ -308,7 +308,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
     dispatch(toggleLoading())
 
-    const url = `${process.env.API_BASE_PATH}/sabana/interconsultations?startDate=${props.startDate}&endDate=${props.endDate}`
+    const url = `/api/sabana/interconsultations?startDate=${props.startDate}&endDate=${props.endDate}`
 
     const data = await fetch(url, {
       method: 'GET',
@@ -424,7 +424,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
     try {
 
-      const url = `${process.env.API_BASE_PATH}/attachments/downloads`
+      const url = '/api/attachments/downloads'
 
       const params = {
         type: 0,
@@ -520,7 +520,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
     try {
 
-      const url = `${process.env.API_BASE_PATH}/attachments/downloads`
+      const url = '/api/attachments/downloads'
 
       const params = {
         type: 1,
@@ -688,3 +688,4 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 }
 
 export default DataTable
+

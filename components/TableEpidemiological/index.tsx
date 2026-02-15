@@ -14,7 +14,7 @@ const TableEpidemiological: React.FC = () => {
   const [data, setData] = useState<EpidemiologicalReport[]>([])
 
   const handleDownload = async (cdg_reg: string) => {
-    const url = `${process.env.API_BASE_PATH}/commons/epidemiological-report/${cdg_reg}`
+    const url = `/api/commons/epidemiological-report/${cdg_reg}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -36,7 +36,7 @@ const TableEpidemiological: React.FC = () => {
 
     if (result.status) {
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
+      const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
@@ -60,7 +60,7 @@ const TableEpidemiological: React.FC = () => {
   useEffect(() => {
 
     const fetchData = async () => {
-      const url = `${process.env.API_BASE_PATH}/commons/epidemiological-report`
+      const url = '/api/commons/epidemiological-report'
 
       const data = await fetch(url, {
         method: 'GET',

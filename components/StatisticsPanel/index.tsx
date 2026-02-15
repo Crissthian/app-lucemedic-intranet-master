@@ -86,7 +86,7 @@ const StatisticsPanel: React.FC = () => {
   const [emptyData, setEmptyData] = useState<boolean>(false)
 
   const getGenders = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/genders?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/genders?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -116,7 +116,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getAges = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/ages?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/ages?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -146,7 +146,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getMedicalFitness = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/medical-fitness?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/medical-fitness?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -176,7 +176,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getNutritionalProfile = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/nutritional-profile?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/nutritional-profile?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -202,7 +202,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getBloodPressure = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/blood-pressure?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/blood-pressure?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -232,7 +232,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getOsteoMuscularPathologies = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/osteo-muscular-pathologies?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/osteo-muscular-pathologies?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -262,7 +262,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getLaboratoryExams = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/exams?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/exams?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -292,7 +292,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getAudiometry = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/audiometry?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/audiometry?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -322,7 +322,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getSpirometry = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/spirometry?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/spirometry?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -352,7 +352,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getVisualAcuity = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/visual-acuity?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/visual-acuity?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -382,7 +382,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getOtherConditions = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/other-conditions?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/other-conditions?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -412,7 +412,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getChestXRay = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/chest-x-ray?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/chest-x-ray?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -442,7 +442,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getElectrocardiogram = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/electrocardiogram?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/electrocardiogram?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -472,7 +472,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getPsychology = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/psychology?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/psychology?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -502,7 +502,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getOdontology = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/odontology?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/odontology?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -532,7 +532,7 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const getStructuralHeight = async () => {
-    let url = `${process.env.API_BASE_PATH}/statistics/structural-height?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/structural-height?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -564,7 +564,7 @@ const StatisticsPanel: React.FC = () => {
   const handleSearch = async () => {
     dispatch(toggleLoading())
 
-    let url = `${process.env.API_BASE_PATH}/statistics/check?startDate=${startDate}&endDate=${endDate}`
+    let url = `/api/statistics/check?startDate=${startDate}&endDate=${endDate}`
 
     if (examType) {
       url += `&examType=${examType}`
@@ -837,3 +837,4 @@ const StatisticsPanel: React.FC = () => {
 }
 
 export default StatisticsPanel
+

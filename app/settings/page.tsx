@@ -61,7 +61,7 @@ export default function Settings() {
       const formData = new FormData()
       formData.append('file', selectedFile || '')
 
-      const data = await fetch(`${process.env.API_BASE_PATH}/commons/users/photo`, {
+      const data = await fetch('/api/commons/users/photo', {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -87,7 +87,7 @@ export default function Settings() {
 
   const handleUpdateChanges = async () => {
     try {
-      const data = await fetch(`${process.env.API_BASE_PATH}/users/${dni}`, {
+      const data = await fetch(`/api/users/${dni}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -50,7 +50,7 @@ export default function Appointments() {
     const formData = new FormData()
     formData.append('file', selectedFile)
 
-    const url = `${process.env.API_BASE_PATH}/appointments`
+    const url = '/api/appointments'
 
     try {
       const response = await fetch(url, {

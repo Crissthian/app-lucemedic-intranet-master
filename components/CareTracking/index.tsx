@@ -35,7 +35,7 @@ const CareTracking: React.FC = () => {
 
     dispatch(toggleLoading())
 
-    let path = `${process.env.API_BASE_PATH}/attention-monitoring?startDate=${startDate}&endDate=${endDate}`
+    let path = `/api/attention-monitoring?startDate=${startDate}&endDate=${endDate}`
 
     if (sede) {
       path = `${path}&headquarter=${sede}`
@@ -74,7 +74,7 @@ const CareTracking: React.FC = () => {
 
       const currentDate = new Date().toISOString().split('T')[0]
 
-      let path = `${process.env.API_BASE_PATH}/attention-monitoring?startDate=${currentDate}&endDate=${currentDate}&headquarter=001`
+      let path = `/api/attention-monitoring?startDate=${currentDate}&endDate=${currentDate}&headquarter=001`
 
       const response = await fetch(path, {
         method: 'GET',
@@ -152,3 +152,4 @@ const CareTracking: React.FC = () => {
 }
 
 export default CareTracking
+

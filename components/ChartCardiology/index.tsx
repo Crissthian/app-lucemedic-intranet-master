@@ -24,7 +24,7 @@ const ChartCardiology: React.FC<ChartCardiologyProps> = (props) => {
 
   useEffect(() => {
     const getCardiologyReport = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/cardiology/${props.dni}`
+      const url = `/api/medical-exams/historical/cardiology/${props.dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -84,3 +84,4 @@ const ChartCardiology: React.FC<ChartCardiologyProps> = (props) => {
 }
 
 export default ChartCardiology
+

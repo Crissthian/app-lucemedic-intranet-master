@@ -46,7 +46,7 @@ const DetailExams: React.FC = () => {
   }
 
   const handleDownloadDiagnosis = async (cdg_fmed: string, diagnosisType: number) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${cdg_fmed}/diagnosis`
+    const path = `/api/medical-exams/${cdg_fmed}/diagnosis`
 
     const body = {
       diagnosisType,
@@ -76,7 +76,7 @@ const DetailExams: React.FC = () => {
     if (result.status) {
       const { file } = result.data
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${file}`
+      const url = `/api/commons/file/${file}`
 
       const response = await fetch(url, {
         method: 'GET',
@@ -163,3 +163,4 @@ const DetailExams: React.FC = () => {
 }
 
 export default DetailExams
+

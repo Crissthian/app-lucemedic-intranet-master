@@ -33,7 +33,7 @@ const Recomendaciones: React.FC = () => {
   }
 
   const handleDownload = async (cdg_fmed: string) => {
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${details.cdg_fmed}/recommendations/${cdg_fmed}`
+    const url = `/api/medical-exams/${details.cdg_fmed}/recommendations/${cdg_fmed}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -55,7 +55,7 @@ const Recomendaciones: React.FC = () => {
 
     if (result.status) {
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
+      const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
@@ -86,7 +86,7 @@ const Recomendaciones: React.FC = () => {
 
     if (details.cdg_fmed) {
       const getRecommendations = async () => {
-        const url = `${process.env.API_BASE_PATH}/medical-exams/${details.cdg_fmed}/recommendations`
+        const url = `/api/medical-exams/${details.cdg_fmed}/recommendations`
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -178,3 +178,4 @@ const Recomendaciones: React.FC = () => {
 }
 
 export default Recomendaciones
+

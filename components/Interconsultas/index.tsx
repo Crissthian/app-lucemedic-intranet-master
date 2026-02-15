@@ -33,7 +33,7 @@ const Interconsultas: React.FC = () => {
   }
 
   const handleDownload = async (num_interconsulta: string) => {
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${details.cdg_fmed}/consultations/${num_interconsulta}`
+    const url = `/api/medical-exams/${details.cdg_fmed}/consultations/${num_interconsulta}`
 
     const response = await fetch(url, {
       method: 'GET',
@@ -55,7 +55,7 @@ const Interconsultas: React.FC = () => {
 
     if (result.status) {
 
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
+      const url = `/api/commons/file/${result.data.file}`
 
       const data = await fetch(url, {
         method: 'GET',
@@ -85,7 +85,7 @@ const Interconsultas: React.FC = () => {
 
     if (details.cdg_fmed) {
       const getConsultations = async () => {
-        const url = `${process.env.API_BASE_PATH}/medical-exams/${details.cdg_fmed}/consultations`
+        const url = `/api/medical-exams/${details.cdg_fmed}/consultations`
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -183,3 +183,4 @@ const Interconsultas: React.FC = () => {
 }
 
 export default Interconsultas
+
