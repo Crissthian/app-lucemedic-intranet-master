@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GetDownloadsDTO } from '@/src/server/commons/dto/get-downloads.dto'
 import AttachmentsService from '@/src/server/attachments/services/attachments.service'
+import { authenticateRequest } from '@/src/server/http/auth'
 import { logger } from '@/src/server/shared'
 
 const attachmentsService = new AttachmentsService()
@@ -18,6 +19,12 @@ async function parseJsonBody(
 export async function handleDownloadAttachment(
   request: NextRequest
 ): Promise<NextResponse> {
+  const auth = authenticateRequest(request)
+
+  if (!auth.ok) {
+    return auth.response
+  }
+
   try {
     const payload = (await parseJsonBody(request)) as unknown as GetDownloadsDTO
     const zipBuffer = await attachmentsService.downloadAttachment(payload)

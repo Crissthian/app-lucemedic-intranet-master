@@ -148,7 +148,7 @@ export async function handleDownloadEpidemiologicalReport(
   }
 
   try {
-    logger.info(`Executing download epidemiological report: ${uid}`)
+    logger.info('Executing download epidemiological report')
 
     const fileBuffer = await commonsService.downloadEpidemiologicalReport(uid)
 
@@ -194,7 +194,7 @@ export async function handleDownloadFile(
   }
 
   try {
-    logger.info(`Executing download file: ${uid}`)
+    logger.info('Executing download file')
 
     const file = await commonsService.downloadFile(uid)
     const contentType = getFileContentType(uid)
@@ -232,7 +232,7 @@ export async function handleUploadPhoto(
   }
 
   try {
-    logger.info(`User: ${JSON.stringify(auth.user)}`)
+    logger.info('User authenticated for photo upload')
 
     const formData = await request.formData()
     const file = formData.get('file')
@@ -354,7 +354,7 @@ export async function handleDeletePhoto(
   }
 
   try {
-    logger.info(`Deleting photo: ${photoId}`)
+    logger.info('Deleting photo')
 
     await commonsService.deletePhoto(photoId)
 

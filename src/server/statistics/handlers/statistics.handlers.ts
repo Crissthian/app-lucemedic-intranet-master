@@ -94,6 +94,19 @@ function getQueryObject(request: NextRequest): Record<string, string> {
   return result
 }
 
+function sanitizeSqlValue(value: string): string {
+  return value.replace(/\u0000/g, '').trim().replace(/'/g, "''")
+}
+
+function sanitizeQuery(query: StatisticsQueryDTO): StatisticsQueryDTO {
+  return {
+    examType: sanitizeSqlValue(String(query.examType ?? '')),
+    headquarter: sanitizeSqlValue(String(query.headquarter ?? '')),
+    startDate: sanitizeSqlValue(String(query.startDate ?? '')),
+    endDate: sanitizeSqlValue(String(query.endDate ?? ''))
+  }
+}
+
 export async function handleStatisticsMetric(
   request: NextRequest,
   metric: string | undefined
@@ -117,8 +130,9 @@ export async function handleStatisticsMetric(
   }
 
   try {
-    const query = getQueryObject(request) as unknown as StatisticsQueryDTO
-    const ruc = String(auth.user.ruc ?? '')
+    const rawQuery = getQueryObject(request) as unknown as StatisticsQueryDTO
+    const query = sanitizeQuery(rawQuery)
+    const ruc = sanitizeSqlValue(String(auth.user.ruc ?? ''))
     const hasDateRange = Boolean(query.startDate && query.endDate)
 
     if (metric === 'check' && !hasDateRange) {

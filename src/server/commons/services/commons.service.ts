@@ -33,7 +33,7 @@ export default class CommonsService {
   async downloadFile(uid: string): Promise<Buffer> {
     try {
       const path = uid
-      logger.info(`Downloading file from FTP: ${path}`)
+      logger.info('Downloading file from FTP')
 
       return this.sambaClient.downloadFile(path)
     } catch (error: unknown) {
@@ -56,7 +56,7 @@ export default class CommonsService {
     try {
       const path = `INFORMEEPIDEMIOLOGICO/${uid}.pdf`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading epidemiological report file')
 
       return this.sambaClient.downloadFile(
         path,
@@ -78,16 +78,14 @@ export default class CommonsService {
     try {
       const remoteFilePath = `/FOTOUS/${originalFilename}`
 
-      logger.info(`Uploading photo to: ${remoteFilePath}`)
+      logger.info('Uploading photo')
 
       const sambaResult = await this.sambaClient.uploadFile(
         buffer,
         remoteFilePath
       )
 
-      logger.info(
-        `SambaClient.uploadFile result: ${JSON.stringify(sambaResult)}`
-      )
+      logger.info(`SambaClient.uploadFile result: ${String(sambaResult)}`)
 
       return originalFilename
     } catch (error: unknown) {
@@ -101,7 +99,7 @@ export default class CommonsService {
     try {
       const path = `FOTOUS/${photoId}`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading photo file')
 
       const fileBuffer = await this.sambaClient.downloadFile(
         path,
@@ -131,11 +129,11 @@ export default class CommonsService {
     try {
       const path = `/FOTOUS/${photoId}`
 
-      logger.info(`Deleting photo from: ${path}`)
+      logger.info('Deleting photo from storage')
 
       await this.sambaClient.deleteFile(path)
 
-      logger.info(`Photo deleted successfully: ${photoId}`)
+      logger.info('Photo deleted successfully')
 
       return true
     } catch (error: unknown) {

@@ -25,9 +25,7 @@ export class SMBClient {
         secure: false
       })
 
-      logger.info(
-        `Connected to FTP ${FTP_HOST}. Downloading: ftp://${FTP_HOST}${remoteFilePath}`
-      )
+      logger.info('Connected to FTP. Starting file download')
 
       // Download directly to memory
       const chunks: Buffer[] = []
@@ -42,15 +40,11 @@ export class SMBClient {
 
       const fileBuffer = Buffer.concat(chunks)
 
-      logger.info(
-        `File downloaded to memory: ${remoteFilePath} (${fileBuffer.length} bytes)`
-      )
+      logger.info(`File downloaded to memory (${fileBuffer.length} bytes)`)
 
       return fileBuffer
     } catch (error: unknown) {
-      logger.error(
-        `FTP Error while downloading file ${remoteFilePath}: ${error}`
-      )
+      logger.error(`FTP Error while downloading file: ${error}`)
       throw error
     } finally {
       client.close()
@@ -69,15 +63,13 @@ export class SMBClient {
         secure: false
       })
 
-      logger.info(
-        `Connected to FTP ${FTP_HOST}. Uploading to: ftp://${FTP_HOST}${remoteFilePath}`
-      )
+      logger.info('Connected to FTP. Starting file upload')
 
       // Upload from memory using a Readable stream
       const readableStream = Readable.from(buffer)
       await client.uploadFrom(readableStream, remoteFilePath)
 
-      logger.info(`File uploaded from memory to: ${remoteFilePath}`)
+      logger.info('File uploaded from memory')
 
       return true
     } catch (error: unknown) {

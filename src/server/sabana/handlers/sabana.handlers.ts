@@ -30,7 +30,7 @@ export async function handleSabana(
     const query = getQueryObject(request) as unknown as SabanaQueryDTO
     const ruc = String(auth.user.ruc ?? '')
 
-    logger.info(`Getting sabana: ${JSON.stringify(query)} | ${ruc}`)
+    logger.info('Getting sabana data')
 
     const sabana = await sabanaService.find(query, ruc)
 
@@ -70,7 +70,7 @@ export async function handleSabanaAptitud(
     const query = getQueryObject(request) as unknown as AptitudQueryDTO
     const ruc = String(auth.user.ruc ?? '')
 
-    logger.info(`Getting aptitud médica: ${JSON.stringify(query)} | ${ruc}`)
+    logger.info('Getting aptitud médica data')
 
     const aptitudes = await sabanaService.findAptitud(query, ruc)
 
@@ -110,7 +110,7 @@ export async function handleSabanaInterconsultations(
     const query = getQueryObject(request) as unknown as SabanaQueryDTO
     const ruc = String(auth.user.ruc ?? '')
 
-    logger.info(`Getting interconsultations: ${JSON.stringify(query)} | ${ruc}`)
+    logger.info('Getting interconsultations data')
 
     const interconsultations = await sabanaService.findInterconsultations(
       query,

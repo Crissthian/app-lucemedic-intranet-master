@@ -4,7 +4,8 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database
+  Database,
+  QueryParams
 } from '../../shared'
 import { AptitudQueryDTO } from '../dto/aptitud.query.dto'
 import { SabanaQueryDTO } from '../dto/sabana.query.dto'
@@ -31,6 +32,7 @@ export default class SabanaRepository {
   async find(params: SabanaQueryDTO, ruc: string): Promise<SabanaRow[]> {
     try {
       let data: SabanaRow[] = []
+      const queryParams: QueryParams = { ruc }
 
       let query = `
       SELECT m.cdg_fmed,c.DES_CLI as empresa, RTRIM(LTRIM(P.APELLIDO_PERSONA)) +' , '+ RTRIM(LTRIM(P.NOMBRE_PERSONA)) AS nombres,
@@ -419,27 +421,35 @@ export default class SabanaRepository {
 
         FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa,M_CONTRATO co
 
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) AND (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) AND (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
 
       and m.ruc_SAB=c.RUC_CLI AND f.cdg_cont=co.cdg_cont`
 
       if (params.startDate && params.endDate) {
-        query += ` AND f.fec_fmed between '${params.startDate}' AND '${params.endDate}'`
+        query += ' AND f.fec_fmed between @startDate AND @endDate'
+        queryParams.startDate = params.startDate
+        queryParams.endDate = params.endDate
       }
 
       if (params.examType) {
-        query += ` AND f.tip_exa='${params.examType}'`
+        query += ' AND f.tip_exa=@examType'
+        queryParams.examType = params.examType
       }
 
       if (params.sede) {
-        query += ` AND f.cdg_sede='${params.sede}'`
+        query += ' AND f.cdg_sede=@sede'
+        queryParams.sede = params.sede
       }
 
       if (params.lastName) {
-        query += ` AND p.APELLIDO_PERSONA LIKE '%${params.lastName}%'`
+        query += ' AND p.APELLIDO_PERSONA LIKE @lastName'
+        queryParams.lastName = `%${params.lastName}%`
       }
 
-      const result = await this.database.query<SabanaRow>(query)
+      const result = await this.database.queryWithParams<SabanaRow>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -459,9 +469,7 @@ export default class SabanaRepository {
   ): Promise<SabanaRow[]> {
     try {
       let data: SabanaRow[] = []
-
-      console.log(params)
-      console.log(ruc)
+      const queryParams: QueryParams = { ruc }
 
       // const query = `
       // Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cdg_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos , CASE FICHA.APTITUD WHEN 1 THEN 'APTO' WHEN 2 THEN 'APTO CON RESTRICCIONES' WHEN 3 THEN 'NO APTO' WHEN 4 THEN 'OBSERVADO' ELSE ' ' END as aptitud From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where FICHA.cdg_sede='001' AND FICHA.fec_fmed BETWEEN '${startDate}' AND '${endDate}' AND FICHA.tip_exa='001'  and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 and ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc )`;
@@ -483,33 +491,42 @@ WHEN 4 THEN 'OBSERVADO'
 
 ELSE ' ' END as aptitud
 
-From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where ficha.ruc_cli='${ruc}' AND ficha.ruc_cli = mc.ruc_cli
+From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where ficha.ruc_cli=@ruc AND ficha.ruc_cli = mc.ruc_cli
 
 AND ficha.tip_exa <>'004'
 
 AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc )`
 
       if (params.lastName) {
-        query += ` AND PACI.APELLIDO_PERSONA LIKE '%${params.lastName}%'`
+        query += ' AND PACI.APELLIDO_PERSONA LIKE @lastName'
+        queryParams.lastName = `%${params.lastName}%`
       }
 
       if (params.dni) {
-        query += ` AND ficha.num_dni='${params.dni}'`
+        query += ' AND ficha.num_dni=@dni'
+        queryParams.dni = params.dni
       }
 
       if (params.sede) {
-        query += ` AND FICHA.cdg_sede='${params.sede}'`
+        query += ' AND FICHA.cdg_sede=@sede'
+        queryParams.sede = params.sede
       }
 
       if (params.startDate && params.endDate) {
-        query += ` AND FICHA.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
+        query += ' AND FICHA.fec_fmed BETWEEN @startDate AND @endDate'
+        queryParams.startDate = params.startDate
+        queryParams.endDate = params.endDate
       }
 
       if (params.examType) {
-        query += ` AND FICHA.tip_exa='${params.examType}'`
+        query += ' AND FICHA.tip_exa=@examType'
+        queryParams.examType = params.examType
       }
 
-      const result = await this.database.query<SabanaRow>(query)
+      const result = await this.database.queryWithParams<SabanaRow>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -529,11 +546,23 @@ AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = pa
   ): Promise<SabanaRow[]> {
     try {
       let data: SabanaRow[] = []
+      const queryParams: QueryParams = { ruc }
 
       let query = `
-      select i.cdg_reg AS CODIGO ,Convert(varchar(10),CONVERT(date,i.fec_reg,106),103) as FECHA,LTRIM(RTRIM(p.NUM_DNI)) AS DNI, ltrim(rtrim(p.APELLIDO_PERSONA)) as APELLIDOS ,ltrim(rtrim(p.NOMBRE_PERSONA)) AS NOMBRES,i.cdg_fmed AS FICHA,LTRIM(RTRIM(i.especialidad)) AS ESPECIALIDAD, case f.tip_exa when '001' then 'EXAMEN PRE OCUPACIONAL' WHEN '002' THEN 'EXAMEN ANUAL'WHEN '003' THEN 'EXAMEN DE RETIRO'ELSE 'OTROS' END AS [TIPO EXAMEN], CASE i.estado  WHEN 1 THEN 'PENDIENTE'  ELSE 'CERRADO'  END as ESTADO,CASE i.TIPO WHEN 1 THEN 'ESPECIALIDAD' WHEN 2 THEN 'VIGILANCIA MEDICA' ELSE '' END AS TIPO, CASE  WHEN i.estado = 2 THEN 'Cerrado'  ELSE  CASE  WHEN f.ruc_cli = '${ruc}' AND DATEDIFF(day, i.fec_reg, GETDATE()) > 30 THEN 'VENCIDO' WHEN f.ruc_cli <> '${ruc}' AND DATEDIFF(day, i.fec_reg, GETDATE()) > 15 THEN 'VENCIDO' ELSE 'EN FECHA'END  END AS CONDICION from m_interconsulta i,vpaciente p,m_fmed f,vclientes vc where i.cdg_fmed=f.cdg_fmed and f.num_dni=p.NUM_DNI and  f.ruc_cli=vc.RUC_CLI   AND vc.RUC_CLI = '${ruc}' and  (i.fec_reg >= '${params.startDate}' AND i.fec_reg <= '${params.endDate}') order by 1 desc`
+      select i.cdg_reg AS CODIGO ,Convert(varchar(10),CONVERT(date,i.fec_reg,106),103) as FECHA,LTRIM(RTRIM(p.NUM_DNI)) AS DNI, ltrim(rtrim(p.APELLIDO_PERSONA)) as APELLIDOS ,ltrim(rtrim(p.NOMBRE_PERSONA)) AS NOMBRES,i.cdg_fmed AS FICHA,LTRIM(RTRIM(i.especialidad)) AS ESPECIALIDAD, case f.tip_exa when '001' then 'EXAMEN PRE OCUPACIONAL' WHEN '002' THEN 'EXAMEN ANUAL'WHEN '003' THEN 'EXAMEN DE RETIRO'ELSE 'OTROS' END AS [TIPO EXAMEN], CASE i.estado  WHEN 1 THEN 'PENDIENTE'  ELSE 'CERRADO'  END as ESTADO,CASE i.TIPO WHEN 1 THEN 'ESPECIALIDAD' WHEN 2 THEN 'VIGILANCIA MEDICA' ELSE '' END AS TIPO, CASE  WHEN i.estado = 2 THEN 'Cerrado'  ELSE  CASE  WHEN f.ruc_cli = @ruc AND DATEDIFF(day, i.fec_reg, GETDATE()) > 30 THEN 'VENCIDO' WHEN f.ruc_cli <> @ruc AND DATEDIFF(day, i.fec_reg, GETDATE()) > 15 THEN 'VENCIDO' ELSE 'EN FECHA'END  END AS CONDICION from m_interconsulta i,vpaciente p,m_fmed f,vclientes vc where i.cdg_fmed=f.cdg_fmed and f.num_dni=p.NUM_DNI and  f.ruc_cli=vc.RUC_CLI   AND vc.RUC_CLI = @ruc`
 
-      const result = await this.database.query<SabanaRow>(query)
+      if (params.startDate && params.endDate) {
+        query += ' and (i.fec_reg >= @startDate AND i.fec_reg <= @endDate)'
+        queryParams.startDate = params.startDate
+        queryParams.endDate = params.endDate
+      }
+
+      query += ' order by 1 desc'
+
+      const result = await this.database.queryWithParams<SabanaRow>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data

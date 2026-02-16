@@ -6,6 +6,70 @@ import { logger } from '@/src/server/shared'
 
 const authService = new AuthService()
 
+type LoginAttemptState = {
+  attempts: number
+  firstAttemptAt: number
+  blockedUntil: number
+}
+
+const loginAttempts = new Map<string, LoginAttemptState>()
+const LOGIN_WINDOW_MS = 10 * 60 * 1000
+const LOGIN_MAX_ATTEMPTS = 5
+const LOGIN_BLOCK_MS = 15 * 60 * 1000
+
+function getClientIp(request: NextRequest): string {
+  const forwardedFor = request.headers.get('x-forwarded-for')
+
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim()
+  }
+
+  return request.headers.get('x-real-ip') || 'unknown'
+}
+
+function getRateLimitKey(request: NextRequest, username: string): string {
+  return `${getClientIp(request)}:${username || 'unknown'}`
+}
+
+function getOrCreateAttemptState(key: string, now: number): LoginAttemptState {
+  const current = loginAttempts.get(key)
+
+  if (!current) {
+    const state: LoginAttemptState = {
+      attempts: 0,
+      firstAttemptAt: now,
+      blockedUntil: 0
+    }
+    loginAttempts.set(key, state)
+    return state
+  }
+
+  if (now - current.firstAttemptAt > LOGIN_WINDOW_MS) {
+    current.attempts = 0
+    current.firstAttemptAt = now
+  }
+
+  return current
+}
+
+function isBlocked(state: LoginAttemptState, now: number): boolean {
+  return state.blockedUntil > now
+}
+
+function registerFailedAttempt(state: LoginAttemptState, now: number): void {
+  state.attempts += 1
+
+  if (state.attempts >= LOGIN_MAX_ATTEMPTS) {
+    state.blockedUntil = now + LOGIN_BLOCK_MS
+    state.attempts = 0
+    state.firstAttemptAt = now
+  }
+}
+
+function clearAttempts(key: string): void {
+  loginAttempts.delete(key)
+}
+
 async function parseJsonBody(
   request: NextRequest
 ): Promise<Record<string, unknown>> {
@@ -20,11 +84,28 @@ export async function handleLogin(request: NextRequest): Promise<NextResponse> {
   const body = await parseJsonBody(request)
   const username = String(body.username ?? '')
   const password = String(body.password ?? '')
+  const now = Date.now()
+  const rateLimitKey = getRateLimitKey(request, username)
+  const state = getOrCreateAttemptState(rateLimitKey, now)
+
+  if (isBlocked(state, now)) {
+    const secondsLeft = Math.ceil((state.blockedUntil - now) / 1000)
+
+    return NextResponse.json(
+      {
+        status: false,
+        message: `Demasiados intentos fallidos. Intente de nuevo en ${secondsLeft} segundos.`
+      },
+      { status: 429 }
+    )
+  }
 
   try {
     logger.info(`Login attempt for user ${username}`)
 
     const data = await authService.login(username, password)
+
+    clearAttempts(rateLimitKey)
 
     return NextResponse.json(
       {
@@ -34,8 +115,22 @@ export async function handleLogin(request: NextRequest): Promise<NextResponse> {
       { status: 200 }
     )
   } catch (error: unknown) {
+    const message = (error as Error).message
+
+    if (message === 'Invalid credentials') {
+      registerFailedAttempt(state, now)
+
+      return NextResponse.json(
+        {
+          status: false,
+          message: 'Credenciales inválidas'
+        },
+        { status: 401 }
+      )
+    }
+
     logger.error(`Error while trying to login user ${username}`)
-    logger.error((error as Error).message)
+    logger.error(message)
 
     return NextResponse.json(
       {

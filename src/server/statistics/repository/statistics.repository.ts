@@ -5,6 +5,7 @@ import {
   DB_PASS,
   DB_USER,
   Database,
+  QueryParams,
   logger
 } from '../../shared'
 import { StatisticsQueryDTO } from '../dto/statistics.query.dto'
@@ -52,6 +53,25 @@ export default class StatisticsRepository implements IStatisticsRepository {
     })
   }
 
+  private addOptionalFilters(
+    params: StatisticsQueryDTO,
+    queryParams: QueryParams
+  ): string {
+    let filter = ''
+
+    if (params.headquarter) {
+      filter += ' AND f.cdg_sede=@headquarter'
+      queryParams.headquarter = params.headquarter
+    }
+
+    if (params.examType) {
+      filter += ' AND F.tip_exa=@examType'
+      queryParams.examType = params.examType
+    }
+
+    return filter
+  }
+
   async findGenders(
     params: StatisticsQueryDTO,
     ruc: string
@@ -59,19 +79,22 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Gender[] = []
 
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
+      }
+
       let query = `
-      SELECT COUNT(CASE WHEN sexo = 'Masculino' THEN 1 END) AS masculino,COUNT(CASE WHEN sexo = 'FEMENINO' THEN 1 END) AS femenino, COUNT(*) AS total FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) and (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'
+      SELECT COUNT(CASE WHEN sexo = 'Masculino' THEN 1 END) AS masculino,COUNT(CASE WHEN sexo = 'FEMENINO' THEN 1 END) AS femenino, COUNT(*) AS total FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) and (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate
       `
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
-
-      const result = await this.database.query<Gender>(query)
+      const result = await this.database.queryWithParams<Gender>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -89,22 +112,25 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Age[] = []
 
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
+      }
+
       let query = `
-      SELECT CASE WHEN P.edad BETWEEN 18 AND 39 THEN '18-39 años' WHEN P.edad BETWEEN 40 AND 49 THEN '40-49 años' WHEN P.edad >= 50 THEN '50 años o más' END AS rango_edad, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc} ' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) and (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'
+      SELECT CASE WHEN P.edad BETWEEN 18 AND 39 THEN '18-39 años' WHEN P.edad BETWEEN 40 AND 49 THEN '40-49 años' WHEN P.edad >= 50 THEN '50 años o más' END AS rango_edad, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) and (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate
       `
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
-
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
       query +=
         " GROUP BY CASE WHEN P.edad BETWEEN 18 AND 39 THEN '18-39 años' WHEN P.edad BETWEEN 40 AND 49 THEN '40-49 años' WHEN P.edad >= 50 THEN '50 años o más' END"
 
-      const result = await this.database.query<Age>(query)
+      const result = await this.database.queryWithParams<Age>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -125,19 +151,22 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: MedicalFitness[] = []
 
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
+      }
+
       let query = `
-      SELECT COUNT(CASE WHEN aptitud = 1 THEN 1 END) AS APTO, COUNT(CASE WHEN aptitud = 2 THEN 1 END) AS [APTO_CON_RESTRICCIONES], COUNT(CASE WHEN aptitud = 3 THEN 1 END) AS [NO_APTO], COUNT(CASE WHEN aptitud = 4 THEN 1 END) AS OBSERVADO, COUNT(*) AS total FROM [dbo].[M_MSABANA] m, m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'
+      SELECT COUNT(CASE WHEN aptitud = 1 THEN 1 END) AS APTO, COUNT(CASE WHEN aptitud = 2 THEN 1 END) AS [APTO_CON_RESTRICCIONES], COUNT(CASE WHEN aptitud = 3 THEN 1 END) AS [NO_APTO], COUNT(CASE WHEN aptitud = 4 THEN 1 END) AS OBSERVADO, COUNT(*) AS total FROM [dbo].[M_MSABANA] m, m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate
       `
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
-
-      const result = await this.database.query<MedicalFitness>(query)
+      const result = await this.database.queryWithParams<MedicalFitness>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -158,20 +187,23 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: NutritionalProfile[] = []
 
-      let conditional = `m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional =
+        'm.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
-      SELECT 'NORMAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'NORMAL' IN (med_1, med_2, med_3, med_4, med_5) UNION SELECT  'SOBREPESO' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'SOBREPESO' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD I°' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD I°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD II°' AS categoria,  COUNT(*) AS cantidad  FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD II°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD III°' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD III°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'TOTAL' AS categoria,  COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional}`
+      SELECT 'NORMAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'NORMAL' IN (med_1, med_2, med_3, med_4, med_5) UNION SELECT  'SOBREPESO' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'SOBREPESO' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD I°' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD I°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD II°' AS categoria,  COUNT(*) AS cantidad  FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD II°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD III°' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD III°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'TOTAL' AS categoria,  COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional}`
 
-      const result = await this.database.query<NutritionalProfile>(query)
+      const result = await this.database.queryWithParams<NutritionalProfile>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -192,20 +224,23 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: BloodPressure[] = []
 
-      let conditional = `m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional =
+        'm.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
-      SELECT 'VALOR ELEVADO DE PRESIÓN ARTERIAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'VALOR ELEVADO DE PRESIÓN ARTERIAL' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT 'HIPERTENSIÓN ARTERIAL °' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'HIPERTENSIÓN ARTERIAL ' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT 'TOTAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional}`
+      SELECT 'VALOR ELEVADO DE PRESIÓN ARTERIAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'VALOR ELEVADO DE PRESIÓN ARTERIAL' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT 'HIPERTENSIÓN ARTERIAL °' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'HIPERTENSIÓN ARTERIAL ' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT 'TOTAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional}`
 
-      const result = await this.database.query<BloodPressure>(query)
+      const result = await this.database.queryWithParams<BloodPressure>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -226,15 +261,15 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: OsteoMuscularPathologies[] = []
 
-      let where = `ruc_SAB='${ruc}' AND m.cdg_fmed=f.cdg_fmed AND (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') AND m.ruc_SAB=c.RUC_CLI AND f.fec_fmed between '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        where += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        where += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let where =
+        'ruc_SAB=@ruc AND m.cdg_fmed=f.cdg_fmed AND (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB=\'EXA\') AND m.ruc_SAB=c.RUC_CLI AND f.fec_fmed between @startDate AND @endDate'
+      where += this.addOptionalFilters(params, queryParams)
 
       let query = `SELECT 
         'DOLOR ARTICULAR' AS categoria, 
@@ -277,7 +312,11 @@ export default class StatisticsRepository implements IStatisticsRepository {
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
       where ${where}`
 
-      const result = await this.database.query<OsteoMuscularPathologies>(query)
+      const result =
+        await this.database.queryWithParams<OsteoMuscularPathologies>(
+          query,
+          queryParams
+        )
 
       if (!result.success) {
         return data
@@ -295,7 +334,16 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Exam[] = []
 
-      let where = `ruc_SAB='${ruc}' AND m.cdg_fmed=f.cdg_fmed AND (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') AND m.ruc_SAB=c.RUC_CLI AND f.fec_fmed between '${params.startDate}' AND '${params.endDate}' AND f.cdg_sede='${params.headquarter}' AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate,
+        headquarter: params.headquarter,
+        examType: params.examType
+      }
+
+      let where =
+        "ruc_SAB=@ruc AND m.cdg_fmed=f.cdg_fmed AND (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') AND m.ruc_SAB=c.RUC_CLI AND f.fec_fmed between @startDate AND @endDate AND f.cdg_sede=@headquarter AND F.tip_exa=@examType"
 
       let query = `
       SELECT 
@@ -339,7 +387,10 @@ export default class StatisticsRepository implements IStatisticsRepository {
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
       where ${where}`
 
-      const result = await this.database.query<Exam>(query)
+      const result = await this.database.queryWithParams<Exam>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -360,15 +411,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Audiometry[] = []
 
-      let where = ` AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        where += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        where += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let where = ' AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      where += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -376,7 +426,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -396,7 +446,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -416,7 +466,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -436,7 +486,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -456,7 +506,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -475,20 +525,17 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
-
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
       logger.info('query audiometria', query)
 
-      const result = await this.database.query<Audiometry>(query)
+      const result = await this.database.queryWithParams<Audiometry>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -509,15 +556,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Spirometry[] = []
 
-      let where = ` AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        where += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        where += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let where = ' AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      where += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -525,7 +571,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -545,7 +591,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -565,7 +611,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -585,18 +631,15 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) and (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) and (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
-
-      const result = await this.database.query<Spirometry>(query)
+      const result = await this.database.queryWithParams<Spirometry>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -617,15 +660,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: VisualAcuity[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -633,7 +675,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -653,7 +695,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -673,7 +715,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -693,18 +735,15 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
-
-      const result = await this.database.query<VisualAcuity>(query)
+      const result = await this.database.queryWithParams<VisualAcuity>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -725,15 +764,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: OtherConditions[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -741,7 +779,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -761,7 +799,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -781,7 +819,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -802,7 +840,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -823,7 +861,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -843,20 +881,17 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
-
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
       logger.info('query other conditions', query)
 
-      const result = await this.database.query<OtherConditions>(query)
+      const result = await this.database.queryWithParams<OtherConditions>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -877,15 +912,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: ChestXRay[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -893,7 +927,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -912,18 +946,15 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
-
-      const result = await this.database.query<ChestXRay>(query)
+      const result = await this.database.queryWithParams<ChestXRay>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -944,15 +975,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Electrocardiogram[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -960,7 +990,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -981,18 +1011,15 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}' AND LTRIM(RTRIM(EKGD_1)) <> ''`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate AND LTRIM(RTRIM(EKGD_1)) <> ''`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
-
-      const result = await this.database.query<Electrocardiogram>(query)
+      const result = await this.database.queryWithParams<Electrocardiogram>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -1013,15 +1040,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Psychology[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -1029,7 +1055,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1048,20 +1074,17 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}' AND LTRIM(RTRIM(PSD_1)) <> ''`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate AND LTRIM(RTRIM(PSD_1)) <> ''`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
-
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
       logger.info('query psychology', query)
 
-      const result = await this.database.query<Psychology>(query)
+      const result = await this.database.queryWithParams<Psychology>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -1082,15 +1105,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: StructuralHeight[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -1098,7 +1120,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1115,7 +1137,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1126,7 +1148,10 @@ export default class StatisticsRepository implements IStatisticsRepository {
           LTRIM(RTRIM(F.opcaptitu)) = 2
         OR LTRIM(RTRIM(F.opc_altoriesgo)) = 2)`
 
-      const result = await this.database.query<StructuralHeight>(query)
+      const result = await this.database.queryWithParams<StructuralHeight>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -1147,15 +1172,14 @@ export default class StatisticsRepository implements IStatisticsRepository {
     try {
       let data: Odontology[] = []
 
-      let conditional = `AND f.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
-
-      if (params.examType) {
-        conditional += ` AND F.tip_exa='${params.examType}'`
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
       }
 
-      if (params.headquarter) {
-        conditional += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
+      conditional += this.addOptionalFilters(params, queryParams)
 
       let query = `
       SELECT 
@@ -1163,7 +1187,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1183,7 +1207,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1203,7 +1227,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1224,7 +1248,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1245,7 +1269,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m, m_fmed f, vclientes C, vpaciente P, D_TABLAS exa
       WHERE 
-        m.ruc_SAB = '${ruc}' 
+        m.ruc_SAB = @ruc 
         AND m.cdg_fmed = f.cdg_fmed 
         AND F.num_dni = P.NUM_DNI 
         AND F.tip_exa = EXA.NUM_ITEM 
@@ -1265,20 +1289,17 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'TOTAL' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
-      where ruc_SAB='${ruc}' and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between '${params.startDate}' and '${params.endDate}' AND LTRIM(RTRIM(ODOD_1)) <> ''`
+      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
+      and m.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate AND LTRIM(RTRIM(ODOD_1)) <> ''`
 
-      if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
-      }
-
-      if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
-      }
+      query += this.addOptionalFilters(params, queryParams)
 
       logger.info('query odontology', query)
 
-      const result = await this.database.query<Odontology>(query)
+      const result = await this.database.queryWithParams<Odontology>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return data
@@ -1298,19 +1319,30 @@ export default class StatisticsRepository implements IStatisticsRepository {
         return false
       }
 
+      const queryParams: QueryParams = {
+        ruc,
+        startDate: params.startDate,
+        endDate: params.endDate
+      }
+
       let query = `
-      SELECT count(m.cdg_fmed) as cantidad FROM M_MSABANA m, m_fmed f WHERE m.cdg_fmed=f.cdg_fmed and m.ruc_SAB='${ruc}'`
-      query += ` AND f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
+      SELECT count(m.cdg_fmed) as cantidad FROM M_MSABANA m, m_fmed f WHERE m.cdg_fmed=f.cdg_fmed and m.ruc_SAB=@ruc`
+      query += ' AND f.fec_fmed between @startDate and @endDate'
 
       if (params.examType) {
-        query += ` AND F.tip_exa='${params.examType}'`
+        query += ' AND F.tip_exa=@examType'
+        queryParams.examType = params.examType
       }
 
       if (params.headquarter) {
-        query += ` AND f.cdg_sede='${params.headquarter}'`
+        query += ' AND f.cdg_sede=@headquarter'
+        queryParams.headquarter = params.headquarter
       }
 
-      const result = await this.database.query<{ cantidad: number }>(query)
+      const result = await this.database.queryWithParams<{ cantidad: number }>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return false

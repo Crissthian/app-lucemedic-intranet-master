@@ -32,14 +32,14 @@ export default class HistoricalService {
       const paths: string[] = []
 
       const radiologies = await this.repository.findRadiology(dni)
-      logger.info(`Radiologies found: ${JSON.stringify(radiologies)}`)
+      logger.info(`Radiologies found: ${radiologies.length}`)
 
       for (const radiology of radiologies) {
         const path = `/rx/${radiology.cdg_fmed}.jpg`
         paths.push(path)
       }
 
-      logger.info(`Downloading files from: ${paths}`)
+      logger.info(`Downloading radiology files: ${paths.length}`)
 
       for (const path of paths) {
         const file = await this.sambaClient.downloadFile(
@@ -69,14 +69,14 @@ export default class HistoricalService {
 
       const audiometries = await this.repository.findAudiometry(dni)
 
-      logger.info(`Audiometries found: ${JSON.stringify(audiometries)}`)
+      logger.info(`Audiometries found: ${audiometries.length}`)
 
       for (const audiometry of audiometries) {
         const path = `/${audiometry.year}/${this.getMonth(audiometry.month)}/${audiometry.cdg_reg}.png`
         paths.push(path)
       }
 
-      logger.info(`Downloading files from: ${paths}`)
+      logger.info(`Downloading audiometry files: ${paths.length}`)
 
       for (const path of paths) {
         const file = await this.sambaClient.downloadFile(

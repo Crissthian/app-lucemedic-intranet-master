@@ -33,7 +33,7 @@ export function authenticateRequest(request: NextRequest): AuthResult {
 
     const user = decoded as AuthenticatedUser
 
-    logger.info(`Decoded token: ${JSON.stringify(user)}`)
+    logger.info('Token decoded successfully')
 
     return {
       ok: true,

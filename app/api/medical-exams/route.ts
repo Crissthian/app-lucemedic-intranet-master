@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import {
-  handleFindMedicalExams,
-  handleMedicalExamsQuery
+  handleFindMedicalExams
 } from '@/src/server/medical-exams/handlers/medical-exams.handlers'
 
 export const runtime = 'nodejs'
@@ -12,6 +11,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  return handleMedicalExamsQuery(request)
+  void request
+
+  return NextResponse.json(
+    {
+      status: false,
+      message: 'Endpoint disabled for security reasons.'
+    },
+    { status: 403 }
+  )
 }
 

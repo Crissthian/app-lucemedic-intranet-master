@@ -5,6 +5,7 @@ import {
   DB_USER,
   DB_INSTANCE,
   Database,
+  QueryParams,
   logger
 } from '../../shared'
 import { MedicalExamsQueryDTO } from '../dto/medical-exams-query.dto'
@@ -30,14 +31,6 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
     })
   }
 
-  async execute(query: string): Promise<object> {
-    try {
-      return this.database.query(query)
-    } catch (error: unknown) {
-      throw error
-    }
-  }
-
   async findAll(
     params: MedicalExamsQueryDTO,
     ruc: string
@@ -47,31 +40,41 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
       // let query = `SELECT ficha.cdg_fmed, CONVERT(varchar(10), CONVERT(date,ficha.fec_fmed, 106), 103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, CASE APTITUD WHEN 1 THEN 'APTO' WHEN 2 THEN 'APTO CON RESTRICCIONES' WHEN 3 THEN 'NO APTO' WHEN 4 THEN 'OBSERVADO' ELSE ' ' END as aptitud FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci WHERE ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc) AND FICHA.EWEB=1 AND ficha.tip_exa <>'004'`;
 
-      let query = `SELECT ficha.chkproceso, ficha.cdg_fmed, ficha.EWEB AS close_status, ficha.cdg_sede, CONVERT(varchar(10), CONVERT(date,ficha.fec_fmed, 106), 103) as fec_fmed, ficha.tip_exa AS cod_t_examen, RTRIM(LTRIM(mc.DES_CLI)) AS empresa, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, CASE APTITUD WHEN 1 THEN 'APTO' WHEN 2 THEN 'APTO CON RESTRICCIONES' WHEN 3 THEN 'NO APTO' WHEN 4 THEN 'OBSERVADO' ELSE ' ' END as aptitud FROM m_fmed ficha, vclientes mc,D_TABLAS EXA,vpaciente paci WHERE ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc) AND ficha.tip_exa <>'004'`
+      let query = `SELECT ficha.chkproceso, ficha.cdg_fmed, ficha.EWEB AS close_status, ficha.cdg_sede, CONVERT(varchar(10), CONVERT(date,ficha.fec_fmed, 106), 103) as fec_fmed, ficha.tip_exa AS cod_t_examen, RTRIM(LTRIM(mc.DES_CLI)) AS empresa, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, CASE APTITUD WHEN 1 THEN 'APTO' WHEN 2 THEN 'APTO CON RESTRICCIONES' WHEN 3 THEN 'NO APTO' WHEN 4 THEN 'OBSERVADO' ELSE ' ' END as aptitud FROM m_fmed ficha, vclientes mc,D_TABLAS EXA,vpaciente paci WHERE ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli=@ruc AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc) AND ficha.tip_exa <>'004'`
+      const queryParams: QueryParams = { ruc }
 
       if (params.dni) {
-        query += ` AND ficha.num_dni='${params.dni}'`
+        query += ' AND ficha.num_dni=@dni'
+        queryParams.dni = params.dni
       }
 
       if (params.lastName) {
-        query += ` AND PACI.APELLIDO_PERSONA LIKE '%${params.lastName}%'`
+        query += ' AND PACI.APELLIDO_PERSONA LIKE @lastName'
+        queryParams.lastName = `%${params.lastName}%`
       }
 
       if (params.startDate && params.endDate) {
-        query += ` AND FICHA.fec_fmed BETWEEN '${params.startDate}' AND '${params.endDate}'`
+        query += ' AND FICHA.fec_fmed BETWEEN @startDate AND @endDate'
+        queryParams.startDate = params.startDate
+        queryParams.endDate = params.endDate
       }
 
       if (params.examType) {
-        query += ` AND FICHA.tip_exa='${params.examType}'`
+        query += ' AND FICHA.tip_exa=@examType'
+        queryParams.examType = params.examType
       }
 
       if (params.sede) {
-        query += ` AND FICHA.cdg_sede='${params.sede}'`
+        query += ' AND FICHA.cdg_sede=@sede'
+        queryParams.sede = params.sede
       }
 
       query += ' ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;'
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -85,9 +88,12 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findByDNI(dni: string, ruc: string): Promise<MedicalExams[]> {
     try {
-      const query = `SELECT ficha.cdg_fmed, Convert(varchar(10), CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.num_dni='${dni}'and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
+      const query = `SELECT ficha.cdg_fmed, Convert(varchar(10), CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.num_dni=@dni and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli=@ruc AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(query, {
+        dni,
+        ruc
+      })
 
       if (!result.success) {
         return []
@@ -101,9 +107,12 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findBySede(sede: string, ruc: string): Promise<MedicalExams[]> {
     try {
-      const query = `Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen,LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where FICHA.cdg_sede='${sede}' and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
+      const query = `Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen,LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where FICHA.cdg_sede=@sede and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli=@ruc AND FICHA.EWEB=1 AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(query, {
+        sede,
+        ruc
+      })
 
       if (!result.success) {
         return []
@@ -117,9 +126,12 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findByExamType(examType: string, ruc: string): Promise<MedicalExams[]> {
     try {
-      const query = `Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where FICHA.tip_exa='${examType}' and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
+      const query = `Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where FICHA.tip_exa=@examType and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli=@ruc AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(query, {
+        examType,
+        ruc
+      })
 
       if (!result.success) {
         return []
@@ -133,9 +145,14 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findByFichaMedica(fichaMedica: string): Promise<MedicalRecord[]> {
     try {
-      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed,ficha.tip_exa AS cod_tip_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS tipo_examen,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, ficha.talla ,ficha.resp ,ficha.abd ,ficha.peso ,ficha.card ,ficha.cadera, ficha.imc  ,ficha.icc ,ficha.satoxi ,ficha.temp,FICHA.pamm,FICHA.PS AS ps,(select isnull((select resultado from d_labo where cdg_exa=2 and  cdg_fmed=ficha.cdg_fmed),'-') ) as hemoglobina,(select (isnull((select resultado from d_labo where cdg_exa=16 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=22 and cdg_fmed=ficha.cdg_fmed),'-')))) as colesterol,(select(isnull((select resultado from d_labo where cdg_exa=17 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=111 and cdg_fmed=ficha.cdg_fmed),'-')))) as trigliceridos,(select isnull((select resultado from d_labo where cdg_exa=14 and cdg_fmed=ficha.cdg_fmed),'-')) as glucosa FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.cdg_fmed='${fichaMedica}' and ficha.ruc_cli = mc.ruc_cli AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc)`
+      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed,ficha.tip_exa AS cod_tip_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS tipo_examen,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, ficha.talla ,ficha.resp ,ficha.abd ,ficha.peso ,ficha.card ,ficha.cadera, ficha.imc  ,ficha.icc ,ficha.satoxi ,ficha.temp,FICHA.pamm,FICHA.PS AS ps,(select isnull((select resultado from d_labo where cdg_exa=2 and  cdg_fmed=ficha.cdg_fmed),'-') ) as hemoglobina,(select (isnull((select resultado from d_labo where cdg_exa=16 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=22 and cdg_fmed=ficha.cdg_fmed),'-')))) as colesterol,(select(isnull((select resultado from d_labo where cdg_exa=17 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=111 and cdg_fmed=ficha.cdg_fmed),'-')))) as trigliceridos,(select isnull((select resultado from d_labo where cdg_exa=14 and cdg_fmed=ficha.cdg_fmed),'-')) as glucosa FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.cdg_fmed=@fichaMedica and ficha.ruc_cli = mc.ruc_cli AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc)`
 
-      const result = await this.database.query<MedicalRecord>(query)
+      const result = await this.database.queryWithParams<MedicalRecord>(
+        query,
+        {
+          fichaMedica
+        }
+      )
 
       if (!result.success) {
         return []
@@ -153,9 +170,13 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
     ruc: string
   ): Promise<MedicalExams[]> {
     try {
-      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) AS fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci WHERE FICHA.fec_fmed BETWEEN '${startDate}'AND '${endDate}' and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
+      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) AS fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci WHERE FICHA.fec_fmed BETWEEN @startDate AND @endDate and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli=@ruc AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(query, {
+        startDate,
+        endDate,
+        ruc
+      })
 
       if (!result.success) {
         return []
@@ -169,9 +190,12 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findByLastName(lastName: string, ruc: string): Promise<MedicalExams[]> {
     try {
-      const query = `Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen,LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos  From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where PACI.APELLIDO_PERSONA LIKE '%${lastName}%' and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 and ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
+      const query = `Select ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen,LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen, LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos  From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  Where PACI.APELLIDO_PERSONA LIKE @lastName and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli=@ruc AND FICHA.EWEB=1 and ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(query, {
+        lastName: `%${lastName}%`,
+        ruc
+      })
 
       if (!result.success) {
         return []
@@ -187,9 +211,11 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
     try {
       // const query = `SELECT ficha.cdg_fmed, Convert(varchar(10), CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed, ficha.tip_exa AS cod_t_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos From m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.num_dni='${dni}'and ficha.ruc_cli = mc.ruc_cli AND ficha.ruc_cli='${ruc}' AND FICHA.EWEB=1 AND ficha.tip_exa <>'004' AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc ) ORDER BY CONVERT(date, ficha.fec_fmed, 106) DESC;`;
 
-      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed,ficha.tip_exa AS cod_t_examen,LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen,c.DES_CLI AS empresa,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, CASE ficha.APTITUD WHEN 1 THEN 'APTO' WHEN 2 THEN 'APTO CON RESTRICCIONES' WHEN 3 THEN 'NO APTO' WHEN 4 THEN 'OBSERVADO' ELSE ' ' END as aptitud FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci,vclientes c  Where ficha.num_dni='${dni}'and ficha.ruc_cli = mc.ruc_cli AND  FICHA.EWEB=1 and ficha.tip_exa <>'004'and ficha.ruc_cli=c.RUC_CLI AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc )`
+      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed,ficha.tip_exa AS cod_t_examen,LTRIM(RTRIM(EXA.DES_ITEM)) AS t_examen,c.DES_CLI AS empresa,LTRIM(RTRIM(ficha.num_dni)) AS num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, CASE ficha.APTITUD WHEN 1 THEN 'APTO' WHEN 2 THEN 'APTO CON RESTRICCIONES' WHEN 3 THEN 'NO APTO' WHEN 4 THEN 'OBSERVADO' ELSE ' ' END as aptitud FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci,vclientes c  Where ficha.num_dni=@dni and ficha.ruc_cli = mc.ruc_cli AND  FICHA.EWEB=1 and ficha.tip_exa <>'004'and ficha.ruc_cli=c.RUC_CLI AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc )`
 
-      const result = await this.database.query<MedicalExams>(query)
+      const result = await this.database.queryWithParams<MedicalExams>(query, {
+        dni
+      })
 
       if (!result.success) {
         return []
@@ -206,13 +232,15 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
       logger.info(`MedicalExamsRepository.findConsultations: ${uid}`)
 
       const query = `
-      select cdg_reg as num_interconsulta,fec_reg,especialidad, mot_interconsulta as motivo,case estado when 1 then 'PENDIENTE' WHEN 2 THEN 'CERRADO'WHEN 3 THEN 'OBSERVADO'ELSE '' END AS estado, CASE TIPO WHEN 1 THEN 'ESPECIALIDAD' WHEN 2 THEN 'VIGILANCIA MEDICA' ELSE '' END AS tipo from m_interconsulta where cdg_fmed='${uid}' ORDER BY 2,1
+      select cdg_reg as num_interconsulta,fec_reg,especialidad, mot_interconsulta as motivo,case estado when 1 then 'PENDIENTE' WHEN 2 THEN 'CERRADO'WHEN 3 THEN 'OBSERVADO'ELSE '' END AS estado, CASE TIPO WHEN 1 THEN 'ESPECIALIDAD' WHEN 2 THEN 'VIGILANCIA MEDICA' ELSE '' END AS tipo from m_interconsulta where cdg_fmed=@uid ORDER BY 2,1
       `
 
       // const query = `
       // select cdg_reg as num_interconsulta, fec_reg, LTRIM(RTRIM(especialidad)) AS especialidad, mot_interconsulta as motivo, case estado when 1 then 'PENDIENTE' WHEN 2 THEN 'CERRADO' WHEN 3 THEN 'OBSERVADO' ELSE '' END AS estado, CASE TIPO WHEN 1 THEN 'ESPECIALIDAD' WHEN 2 THEN 'VIGILANCIA MEDICA' ELSE '' END AS tipo from m_interconsulta ORDER BY 2,1`;
 
-      const result = await this.database.query<Consultations>(query)
+      const result = await this.database.queryWithParams<Consultations>(query, {
+        uid
+      })
 
       if (!result.success) {
         return []
@@ -226,9 +254,15 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
 
   async findRecommendations(cdg_fmed: string): Promise<Recommendations[]> {
     try {
-      const query = `select cdg_reg, descripcion, cdg_fmed from m_recomendaciones where cdg_fmed='${cdg_fmed}'`
+      const query =
+        'select cdg_reg, descripcion, cdg_fmed from m_recomendaciones where cdg_fmed=@cdg_fmed'
 
-      const result = await this.database.query<Recommendations>(query)
+      const result = await this.database.queryWithParams<Recommendations>(
+        query,
+        {
+          cdg_fmed
+        }
+      )
 
       if (!result.success) {
         return []
@@ -244,9 +278,15 @@ export default class MedicalExamsRepository implements IMedicalExamsRepository {
     ruc: string
   ): Promise<EpidemiologicalReport[]> {
     try {
-      const query = `select cdg_reg,periodo,tipo from m_informe_ipidemiologico where ruc_cli='${ruc}'`
+      const query =
+        'select cdg_reg,periodo,tipo from m_informe_ipidemiologico where ruc_cli=@ruc'
 
-      const result = await this.database.query<EpidemiologicalReport>(query)
+      const result = await this.database.queryWithParams<EpidemiologicalReport>(
+        query,
+        {
+          ruc
+        }
+      )
 
       if (!result.success) {
         return []

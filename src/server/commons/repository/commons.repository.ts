@@ -6,6 +6,7 @@ import {
   DB_PASS,
   DB_USER,
   Database,
+  QueryParams,
   logger
 } from '../../shared'
 import { ExamType } from './entity/examType'
@@ -76,9 +77,14 @@ export default class CommonsRepository implements ICommonsRepository {
     ruc: string
   ): Promise<EpidemiologicalReport[]> {
     try {
-      const query = `select cdg_reg,periodo,tipo from m_informe_ipidemiologico where ruc_cli='${ruc}'`
+      const query =
+        'select cdg_reg,periodo,tipo from m_informe_ipidemiologico where ruc_cli=@ruc'
+      const queryParams: QueryParams = { ruc }
 
-      const result = await this.database.query<EpidemiologicalReport>(query)
+      const result = await this.database.queryWithParams<EpidemiologicalReport>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -92,11 +98,16 @@ export default class CommonsRepository implements ICommonsRepository {
 
   async uploadPhoto(photoURL: string, dni: string): Promise<boolean> {
     try {
-      const query = `UPDATE m_User_Intranet SET usr_foto='${photoURL}' WHERE dni='${dni}'`
+      const query =
+        'UPDATE m_User_Intranet SET usr_foto=@photoURL WHERE dni=@dni'
+      const queryParams: QueryParams = { photoURL, dni }
 
       logger.info(`Updating photo for user: ${dni} | Photo: ${photoURL} init`)
 
-      const result = await this.database.query<User>(query)
+      const result = await this.database.queryWithParams<User>(
+        query,
+        queryParams
+      )
 
       logger.info(
         `Updating photo for user: ${dni} | Photo: ${photoURL} end | Result: ${result.data}`

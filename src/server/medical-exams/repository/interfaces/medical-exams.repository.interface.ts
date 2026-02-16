@@ -8,7 +8,6 @@ import {
 } from '../entity'
 
 export interface IMedicalExamsRepository {
-  execute(query: string): Promise<object>
   findAll(params: MedicalExamsQueryDTO, ruc: string): Promise<MedicalExams[]>
   findByDNI(dni: string, ruc: string): Promise<MedicalExams[]>
   findBySede(sede: string, ruc: string): Promise<MedicalExams[]>

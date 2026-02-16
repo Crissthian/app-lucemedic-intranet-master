@@ -24,7 +24,7 @@ export default class AuthService {
       throw new Error('Invalid credentials')
     }
 
-    logger.info(`User ${JSON.stringify(patient)} logged in`)
+    logger.info('User logged in successfully')
 
     const accessToken = this.jwt.sign({
       sub: patient.dni,
@@ -72,7 +72,7 @@ export default class AuthService {
   ): Promise<boolean> {
     const remoteFilePath = `/FOTOUS/${originalFilename}`
 
-    logger.info(`Uploading photo to ${remoteFilePath}`)
+    logger.info('Uploading profile photo')
 
     await this.sambaClient.uploadFile(buffer, remoteFilePath)
 

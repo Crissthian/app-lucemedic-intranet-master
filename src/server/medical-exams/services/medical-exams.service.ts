@@ -25,10 +25,6 @@ export default class MedicalExamsService {
     this.sambaClient = new FTPClient()
   }
 
-  async executeQuery(query: string): Promise<object> {
-    return this.repository.execute(query)
-  }
-
   async find(
     query: MedicalExamsQueryDTO,
     user: UserToken
@@ -68,11 +64,11 @@ export default class MedicalExamsService {
 
   async downloadEMO(user: UserToken, uid: string): Promise<Buffer> {
     try {
-      logger.info(`${user.ruc}`)
+      void user
 
       const path = `/EMO/${uid}.pdf`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading EMO file')
 
       return this.sambaClient.downloadFile(path)
     } catch (error: unknown) {
@@ -84,11 +80,11 @@ export default class MedicalExamsService {
 
   async downloadCertificado(user: UserToken, uid: string): Promise<Buffer> {
     try {
-      logger.info(`${user.ruc}`)
+      void user
 
       const path = `/CERTIFICADO/${uid}.pdf`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading certificado file')
 
       return this.sambaClient.downloadFile(path)
     } catch (error: unknown) {
@@ -102,7 +98,7 @@ export default class MedicalExamsService {
     try {
       let path = ''
 
-      logger.info(`Diagnosis Type: ${diagnosisType}`)
+      logger.info('Preparing diagnosis download')
 
       switch (diagnosisType) {
         case 1:
@@ -166,7 +162,7 @@ export default class MedicalExamsService {
     try {
       const path = `/rx/${uid}.jpg`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading diagnosis xray file')
 
       return this.sambaClient.downloadFile(path, undefined, 'rx', 'jpg')
     } catch (error: unknown) {
@@ -304,7 +300,7 @@ export default class MedicalExamsService {
     try {
       const path = `INTERCONSULTA/${uid}.pdf`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading consultation file')
 
       return this.sambaClient.downloadFile(path, undefined, 'INTERCONSULTA')
     } catch (error: unknown) {
@@ -326,7 +322,7 @@ export default class MedicalExamsService {
     try {
       const path = `RECOMENDACIONES/${uid}.pdf`
 
-      logger.info(`Downloading file from: ${path}`)
+      logger.info('Downloading recommendation file')
 
       return this.sambaClient.downloadFile(path, undefined, 'RECOMENDACIONES')
     } catch (error: unknown) {

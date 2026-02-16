@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as ftp from 'basic-ftp'
 import { FTP_HOST, FTP_USER, FTP_PASSWORD, logger } from '@/src/server/shared'
+import { authenticateRequest } from '@/src/server/http/auth'
 import path from 'path'
 import { Writable } from 'stream'
 
@@ -11,6 +12,12 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ filename: string }> }
 ): Promise<NextResponse> {
+  const auth = authenticateRequest(request)
+
+  if (!auth.ok) {
+    return auth.response
+  }
+
   const { filename } = await params
 
   // Clean filename to prevent path traversal

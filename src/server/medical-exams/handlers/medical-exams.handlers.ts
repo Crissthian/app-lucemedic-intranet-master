@@ -43,38 +43,15 @@ function getAuthUser(request: NextRequest): {
 export async function handleMedicalExamsQuery(
   request: NextRequest
 ): Promise<NextResponse> {
-  const { response } = getAuthUser(request)
-  if (response) {
-    return response
-  }
+  void request
 
-  const body = await parseJsonBody(request)
-  const query = String(body.query ?? '')
-
-  try {
-    logger.info(`Executing query: ${query}`)
-
-    const data = await medicalExamsService.executeQuery(query)
-
-    return NextResponse.json(
-      {
-        status: true,
-        data
-      },
-      { status: 200 }
-    )
-  } catch (error: unknown) {
-    logger.error(`Error while trying to execute query: ${query}`)
-    logger.error((error as Error).message)
-
-    return NextResponse.json(
-      {
-        status: false,
-        message: 'Error while trying to verify user'
-      },
-      { status: 500 }
-    )
-  }
+  return NextResponse.json(
+    {
+      status: false,
+      message: 'Endpoint disabled for security reasons.'
+    },
+    { status: 403 }
+  )
 }
 
 export async function handleFindMedicalExams(
@@ -88,7 +65,7 @@ export async function handleFindMedicalExams(
   const query = getQueryObject(request) as unknown as MedicalExamsQueryDTO
 
   try {
-    logger.info(`Executing get medical exams: ${JSON.stringify(query)}`)
+    logger.info('Executing get medical exams')
 
     const data = await medicalExamsService.find(query, auth.user)
 
@@ -100,7 +77,7 @@ export async function handleFindMedicalExams(
       { status: 200 }
     )
   } catch (error: unknown) {
-    logger.error(`Error while trying medical exams ${JSON.stringify(query)}`)
+    logger.error('Error while trying medical exams')
     logger.error((error as Error).message)
 
     return NextResponse.json(
@@ -130,7 +107,7 @@ export async function handleFindMedicalExam(
   }
 
   try {
-    logger.info(`Executing get medical exam: ${uid}`)
+    logger.info('Executing get medical exam')
 
     const data = await medicalExamsService.findOne(uid)
 
@@ -142,7 +119,7 @@ export async function handleFindMedicalExam(
       { status: 200 }
     )
   } catch (error: unknown) {
-    logger.error(`Error while trying medical exam details: ${uid}`)
+    logger.error('Error while trying medical exam details')
     logger.error((error as Error).message)
 
     return NextResponse.json(
@@ -172,7 +149,7 @@ export async function handleDownloadEMO(
   }
 
   try {
-    logger.info(`Executing download EMO: ${uid}`)
+    logger.info('Executing download EMO')
 
     const fileBuffer = await medicalExamsService.downloadEMO(auth.user, uid)
 
@@ -186,7 +163,7 @@ export async function handleDownloadEMO(
       { status: 200 }
     )
   } catch (error: unknown) {
-    logger.error(`Error while trying download EMO: ${uid}`)
+    logger.error('Error while trying download EMO')
     logger.error((error as Error).message)
 
     return NextResponse.json(
@@ -216,7 +193,7 @@ export async function handleDownloadCertificado(
   }
 
   try {
-    logger.info(`Executing download certificado: ${uid}`)
+    logger.info('Executing download certificado')
 
     const fileBuffer = await medicalExamsService.downloadCertificado(
       auth.user,
@@ -233,7 +210,7 @@ export async function handleDownloadCertificado(
       { status: 200 }
     )
   } catch (error: unknown) {
-    logger.error(`Error while trying download certificado: ${uid}`)
+    logger.error('Error while trying download certificado')
     logger.error((error as Error).message)
 
     return NextResponse.json(
@@ -307,8 +284,7 @@ export async function handleDownloadDiagnosis(
   }
 
   try {
-    logger.info(`Executing download diagnosis: ${JSON.stringify(body)}`)
-    logger.info(`User ${auth.user.sub} is downloading diagnosis ${uid}`)
+    logger.info('Executing download diagnosis')
 
     const fileBuffer = await medicalExamsService.downloadDiagnosis(
       uid,
@@ -325,9 +301,7 @@ export async function handleDownloadDiagnosis(
       { status: 200 }
     )
   } catch (error: unknown) {
-    logger.error(
-      `Error while trying download diagnosis: ${JSON.stringify(body)}`
-    )
+    logger.error('Error while trying download diagnosis')
     logger.error((error as Error).message)
 
     return NextResponse.json(
@@ -357,7 +331,7 @@ export async function handleDownloadDiagnosisXray(
   }
 
   try {
-    logger.info(`Executing download diagnosis xray: ${uid}`)
+    logger.info('Executing download diagnosis xray')
 
     const fileBuffer = await medicalExamsService.downloadDiagnosisXray(uid)
 
@@ -442,7 +416,7 @@ export async function handleDownloadConsultation(
   }
 
   try {
-    logger.info(`Executing download consultation: ${uid} - ${fileId}`)
+    logger.info('Executing download consultation')
 
     const fileBuffer = await medicalExamsService.downloadConsultation(fileId)
 
@@ -527,7 +501,7 @@ export async function handleDownloadRecommendation(
   }
 
   try {
-    logger.info(`Executing download recommendation: ${uid} - ${fileId}`)
+    logger.info('Executing download recommendation')
 
     const fileBuffer = await medicalExamsService.downloadRecommendation(fileId)
 

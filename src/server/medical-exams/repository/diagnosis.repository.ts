@@ -4,7 +4,8 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database
+  Database,
+  QueryParams
 } from '../../shared'
 import { Diagnosis } from './entity'
 import { IDiagnosisRepository } from './interfaces/diagnosis.repository.interface'
@@ -28,9 +29,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findMedicina(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT LTRIM(RTRIM(OBS_MEDICINA)) AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT LTRIM(RTRIM(OBS_MEDICINA)) AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -44,9 +50,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findOftalmologia(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT con_oftal AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT con_oftal AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -60,9 +71,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findOtorrino(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT obs_audio AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT obs_audio AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -76,9 +92,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findRadiologia(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT obs_radio AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT obs_radio AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -92,9 +113,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findLaboratorio(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT obs_labo AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT obs_labo AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -108,9 +134,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findOdontologia(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT con_denta AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT con_denta AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -124,9 +155,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findCardiologia(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT con_cardio AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT con_cardio AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -140,9 +176,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findEspirometria(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT obs_espiro AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT obs_espiro AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []
@@ -156,9 +197,14 @@ export default class DiagnosisRepository implements IDiagnosisRepository {
 
   async findPsicologia(cdg_fmed: string): Promise<Diagnosis[]> {
     try {
-      const query = `SELECT obs_psico AS diagnostico FROM M_FMED WHERE cdg_fmed='${cdg_fmed}'`
+      const query =
+        'SELECT obs_psico AS diagnostico FROM M_FMED WHERE cdg_fmed=@cdg_fmed'
+      const queryParams: QueryParams = { cdg_fmed }
 
-      const result = await this.database.query<Diagnosis>(query)
+      const result = await this.database.queryWithParams<Diagnosis>(
+        query,
+        queryParams
+      )
 
       if (!result.success) {
         return []

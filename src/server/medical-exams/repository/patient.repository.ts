@@ -4,7 +4,8 @@ import {
   DB_NAME,
   DB_PASS,
   DB_USER,
-  Database
+  Database,
+  QueryParams
 } from '../../shared'
 import { IPatientRepository } from './interfaces/patient.repository.interface'
 
@@ -27,9 +28,10 @@ export default class PatientRepository implements IPatientRepository {
 
   async getMedicalDetails(fichaMedica: string): Promise<object> {
     try {
-      const query = `SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed,ficha.tip_exa AS cod_tip_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS tipo_examen,ficha.num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, ficha.talla ,ficha.resp ,ficha.abd ,ficha.peso ,ficha.card ,ficha.cadera, ficha.imc  ,ficha.icc ,ficha.satoxi ,ficha.temp,(select isnull((select resultado from d_labo where cdg_exa=2 and  cdg_fmed=ficha.cdg_fmed),'-') ) as hemoglobina,(select (isnull((select resultado from d_labo where cdg_exa=16 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=22 and cdg_fmed=ficha.cdg_fmed),'-')))) as colesterol,(select(isnull((select resultado from d_labo where cdg_exa=17 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=111 and cdg_fmed=ficha.cdg_fmed),'-')))) as trigliceridos,(select isnull((select resultado from d_labo where cdg_exa=14 and cdg_fmed=ficha.cdg_fmed),'-')) as glucosa FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.cdg_fmed='${fichaMedica}' and ficha.ruc_cli = mc.ruc_cli AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc )`
+      const query = "SELECT ficha.cdg_fmed,Convert(varchar(10),CONVERT(date,ficha.fec_fmed,106),103) as fec_fmed,ficha.tip_exa AS cod_tip_examen, LTRIM(RTRIM(EXA.DES_ITEM)) AS tipo_examen,ficha.num_dni, LTRIM(RTRIM(paci.NOMBRE_PERSONA)) AS nombres, LTRIM(RTRIM(paci.APELLIDO_PERSONA)) AS apellidos, ficha.talla ,ficha.resp ,ficha.abd ,ficha.peso ,ficha.card ,ficha.cadera, ficha.imc  ,ficha.icc ,ficha.satoxi ,ficha.temp,(select isnull((select resultado from d_labo where cdg_exa=2 and  cdg_fmed=ficha.cdg_fmed),'-') ) as hemoglobina,(select (isnull((select resultado from d_labo where cdg_exa=16 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=22 and cdg_fmed=ficha.cdg_fmed),'-')))) as colesterol,(select(isnull((select resultado from d_labo where cdg_exa=17 and cdg_fmed=ficha.cdg_fmed),isnull((select resultado from d_labo where cdg_exa=111 and cdg_fmed=ficha.cdg_fmed),'-')))) as trigliceridos,(select isnull((select resultado from d_labo where cdg_exa=14 and cdg_fmed=ficha.cdg_fmed),'-')) as glucosa FROM m_fmed ficha,vclientes mc,D_TABLAS EXA,vpaciente paci  WHERE ficha.cdg_fmed=@fichaMedica and ficha.ruc_cli = mc.ruc_cli AND (ficha.tip_Exa = EXA.NUM_ITEM AND EXA.cdg_tab='EXA') AND (ficha.NUM_DNI = paci.NUM_DNI AND ficha.cdg_tdoc = paci.cdg_tdoc )"
+      const queryParams: QueryParams = { fichaMedica }
 
-      return this.database.query(query)
+      return this.database.queryWithParams(query, queryParams)
     } catch (error: unknown) {
       throw error
     }
