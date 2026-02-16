@@ -146,6 +146,9 @@ export default class MedicalExamsService {
         case 15:
           path = `/ANEXO16A/${uid}.pdf`
           break
+        case 16:
+          path = `/PSICOSENSOMETRICA/${uid}.pdf`
+          break
         default:
           break
       }
@@ -278,6 +281,10 @@ export default class MedicalExamsService {
         },
         {
           type: 'Anexo 16A',
+          data: '_'
+        },
+        {
+          type: 'Psicosensométrico',
           data: '_'
         }
       )

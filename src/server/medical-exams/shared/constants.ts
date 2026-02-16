@@ -7,5 +7,6 @@ export enum DiagnosisType {
   ODONTOLOGIA = 6,
   CARDIOLOGIA = 7,
   ESPIROMETRIA = 8,
-  PSICOLOGIA = 9
+  PSICOLOGIA = 9,
+  PSICOSENSOMETRICA = 16
 }
