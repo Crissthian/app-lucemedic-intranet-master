@@ -1294,12 +1294,13 @@ export default class StatisticsRepository implements IStatisticsRepository {
 
   async check(params: StatisticsQueryDTO, ruc: string): Promise<boolean> {
     try {
-      let query = `
-      SELECT count(m.cdg_fmed) as cantidad FROM M_MSABANA m, m_fmed f WHERE m.cdg_fmed=f.cdg_fmed and m.ruc_SAB='${ruc}' and f.fec_fmed`
-
-      if (params.startDate && params.endDate) {
-        query += ` between '${params.startDate}' and '${params.endDate}'`
+      if (!params.startDate || !params.endDate) {
+        return false
       }
+
+      let query = `
+      SELECT count(m.cdg_fmed) as cantidad FROM M_MSABANA m, m_fmed f WHERE m.cdg_fmed=f.cdg_fmed and m.ruc_SAB='${ruc}'`
+      query += ` AND f.fec_fmed between '${params.startDate}' and '${params.endDate}'`
 
       if (params.examType) {
         query += ` AND F.tip_exa='${params.examType}'`

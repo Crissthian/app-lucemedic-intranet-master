@@ -268,99 +268,92 @@ const TableTracking: React.FC<ITableTrackingProps> = (props) => {
           <div className={styles.body}>
             {props.data.map((item, index) => {
               return (
-                <>
-                  <div key={index} className={styles.row}>
-                    <div>
-                      <p
-                        className={`${roboto400.className} ${styles.fullName}`}
-                      >
-                        {item.nombres || ''}
-                      </p>
-                      <p className={`${rubik400.className} ${styles.subLabel}`}>
-                        Fecha de atención:{' '}
-                        {moment(item.fec_fmed.split('T')[0]).format('LL') || ''}
-                      </p>
-                      <p className={`${rubik400.className} ${styles.subLabel}`}>
-                        DNI: {item.num_dni || ''}
-                      </p>
-                    </div>
-                    <div>{item.h_ing || '--:--'}</div>
-                    <div className={styles.careProcessContainer}>
-                      <div className={styles.step}>
-                        <FontAwesomeIcon
-                          icon={faCheckCircle}
-                          color={'#1EE67D'}
-                        />
-                        <p className={styles.stepTitle}>Ingreso</p>
-                        <p className={styles.stepStatus}>
-                          <span>Completado</span>
-                        </p>
-                      </div>
-                      {item.h_sal === '' && (
-                        <>
-                          <div className={styles.step}>
-                            <FontAwesomeIcon
-                              icon={faFileMedicalAlt}
-                              color={'#636D73'}
-                            />
-                            <p className={styles.stepTitle}>Evaluación</p>
-                            <p className={styles.stepStatusPendingProgress}>
-                              <span>En proceso</span>
-                            </p>
-                            <div
-                              className={styles.viewMore}
-                              onClick={() => showDetail(item)}
-                            >
-                              Ver detalle
-                            </div>
-                          </div>
-                          <div className={styles.step}>
-                            <FontAwesomeIcon
-                              icon={faSignOutAlt}
-                              color={'#636D73'}
-                            />
-                            <p className={styles.stepTitle}>Salida</p>
-                            <p className={styles.stepStatusPending}>
-                              <span>Pendiente</span>
-                            </p>
-                          </div>
-                        </>
-                      )}
-                      {item.h_sal !== '' && (
-                        <>
-                          <div className={styles.step}>
-                            <FontAwesomeIcon
-                              icon={faFileMedicalAlt}
-                              color={'#1EE67D'}
-                            />
-                            <p className={styles.stepTitle}>Evaluación</p>
-                            <p className={styles.stepStatus}>
-                              <span>Completado</span>
-                            </p>
-                            <div
-                              className={styles.viewMore}
-                              onClick={() => showDetail(item)}
-                            >
-                              Ver detalle
-                            </div>
-                          </div>
-                          <div className={styles.step}>
-                            <FontAwesomeIcon
-                              icon={faSignOutAlt}
-                              color={'#1EE67D'}
-                            />
-                            <p className={styles.stepTitle}>Salida</p>
-                            <p className={styles.stepStatus}>
-                              <span>Completado</span>
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    {/* <CareProcess attentionMonitoring={item}  currentStep={item.h_sal === '' ? 1 : 3} /> */}
-                    <div>{item.h_sal || '--:--'}</div>
+                <div key={index} className={styles.row}>
+                  <div>
+                    <p className={`${roboto400.className} ${styles.fullName}`}>
+                      {item.nombres || ''}
+                    </p>
+                    <p className={`${rubik400.className} ${styles.subLabel}`}>
+                      Fecha de atención:{' '}
+                      {moment(item.fec_fmed.split('T')[0]).format('LL') || ''}
+                    </p>
+                    <p className={`${rubik400.className} ${styles.subLabel}`}>
+                      DNI: {item.num_dni || ''}
+                    </p>
                   </div>
-                </>
+                  <div>{item.h_ing || '--:--'}</div>
+                  <div className={styles.careProcessContainer}>
+                    <div className={styles.step}>
+                      <FontAwesomeIcon icon={faCheckCircle} color={'#1EE67D'} />
+                      <p className={styles.stepTitle}>Ingreso</p>
+                      <p className={styles.stepStatus}>
+                        <span>Completado</span>
+                      </p>
+                    </div>
+                    {item.h_sal === '' && (
+                      <>
+                        <div className={styles.step}>
+                          <FontAwesomeIcon
+                            icon={faFileMedicalAlt}
+                            color={'#636D73'}
+                          />
+                          <p className={styles.stepTitle}>Evaluación</p>
+                          <p className={styles.stepStatusPendingProgress}>
+                            <span>En proceso</span>
+                          </p>
+                          <div
+                            className={styles.viewMore}
+                            onClick={() => showDetail(item)}
+                          >
+                            Ver detalle
+                          </div>
+                        </div>
+                        <div className={styles.step}>
+                          <FontAwesomeIcon
+                            icon={faSignOutAlt}
+                            color={'#636D73'}
+                          />
+                          <p className={styles.stepTitle}>Salida</p>
+                          <p className={styles.stepStatusPending}>
+                            <span>Pendiente</span>
+                          </p>
+                        </div>
+                      </>
+                    )}
+                    {item.h_sal !== '' && (
+                      <>
+                        <div className={styles.step}>
+                          <FontAwesomeIcon
+                            icon={faFileMedicalAlt}
+                            color={'#1EE67D'}
+                          />
+                          <p className={styles.stepTitle}>Evaluación</p>
+                          <p className={styles.stepStatus}>
+                            <span>Completado</span>
+                          </p>
+                          <div
+                            className={styles.viewMore}
+                            onClick={() => showDetail(item)}
+                          >
+                            Ver detalle
+                          </div>
+                        </div>
+                        <div className={styles.step}>
+                          <FontAwesomeIcon
+                            icon={faSignOutAlt}
+                            color={'#1EE67D'}
+                          />
+                          <p className={styles.stepTitle}>Salida</p>
+                          <p className={styles.stepStatus}>
+                            <span>Completado</span>
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  {/* <CareProcess attentionMonitoring={item}  currentStep={item.h_sal === '' ? 1 : 3} /> */}
+                  <div>{item.h_sal || '--:--'}</div>
+                </div>
               )
             })}
           </div>

@@ -119,6 +119,17 @@ export async function handleStatisticsMetric(
   try {
     const query = getQueryObject(request) as unknown as StatisticsQueryDTO
     const ruc = String(auth.user.ruc ?? '')
+    const hasDateRange = Boolean(query.startDate && query.endDate)
+
+    if (metric === 'check' && !hasDateRange) {
+      return NextResponse.json(
+        {
+          status: false,
+          message: 'startDate y endDate son obligatorios'
+        },
+        { status: 400 }
+      )
+    }
 
     logger.info(
       `Gettings statistics ${metric} ${JSON.stringify(query)} | ${ruc}`

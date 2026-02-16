@@ -562,6 +562,11 @@ const StatisticsPanel: React.FC = () => {
   }
 
   const handleSearch = async () => {
+    if (!startDate || !endDate) {
+      alert('Debes seleccionar un rango de fechas.')
+      return
+    }
+
     dispatch(toggleLoading())
 
     let url = `/api/statistics/check?startDate=${startDate}&endDate=${endDate}`
