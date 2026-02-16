@@ -1,8 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import Header from '@/components/Header'
 import styles from './settings.module.css'
-import Navigation from '@/components/Navigation'
 import Panel from '@/components/Panel'
 import { Rubik } from 'next/font/google'
 import Input from '@/components/Input'
@@ -12,12 +10,10 @@ import Button from '@/components/Button'
 import { BaseApi } from '@/models/base'
 import { ROLES_TYPES } from '@/shared/constants'
 import useUserProfile from '@/hooks/useUserProfile'
-import { useRouter } from 'next/navigation'
 
 const rubik = Rubik({ weight: '600', subsets: ['latin'] })
 
 export default function Settings() {
-  const router = useRouter()
   const currentUser = useUserProfile()
 
   const [dni, setDni] = useState<string>('')
@@ -196,132 +192,114 @@ export default function Settings() {
     }
   }, [currentUser])
 
-  useEffect(() => {
-    const jwt = localStorage.getItem('accessToken') || ''
-
-    if (jwt.length <= 0) {
-      router.push('/auth')
-    }
-  }, [router])
-
   return (
-    <>
-      <Header />
-      <main className={styles.main}>
-        <Navigation />
-        <Panel>
-          <h1 className={`${rubik.className} ${styles.title}`}>Mi cuenta</h1>
-          <div className={styles.settings}>
-            <div
-              className={`${styles.dragAndDropArea} ${(preview || photoUrl) && styles.withImage}`}
-              style={{
-                backgroundImage: preview
-                  ? `url(${preview})`
-                  : photoUrl
-                    ? `url(/api/photos/${photoUrl})`
-                    : 'none',
-                backgroundPosition: 'center',
-                backgroundSize: 'cover'
-              }}
+    <Panel>
+      <h1 className={`${rubik.className} ${styles.title}`}>Mi cuenta</h1>
+      <div className={styles.settings}>
+        <div
+          className={`${styles.dragAndDropArea} ${(preview || photoUrl) && styles.withImage}`}
+          style={{
+            backgroundImage: preview
+              ? `url(${preview})`
+              : photoUrl
+                ? `url(/api/photos/${photoUrl})`
+                : 'none',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover'
+          }}
+        >
+          {!preview && !photoUrl && (
+            <>
+              <FontAwesomeIcon icon={faImage} width={20} />
+              <input
+                type='file'
+                name='image'
+                accept='image/*'
+                onChange={handleFileChange}
+              />
+              <p>Arrastra y suelta tu foto de perfil aquí</p>
+            </>
+          )}
+          {(preview || photoUrl) && (
+            <button
+              className={styles.removeImageButton}
+              onClick={handleRemoveImage}
             >
-              {!preview && !photoUrl && (
-                <>
-                  <FontAwesomeIcon icon={faImage} width={20} />
-                  <input
-                    type='file'
-                    name='image'
-                    accept='image/*'
-                    onChange={handleFileChange}
-                  />
-                  <p>Arrastra y suelta tu foto de perfil aquí</p>
-                </>
-              )}
-              {(preview || photoUrl) && (
-                <button
-                  className={styles.removeImageButton}
-                  onClick={handleRemoveImage}
-                >
-                  Remover Imagen
-                </button>
-              )}
+              Remover Imagen
+            </button>
+          )}
+        </div>
+        <div className={styles.account}>
+          <div>
+            <div className={styles.rowInput}>
+              <label htmlFor='firstName'>Nombres</label>
+              <Input
+                placeholder={''}
+                type='text'
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName || currentUser?.firstName}
+              />
             </div>
-            <div className={styles.account}>
-              <div>
-                <div className={styles.rowInput}>
-                  <label htmlFor='firstName'>Nombres</label>
-                  <Input
-                    placeholder={''}
-                    type='text'
-                    onChange={(e) => setFirstName(e.target.value)}
-                    value={firstName || currentUser?.firstName}
-                  />
-                </div>
-                {currentUser?.profile === ROLES_TYPES.DOCTOR && (
-                  <div className={styles.rowInput}>
-                    <label htmlFor='cmp'>CMP</label>
-                    <Input
-                      placeholder={''}
-                      type='text'
-                      onChange={(e) => setCmp(e.target.value)}
-                      value={cmp || ''}
-                    />
-                  </div>
-                )}
-                <div className={styles.rowInput}>
-                  <label htmlFor='phone'>Teléfono</label>
-                  <Input
-                    placeholder={''}
-                    type='text'
-                    onChange={(e) => setPhone(e.target.value)}
-                    value={phone || ''}
-                  />
-                </div>
+            {currentUser?.profile === ROLES_TYPES.DOCTOR && (
+              <div className={styles.rowInput}>
+                <label htmlFor='cmp'>CMP</label>
+                <Input
+                  placeholder={''}
+                  type='text'
+                  onChange={(e) => setCmp(e.target.value)}
+                  value={cmp || ''}
+                />
               </div>
-              <div>
-                <div className={styles.rowInput}>
-                  <label htmlFor='lastName'>Apellidos</label>
-                  <Input
-                    placeholder={''}
-                    type='text'
-                    onChange={(e) => setLastName(e.target.value)}
-                    value={lastName || currentUser?.lastName}
-                  />
-                </div>
-                <div className={styles.rowInput}>
-                  <label htmlFor='email'>Correo</label>
-                  <Input
-                    placeholder={''}
-                    type='text'
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email || currentUser?.email}
-                  />
-                </div>
-                <div className={styles.rowInput}>
-                  <label htmlFor='birthDate'>Fecha de Nacimiento</label>
-                  <Input
-                    placeholder={''}
-                    type='date'
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    value={birthDate || ''}
-                  />
-                </div>
-              </div>
+            )}
+            <div className={styles.rowInput}>
+              <label htmlFor='phone'>Teléfono</label>
+              <Input
+                placeholder={''}
+                type='text'
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone || ''}
+              />
             </div>
           </div>
-          <div className={styles.footer}>
-            <p>
-              <a
-                href='#javascript'
-                onClick={handleLogout}
-                className={styles.logout}
-              >
-                <FontAwesomeIcon icon={faLock} width={20} /> Cerrar sesión
-              </a>
-            </p>
-            <Button label='Actualizar cambios' onClick={handleUpdateChanges} />
+          <div>
+            <div className={styles.rowInput}>
+              <label htmlFor='lastName'>Apellidos</label>
+              <Input
+                placeholder={''}
+                type='text'
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName || currentUser?.lastName}
+              />
+            </div>
+            <div className={styles.rowInput}>
+              <label htmlFor='email'>Correo</label>
+              <Input
+                placeholder={''}
+                type='text'
+                onChange={(e) => setEmail(e.target.value)}
+                value={email || currentUser?.email}
+              />
+            </div>
+            <div className={styles.rowInput}>
+              <label htmlFor='birthDate'>Fecha de Nacimiento</label>
+              <Input
+                placeholder={''}
+                type='date'
+                onChange={(e) => setBirthDate(e.target.value)}
+                value={birthDate || ''}
+              />
+            </div>
           </div>
-        </Panel>
-      </main>
-    </>
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <p>
+          <a href='#javascript' onClick={handleLogout} className={styles.logout}>
+            <FontAwesomeIcon icon={faLock} width={20} /> Cerrar sesión
+          </a>
+        </p>
+        <Button label='Actualizar cambios' onClick={handleUpdateChanges} />
+      </div>
+    </Panel>
   )
 }

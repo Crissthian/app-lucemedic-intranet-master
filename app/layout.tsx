@@ -1,4 +1,5 @@
 import { ReduxProvider } from '@/redux/provider'
+import AppShell from '@/components/AppShell'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -27,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang='es'>
       <body suppressHydrationWarning={true} className={inter.className}>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <AppShell>{children}</AppShell>
+        </ReduxProvider>
       </body>
     </html>
   )
