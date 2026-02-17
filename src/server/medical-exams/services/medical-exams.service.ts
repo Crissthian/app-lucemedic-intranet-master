@@ -284,7 +284,7 @@ export default class MedicalExamsService {
           data: '_'
         },
         {
-          type: 'Psicosensométrico',
+          type: 'Psicosensométrica',
           data: '_'
         }
       )
