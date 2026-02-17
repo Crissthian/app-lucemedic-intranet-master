@@ -6,7 +6,14 @@ import moment from 'moment'
 import { AppDispatch, useAppSelector } from '@/redux/store'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faChevronLeft, faCircleInfo, faFile, faFilePdf, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBell,
+  faChevronLeft,
+  faCircleInfo,
+  faFile,
+  faFilePdf,
+  faUserAlt
+} from '@fortawesome/free-solid-svg-icons'
 import { toggleRecomendaciones } from '@/redux/features/medical-exams.slice'
 import { Rubik } from 'next/font/google'
 import Panel from '../Panel'
@@ -14,6 +21,7 @@ import { formatFullName } from '@/shared/utils'
 import styles from './recomendaciones.module.css'
 import { Recommendations } from '@/models/recommendations'
 import { BaseApi } from '@/models/base'
+import { openBase64InNewWindow } from '@/shared/base64'
 
 const rubik400 = Rubik({ weight: '400', subsets: ['latin'] })
 const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
@@ -33,14 +41,14 @@ const Recomendaciones: React.FC = () => {
   }
 
   const handleDownload = async (cdg_fmed: string) => {
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${details.cdg_fmed}/recommendations/${cdg_fmed}`
+    const url = `/api/medical-exams/${details.cdg_fmed}/recommendations/${cdg_fmed}`
 
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -54,30 +62,15 @@ const Recomendaciones: React.FC = () => {
     }
 
     if (result.status) {
-
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
-
-      const data = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
-      })
-
-      const blob = await data.blob()
-
-      const file = new File([blob], result.data.file, { type: 'application/pdf' })
-
-      const urlFile = window.URL.createObjectURL(file)
-
-      window.open(urlFile)
-      
+      openBase64InNewWindow(
+        result.data.file,
+        `recommendation_${cdg_fmed}.pdf`,
+        'application/pdf'
+      )
     }
   }
 
   useEffect(() => {
-
     const jwt = localStorage.getItem('accessToken') || ''
 
     if (jwt.length <= 0) {
@@ -86,16 +79,16 @@ const Recomendaciones: React.FC = () => {
 
     if (details.cdg_fmed) {
       const getRecommendations = async () => {
-        const url = `${process.env.API_BASE_PATH}/medical-exams/${details.cdg_fmed}/recommendations`
+        const url = `/api/medical-exams/${details.cdg_fmed}/recommendations`
         const response = await fetch(url, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          }
         })
         const result: BaseApi = await response.json()
-        
+
         if (result.error) {
           localStorage.removeItem('accessToken')
           router.push('/auth')
@@ -108,7 +101,6 @@ const Recomendaciones: React.FC = () => {
 
       getRecommendations()
     }
-
   }, [router, details.cdg_fmed])
 
   return (
@@ -133,45 +125,53 @@ const Recomendaciones: React.FC = () => {
             {formatFullName(`${details.nombres} ${details.apellidos}`)}
           </p>
         </div>
-        {
-          recommendations.length === 0 && (
-            <>
-              <div className={`${rubik400.className} ${styles.empty}`}>
-                <FontAwesomeIcon icon={faBell} color='#1EE67D' />
-                <p>Su evaluación no <br />requiere recomendaciones</p>
+        {recommendations.length === 0 && (
+          <>
+            <div className={`${rubik400.className} ${styles.empty}`}>
+              <FontAwesomeIcon icon={faBell} color='#1EE67D' />
+              <p>
+                Su evaluación no <br />
+                requiere recomendaciones
+              </p>
+            </div>
+          </>
+        )}
+        {recommendations.length > 0 && (
+          <div className={styles.dataTable}>
+            <div className={`${rubik400.className} ${styles.dataTableHeader}`}>
+              <div>
+                <FontAwesomeIcon icon={faCircleInfo} /> Recomendación
               </div>
-            </>
-          )
-        }
-        {
-          recommendations.length > 0 && (
-            <div className={styles.dataTable}>
-          <div className={`${rubik400.className} ${styles.dataTableHeader}`}>
-            <div><FontAwesomeIcon icon={faCircleInfo} /> Recomendación</div>
-            <div><FontAwesomeIcon icon={faFile} />Descargar</div>
-          </div>
-          <div className={styles.dataTableBody}>
-            {
-              recommendations.length > 0 ? (
+              <div>
+                <FontAwesomeIcon icon={faFile} />
+                Descargar
+              </div>
+            </div>
+            <div className={styles.dataTableBody}>
+              {recommendations.length > 0 ? (
                 <>
-                  {
-                    recommendations.map((recommendation, index) => (
-                      <div key={index} className={`${rubik400.className} ${styles.dataTableRow}`}>
-                        <div>{recommendation.descripcion}</div>
-                        <div>
-                          <FontAwesomeIcon icon={faFilePdf} width={'10px'} onClick={() => handleDownload(recommendation.cdg_reg)} />
-                        </div>
+                  {recommendations.map((recommendation, index) => (
+                    <div
+                      key={index}
+                      className={`${rubik400.className} ${styles.dataTableRow}`}
+                    >
+                      <div>{recommendation.descripcion}</div>
+                      <div>
+                        <FontAwesomeIcon
+                          icon={faFilePdf}
+                          width={'10px'}
+                          onClick={() => handleDownload(recommendation.cdg_reg)}
+                        />
                       </div>
-                    ))
-                  }
+                    </div>
+                  ))}
                 </>
-              ) : ('')
-            }
+              ) : (
+                ''
+              )}
+            </div>
           </div>
-        </div>
-          )
-        }
-        
+        )}
       </Panel>
     </>
   )

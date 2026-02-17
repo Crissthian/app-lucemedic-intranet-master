@@ -1,16 +1,16 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react'
 
 const useAccessToken = () => {
-  const [accessToken, setAccessToken] = useState<string>('');
+  const [accessToken, setAccessToken] = useState<string>('')
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken') || '';
+    const token = localStorage.getItem('accessToken') || ''
     if (token) {
-      setAccessToken(token);
+      setAccessToken(token)
     }
-  }, []);
+  }, [])
 
-  return accessToken;
-};
+  return accessToken
+}
 
-export default useAccessToken;
+export default useAccessToken

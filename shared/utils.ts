@@ -8,6 +8,4 @@ const formatFullName = (text: string): string => {
   return formattedWords.join(' ')
 }
 
-export {
-  formatFullName,
-}
+export { formatFullName }

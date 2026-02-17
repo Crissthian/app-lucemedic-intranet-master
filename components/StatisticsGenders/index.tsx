@@ -3,7 +3,7 @@ import StatisticsGraphCard from '../StatisticsGraphCard'
 import styles from './statistics-genders.module.css'
 
 interface StatisticsGendersProps {
-  data: Genders;
+  data: Genders
 }
 
 const StatisticsGenders: React.FC<StatisticsGendersProps> = (props) => {

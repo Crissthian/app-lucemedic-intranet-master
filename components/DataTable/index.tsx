@@ -9,10 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleInfo,
   faFile,
-  faFilePdf,
+  faFilePdf
 } from '@fortawesome/free-solid-svg-icons'
 import Button from '../Button'
 import { formatFullName } from '@/shared/utils'
+import { openBase64InNewWindow } from '@/shared/base64'
 import { getDetail, toggleDetail } from '@/redux/features/medical-exams.slice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/redux/store'
@@ -27,13 +28,13 @@ const rubik = Rubik({ weight: '400', subsets: ['latin'] })
 const roboto400 = Roboto({ weight: '400', subsets: ['latin'] })
 
 interface DataTableProps {
-  data: Array<any>;
-  lastName?: string;
-  dni?: string;
-  examType?: string;
-  sede?: string;
-  startDate: string;
-  endDate: string;
+  data: Array<any>
+  lastName?: string
+  dni?: string
+  examType?: string
+  sede?: string
+  startDate: string
+  endDate: string
 }
 
 const DataTable: React.FC<DataTableProps> = (props) => {
@@ -45,14 +46,14 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
   const handleDetail = async (fmed: string) => {
     dispatch(toggleLoading())
-    const url = `${process.env.API_BASE_PATH}/medical-exams/${fmed}`
+    const url = `/api/medical-exams/${fmed}`
 
     const data = await fetch(url, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await data.json()
@@ -73,7 +74,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
     }
 
@@ -89,14 +90,14 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   }
 
   const downloadCertificadoFile = async (cdg_fmed: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${cdg_fmed}/certificado`
+    const path = `/api/medical-exams/${cdg_fmed}/certificado`
 
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -110,37 +111,23 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     }
 
     if (result.status) {
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
-
-      const data = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
-      })
-
-      const blob = await data.blob()
-
-      const file = new File([blob], result.data.file, {
-        type: 'application/pdf',
-      })
-
-      const urlFile = window.URL.createObjectURL(file)
-
-      window.open(urlFile)
+      openBase64InNewWindow(
+        result.data.file,
+        `certificado_${cdg_fmed}.pdf`,
+        'application/pdf'
+      )
     }
   }
 
   const downloadEMOFile = async (file: string) => {
-    const path = `${process.env.API_BASE_PATH}/medical-exams/${file}/emo`
+    const path = `/api/medical-exams/${file}/emo`
 
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -154,25 +141,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     }
 
     if (result.status) {
-      const url = `${process.env.API_BASE_PATH}/commons/file/${result.data.file}`
-
-      const data = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
-      })
-
-      const blob = await data.blob()
-
-      const file = new File([blob], result.data.file, {
-        type: 'application/pdf',
-      })
-
-      const urlFile = window.URL.createObjectURL(file)
-
-      window.open(urlFile)
+      openBase64InNewWindow(
+        result.data.file,
+        `emo_${file}.pdf`,
+        'application/pdf'
+      )
     }
   }
 
@@ -193,7 +166,13 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   const handleSelectAll = () => {
     setSelectAll(!selectAll)
     // setSelecteds(selectAll ? [] : props.data.map((item) => item.cdg_fmed))
-    setSelecteds(selectAll ? [] : props.data.filter((item) => item.close_status === 1).map((item) => item.cdg_fmed))
+    setSelecteds(
+      selectAll
+        ? []
+        : props.data
+            .filter((item) => item.close_status === 1)
+            .map((item) => item.cdg_fmed)
+    )
     // console.log(props.data.filter((item) => item.close_status === 1).length)
   }
 
@@ -209,14 +188,14 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
 
     dispatch(toggleLoading())
 
-    let url = `${process.env.API_BASE_PATH}/sabana?startDate=${props.startDate}&endDate=${props.endDate}`
+    let url = `/api/sabana?startDate=${props.startDate}&endDate=${props.endDate}`
 
     if (props.lastName) {
       url += `&lastName=${props.lastName}`
@@ -238,8 +217,8 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await data.json()
@@ -266,7 +245,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         worksheet[cell_ref].s = {
           // Aplicar estilo a la celda
           fill: { fgColor: { rgb: '2662F0' } }, // Color de fondo negro
-          font: { color: { rgb: 'FFFFFF' } }, // Color del texto blanco
+          font: { color: { rgb: 'FFFFFF' } } // Color del texto blanco
         }
       }
 
@@ -278,10 +257,10 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
       const excelBuffer = XLSX.write(workbook, {
         bookType: 'xlsx',
-        type: 'array',
+        type: 'array'
       })
       const dataExcel = new Blob([excelBuffer], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
       })
 
       dispatch(toggleLoading())
@@ -301,21 +280,21 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
 
     dispatch(toggleLoading())
 
-    const url = `${process.env.API_BASE_PATH}/sabana/interconsultations?startDate=${props.startDate}&endDate=${props.endDate}`
+    const url = `/api/sabana/interconsultations?startDate=${props.startDate}&endDate=${props.endDate}`
 
     const data = await fetch(url, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await data.json()
@@ -330,7 +309,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -345,17 +324,14 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
 
     if (result.status) {
-
       const workbook = XLSX.utils.book_new()
-      const worksheet = XLSX.utils.json_to_sheet(
-        result.data.interconsultations
-      )
+      const worksheet = XLSX.utils.json_to_sheet(result.data.interconsultations)
 
       const range = XLSX.utils.decode_range('A1:K1')
 
@@ -365,7 +341,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         worksheet[cell_ref].s = {
           // Aplicar estilo a la celda
           fill: { fgColor: { rgb: '2662F0' } }, // Color de fondo negro
-          font: { color: { rgb: 'FFFFFF' } }, // Color del texto blanco
+          font: { color: { rgb: 'FFFFFF' } } // Color del texto blanco
         }
       }
 
@@ -377,10 +353,10 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
       const excelBuffer = XLSX.write(workbook, {
         bookType: 'xlsx',
-        type: 'array',
+        type: 'array'
       })
       const dataExcel = new Blob([excelBuffer], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
       })
 
       dispatch(toggleLoading())
@@ -400,7 +376,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -415,7 +391,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -423,8 +399,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     dispatch(toggleLoading())
 
     try {
-
-      const url = `${process.env.API_BASE_PATH}/attachments/downloads`
+      const url = '/api/attachments/downloads'
 
       const params = {
         type: 0,
@@ -435,24 +410,27 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(params),
+        body: JSON.stringify(params)
       })
 
       if (data.status !== 200) {
         dispatch(toggleLoading())
-        toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-          transition: Slide,
-        })
+        toast.error(
+          'Al parecer algo no salió bien. Contacte al administrador.',
+          {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            transition: Slide
+          }
+        )
         return
       }
 
@@ -460,15 +438,17 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       const blob = await data.blob()
 
       // create file
-      const file = new File([blob], `lucemedic_certificados_${moment().format('YYYY-MM-DD')}.zip`, {
-        type: 'application/zip',
-      })
+      const file = new File(
+        [blob],
+        `lucemedic_certificados_${moment().format('YYYY-MM-DD')}.zip`,
+        {
+          type: 'application/zip'
+        }
+      )
 
       dispatch(toggleLoading())
 
       saveAs(file)
-
-
     } catch (error: unknown) {
       toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
         position: 'top-center',
@@ -479,7 +459,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -496,7 +476,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -511,7 +491,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -519,8 +499,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     dispatch(toggleLoading())
 
     try {
-
-      const url = `${process.env.API_BASE_PATH}/attachments/downloads`
+      const url = '/api/attachments/downloads'
 
       const params = {
         type: 1,
@@ -531,24 +510,27 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(params),
+        body: JSON.stringify(params)
       })
 
       if (data.status !== 200) {
         dispatch(toggleLoading())
-        toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-          transition: Slide,
-        })
+        toast.error(
+          'Al parecer algo no salió bien. Contacte al administrador.',
+          {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            transition: Slide
+          }
+        )
         return
       }
 
@@ -556,15 +538,17 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       const blob = await data.blob()
 
       // create file
-      const file = new File([blob], `lucemedic_emos_${moment().format('YYYY-MM-DD')}.zip`, {
-        type: 'application/zip',
-      })
+      const file = new File(
+        [blob],
+        `lucemedic_emos_${moment().format('YYYY-MM-DD')}.zip`,
+        {
+          type: 'application/zip'
+        }
+      )
 
       dispatch(toggleLoading())
 
       saveAs(file)
-
-
     } catch (error: unknown) {
       toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
         position: 'top-center',
@@ -575,7 +559,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-        transition: Slide,
+        transition: Slide
       })
       return
     }
@@ -590,7 +574,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
             <div>
               <input
                 id={'selectAll'}
-                type="checkbox"
+                type='checkbox'
                 checked={selectAll}
                 onChange={handleSelectAll}
               />
@@ -614,7 +598,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                     <input
                       id={`selected_${item.cdg_fmed}`}
                       key={index}
-                      type="checkbox"
+                      type='checkbox'
                       checked={selecteds.includes(item.cdg_fmed)}
                       onChange={() => handleChecked(item.cdg_fmed)}
                     />
@@ -650,9 +634,9 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                 <div className={styles.dataTableItemActions}>
                   <Button
                     key={index}
-                    label="Ver más"
+                    label='Ver más'
                     onClick={() => showDetailView(`${item.cdg_fmed}`)}
-                    width="100px"
+                    width='100px'
                     disabled={item.chkproceso}
                   />
                 </div>
@@ -660,9 +644,12 @@ const DataTable: React.FC<DataTableProps> = (props) => {
             ))}
           </div>
           <div className={styles.dataTableFooter}>
-            <Button label="DESCARGA MASIVA E.M.O." onClick={handleDownloadEMOS} />
             <Button
-              label="DESCARGA MASIVA CERTIFICADO"
+              label='DESCARGA MASIVA E.M.O.'
+              onClick={handleDownloadEMOS}
+            />
+            <Button
+              label='DESCARGA MASIVA CERTIFICADO'
               onClick={handleDownloadCertificados}
             />
             <Button
@@ -675,11 +662,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
             />
           </div>
           <div className={styles.totalRows}>
-            {
-              selecteds.length > 0 && (
-                <p className={rubik.className}>Total seleccionados: <b>{selecteds.length} registros</b></p>
-              )
-            }
+            {selecteds.length > 0 && (
+              <p className={rubik.className}>
+                Total seleccionados: <b>{selecteds.length} registros</b>
+              </p>
+            )}
           </div>
         </div>
       )}

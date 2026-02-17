@@ -1,7 +1,11 @@
 'use client'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faDownload, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  faChevronLeft,
+  faDownload,
+  faUserAlt
+} from '@fortawesome/free-solid-svg-icons'
 import { Rubik } from 'next/font/google'
 import Panel from '../Panel'
 import PanelIcon from '../PanelIcon'
@@ -19,6 +23,7 @@ import ChartLaboratoryExams from '../ChartLaboratoryExams'
 import { Radiology } from '@/models/radiology'
 import { Audiometry } from '@/models/audiometry'
 import Modal from '@/components/Modal'
+import { base64ToFile } from '@/shared/base64'
 
 const rubik400 = Rubik({ weight: '400', subsets: ['latin'] })
 const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })
@@ -51,13 +56,13 @@ const MedicalHistory: React.FC = () => {
 
   useEffect(() => {
     const getRadiologyImages = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/radiology/${details.num_dni}`
+      const url = `/api/medical-exams/historical/radiology/${details.num_dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -72,41 +77,25 @@ const MedicalHistory: React.FC = () => {
 
       if (result.status) {
         setRadiologyDetails(result.data?.radiologies)
-        const radiologyImages = result.data?.files
+        const radiologyImages = result.data?.files // Array of base64 strings
 
-        for (const image of radiologyImages) {
-          const url = `${process.env.API_BASE_PATH}/commons/file/${image}`
+        // Convert each base64 string to a File object
+        const files = radiologyImages.map((base64: string, index: number) =>
+          base64ToFile(base64, `radiology_${index}.jpg`, 'image/jpeg')
+        )
 
-          const result = await fetch(url, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-              'Content-Type': 'application/json',
-            },
-          })
-
-          const data = await result.blob()
-          const file = new File([data], image, { type: 'image/jpeg' })
-
-          setRadiologyImage((prevState) => {
-            if (prevState) {
-              return [...prevState, file]
-            } else {
-              return [file]
-            }
-          })
-        }
+        setRadiologyImage(files)
       }
     }
 
     const getAudiometryImages = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/audiometry/${details.num_dni}`
+      const url = `/api/medical-exams/historical/audiometry/${details.num_dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -121,30 +110,14 @@ const MedicalHistory: React.FC = () => {
 
       if (result.status) {
         setAudiometryDetails(result.data.audiometries)
-        const audiometryImages = result.data?.files
+        const audiometryImages = result.data?.files // Array of base64 strings
 
-        for (const image of audiometryImages) {
-          const url = `${process.env.API_BASE_PATH}/commons/file/${image}`
+        // Convert each base64 string to a File object
+        const files = audiometryImages.map((base64: string, index: number) =>
+          base64ToFile(base64, `audiometry_${index}.png`, 'image/png')
+        )
 
-          const result = await fetch(url, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-              'Content-Type': 'application/json',
-            },
-          })
-
-          const data = await result.blob()
-          const file = new File([data], image, { type: 'image/jpeg' })
-
-          setAudiometryImage((prevState) => {
-            if (prevState) {
-              return [...prevState, file]
-            } else {
-              return [file]
-            }
-          })
-        }
+        setAudiometryImage(files)
       }
     }
 
@@ -191,7 +164,9 @@ const MedicalHistory: React.FC = () => {
                   <strong>Radiografía de Tórax</strong>
                 </p>
                 <p>Tipo de exámen: {radiologyDetails[index]?.t_examen || ''}</p>
-                <p>Fecha: {radiologyDetails[index]?.fec_fmed.slice(0, 10) || ''}</p>
+                <p>
+                  Fecha: {radiologyDetails[index]?.fec_fmed.slice(0, 10) || ''}
+                </p>
               </div>
             ))}
           </section>
@@ -210,8 +185,12 @@ const MedicalHistory: React.FC = () => {
                 <p>
                   <strong>{audiometryDetails[index]?.obs_audio || ''}</strong>
                 </p>
-                <p>Tipo de exámen: {audiometryDetails[index]?.t_examen || ''}</p>
-                <p>Fecha: {audiometryDetails[index]?.fec_fmed.slice(0, 10) || ''}</p>
+                <p>
+                  Tipo de exámen: {audiometryDetails[index]?.t_examen || ''}
+                </p>
+                <p>
+                  Fecha: {audiometryDetails[index]?.fec_fmed.slice(0, 10) || ''}
+                </p>
               </div>
             ))}
           </section>
@@ -228,29 +207,36 @@ const MedicalHistory: React.FC = () => {
           <ChartLaboratoryExams dni={details.num_dni} />
         </PanelIcon>
       </Panel>
-      {
-        showModal && (
-          <Modal title={''}>
-            {
-              radiologyImage && radiologyImage[modalActive] && (
-                <>
-                  <div className={styles.modalActions}>
-                    <p onClick={() => setShowModal(false)}><FontAwesomeIcon icon={faChevronLeft} /> VOLVER</p>
-                    <p><FontAwesomeIcon icon={faDownload} onClick={() => downloadImage(URL.createObjectURL(radiologyImage[modalActive]))} /></p>
-                  </div>
-                  <Image
-                    src={URL.createObjectURL(radiologyImage[modalActive])}
-                    width={1000}
-                    height={850}
-                    priority
-                    alt={''}
+      {showModal && (
+        <Modal title={''}>
+          {radiologyImage && radiologyImage[modalActive] && (
+            <>
+              <div className={styles.modalActions}>
+                <p onClick={() => setShowModal(false)}>
+                  <FontAwesomeIcon icon={faChevronLeft} /> VOLVER
+                </p>
+                <p>
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    onClick={() =>
+                      downloadImage(
+                        URL.createObjectURL(radiologyImage[modalActive])
+                      )
+                    }
                   />
-                </>
-              )
-            }
-          </Modal>
-        )
-      }
+                </p>
+              </div>
+              <Image
+                src={URL.createObjectURL(radiologyImage[modalActive])}
+                width={1000}
+                height={850}
+                priority
+                alt={''}
+              />
+            </>
+          )}
+        </Modal>
+      )}
     </>
   )
 }

@@ -1,24 +1,25 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+  --font-mono:
+    ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --primary-color: #2662F0;
-  --primary-color-hover: #1E4CC3;
-  --bg-color: #F1F5F8;
+  --primary-color: #2662f0;
+  --primary-color-hover: #1e4cc3;
+  --bg-color: #f1f5f8;
   --text-color: rgba(65, 77, 85, 1);
-  --green-color: #1EE67D;
-  --input-color: #8EA9BA;
-  --table-header-color: #414D55;
-  --white-color: #FAFBFD;
-  --green-color-light: #47E995;
-  --blue-color: #0073ED;
-  --red-color: #ED0423;
-  --icon-color: #636D73;
-  --border-line-color: #A2C0D4;
-  --purple-color: #6665DD;
+  --green-color: #1ee67d;
+  --input-color: #8ea9ba;
+  --table-header-color: #414d55;
+  --white-color: #fafbfd;
+  --green-color-light: #47e995;
+  --blue-color: #0073ed;
+  --red-color: #ed0423;
+  --icon-color: #636d73;
+  --border-line-color: #a2c0d4;
+  --purple-color: #6665dd;
 }
 
 * {
@@ -49,7 +50,7 @@ a {
 
 .react-datepicker__close-icon::after {
   background-color: var(--input-color) !important;
-  opacity: .3 !important;
+  opacity: 0.3 !important;
 }
 
 .react-datepicker__header {
@@ -57,7 +58,18 @@ a {
   border: none !important;
 }
 
-.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range {
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range {
   background-color: var(--primary-color) !important;
   color: var(--white-color) !important;
 }

@@ -4,10 +4,21 @@ import { useEffect, useState } from 'react'
 // import { BarChart } from '@mui/x-charts'
 import { BaseApi } from '@/models/base'
 import { IMCReport } from '@/models/imc-report'
-import { Bar, BarChart, CartesianGrid, LabelList, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  Legend,
+  Line,
+  LineChart,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts'
 
 interface ChartIMCProps {
-  dni: string;
+  dni: string
 }
 
 const ChartIMC: React.FC<ChartIMCProps> = (props) => {
@@ -15,13 +26,13 @@ const ChartIMC: React.FC<ChartIMCProps> = (props) => {
 
   useEffect(() => {
     const getImcReport = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/imc/${props.dni}`
+      const url = `/api/medical-exams/historical/imc/${props.dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -38,7 +49,7 @@ const ChartIMC: React.FC<ChartIMCProps> = (props) => {
         const data = result.data.imc_reports.map((report: IMCReport) => {
           return {
             ...report,
-            fec_reg: report.fec_reg.slice(0, 10),
+            fec_reg: report.fec_reg.slice(0, 10)
           }
         })
         setImcReport(data)
@@ -59,21 +70,33 @@ const ChartIMC: React.FC<ChartIMCProps> = (props) => {
             top: 5,
             right: 30,
             left: 20,
-            bottom: 5,
+            bottom: 5
           }}
         >
-          <CartesianGrid strokeDasharray="5 5" />
-          <XAxis dataKey="fec_reg">
-            <LabelList dataKey="fec_reg" position="top" />
+          <CartesianGrid strokeDasharray='5 5' />
+          <XAxis dataKey='fec_reg'>
+            <LabelList dataKey='fec_reg' position='top' />
           </XAxis>
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="peso" stroke="#0496FF" activeDot={{ r: 10 }} strokeWidth={2}>
-            <LabelList dataKey="peso" position="top" />
+          <Line
+            type='monotone'
+            dataKey='peso'
+            stroke='#0496FF'
+            activeDot={{ r: 10 }}
+            strokeWidth={2}
+          >
+            <LabelList dataKey='peso' position='top' />
           </Line>
-          <Line type="monotone" dataKey="imc" stroke="#8E3DBA" activeDot={{ r: 8 }} strokeWidth={2}>
-            <LabelList dataKey="imc" position="top" />
+          <Line
+            type='monotone'
+            dataKey='imc'
+            stroke='#8E3DBA'
+            activeDot={{ r: 8 }}
+            strokeWidth={2}
+          >
+            <LabelList dataKey='imc' position='top' />
           </Line>
         </LineChart>
         // <BarChart width={550} height={400} data={imcReport}>

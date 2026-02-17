@@ -47,7 +47,7 @@
 
 .panelActions > div {
   margin-bottom: 10px;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .panelActions > div:last-child {
@@ -61,7 +61,7 @@
 .panelActions > div:hover {
   cursor: pointer;
   color: var(--primary-color);
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .profilePicture {

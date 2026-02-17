@@ -6,10 +6,10 @@ import { useAppSelector } from '@/redux/store'
 const rubik = Rubik({ weight: '500', subsets: ['latin'] })
 
 interface ButtonProps {
-  width?: string;
-  label: string;
-  disabled?: boolean;
-  onClick?: () => void;
+  width?: string
+  label: string
+  disabled?: boolean
+  onClick?: () => void
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -20,10 +20,11 @@ const Button: React.FC<ButtonProps> = (props) => {
       className={`${styles.btn} ${rubik.className} ${isLoading ? styles.loading : ''}`}
       style={{ width: props.width, minWidth: props.width }}
       onClick={props.onClick}
-      disabled={props.disabled || isLoading}>
-        { isLoading ? 'Cargando...' : props.label }
+      disabled={props.disabled || isLoading}
+    >
+      {isLoading ? 'Cargando...' : props.label}
     </button>
-  ) 
+  )
 }
 
 export default Button

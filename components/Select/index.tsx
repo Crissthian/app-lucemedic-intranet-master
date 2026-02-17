@@ -18,15 +18,21 @@ interface SelectProps {
 }
 
 const Select: React.FC<SelectProps> = (props) => {
-  return(
+  return (
     <>
-      <select className={`${roboto.className} ${styles.selectField}`} defaultValue={props.placeholder} onChange={props.onChange}>
-        <option value={props.placeholder} disabled>{props.placeholder}</option>
-        {
-          props.options?.map((option, index) => (
-            <option key={index} value={option.value}>{option.label}</option>
-          ))
-        }
+      <select
+        className={`${roboto.className} ${styles.selectField}`}
+        defaultValue={props.placeholder}
+        onChange={props.onChange}
+      >
+        <option value={props.placeholder} disabled>
+          {props.placeholder}
+        </option>
+        {props.options?.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
     </>
   )

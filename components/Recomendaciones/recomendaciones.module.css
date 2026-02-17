@@ -87,7 +87,7 @@
   justify-content: center;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px dashed #A2C0D4;
+  border-bottom: 1px dashed #a2c0d4;
   margin: 0 15px;
   font-size: 12px;
 }
@@ -132,7 +132,7 @@
 }
 
 .empty p {
-  color: #0064D2;
+  color: #0064d2;
   font-size: 16px;
   text-transform: uppercase;
 }

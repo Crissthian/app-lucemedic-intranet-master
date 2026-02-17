@@ -37,3 +37,6 @@ next-env.d.ts
 yarn.lock
 .idea
 .env
+/temp/
+app.log
+.npm-cache/

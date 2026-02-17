@@ -2,22 +2,12 @@ import { MedicalExams } from '@/models/medical-exams'
 import { MedicalExamsDetails } from '@/models/medical-exams-details'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-// type MedicalExams = {
-//   cdg_fmed: string,
-//   fec_fmed: string,
-//   cod_t_examen: string,
-//   t_examen: string,
-//   num_dni: string,
-//   nombres: string,
-//   apellidos: string,
-// }
-
 type InitialState = {
-  showDetail: boolean,
-  showMedicalHistory: boolean,
-  showInterconsultas: boolean,
-  showRecomendaciones: boolean,
-  data: MedicalExams[],
+  showDetail: boolean
+  showMedicalHistory: boolean
+  showInterconsultas: boolean
+  showRecomendaciones: boolean
+  data: MedicalExams[]
   details: MedicalExamsDetails
 }
 
@@ -59,37 +49,28 @@ export const medicalExams = createSlice({
   initialState,
   reducers: {
     getDetail: (state, action: PayloadAction<MedicalExamsDetails>) => {
-      return {
-        ...state,
-        details: action.payload
-      }
+      state.details = action.payload
     },
     toggleDetail: (state) => {
-      return {
-        ...state,
-        showDetail: !state.showDetail
-      }
+      state.showDetail = !state.showDetail
     },
     toggleMedicalHistory: (state) => {
-      return {
-        ...state,
-        showMedicalHistory: !state.showMedicalHistory
-      }
+      state.showMedicalHistory = !state.showMedicalHistory
     },
     toggleInterconsultas: (state) => {
-      return {
-        ...state,
-        showInterconsultas: !state.showInterconsultas
-      }
+      state.showInterconsultas = !state.showInterconsultas
     },
     toggleRecomendaciones: (state) => {
-      return {
-        ...state,
-        showRecomendaciones: !state.showRecomendaciones
-      }
+      state.showRecomendaciones = !state.showRecomendaciones
     }
   }
 })
 
-export const { getDetail, toggleDetail, toggleMedicalHistory, toggleInterconsultas, toggleRecomendaciones } = medicalExams.actions
+export const {
+  getDetail,
+  toggleDetail,
+  toggleMedicalHistory,
+  toggleInterconsultas,
+  toggleRecomendaciones
+} = medicalExams.actions
 export default medicalExams.reducer

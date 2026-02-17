@@ -15,16 +15,10 @@ export const global = createSlice({
   initialState,
   reducers: {
     toggleLoading: (state) => {
-      return {
-        ...state,
-        isLoading: !state.isLoading
-      }
+      state.isLoading = !state.isLoading
     },
     toggleWelcome: (state) => {
-      return {
-        ...state,
-        showWelcome: !state.showWelcome
-      }
+      state.showWelcome = !state.showWelcome
     }
   }
 })

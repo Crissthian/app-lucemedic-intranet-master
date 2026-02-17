@@ -7,15 +7,20 @@ import { ChangeEvent } from 'react'
 const roboto = Roboto({ weight: '500', subsets: ['latin'] })
 
 interface TextFieldProps {
-  label: string;
-  type?: 'text' | 'password';
-  icon?: 'user' | 'lock';
-  value?: string;
-  onChange?: (value: string) => void;
+  label: string
+  type?: 'text' | 'password'
+  icon?: 'user' | 'lock'
+  value?: string
+  onChange?: (value: string) => void
 }
 
-const TextField: React.FC<TextFieldProps> = ({ label, type, icon, value, onChange }) => {
-
+const TextField: React.FC<TextFieldProps> = ({
+  label,
+  type,
+  icon,
+  value,
+  onChange
+}) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(event.target.value)
@@ -24,8 +29,17 @@ const TextField: React.FC<TextFieldProps> = ({ label, type, icon, value, onChang
 
   return (
     <div className={styles.textField}>
-      <FontAwesomeIcon icon={icon === 'user' ? faUser : faLock} width={'15px'} />
-      <input type={type} placeholder={label} className={roboto.className} value={value || ''} onChange={handleInputChange} />
+      <FontAwesomeIcon
+        icon={icon === 'user' ? faUser : faLock}
+        width={'15px'}
+      />
+      <input
+        type={type}
+        placeholder={label}
+        className={roboto.className}
+        value={value || ''}
+        onChange={handleInputChange}
+      />
     </div>
   )
 }

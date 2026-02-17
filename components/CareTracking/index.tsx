@@ -35,7 +35,7 @@ const CareTracking: React.FC = () => {
 
     dispatch(toggleLoading())
 
-    let path = `${process.env.API_BASE_PATH}/attention-monitoring?startDate=${startDate}&endDate=${endDate}`
+    let path = `/api/attention-monitoring?startDate=${startDate}&endDate=${endDate}`
 
     if (sede) {
       path = `${path}&headquarter=${sede}`
@@ -45,8 +45,8 @@ const CareTracking: React.FC = () => {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const result: BaseApi = await response.json()
@@ -74,14 +74,14 @@ const CareTracking: React.FC = () => {
 
       const currentDate = new Date().toISOString().split('T')[0]
 
-      let path = `${process.env.API_BASE_PATH}/attention-monitoring?startDate=${currentDate}&endDate=${currentDate}&headquarter=001`
+      let path = `/api/attention-monitoring?startDate=${currentDate}&endDate=${currentDate}&headquarter=001`
 
       const response = await fetch(path, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -106,7 +106,7 @@ const CareTracking: React.FC = () => {
       <section className={styles.searchFilters}>
         <div className={styles.filters}>
           <Select
-            placeholder="Sede"
+            placeholder='Sede'
             options={HEADQUARTERS_OPTIONS}
             onChange={(e) => setSede(e.target.value)}
           />
@@ -133,20 +133,16 @@ const CareTracking: React.FC = () => {
           </button>
         </div>
       </section>
-      {
-        attentionMonitoring.length === 0 && (
-          <Panel>
-            <EmtpyData />
-          </Panel>
-        )
-      }
-      {
-        attentionMonitoring.length > 0 && (
-          <Panel>
-            <TableTracking data={attentionMonitoring} />
-          </Panel>
-        )
-      }
+      {attentionMonitoring.length === 0 && (
+        <Panel>
+          <EmtpyData />
+        </Panel>
+      )}
+      {attentionMonitoring.length > 0 && (
+        <Panel>
+          <TableTracking data={attentionMonitoring} />
+        </Panel>
+      )}
     </div>
   )
 }

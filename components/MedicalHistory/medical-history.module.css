@@ -51,7 +51,7 @@
   background: #fff;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.10);
+  box-shadow: 0px 1px 8px 0px rgba(20, 46, 110, 0.1);
 }
 
 .card > img {
@@ -69,7 +69,6 @@
   text-transform: uppercase;
   font-size: 14px;
 }
-
 
 .modalActions {
   display: flex;

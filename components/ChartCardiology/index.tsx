@@ -8,13 +8,13 @@ import {
   Legend,
   Tooltip,
   XAxis,
-  YAxis,
+  YAxis
 } from 'recharts'
 import { BaseApi } from '@/models/base'
 import { CardiologyReport } from '@/models/cardiology-report'
 
 interface ChartCardiologyProps {
-  dni: string;
+  dni: string
 }
 
 const ChartCardiology: React.FC<ChartCardiologyProps> = (props) => {
@@ -24,13 +24,13 @@ const ChartCardiology: React.FC<ChartCardiologyProps> = (props) => {
 
   useEffect(() => {
     const getCardiologyReport = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/cardiology/${props.dni}`
+      const url = `/api/medical-exams/historical/cardiology/${props.dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -44,12 +44,14 @@ const ChartCardiology: React.FC<ChartCardiologyProps> = (props) => {
       }
 
       if (result.status) {
-        const data = result.data.cardiology_reports.map((report: CardiologyReport) => {
-          return {
-            ...report,
-            fec_reg: report.fec_reg.slice(0, 10),
+        const data = result.data.cardiology_reports.map(
+          (report: CardiologyReport) => {
+            return {
+              ...report,
+              fec_reg: report.fec_reg.slice(0, 10)
+            }
           }
-        })
+        )
         setCardiologyReport(data)
       }
     }
@@ -61,21 +63,21 @@ const ChartCardiology: React.FC<ChartCardiologyProps> = (props) => {
     <>
       {cardiologyReport.length > 0 && (
         <BarChart width={550} height={400} data={cardiologyReport}>
-          <CartesianGrid strokeDasharray="5 5" />
-          <XAxis dataKey="fec_reg">
-            <LabelList dataKey="fec_reg" position="top" />
+          <CartesianGrid strokeDasharray='5 5' />
+          <XAxis dataKey='fec_reg'>
+            <LabelList dataKey='fec_reg' position='top' />
           </XAxis>
           <YAxis domain={[0, 100]} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="p_sistolica" fill="#0496FF">
-            <LabelList dataKey="p_sistolica" position="top" />
+          <Bar dataKey='p_sistolica' fill='#0496FF'>
+            <LabelList dataKey='p_sistolica' position='top' />
           </Bar>
-          <Bar dataKey="p_diastolica" fill="#1973D6">
-            <LabelList dataKey="p_diastolica" position="top" />
+          <Bar dataKey='p_diastolica' fill='#1973D6'>
+            <LabelList dataKey='p_diastolica' position='top' />
           </Bar>
-          <Bar dataKey="f_cardiaca" fill="#FF715B">
-            <LabelList dataKey="f_cardiaca" position="top" />
+          <Bar dataKey='f_cardiaca' fill='#FF715B'>
+            <LabelList dataKey='f_cardiaca' position='top' />
           </Bar>
         </BarChart>
       )}

@@ -11,12 +11,12 @@ import {
   Legend,
   Tooltip,
   XAxis,
-  YAxis,
+  YAxis
 } from 'recharts'
 // import { BarChart } from '@mui/x-charts'
 
 interface ChartLaboratoryExamsProps {
-  dni: string;
+  dni: string
 }
 
 const ChartLaboratoryExams: React.FC<ChartLaboratoryExamsProps> = (props) => {
@@ -26,13 +26,13 @@ const ChartLaboratoryExams: React.FC<ChartLaboratoryExamsProps> = (props) => {
 
   useEffect(() => {
     const getLaboratoryExamReport = async () => {
-      const url = `${process.env.API_BASE_PATH}/medical-exams/historical/laboratory-exams/${props.dni}`
+      const url = `/api/medical-exams/historical/laboratory-exams/${props.dni}`
       const response = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       })
 
       const result: BaseApi = await response.json()
@@ -54,7 +54,7 @@ const ChartLaboratoryExams: React.FC<ChartLaboratoryExamsProps> = (props) => {
               glucosa: report.glucosa === '-' ? 0 : report.glucosa,
               trigliceridos:
                 report.trigliceridos === '-' ? 0 : report.trigliceridos,
-              colesterol: report.colesterol === '-' ? 0 : report.colesterol,
+              colesterol: report.colesterol === '-' ? 0 : report.colesterol
             }
           }
         )
@@ -69,24 +69,24 @@ const ChartLaboratoryExams: React.FC<ChartLaboratoryExamsProps> = (props) => {
     <>
       {laboratoryExams.length > 0 && (
         <BarChart width={1050} height={400} data={laboratoryExams}>
-          <CartesianGrid strokeDasharray="5 5" />
-          <XAxis dataKey="fec_reg">
-            <LabelList dataKey="fec_reg" position="top" />
+          <CartesianGrid strokeDasharray='5 5' />
+          <XAxis dataKey='fec_reg'>
+            <LabelList dataKey='fec_reg' position='top' />
           </XAxis>
           <YAxis domain={[0, 100]} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="hemoglobina" fill="#FE7E6B">
-            <LabelList dataKey="hemoglobina" position="top" />
+          <Bar dataKey='hemoglobina' fill='#FE7E6B'>
+            <LabelList dataKey='hemoglobina' position='top' />
           </Bar>
-          <Bar dataKey="colesterol" fill="#6665DD">
-            <LabelList dataKey="colesterol" position="top" />
+          <Bar dataKey='colesterol' fill='#6665DD'>
+            <LabelList dataKey='colesterol' position='top' />
           </Bar>
-          <Bar dataKey="trigliceridos" fill="#0496FF">
-            <LabelList dataKey="trigliceridos" position="top" />
+          <Bar dataKey='trigliceridos' fill='#0496FF'>
+            <LabelList dataKey='trigliceridos' position='top' />
           </Bar>
-          <Bar dataKey="glucosa" fill="#34D1BF">
-            <LabelList dataKey="glucosa" position="top" />
+          <Bar dataKey='glucosa' fill='#34D1BF'>
+            <LabelList dataKey='glucosa' position='top' />
           </Bar>
         </BarChart>
         // <BarChart

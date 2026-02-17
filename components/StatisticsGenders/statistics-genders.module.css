@@ -6,7 +6,7 @@
   gap: 50px;
 }
 .bar {
-  background: #F1F5F8;
+  background: #f1f5f8;
   border-radius: 7px;
   height: 250px;
   width: 50px;
@@ -15,12 +15,12 @@
   align-items: flex-end;
 }
 .inner {
-  background: #0073ED;
+  background: #0073ed;
   width: 100%;
   border-radius: 7px;
 }
 .innerGreen {
-  background: #8E3DBA;
+  background: #8e3dba;
   width: 100%;
   border-radius: 7px;
 }
@@ -35,13 +35,13 @@
   text-align: center;
   font-weight: bold;
   font-size: 28px;
-  color: #4F4F4F;
+  color: #4f4f4f;
 }
 .graphFooter > p > span {
   text-transform: uppercase;
   font-weight: normal;
   font-size: 10px;
-  color: #BDBDBD;
+  color: #bdbdbd;
   display: block;
   margin-top: 5px;
 }

@@ -7,7 +7,7 @@ import {
   faChevronDown,
   faChevronUp,
   faSignOut,
-  faUser,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -17,7 +17,7 @@ import useUserProfile from '@/hooks/useUserProfile'
 const roboto500 = Roboto({ weight: '500', subsets: ['latin'] })
 const roboto400 = Roboto({ weight: '400', subsets: ['latin'] })
 
-const Header: React.FC = (props) => {
+const Header: React.FC = () => {
   const router = useRouter()
 
   const currentUser = useUserProfile()
@@ -41,39 +41,47 @@ const Header: React.FC = (props) => {
   }
 
   const handleActions = () => {
-    if (!showActions) {
-      setShowActions(true)
-      return
-    }
-
-    setShowActions(false)
+    setShowActions((prev) => !prev)
   }
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('profileLogged')
-    window.location.reload()
+    router.push('/auth')
   }
 
   return (
     <div className={styles.header}>
-      <Link href="/" as={'/'}>
+      <Link href='/' as={'/'}>
         <Image
-          src="/lucemedic-logo.svg"
-          alt="Lucemedic"
+          src='/lucemedic-logo.svg'
+          alt='Lucemedic'
           width={300}
           height={66}
           priority
         />
       </Link>
       <div className={styles.currentUser}>
-        <div
-          className={styles.profilePicture}
-        ></div>
+        <div className={styles.profilePicture}>
+          {currentUser?.photoUrl && (
+            <img
+              src={`/api/photos/${currentUser.photoUrl}`}
+              alt='Profile'
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '10%'
+              }}
+            />
+          )}
+        </div>
         <div className={styles.personalData}>
           <h2 className={roboto500.className}>
-            {getFullName(currentUser?.firstName || '', currentUser?.lastName || '') ||
-              'Nombres y Apellidos'}
+            {getFullName(
+              currentUser?.firstName || '',
+              currentUser?.lastName || ''
+            ) || 'Nombres y Apellidos'}
           </h2>
           <h3 className={roboto500.className}>
             {currentUser?.empresa || 'Empresa'}
@@ -84,9 +92,9 @@ const Header: React.FC = (props) => {
         </div>
         <div className={styles.actions} onClick={handleActions}>
           {showActions ? (
-            <FontAwesomeIcon icon={faChevronUp} color="#BBCDD9" />
+            <FontAwesomeIcon icon={faChevronUp} color='#BBCDD9' />
           ) : (
-            <FontAwesomeIcon icon={faChevronDown} color="#BBCDD9" />
+            <FontAwesomeIcon icon={faChevronDown} color='#BBCDD9' />
           )}
         </div>
       </div>
