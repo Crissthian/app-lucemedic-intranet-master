@@ -1,0 +1,4 @@
+{"level":"info","message":"Login attempt for user 46222532","timestamp":"2026-02-17T13:29:57.560Z"}
+{"level":"info","message":"User logged in successfully","timestamp":"2026-02-17T13:29:57.831Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-17T13:30:09.602Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-17T13:30:09.605Z"}
