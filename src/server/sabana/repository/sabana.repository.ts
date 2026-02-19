@@ -415,9 +415,8 @@ export default class SabanaRepository {
 
             ,
 
-              (select APTITUD from m_7D a where a.cdg_fmed=f.cdg_fmed)as anexo16a,f.opcaptitu AS ALTURA
-
-      
+              (select APTITUD from m_7D a where a.cdg_fmed=f.cdg_fmed)as anexo16a,f.opcaptitu AS ALTURA,
+            f.unidad AS [UNIDAD]
 
         FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa,M_CONTRATO co
 
