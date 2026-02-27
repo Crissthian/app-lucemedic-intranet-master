@@ -1,28 +1,27 @@
 'use client'
-import React, { useState } from 'react'
-import { Slide, ToastContainer, toast } from 'react-toastify'
-import * as XLSX from 'xlsx-js-style'
-import { saveAs } from 'file-saver'
-import styles from './datatable.module.css'
-import { Roboto, Rubik } from 'next/font/google'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { BaseApi } from '@/models/base'
+import { toggleLoading } from '@/redux/features/global.slice'
+import { getDetail, toggleDetail, toggleInterconsultas } from '@/redux/features/medical-exams.slice'
+import { AppDispatch } from '@/redux/store'
+import { openBase64InNewWindow } from '@/shared/base64'
+import { formatFullName } from '@/shared/utils'
 import {
   faCircleInfo,
   faFile,
   faFilePdf
 } from '@fortawesome/free-solid-svg-icons'
-import Button from '../Button'
-import { formatFullName } from '@/shared/utils'
-import { openBase64InNewWindow } from '@/shared/base64'
-import { getDetail, toggleDetail } from '@/redux/features/medical-exams.slice'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '@/redux/store'
-import { BaseApi } from '@/models/base'
-import { useRouter } from 'next/navigation'
-import { toggleLoading } from '@/redux/features/global.slice'
-import 'react-toastify/dist/ReactToastify.css'
-import { sendGAEvent } from '@next/third-parties/google'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { saveAs } from 'file-saver'
 import moment from 'moment'
+import { Roboto, Rubik } from 'next/font/google'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Slide, ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import * as XLSX from 'xlsx-js-style'
+import Button from '../Button'
+import styles from './datatable.module.css'
 
 const rubik = Rubik({ weight: '400', subsets: ['latin'] })
 const roboto400 = Roboto({ weight: '400', subsets: ['latin'] })
@@ -43,6 +42,44 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
   const [selecteds, setSelecteds] = useState<string[]>([])
   const [selectAll, setSelectAll] = useState(false)
+  const [consultationsMap, setConsultationsMap] = useState<Record<string, boolean>>({})
+
+  useEffect(() => {
+    if (!props.data || props.data.length === 0) return
+
+    const token = localStorage.getItem('accessToken')
+    const closedItems = props.data.filter((item) => item.close_status === 1)
+
+    Promise.all(
+      closedItems.map(async (item) => {
+        try {
+          const res = await fetch(`/api/medical-exams/${item.cdg_fmed}/consultations`, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          })
+          const result: BaseApi = await res.json()
+          return {
+            cdg_fmed: item.cdg_fmed,
+            hasConsultations:
+              result.status &&
+              Array.isArray(result.data?.consultations) &&
+              result.data.consultations.length > 0
+          }
+        } catch {
+          return { cdg_fmed: item.cdg_fmed, hasConsultations: false }
+        }
+      })
+    ).then((results) => {
+      const map: Record<string, boolean> = {}
+      results.forEach(({ cdg_fmed, hasConsultations }) => {
+        map[cdg_fmed] = hasConsultations
+      })
+      setConsultationsMap(map)
+    })
+  }, [props.data])
 
   const handleDetail = async (fmed: string) => {
     dispatch(toggleLoading())
@@ -147,6 +184,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         'application/pdf'
       )
     }
+  }
+
+  const handleOpenInterconsultas = (item: any) => {
+    dispatch(getDetail(item))
+    dispatch(toggleInterconsultas())
   }
 
   const handleChecked = (id: string) => {
@@ -587,7 +629,10 @@ const DataTable: React.FC<DataTableProps> = (props) => {
               <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado
             </div>
             <div>
-              <FontAwesomeIcon icon={faCircleInfo} width={'15px'} /> EMO
+              <FontAwesomeIcon icon={faCircleInfo} width={'10px'} /> EMO
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faFile} width={'15px'} /> Interconsulta
             </div>
           </div>
           <div className={styles.dataTableBody}>
@@ -630,6 +675,19 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                       onClick={() => downloadEMOFile(item.cdg_fmed)}
                     />
                   )}
+                </div>
+                <div className={styles.columnInterconsulta}>
+                  {item.close_status === 1 ? (
+                    consultationsMap[item.cdg_fmed] ? (
+                      <FontAwesomeIcon
+                        icon={faFilePdf}
+                        width={'28px'}
+                        onClick={() => handleOpenInterconsultas(item)}
+                      />
+                    ) : (
+                      <span className={styles.noInterconsulta}>—</span>
+                    )
+                  ) : null}
                 </div>
                 <div className={styles.dataTableItemActions}>
                   <Button
