@@ -15,3 +15,7 @@ export const JWT_SECRET = jwtSecret
 export const FTP_HOST = process.env.FTP_HOST || ''
 export const FTP_USER = process.env.FTP_USER || ''
 export const FTP_PASSWORD = process.env.FTP_PASSWORD || ''
+
+export const FTP_AUDIOMETRY_HOST = process.env.FTP_AUDIOMETRY_HOST || '192.168.1.34'
+export const FTP_AUDIOMETRY_USER = process.env.FTP_AUDIOMETRY_USER || 'administrador'
+export const FTP_AUDIOMETRY_PASSWORD = process.env.FTP_AUDIOMETRY_PASSWORD || 'luc3'

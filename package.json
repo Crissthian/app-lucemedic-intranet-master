@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.2.0",
+    "@marsaud/smb2": "^0.18.0",
     "@next/third-parties": "^16.1.6",
     "@reduxjs/toolkit": "^2.11.2",
     "adm-zip": "^0.5.16",

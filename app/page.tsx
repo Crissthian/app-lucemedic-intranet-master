@@ -229,7 +229,11 @@ export default function HomePage() {
               <DetailExams />
             </Panel>
           )}
-        {!showWelcome && !showViewDetail && !showMedicalHistory && (
+        {!showWelcome &&
+          !showViewDetail &&
+          !showMedicalHistory &&
+          !showInterconsultas &&
+          !showRecomendaciones && (
           <>
             <section className={styles.searchFilters}>
               <div className={styles.filters}>

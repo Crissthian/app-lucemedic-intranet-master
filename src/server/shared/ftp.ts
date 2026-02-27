@@ -12,15 +12,17 @@ export class FTPClient {
     remoteFilePath: string,
     host?: string,
     _subfolder?: string,
-    _extension?: string
+    _extension?: string,
+    user?: string,
+    password?: string
   ): Promise<Buffer> {
     const client = new ftp.Client()
     client.ftp.verbose = true
 
     try {
       const hostToUse = host || FTP_HOST
-      const userToUse = FTP_USER
-      const passwordToUse = FTP_PASSWORD
+      const userToUse = user ?? FTP_USER
+      const passwordToUse = password ?? FTP_PASSWORD
 
       await client.access({
         host: hostToUse,

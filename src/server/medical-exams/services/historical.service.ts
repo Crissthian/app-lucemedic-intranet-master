@@ -1,4 +1,4 @@
-import { FTPClient, logger } from '../../shared'
+import { FTPClient, FTP_AUDIOMETRY_HOST, SMBClient, logger } from '../../shared'
 import {
   CardiologyReport,
   IMCReport,
@@ -18,11 +18,13 @@ type AudiometryImagesResult = {
 }
 
 export default class HistoricalService {
-  private readonly sambaClient: FTPClient
+  private readonly ftpClient: FTPClient
+  private readonly sambaClient: SMBClient
   private readonly repository: IHistoricalRepository
 
   constructor() {
-    this.sambaClient = new FTPClient()
+    this.ftpClient = new FTPClient()
+    this.sambaClient = new SMBClient()
     this.repository = new HistoricalRepository()
   }
 
@@ -42,7 +44,7 @@ export default class HistoricalService {
       logger.info(`Downloading radiology files: ${paths.length}`)
 
       for (const path of paths) {
-        const file = await this.sambaClient.downloadFile(
+        const file = await this.ftpClient.downloadFile(
           path,
           undefined,
           'empresas',
@@ -70,20 +72,23 @@ export default class HistoricalService {
       const audiometries = await this.repository.findAudiometry(dni)
 
       logger.info(`Audiometries found: ${audiometries.length}`)
+      logger.info(`Audiometries raw data: ${JSON.stringify(audiometries)}`)
 
       for (const audiometry of audiometries) {
-        const path = `/${audiometry.year}/${this.getMonth(audiometry.month)}/${audiometry.cdg_reg}.png`
+        const translatedMonth = this.getMonth(audiometry.month)
+        const path = `/${audiometry.year}/${translatedMonth}/${audiometry.cdg_reg}.png`
+        logger.info(`Audiometry path constructed: ${path} (raw month: "${audiometry.month}", translated: "${translatedMonth}")`)
         paths.push(path)
       }
 
       logger.info(`Downloading audiometry files: ${paths.length}`)
 
       for (const path of paths) {
+        logger.info(`Attempting FTP download from ${FTP_AUDIOMETRY_HOST}, path: ${path}`)
         const file = await this.sambaClient.downloadFile(
           path,
-          '192.168.1.34',
-          'graficosotorrino',
-          'png'
+          undefined,
+          'graficosotorrino'
         )
         localFiles.push(file)
       }
@@ -93,7 +98,8 @@ export default class HistoricalService {
         localFiles
       }
     } catch (error: unknown) {
-      logger.error((error as Error).message)
+      logger.error(`downloadAudiometryImages error for dni ${dni}: ${(error as Error).message}`)
+      logger.error(`Stack: ${(error as Error).stack}`)
 
       throw new Error('Error while trying to download audiometry images')
     }
@@ -131,53 +137,53 @@ export default class HistoricalService {
 
   private getMonth(month: string): string {
     if (month === 'September') {
-      return 'Setiembre'
+      return 'SETIEMBRE'
     }
 
     if (month === 'November') {
-      return 'Noviembre'
+      return 'NOVIEMBRE'
     }
 
     if (month === 'August') {
-      return 'Agosto'
+      return 'AGOSTO'
     }
 
     if (month === 'July') {
-      return 'Julio'
+      return 'JULIO'
     }
 
     if (month == 'June') {
-      return 'Junio'
+      return 'JUNIO'
     }
 
     if (month === 'May') {
-      return 'Mayo'
+      return 'MAYO'
     }
 
     if (month === 'March') {
-      return 'Marzo'
+      return 'MARZO'
     }
 
     if (month === 'April') {
-      return 'Abril'
+      return 'ABRIL'
     }
 
     if (month === 'February') {
-      return 'Febrero'
+      return 'FEBRERO'
     }
 
     if (month === 'December') {
-      return 'Diciembre'
+      return 'DICIEMBRE'
     }
 
     if (month === 'October') {
-      return 'Octubre'
+      return 'OCTUBRE'
     }
 
     if (month === 'January') {
-      return 'Enero'
+      return 'ENERO'
     }
 
-    return month
+    return month.toUpperCase()
   }
 }
