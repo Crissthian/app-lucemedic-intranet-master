@@ -6,7 +6,7 @@
   padding: 15px 20px;
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 30px 1fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-template-columns: 30px 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
   gap: 5px;
   align-items: center;
   color: var(--table-header-color);
@@ -42,7 +42,7 @@
 }
 .dataTableItem {
   display: grid;
-  grid-template-columns: 30px 1fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-template-columns: 30px 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
   gap: 10px;
   justify-content: center;
   align-items: center;
@@ -98,6 +98,14 @@
 }
 .columnEMO {
   padding-left: 20px;
+}
+.columnInterconsulta {
+  padding-left: 20px;
+}
+.noInterconsulta {
+  color: #a2c0d4;
+  font-size: 18px;
+  padding-left: 8px;
 }
 .totalRows {
   font-size: 14px;
