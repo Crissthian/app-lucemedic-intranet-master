@@ -84,7 +84,7 @@ export async function handleHistoricalAudiometry(
   }
 
   try {
-    logger.info(`Executing get radiology images of user: ${dni}`)
+    logger.info(`Executing get audiometry images of user: ${dni}`)
 
     const { localFiles, audiometries } =
       await historicalService.downloadAudiometryImages(dni)

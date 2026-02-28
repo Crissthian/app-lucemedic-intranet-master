@@ -46,3 +46,5 @@ npm start
 
 - El frontend consume la API interna via rutas relativas `/api`.
 - La conexion SQL en `src/server/shared/database.ts` usa singleton para evitar reconexiones durante HMR.
+- El acceso SMB para audiometría (`@marsaud/smb2`) requiere OpenSSL legacy para NTLM en Node moderno.
+- Los scripts `dev` y `start` ya incluyen `--openssl-legacy-provider`; si usas PM2/comando custom, define `NODE_OPTIONS=--openssl-legacy-provider`.
