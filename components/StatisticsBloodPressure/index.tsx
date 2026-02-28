@@ -10,7 +10,7 @@ interface StatisticsBloodPressureProps {
 const StatisticsBloodPressure: React.FC<StatisticsBloodPressureProps> = (
   props
 ) => {
-  let data = props.data.map((item) => {
+  const data = props.data.map((item) => {
     return [item.categoria, item.cantidad]
   })
 

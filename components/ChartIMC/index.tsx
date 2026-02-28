@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react'
 import { BaseApi } from '@/models/base'
 import { IMCReport } from '@/models/imc-report'
 import {
-  Bar,
-  BarChart,
   CartesianGrid,
   LabelList,
   Legend,

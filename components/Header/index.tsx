@@ -64,9 +64,11 @@ const Header: React.FC = () => {
       <div className={styles.currentUser}>
         <div className={styles.profilePicture}>
           {currentUser?.photoUrl && (
-            <img
+            <Image
               src={`/api/photos/${currentUser.photoUrl}`}
               alt='Profile'
+              width={55}
+              height={66}
               style={{
                 width: '100%',
                 height: '100%',

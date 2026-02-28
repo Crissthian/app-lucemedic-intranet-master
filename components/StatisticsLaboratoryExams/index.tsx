@@ -4,7 +4,6 @@ import {
   BarChart,
   CartesianGrid,
   LabelList,
-  Legend,
   Tooltip,
   XAxis,
   YAxis
@@ -14,11 +13,6 @@ import StatisticsGraphCard from '../StatisticsGraphCard'
 
 interface StatisticsLaboratoryExamsProps {
   data: LaboratoryExams[]
-}
-
-const size = {
-  width: 400,
-  height: 200
 }
 
 const StatisticsLaboratoryExams: React.FC<StatisticsLaboratoryExamsProps> = (

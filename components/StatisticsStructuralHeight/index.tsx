@@ -10,7 +10,7 @@ interface StatisticsStructuralHeightProps {
 const StatisticsStructuralHeight: React.FC<StatisticsStructuralHeightProps> = (
   props
 ) => {
-  let data = props.data.map((item) => {
+  const data = props.data.map((item) => {
     return [item.categoria, item.cantidad]
   })
 

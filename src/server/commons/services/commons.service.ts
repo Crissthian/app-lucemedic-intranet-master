@@ -73,12 +73,13 @@ export default class CommonsService {
   async uploadPhoto(
     buffer: Buffer,
     originalFilename: string,
-    _mimetype: string
+    mimetype: string
   ): Promise<string> {
     try {
       const remoteFilePath = `/FOTOUS/${originalFilename}`
 
       logger.info('Uploading photo')
+      logger.info(`Photo mimetype: ${mimetype}`)
 
       const sambaResult = await this.sambaClient.uploadFile(
         buffer,

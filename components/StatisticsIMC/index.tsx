@@ -1,12 +1,9 @@
 'use client'
 import {
-  Area,
-  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
   LabelList,
-  Legend,
   Tooltip,
   XAxis,
   YAxis

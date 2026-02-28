@@ -2,3 +2,1169 @@
 {"level":"info","message":"User logged in successfully","timestamp":"2026-02-17T13:29:57.831Z"}
 {"level":"info","message":"Token decoded successfully","timestamp":"2026-02-17T13:30:09.602Z"}
 {"level":"info","message":"Executing get medical exams","timestamp":"2026-02-17T13:30:09.605Z"}
+{"level":"info","message":"Login attempt for user 46222532","timestamp":"2026-02-28T13:52:24.248Z"}
+{"level":"info","message":"User logged in successfully","timestamp":"2026-02-28T13:52:24.530Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:34.371Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T13:52:34.374Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.357Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T13:52:36.362Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.364Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T13:52:36.364Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.366Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T13:52:36.367Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.368Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T13:52:36.369Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.541Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T13:52:36.542Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.616Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T13:52:36.618Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.684Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T13:52:36.685Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:36.700Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T13:52:36.701Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:37.942Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T13:52:37.944Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:38.030Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T13:52:38.031Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T13:52:40.292Z"}
+{"level":"info","message":"Executing download consultation","timestamp":"2026-02-28T13:52:40.295Z"}
+{"level":"info","message":"Downloading consultation file","timestamp":"2026-02-28T13:52:40.297Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T13:52:40.531Z"}
+{"level":"info","message":"File downloaded to memory (490343 bytes)","timestamp":"2026-02-28T13:52:40.694Z"}
+{"level":"info","message":"Login attempt for user 46222532","timestamp":"2026-02-28T14:35:12.058Z"}
+{"level":"info","message":"User logged in successfully","timestamp":"2026-02-28T14:35:12.468Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:27.014Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:35:27.016Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.269Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:35:29.273Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.275Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:35:29.276Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.277Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:35:29.278Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.279Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:35:29.279Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.475Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:35:29.476Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.514Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:35:29.515Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.556Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:35:29.559Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:29.572Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:35:29.573Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:33.946Z"}
+{"level":"info","message":"Executing get medical exam","timestamp":"2026-02-28T14:35:33.949Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:39.065Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:40.667Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:43.082Z"}
+{"level":"info","message":"Executing download diagnosis","timestamp":"2026-02-28T14:35:43.084Z"}
+{"level":"info","message":"Preparing diagnosis download","timestamp":"2026-02-28T14:35:43.085Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:43.293Z"}
+{"level":"info","message":"File downloaded to memory (141337 bytes)","timestamp":"2026-02-28T14:35:43.390Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:47.770Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:35:47.777Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:47.963Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:35:47.968Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:48.009Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:35:48.015Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:48.109Z"}
+{"level":"info","message":"Executing get radiology images of user: 45613613","timestamp":"2026-02-28T14:35:48.113Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:48.140Z"}
+{"level":"info","message":"Executing get radiology images of user: \"45613613\"","timestamp":"2026-02-28T14:35:48.147Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:48.603Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:35:48.605Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:48.732Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:35:48.735Z"}
+{"level":"info","message":"Audiometries found: 3","timestamp":"2026-02-28T14:35:50.368Z"}
+{"level":"info","message":"Audiometries raw data: [{\"cdg_reg\":\"0000036537\",\"year\":\"2026\",\"month\":\"February\",\"cdg_fmed\":\"0080407374\",\"fec_fmed\":\"2026-02-02T00:00:00.000Z\",\"t_examen\":\"EXAMEN PRE OCUPACIONAL\",\"obs_audio\":\"AUDICIÓN NORMAL / \"},{\"cdg_reg\":\"0000024333\",\"year\":\"2024\",\"month\":\"July\",\"cdg_fmed\":\"0080388495\",\"fec_fmed\":\"2024-07-17T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"AUDICIÓN NORMAL\\r\\n\"},{\"cdg_reg\":\"0000020673\",\"year\":\"2023\",\"month\":\"June\",\"cdg_fmed\":\"0080382582\",\"fec_fmed\":\"2023-06-26T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"  HIPOACUSIA CONDUCTIVA BILATERAL LEVE / \"}]","timestamp":"2026-02-28T14:35:50.370Z"}
+{"level":"info","message":"Audiometry path constructed: /2026/FEBRERO/0000036537.png (raw month: \"February\", translated: \"FEBRERO\")","timestamp":"2026-02-28T14:35:50.392Z"}
+{"level":"info","message":"Audiometry path constructed: /2024/JULIO/0000024333.png (raw month: \"July\", translated: \"JULIO\")","timestamp":"2026-02-28T14:35:50.397Z"}
+{"level":"info","message":"Audiometry path constructed: /2023/JUNIO/0000020673.png (raw month: \"June\", translated: \"JUNIO\")","timestamp":"2026-02-28T14:35:50.398Z"}
+{"level":"info","message":"Downloading audiometry files: 3","timestamp":"2026-02-28T14:35:50.399Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2026/FEBRERO/0000036537.png","timestamp":"2026-02-28T14:35:50.406Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:35:50.410Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2026\\FEBRERO\\0000036537.png","timestamp":"2026-02-28T14:35:50.412Z"}
+{"level":"info","message":"Radiologies found: 3","timestamp":"2026-02-28T14:35:50.581Z"}
+{"level":"info","message":"Downloading radiology files: 3","timestamp":"2026-02-28T14:35:50.584Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:50.737Z"}
+{"level":"info","message":"File downloaded to memory (200991 bytes)","timestamp":"2026-02-28T14:35:50.920Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:35:51.086Z"}
+{"level":"info","message":"SMB file downloaded (7829 bytes)","timestamp":"2026-02-28T14:35:51.251Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:51.290Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2024/JULIO/0000024333.png","timestamp":"2026-02-28T14:35:51.429Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:35:51.431Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2024\\JULIO\\0000024333.png","timestamp":"2026-02-28T14:35:51.432Z"}
+{"level":"info","message":"File downloaded to memory (211930 bytes)","timestamp":"2026-02-28T14:35:51.449Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:51.616Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:35:51.743Z"}
+{"level":"info","message":"File downloaded to memory (230069 bytes)","timestamp":"2026-02-28T14:35:51.751Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:35:51.759Z"}
+{"level":"info","message":"SMB file downloaded (7398 bytes)","timestamp":"2026-02-28T14:35:51.807Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:51.885Z"}
+{"level":"info","message":"Executing get radiology images of user: \"45613613\"","timestamp":"2026-02-28T14:35:51.889Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2023/JUNIO/0000020673.png","timestamp":"2026-02-28T14:35:51.922Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:35:51.926Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2023\\JUNIO\\0000020673.png","timestamp":"2026-02-28T14:35:51.927Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:52.020Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:35:52.021Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:52.067Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:35:52.069Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:35:52.187Z"}
+{"level":"info","message":"SMB file downloaded (9093 bytes)","timestamp":"2026-02-28T14:35:52.226Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:35:52.344Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:52.413Z"}
+{"level":"info","message":"Executing get radiology images of user: 45613613","timestamp":"2026-02-28T14:35:52.415Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:52.536Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:35:52.537Z"}
+{"level":"info","message":"Radiologies found: 3","timestamp":"2026-02-28T14:35:52.550Z"}
+{"level":"info","message":"Downloading radiology files: 3","timestamp":"2026-02-28T14:35:52.550Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:52.581Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:35:52.583Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:52.704Z"}
+{"level":"info","message":"File downloaded to memory (200991 bytes)","timestamp":"2026-02-28T14:35:52.851Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:53.000Z"}
+{"level":"info","message":"Audiometries found: 3","timestamp":"2026-02-28T14:35:53.087Z"}
+{"level":"info","message":"Audiometries raw data: [{\"cdg_reg\":\"0000036537\",\"year\":\"2026\",\"month\":\"February\",\"cdg_fmed\":\"0080407374\",\"fec_fmed\":\"2026-02-02T00:00:00.000Z\",\"t_examen\":\"EXAMEN PRE OCUPACIONAL\",\"obs_audio\":\"AUDICIÓN NORMAL / \"},{\"cdg_reg\":\"0000024333\",\"year\":\"2024\",\"month\":\"July\",\"cdg_fmed\":\"0080388495\",\"fec_fmed\":\"2024-07-17T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"AUDICIÓN NORMAL\\r\\n\"},{\"cdg_reg\":\"0000020673\",\"year\":\"2023\",\"month\":\"June\",\"cdg_fmed\":\"0080382582\",\"fec_fmed\":\"2023-06-26T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"  HIPOACUSIA CONDUCTIVA BILATERAL LEVE / \"}]","timestamp":"2026-02-28T14:35:53.089Z"}
+{"level":"info","message":"Audiometry path constructed: /2026/FEBRERO/0000036537.png (raw month: \"February\", translated: \"FEBRERO\")","timestamp":"2026-02-28T14:35:53.091Z"}
+{"level":"info","message":"Audiometry path constructed: /2024/JULIO/0000024333.png (raw month: \"July\", translated: \"JULIO\")","timestamp":"2026-02-28T14:35:53.093Z"}
+{"level":"info","message":"Audiometry path constructed: /2023/JUNIO/0000020673.png (raw month: \"June\", translated: \"JUNIO\")","timestamp":"2026-02-28T14:35:53.097Z"}
+{"level":"info","message":"Downloading audiometry files: 3","timestamp":"2026-02-28T14:35:53.098Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2026/FEBRERO/0000036537.png","timestamp":"2026-02-28T14:35:53.099Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:35:53.103Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2026\\FEBRERO\\0000036537.png","timestamp":"2026-02-28T14:35:53.105Z"}
+{"level":"info","message":"File downloaded to memory (211930 bytes)","timestamp":"2026-02-28T14:35:53.188Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:35:53.325Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:35:53.413Z"}
+{"level":"info","message":"File downloaded to memory (230069 bytes)","timestamp":"2026-02-28T14:35:53.495Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:35:53.542Z"}
+{"level":"info","message":"SMB file downloaded (7829 bytes)","timestamp":"2026-02-28T14:35:53.576Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:53.819Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2024/JULIO/0000024333.png","timestamp":"2026-02-28T14:35:53.827Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:35:53.829Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2024\\JULIO\\0000024333.png","timestamp":"2026-02-28T14:35:53.831Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:35:54.414Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:54.485Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:35:54.488Z"}
+{"level":"info","message":"SMB file downloaded (7398 bytes)","timestamp":"2026-02-28T14:35:54.500Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2023/JUNIO/0000020673.png","timestamp":"2026-02-28T14:35:54.607Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:35:54.612Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2023\\JUNIO\\0000020673.png","timestamp":"2026-02-28T14:35:54.613Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:35:54.851Z"}
+{"level":"info","message":"SMB file downloaded (9093 bytes)","timestamp":"2026-02-28T14:35:54.876Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:35:54.981Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:57.161Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:57.256Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:59.229Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:35:59.230Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:59.441Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:35:59.442Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:35:59.502Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:35:59.503Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:03.095Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:05.638Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:07.232Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:08.717Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:10.245Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:13.703Z"}
+{"level":"info","message":"Gettings statistics check {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2023-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:13.709Z"}
+{"level":"info","message":"Statistics check: [{\"cantidad\":0}]","timestamp":"2026-02-28T14:36:14.318Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:22.934Z"}
+{"level":"info","message":"Gettings statistics check {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:22.936Z"}
+{"level":"info","message":"Statistics check: [{\"cantidad\":134}]","timestamp":"2026-02-28T14:36:23.233Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:23.314Z"}
+{"level":"info","message":"Gettings statistics genders {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:23.315Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:23.330Z"}
+{"level":"info","message":"Gettings statistics ages {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:23.331Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:23.353Z"}
+{"level":"info","message":"Gettings statistics medical-fitness {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:23.354Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:23.389Z"}
+{"level":"info","message":"Gettings statistics nutritional-profile {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:23.391Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:23.403Z"}
+{"level":"info","message":"Gettings statistics blood-pressure {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:23.404Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:23.416Z"}
+{"level":"info","message":"Gettings statistics osteo-muscular-pathologies {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:23.417Z"}
+{"level":"info","message":"StatisticsService.findAges | data: [{\"rango_edad\":\"18-39 años\",\"cantidad\":85},{\"rango_edad\":\"40-49 años\",\"cantidad\":25},{\"rango_edad\":\"50 años o más\",\"cantidad\":24}]","timestamp":"2026-02-28T14:36:24.362Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:24.427Z"}
+{"level":"info","message":"Gettings statistics exams {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:24.429Z"}
+{"level":"info","message":"StatisticsService.findGenders | data: [{\"masculino\":118,\"femenino\":16,\"total\":134}]","timestamp":"2026-02-28T14:36:24.437Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:24.462Z"}
+{"level":"info","message":"Gettings statistics audiometry {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:24.462Z"}
+{"level":"info","message":"query audiometria","timestamp":"2026-02-28T14:36:24.464Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:24.487Z"}
+{"level":"info","message":"Gettings statistics spirometry {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:24.488Z"}
+{"level":"info","message":"StatisticsService.findBloodPressure | data: [{\"categoria\":\"VALOR ELEVADO DE PRESIÓN ARTERIAL\",\"cantidad\":0},{\"categoria\":\"HIPERTENSIÓN ARTERIAL °\",\"cantidad\":3},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:25.390Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:25.415Z"}
+{"level":"info","message":"Gettings statistics visual-acuity {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:25.416Z"}
+{"level":"info","message":"StatisticsService.findOsteoMuscularPathologies | data: [{\"categoria\":\"DOLOR ARTICULAR\",\"cantidad\":0},{\"categoria\":\"LUMBALGIA\",\"cantidad\":0},{\"categoria\":\"DORSALGIA\",\"cantidad\":0},{\"categoria\":\"VÁRICES DE MIEMBROS INFERIORES\",\"cantidad\":2},{\"categoria\":\"CONTRACTURA MUSCULAR\",\"cantidad\":0},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:26.101Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:26.145Z"}
+{"level":"info","message":"Gettings statistics other-conditions {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:26.147Z"}
+{"level":"info","message":"query other conditions","timestamp":"2026-02-28T14:36:26.148Z"}
+{"level":"info","message":"StatisticsService.findSpirometry | data: [{\"categoria\":\"NORMAL\",\"cantidad\":115},{\"categoria\":\"RESTRICCION\",\"cantidad\":9},{\"categoria\":\"OBSTRUCCIÓN\",\"cantidad\":7},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:26.851Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:26.873Z"}
+{"level":"info","message":"Gettings statistics chest-x-ray {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:26.875Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:26.949Z"}
+{"level":"info","message":"Gettings statistics electrocardiogram {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:26.950Z"}
+{"level":"info","message":"StatisticsService.findExams | data: [{\"categoria\":\"DISLIPIDEMIA MIXTA\",\"cantidad\":0},{\"categoria\":\"EXÁMENES DE LABORATORIO NORMALES.\",\"cantidad\":0},{\"categoria\":\"HIPERCOLESTEROLEMIA\",\"cantidad\":0},{\"categoria\":\"HIPERTRIGLICERIDEMIA\",\"cantidad\":0},{\"categoria\":\"TOTAL\",\"cantidad\":0}]","timestamp":"2026-02-28T14:36:27.732Z"}
+{"level":"info","message":"StatisticsService.findAudiometry | data: [{\"categoria\":\"AUDICIÓN NORMAL\",\"cantidad\":87},{\"categoria\":\"HIPOACUSIA CONDUCTIVA\",\"cantidad\":21},{\"categoria\":\"HIPOACUSIA NEUROSENSORIAL\",\"cantidad\":6},{\"categoria\":\"HIPOACUSIA MIXTA\",\"cantidad\":3},{\"categoria\":\"HIPOACUSIA INDUCIDA POR EL RUIDO\",\"cantidad\":17},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:27.742Z"}
+{"level":"info","message":"StatisticsService.findChestXRay | data: [{\"categoria\":\"NORMAL\",\"cantidad\":126},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:27.751Z"}
+{"level":"info","message":"StatisticsService.findElectrocardiogram | data: [{\"categoria\":\"NORMAL\",\"cantidad\":88},{\"categoria\":\"TOTAL\",\"cantidad\":133}]","timestamp":"2026-02-28T14:36:27.788Z"}
+{"level":"info","message":"StatisticsService.findVisualAcuity | data: [{\"categoria\":\"EMETROPE\",\"cantidad\":38},{\"categoria\":\"AMETROPIA\",\"cantidad\":88},{\"categoria\":\"PRESBICIA\",\"cantidad\":36},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:27.795Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:27.828Z"}
+{"level":"info","message":"Gettings statistics psychology {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:27.828Z"}
+{"level":"info","message":"query psychology","timestamp":"2026-02-28T14:36:27.829Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:27.843Z"}
+{"level":"info","message":"Gettings statistics odontology {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:27.843Z"}
+{"level":"info","message":"query odontology","timestamp":"2026-02-28T14:36:27.845Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:27.861Z"}
+{"level":"info","message":"Gettings statistics structural-height {\"examType\":\"\",\"headquarter\":\"\",\"startDate\":\"2022-12-12\",\"endDate\":\"2025-12-12\"} | 20101635873","timestamp":"2026-02-28T14:36:27.861Z"}
+{"level":"info","message":"StatisticsService.findOtherConditions | data: [{\"categoria\":\"DISCROMATOPSIA\",\"cantidad\":3},{\"categoria\":\"CICATRIZ CORNEAL\",\"cantidad\":1},{\"categoria\":\"ESTEREOPSIS ANORMAL\",\"cantidad\":6},{\"categoria\":\"PINGUECULA\",\"cantidad\":11},{\"categoria\":\"PTERIGION\",\"cantidad\":22},{\"categoria\":\"TOTAL\",\"cantidad\":134}]","timestamp":"2026-02-28T14:36:28.356Z"}
+{"level":"info","message":"StatisticsService.findPsychology | data init: [{\"categoria\":\"APTO\",\"cantidad\":105},{\"categoria\":\"TOTAL\",\"cantidad\":133}]","timestamp":"2026-02-28T14:36:28.430Z"}
+{"level":"info","message":"StatisticsService.findPsychology | data result: [{\"categoria\":\"APTO\",\"cantidad\":78.95},{\"categoria\":\"NO APTO\",\"cantidad\":21.05}]","timestamp":"2026-02-28T14:36:28.432Z"}
+{"level":"info","message":"StatisticsService.findStructuralHeight | data: [{\"categoria\":\"APTO\",\"cantidad\":118},{\"categoria\":\"NO APTO\",\"cantidad\":6}]","timestamp":"2026-02-28T14:36:28.481Z"}
+{"level":"info","message":"StatisticsService.findOdontology | data: [{\"categoria\":\"CARIES DENTAL\",\"cantidad\":120},{\"categoria\":\"SIN CARIES\",\"cantidad\":0},{\"categoria\":\"GINGIVITIS\",\"cantidad\":112},{\"categoria\":\"NECROSIS DE LA PULPA\",\"cantidad\":23},{\"categoria\":\"PULPITIS\",\"cantidad\":6},{\"categoria\":\"TOTAL\",\"cantidad\":131}]","timestamp":"2026-02-28T14:36:29.279Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:44.650Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:44.714Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:48.697Z"}
+{"level":"info","message":"Getting attention monitoring: {\"startDate\":\"2026-02-28\",\"endDate\":\"2026-02-28\",\"headquarter\":\"001\"} | 20101635873","timestamp":"2026-02-28T14:36:48.699Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:49.071Z"}
+{"level":"info","message":"Getting attention monitoring: {\"startDate\":\"2026-02-28\",\"endDate\":\"2026-02-28\",\"headquarter\":\"001\"} | 20101635873","timestamp":"2026-02-28T14:36:49.075Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:52.609Z"}
+{"level":"info","message":"Getting attention monitoring: {\"startDate\":\"2026-02-28\",\"endDate\":\"2026-02-28\",\"headquarter\":\"001\"} | 20101635873","timestamp":"2026-02-28T14:36:52.611Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:36:53.053Z"}
+{"level":"info","message":"Getting attention monitoring: {\"startDate\":\"2026-02-28\",\"endDate\":\"2026-02-28\",\"headquarter\":\"001\"} | 20101635873","timestamp":"2026-02-28T14:36:53.055Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:00.336Z"}
+{"level":"info","message":"Getting attention monitoring: {\"startDate\":\"2022-12-12\",\"endDate\":\"2026-12-12\"} | 20101635873","timestamp":"2026-02-28T14:37:00.339Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:06.362Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:11.447Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:27.909Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:37:27.911Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.475Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:28.476Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.487Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:28.487Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.497Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:28.498Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.509Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:28.510Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.604Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:28.605Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.636Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:28.638Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.715Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:28.716Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:28.728Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:28.728Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.517Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:37.518Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.528Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:37.528Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.535Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:37.536Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.545Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:37.546Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.637Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:37.639Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.652Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:37.652Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.674Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:37.675Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.687Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:37.688Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.850Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:37.851Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.860Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:37.860Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.877Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:37.878Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:37.888Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:37.889Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:38.086Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:38.087Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:38.098Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:38.099Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:38.114Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:38.115Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:38.127Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:38.127Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:39.593Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:39.595Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:39.610Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:39.611Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:39.624Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:39.625Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:39.634Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:39.635Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.447Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:40.448Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.457Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:40.458Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.468Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:40.469Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.478Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:40.479Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.749Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:40.750Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.759Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:40.759Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.767Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:40.767Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.781Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:40.782Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.885Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:37:40.887Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.896Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:37:40.897Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.908Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:37:40.908Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:40.917Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:37:40.918Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:37:43.199Z"}
+{"level":"info","message":"Getting sabana data","timestamp":"2026-02-28T14:37:43.201Z"}
+{"level":"info","message":"Login attempt for user 46222532","timestamp":"2026-02-28T14:43:09.632Z"}
+{"level":"info","message":"User logged in successfully","timestamp":"2026-02-28T14:43:12.278Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:29.880Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:43:29.882Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:31.852Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:31.856Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:31.857Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:43:31.858Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:31.860Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:43:31.860Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:31.862Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:31.862Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:32.046Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:32.047Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:32.077Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:43:32.078Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:32.162Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:43:32.164Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:32.181Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:32.181Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.137Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:43:36.138Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.149Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:36.150Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.160Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:36.160Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.177Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:43:36.178Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.325Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:43:36.326Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.336Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:36.337Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.348Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:43:36.349Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.402Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:36.403Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.650Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:43:36.651Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.665Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:36.665Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.677Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:36.678Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.691Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:43:36.692Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.926Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:43:36.928Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.939Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:36.939Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.950Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:36.950Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:36.966Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:43:36.966Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:42.072Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:43:42.074Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:45.118Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:45.121Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:45.133Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:45.134Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:45.223Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:45.224Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:45.235Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:45.236Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:46.633Z"}
+{"level":"info","message":"Getting sabana data","timestamp":"2026-02-28T14:43:46.635Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:53.162Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:53.163Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:53.175Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:53.175Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:53.240Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:43:53.241Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:43:53.270Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:43:53.271Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.445Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:44:16.446Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.459Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:44:16.460Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.560Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:44:16.561Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.572Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:44:16.572Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.732Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:44:16.733Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.745Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:44:16.745Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.955Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:44:16.956Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:16.969Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:44:16.970Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:18.295Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:44:18.296Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:19.811Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:44:19.812Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:19.824Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:44:19.825Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:19.881Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:44:19.882Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:19.892Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:44:19.893Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:27.899Z"}
+{"level":"info","message":"Getting sabana data","timestamp":"2026-02-28T14:44:27.901Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:42.390Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:44:42.392Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.387Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:44:46.388Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.410Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:44:46.411Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.424Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:44:46.424Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.433Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:44:46.435Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.447Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:44:46.447Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.481Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:44:46.482Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.577Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:44:46.578Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.589Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:44:46.589Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.678Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:44:46.679Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.693Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:44:46.693Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.703Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:44:46.704Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.713Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:44:46.713Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.761Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:44:46.762Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.775Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:44:46.776Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.856Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:44:46.857Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.868Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:44:46.869Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.905Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:44:46.907Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.916Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:44:46.917Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.957Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:44:46.959Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:46.990Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:44:46.991Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.065Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:44:47.066Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.077Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:44:47.078Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.114Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:44:47.115Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.124Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:44:47.125Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.133Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:44:47.134Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.176Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:44:47.177Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.216Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:44:47.218Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.229Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:44:47.229Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.274Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:44:47.275Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.285Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:44:47.285Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.299Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:44:47.300Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.341Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:44:47.342Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.360Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:44:47.361Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.371Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:44:47.372Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.429Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:44:47.431Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.459Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:44:47.459Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.470Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:44:47.472Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:47.587Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:44:47.588Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:44:48.195Z"}
+{"level":"info","message":"Getting sabana data","timestamp":"2026-02-28T14:44:48.196Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:31.876Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:45:31.878Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:31.894Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:45:31.894Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:31.910Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:45:31.911Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:31.932Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:45:31.933Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:31.955Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:45:31.958Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.013Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:45:32.014Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.155Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:45:32.156Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.224Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:45:32.225Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.256Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:45:32.258Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.268Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:45:32.269Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.299Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:45:32.301Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.310Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:45:32.311Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.363Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:45:32.364Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.437Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:45:32.440Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.498Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:45:32.502Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.521Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:45:32.522Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.604Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:45:32.613Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.660Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:45:32.662Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.739Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:45:32.744Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.869Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:45:32.871Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.897Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:45:32.898Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.922Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:45:32.927Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:32.988Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:45:32.990Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.004Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:45:33.005Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.039Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:45:33.043Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.293Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:45:33.295Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.312Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:45:33.313Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.363Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:45:33.365Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.405Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:45:33.411Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.430Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:45:33.431Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.448Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:45:33.449Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.676Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:45:33.678Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.692Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:45:33.693Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.707Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:45:33.711Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.739Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:45:33.742Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.799Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:45:33.801Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.818Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:45:33.819Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:33.990Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:45:33.995Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:34.040Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:45:34.044Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:45:34.069Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:45:34.070Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:48:45.943Z"}
+{"level":"info","message":"Getting sabana data","timestamp":"2026-02-28T14:48:45.947Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.105Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:49:28.107Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.123Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:49:28.126Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.144Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:49:28.150Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.172Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:49:28.172Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.219Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:49:28.224Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.242Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:49:28.242Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.354Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:49:28.357Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.427Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:49:28.429Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.489Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:49:28.491Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.540Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:49:28.541Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.550Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:49:28.551Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.566Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:49:28.566Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.575Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:49:28.576Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.619Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:49:28.620Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.670Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:49:28.672Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.712Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:49:28.715Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.737Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:49:28.737Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.747Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:49:28.748Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.760Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:49:28.761Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.790Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:49:28.791Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.817Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:49:28.818Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.835Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:49:28.836Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.930Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:49:28.931Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.941Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:49:28.942Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.957Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:49:28.958Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.967Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:49:28.968Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:28.997Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:49:28.998Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.009Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:49:29.010Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.057Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:49:29.058Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.071Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:49:29.072Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.151Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:49:29.153Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.165Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:49:29.176Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.272Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:49:29.274Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.294Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:49:29.296Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:49:29.500Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:49:29.504Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:52:51.557Z"}
+{"level":"info","message":"Executing get medical exam","timestamp":"2026-02-28T14:52:51.563Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:52:57.058Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:02.956Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:08.257Z"}
+{"level":"info","message":"Executing download diagnosis","timestamp":"2026-02-28T14:53:08.261Z"}
+{"level":"info","message":"Preparing diagnosis download","timestamp":"2026-02-28T14:53:08.262Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:53:08.402Z"}
+{"level":"error","message":"FTP Error while downloading file: FTPError: 550 ","timestamp":"2026-02-28T14:53:08.435Z"}
+{"level":"error","message":"Error while trying download diagnosis","timestamp":"2026-02-28T14:53:08.438Z"}
+{"level":"error","message":"550 ","timestamp":"2026-02-28T14:53:08.438Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.846Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:53:18.848Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.856Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:53:18.856Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.864Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:53:18.865Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.881Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:53:18.881Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.888Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:53:18.889Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.899Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:53:18.900Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.961Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:53:18.962Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:18.993Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:53:18.993Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.055Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:53:19.056Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.070Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:53:19.070Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.096Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:53:19.097Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.114Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:53:19.115Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.127Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:53:19.128Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.137Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:53:19.137Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.189Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:53:19.191Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.200Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:53:19.201Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.229Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:53:19.230Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.266Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:53:19.268Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.278Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:53:19.279Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.294Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:53:19.294Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.361Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:53:19.363Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.373Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:53:19.374Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.422Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:53:19.424Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.479Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:53:19.480Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.493Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:53:19.493Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.515Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:53:19.516Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.549Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:53:19.551Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.559Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:53:19.560Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.570Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:53:19.570Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.612Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:53:19.613Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.621Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:53:19.622Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.633Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:53:19.634Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.682Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:53:19.684Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.693Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:53:19.693Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.701Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:53:19.702Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.753Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:53:19.754Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.775Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:53:19.775Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.783Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:53:19.784Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.826Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:53:19.827Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:19.852Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:53:19.853Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:21.521Z"}
+{"level":"info","message":"Executing get medical exam","timestamp":"2026-02-28T14:53:21.523Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:27.635Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:29.467Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:31.300Z"}
+{"level":"info","message":"Executing download diagnosis","timestamp":"2026-02-28T14:53:31.302Z"}
+{"level":"info","message":"Preparing diagnosis download","timestamp":"2026-02-28T14:53:31.303Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:53:31.370Z"}
+{"level":"info","message":"File downloaded to memory (141337 bytes)","timestamp":"2026-02-28T14:53:31.498Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.668Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:53:35.670Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.680Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:53:35.681Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.689Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:53:35.690Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.700Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:53:35.700Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.708Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:53:35.709Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.733Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:53:35.734Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.802Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:53:35.803Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.811Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:53:35.812Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.863Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:53:35.864Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.872Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:53:35.872Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.880Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:53:35.881Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.905Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:53:35.905Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.933Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:53:35.934Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.942Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:53:35.943Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:35.998Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:53:35.999Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.029Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:53:36.031Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.188Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:53:36.190Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.207Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:53:36.208Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.224Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:53:36.225Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.235Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:53:36.236Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.254Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403938","timestamp":"2026-02-28T14:53:36.254Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.264Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403374","timestamp":"2026-02-28T14:53:36.265Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.307Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080406563","timestamp":"2026-02-28T14:53:36.308Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.363Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403599","timestamp":"2026-02-28T14:53:36.364Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.384Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:53:36.384Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.392Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080403967","timestamp":"2026-02-28T14:53:36.393Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.400Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401552","timestamp":"2026-02-28T14:53:36.401Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.409Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401482","timestamp":"2026-02-28T14:53:36.410Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.443Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080401141","timestamp":"2026-02-28T14:53:36.444Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.508Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400978","timestamp":"2026-02-28T14:53:36.509Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.522Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400753","timestamp":"2026-02-28T14:53:36.522Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.534Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400576","timestamp":"2026-02-28T14:53:36.534Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.546Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400648","timestamp":"2026-02-28T14:53:36.546Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.555Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400569","timestamp":"2026-02-28T14:53:36.556Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.570Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400315","timestamp":"2026-02-28T14:53:36.570Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.638Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400320","timestamp":"2026-02-28T14:53:36.639Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.650Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400338","timestamp":"2026-02-28T14:53:36.651Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.672Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400047","timestamp":"2026-02-28T14:53:36.673Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.686Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400018","timestamp":"2026-02-28T14:53:36.686Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:36.708Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080400009","timestamp":"2026-02-28T14:53:36.710Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:56.633Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:53:56.635Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.416Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:53:57.417Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.433Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:53:57.434Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.446Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:53:57.447Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.472Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:53:57.473Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.515Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:53:57.516Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.565Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:53:57.567Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.581Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:53:57.582Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:53:57.597Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:53:57.598Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:01.932Z"}
+{"level":"info","message":"Executing get medical exam","timestamp":"2026-02-28T14:54:01.934Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:04.485Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:06.424Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.224Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:54:07.225Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.235Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:54:07.236Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.251Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:54:07.251Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.267Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:54:07.269Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.420Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:54:07.421Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.430Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:54:07.430Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:07.446Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:54:07.447Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:13.276Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:54:13.277Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:13.362Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:54:13.363Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:16.617Z"}
+{"level":"info","message":"Executing download consultation","timestamp":"2026-02-28T14:54:16.622Z"}
+{"level":"info","message":"Downloading consultation file","timestamp":"2026-02-28T14:54:16.623Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:54:16.769Z"}
+{"level":"info","message":"File downloaded to memory (490343 bytes)","timestamp":"2026-02-28T14:54:16.977Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:22.919Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:54:22.921Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:22.936Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:54:22.937Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:22.948Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:54:22.949Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:22.957Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:54:22.957Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:23.041Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:54:23.043Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:23.061Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:54:23.061Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:23.086Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:54:23.087Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:23.098Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:54:23.099Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:52.862Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:54:53.292Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:00.967Z"}
+{"level":"info","message":"Executing get medical exams","timestamp":"2026-02-28T14:55:00.969Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:01.921Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:01.922Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:01.934Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:55:01.935Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:01.947Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:55:01.947Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:01.960Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:55:01.961Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:02.081Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:02.082Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:02.228Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:55:02.229Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:02.258Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:55:02.260Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:02.270Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:55:02.271Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:07.279Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:07.281Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:07.684Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:07.685Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:08.844Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:08.845Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:08.858Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:55:08.858Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:08.869Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:55:08.870Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:08.879Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:55:08.880Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:09.046Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:55:09.047Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:09.059Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:55:09.059Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:09.067Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:09.068Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:09.081Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:55:09.081Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:10.504Z"}
+{"level":"info","message":"Executing get medical exam","timestamp":"2026-02-28T14:55:10.507Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:14.036Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.258Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:15.259Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.271Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:55:15.272Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.287Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:55:15.287Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.301Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:55:15.302Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.346Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:55:15.347Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.384Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:55:15.385Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.395Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:55:15.396Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.422Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:55:15.425Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:15.888Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:25.287Z"}
+{"level":"info","message":"Executing get medical exam","timestamp":"2026-02-28T14:55:25.288Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:30.699Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.291Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:35.294Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.419Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:35.424Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.564Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:55:35.568Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.581Z"}
+{"level":"info","message":"Executing get radiology images of user: \"45613613\"","timestamp":"2026-02-28T14:55:35.582Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.606Z"}
+{"level":"info","message":"Executing get radiology images of user: 45613613","timestamp":"2026-02-28T14:55:35.610Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.733Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:35.735Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:35.809Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:35.812Z"}
+{"level":"info","message":"Audiometries found: 3","timestamp":"2026-02-28T14:55:37.913Z"}
+{"level":"info","message":"Audiometries raw data: [{\"cdg_reg\":\"0000036537\",\"year\":\"2026\",\"month\":\"February\",\"cdg_fmed\":\"0080407374\",\"fec_fmed\":\"2026-02-02T00:00:00.000Z\",\"t_examen\":\"EXAMEN PRE OCUPACIONAL\",\"obs_audio\":\"AUDICIÓN NORMAL / \"},{\"cdg_reg\":\"0000024333\",\"year\":\"2024\",\"month\":\"July\",\"cdg_fmed\":\"0080388495\",\"fec_fmed\":\"2024-07-17T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"AUDICIÓN NORMAL\\r\\n\"},{\"cdg_reg\":\"0000020673\",\"year\":\"2023\",\"month\":\"June\",\"cdg_fmed\":\"0080382582\",\"fec_fmed\":\"2023-06-26T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"  HIPOACUSIA CONDUCTIVA BILATERAL LEVE / \"}]","timestamp":"2026-02-28T14:55:37.914Z"}
+{"level":"info","message":"Audiometry path constructed: /2026/FEBRERO/0000036537.png (raw month: \"February\", translated: \"FEBRERO\")","timestamp":"2026-02-28T14:55:37.915Z"}
+{"level":"info","message":"Audiometry path constructed: /2024/JULIO/0000024333.png (raw month: \"July\", translated: \"JULIO\")","timestamp":"2026-02-28T14:55:37.915Z"}
+{"level":"info","message":"Audiometry path constructed: /2023/JUNIO/0000020673.png (raw month: \"June\", translated: \"JUNIO\")","timestamp":"2026-02-28T14:55:37.916Z"}
+{"level":"info","message":"Downloading audiometry files: 3","timestamp":"2026-02-28T14:55:37.916Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2026/FEBRERO/0000036537.png","timestamp":"2026-02-28T14:55:37.916Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:55:37.917Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2026\\FEBRERO\\0000036537.png","timestamp":"2026-02-28T14:55:37.918Z"}
+{"level":"info","message":"Radiologies found: 3","timestamp":"2026-02-28T14:55:38.278Z"}
+{"level":"info","message":"Downloading radiology files: 3","timestamp":"2026-02-28T14:55:38.281Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:55:38.351Z"}
+{"level":"info","message":"SMB file downloaded (7829 bytes)","timestamp":"2026-02-28T14:55:38.398Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:55:38.425Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2024/JULIO/0000024333.png","timestamp":"2026-02-28T14:55:38.462Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:55:38.464Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2024\\JULIO\\0000024333.png","timestamp":"2026-02-28T14:55:38.464Z"}
+{"level":"info","message":"File downloaded to memory (200991 bytes)","timestamp":"2026-02-28T14:55:38.501Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:55:38.570Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:55:38.588Z"}
+{"level":"info","message":"SMB file downloaded (7398 bytes)","timestamp":"2026-02-28T14:55:38.618Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:38.654Z"}
+{"level":"info","message":"File downloaded to memory (211930 bytes)","timestamp":"2026-02-28T14:55:38.661Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2023/JUNIO/0000020673.png","timestamp":"2026-02-28T14:55:38.669Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:55:38.670Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2023\\JUNIO\\0000020673.png","timestamp":"2026-02-28T14:55:38.671Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:55:38.727Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:55:38.783Z"}
+{"level":"info","message":"File downloaded to memory (230069 bytes)","timestamp":"2026-02-28T14:55:38.864Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:55:38.868Z"}
+{"level":"info","message":"SMB file downloaded (9093 bytes)","timestamp":"2026-02-28T14:55:38.880Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:38.911Z"}
+{"level":"info","message":"Executing get radiology images of user: \"45613613\"","timestamp":"2026-02-28T14:55:38.913Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:55:38.923Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:38.951Z"}
+{"level":"info","message":"Executing get radiology images of user: 45613613","timestamp":"2026-02-28T14:55:38.952Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:39.052Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:39.053Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:39.073Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:39.074Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:39.635Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:39.637Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:39.652Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:39.653Z"}
+{"level":"info","message":"Audiometries found: 3","timestamp":"2026-02-28T14:55:40.091Z"}
+{"level":"info","message":"Audiometries raw data: [{\"cdg_reg\":\"0000036537\",\"year\":\"2026\",\"month\":\"February\",\"cdg_fmed\":\"0080407374\",\"fec_fmed\":\"2026-02-02T00:00:00.000Z\",\"t_examen\":\"EXAMEN PRE OCUPACIONAL\",\"obs_audio\":\"AUDICIÓN NORMAL / \"},{\"cdg_reg\":\"0000024333\",\"year\":\"2024\",\"month\":\"July\",\"cdg_fmed\":\"0080388495\",\"fec_fmed\":\"2024-07-17T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"AUDICIÓN NORMAL\\r\\n\"},{\"cdg_reg\":\"0000020673\",\"year\":\"2023\",\"month\":\"June\",\"cdg_fmed\":\"0080382582\",\"fec_fmed\":\"2023-06-26T00:00:00.000Z\",\"t_examen\":\"EXAMEN ANUAL\",\"obs_audio\":\"  HIPOACUSIA CONDUCTIVA BILATERAL LEVE / \"}]","timestamp":"2026-02-28T14:55:40.095Z"}
+{"level":"info","message":"Audiometry path constructed: /2026/FEBRERO/0000036537.png (raw month: \"February\", translated: \"FEBRERO\")","timestamp":"2026-02-28T14:55:40.096Z"}
+{"level":"info","message":"Audiometry path constructed: /2024/JULIO/0000024333.png (raw month: \"July\", translated: \"JULIO\")","timestamp":"2026-02-28T14:55:40.098Z"}
+{"level":"info","message":"Audiometry path constructed: /2023/JUNIO/0000020673.png (raw month: \"June\", translated: \"JUNIO\")","timestamp":"2026-02-28T14:55:40.100Z"}
+{"level":"info","message":"Downloading audiometry files: 3","timestamp":"2026-02-28T14:55:40.101Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2026/FEBRERO/0000036537.png","timestamp":"2026-02-28T14:55:40.101Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:55:40.102Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2026\\FEBRERO\\0000036537.png","timestamp":"2026-02-28T14:55:40.102Z"}
+{"level":"info","message":"Radiologies found: 3","timestamp":"2026-02-28T14:55:40.220Z"}
+{"level":"info","message":"Downloading radiology files: 3","timestamp":"2026-02-28T14:55:40.222Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:55:40.301Z"}
+{"level":"info","message":"SMB file downloaded (7829 bytes)","timestamp":"2026-02-28T14:55:40.317Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2024/JULIO/0000024333.png","timestamp":"2026-02-28T14:55:40.373Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:55:40.375Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2024\\JULIO\\0000024333.png","timestamp":"2026-02-28T14:55:40.375Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:55:40.505Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:55:40.585Z"}
+{"level":"info","message":"SMB file downloaded (7398 bytes)","timestamp":"2026-02-28T14:55:40.599Z"}
+{"level":"info","message":"Attempting FTP download from 192.168.1.34, path: /2023/JUNIO/0000020673.png","timestamp":"2026-02-28T14:55:40.655Z"}
+{"level":"info","message":"SMB connecting to \\\\192.168.1.34\\graficosotorrino as administrador","timestamp":"2026-02-28T14:55:40.656Z"}
+{"level":"info","message":"SMB file path: \\\\192.168.1.34\\graficosotorrino\\2023\\JUNIO\\0000020673.png","timestamp":"2026-02-28T14:55:40.657Z"}
+{"level":"info","message":"File downloaded to memory (200991 bytes)","timestamp":"2026-02-28T14:55:40.756Z"}
+{"level":"info","message":"SMB share mounted","timestamp":"2026-02-28T14:55:40.820Z"}
+{"level":"info","message":"SMB file downloaded (9093 bytes)","timestamp":"2026-02-28T14:55:40.830Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:55:40.896Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:55:40.972Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:41.055Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:41.057Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:41.092Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:41.094Z"}
+{"level":"info","message":"File downloaded to memory (211930 bytes)","timestamp":"2026-02-28T14:55:41.113Z"}
+{"level":"info","message":"Connected to FTP. Starting file download","timestamp":"2026-02-28T14:55:41.191Z"}
+{"level":"info","message":"File downloaded to memory (230069 bytes)","timestamp":"2026-02-28T14:55:41.315Z"}
+{"level":"info","message":"Files downloaded: 3","timestamp":"2026-02-28T14:55:41.321Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:41.587Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:41.588Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:41.602Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:41.604Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:43.445Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:55:43.447Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:49.118Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:55:49.120Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:54.333Z"}
+{"level":"info","message":"Executing get cardiology report of user: 45613613","timestamp":"2026-02-28T14:55:54.334Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:54.354Z"}
+{"level":"info","message":"Executing get IMC report of user: 45613613","timestamp":"2026-02-28T14:55:54.355Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:55:54.807Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:55:54.808Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:01.058Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:56:01.060Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:01.609Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:56:01.610Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:01.676Z"}
+{"level":"info","message":"Executing get Laboratory Exams report of user: 45613613","timestamp":"2026-02-28T14:56:01.677Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:02.284Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.082Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:04.083Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.093Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:04.094Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.168Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:04.169Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.191Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:04.192Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.253Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:04.254Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.294Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:04.295Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.332Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:04.333Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:04.379Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:04.380Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.717Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:09.719Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.734Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:09.735Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.746Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:09.747Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.764Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:09.764Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.852Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:09.853Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.860Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:09.860Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.874Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:09.875Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:09.886Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:09.886Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.030Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:10.032Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.044Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:10.044Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.053Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:10.053Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.070Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:10.071Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.116Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.173Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:10.175Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.186Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:10.187Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.198Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:10.199Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:10.208Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:10.208Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.549Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:11.550Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.561Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:11.562Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.570Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:11.571Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.581Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:11.582Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.642Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:11.643Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.688Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:11.689Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.704Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:11.704Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.714Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:11.715Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.986Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:11.987Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:11.997Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:11.998Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:12.013Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:12.015Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:12.026Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:12.027Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:12.292Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:12.294Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:12.312Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:12.313Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:12.326Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:12.326Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:12.346Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:12.347Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:14.324Z"}
+{"level":"info","message":"Getting sabana data","timestamp":"2026-02-28T14:56:14.327Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.266Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:26.267Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.282Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:26.283Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.307Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:26.308Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.374Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:26.374Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.445Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080388495","timestamp":"2026-02-28T14:56:26.447Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.468Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080407374","timestamp":"2026-02-28T14:56:26.469Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.556Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080382582","timestamp":"2026-02-28T14:56:26.558Z"}
+{"level":"info","message":"Token decoded successfully","timestamp":"2026-02-28T14:56:26.573Z"}
+{"level":"info","message":"MedicalExamsRepository.findConsultations: 0080361051","timestamp":"2026-02-28T14:56:26.574Z"}

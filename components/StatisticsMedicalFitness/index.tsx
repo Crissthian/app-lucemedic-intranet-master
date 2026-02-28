@@ -12,7 +12,7 @@ const StatisticsMedicalFitness: React.FC<StatisticsMedicalFitnessProps> = (
 ) => {
   if (props.data.length === 0) return null
 
-  let data = [
+  const data = [
     ['Apto', props.data[0].APTO],
     ['Apto con restricciones', props.data[0].APTO_CON_RESTRICCIONES],
     ['No apto', props.data[0].NO_APTO],

@@ -197,7 +197,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'm.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate'
       conditional += this.addOptionalFilters(params, queryParams)
 
-      let query = `
+      const query = `
       SELECT 'NORMAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'NORMAL' IN (med_1, med_2, med_3, med_4, med_5) UNION SELECT  'SOBREPESO' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'SOBREPESO' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD I°' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD I°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD II°' AS categoria,  COUNT(*) AS cantidad  FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD II°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'OBESIDAD III°' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'OBESIDAD III°' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT  'TOTAL' AS categoria,  COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional}`
 
       const result = await this.database.queryWithParams<NutritionalProfile>(
@@ -234,7 +234,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'm.ruc_SAB=c.RUC_CLI and f.fec_fmed between @startDate and @endDate'
       conditional += this.addOptionalFilters(params, queryParams)
 
-      let query = `
+      const query = `
       SELECT 'VALOR ELEVADO DE PRESIÓN ARTERIAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'VALOR ELEVADO DE PRESIÓN ARTERIAL' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT 'HIPERTENSIÓN ARTERIAL °' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional} AND 'HIPERTENSIÓN ARTERIAL ' IN (ltrim(rtrim(med_1)), ltrim(rtrim(med_2)), ltrim(rtrim(med_3)),ltrim(rtrim(med_4)),ltrim(rtrim(med_5))) UNION SELECT 'TOTAL' AS categoria, COUNT(*) AS cantidad FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') and ${conditional}`
 
       const result = await this.database.queryWithParams<BloodPressure>(
@@ -271,7 +271,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
         'ruc_SAB=@ruc AND m.cdg_fmed=f.cdg_fmed AND (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB=\'EXA\') AND m.ruc_SAB=c.RUC_CLI AND f.fec_fmed between @startDate AND @endDate'
       where += this.addOptionalFilters(params, queryParams)
 
-      let query = `SELECT 
+      const query = `SELECT 
         'DOLOR ARTICULAR' AS categoria, 
         COUNT(*) AS cantidad 
       FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa
@@ -342,10 +342,10 @@ export default class StatisticsRepository implements IStatisticsRepository {
         examType: params.examType
       }
 
-      let where =
+      const where =
         "ruc_SAB=@ruc AND m.cdg_fmed=f.cdg_fmed AND (F.num_dni=P.NUM_DNI)and(F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA') AND m.ruc_SAB=c.RUC_CLI AND f.fec_fmed between @startDate AND @endDate AND f.cdg_sede=@headquarter AND F.tip_exa=@examType"
 
-      let query = `
+      const query = `
       SELECT 
         'EXÁMENES DE LABORATORIO NORMALES.' AS categoria, 
         COUNT(*) AS cantidad 
@@ -1114,7 +1114,7 @@ export default class StatisticsRepository implements IStatisticsRepository {
       let conditional = 'AND f.fec_fmed BETWEEN @startDate AND @endDate'
       conditional += this.addOptionalFilters(params, queryParams)
 
-      let query = `
+      const query = `
       SELECT 
         'APTO' AS categoria, 
         COUNT(*) AS cantidad 

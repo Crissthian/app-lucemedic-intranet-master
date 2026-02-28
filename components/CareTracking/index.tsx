@@ -74,7 +74,7 @@ const CareTracking: React.FC = () => {
 
       const currentDate = new Date().toISOString().split('T')[0]
 
-      let path = `/api/attention-monitoring?startDate=${currentDate}&endDate=${currentDate}&headquarter=001`
+      const path = `/api/attention-monitoring?startDate=${currentDate}&endDate=${currentDate}&headquarter=001`
 
       const response = await fetch(path, {
         method: 'GET',

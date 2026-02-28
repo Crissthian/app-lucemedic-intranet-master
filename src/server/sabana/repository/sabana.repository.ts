@@ -39,7 +39,7 @@ export default class SabanaRepository {
 
       LTRIM(RTRIM(F.num_dni)) AS dni,CONVERT(varchar,P.FECHA_NAC,103) AS [fecha_nacimiento],P.edad AS edad,P.sexo AS sexo,
 
-      RTRIM(LTRIM(F.puestopostula)) AS puesto_postula, RTRIM(LTRIM(F.pue_trb)) AS puesto, RTRIM(LTRIM(exa.DES_ITEM)) AS tipo_examen,RTRIM(LTRIM(co.des_cont)) as protocolo,CONVERT(varchar,F.fec_fmed,103) AS [fecha_examen],
+      RTRIM(LTRIM(F.puestopostula)) AS puesto_postula, RTRIM(LTRIM(F.pue_trb)) AS puesto, RTRIM(LTRIM(exa.DES_ITEM)) AS tipo_examen,RTRIM(LTRIM(co.des_cont)) as protocolo, f.unidad AS [UNIDAD],CONVERT(varchar,F.fec_fmed,103) AS [fecha_examen],
 
       CASE APTITUD
 
@@ -415,8 +415,7 @@ export default class SabanaRepository {
 
             ,
 
-              (select APTITUD from m_7D a where a.cdg_fmed=f.cdg_fmed)as anexo16a,f.opcaptitu AS ALTURA,
-            f.unidad AS [UNIDAD]
+              (select APTITUD from m_7D a where a.cdg_fmed=f.cdg_fmed)as anexo16a,f.opcaptitu AS ALTURA
 
         FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa,M_CONTRATO co
 

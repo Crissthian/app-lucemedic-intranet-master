@@ -1,5 +1,4 @@
 'use client'
-import { Chart } from 'react-google-charts'
 import { Ages } from '@/models/statistics'
 import StatisticsGraphCard from '../StatisticsGraphCard'
 import PieGraph from '../PieGraph'

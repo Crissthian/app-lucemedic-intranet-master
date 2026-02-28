@@ -1,5 +1,4 @@
 import { Roboto } from 'next/font/google'
-import Button from '../Button'
 import styles from './search-filters.module.css'
 
 const roboto = Roboto({ weight: '400', subsets: ['latin'] })

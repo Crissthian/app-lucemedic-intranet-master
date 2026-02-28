@@ -19,11 +19,6 @@ interface StatisticsSpirometryProps {
   data: Spirometry[]
 }
 
-const size = {
-  width: 400,
-  height: 200
-}
-
 const StatisticsSpirometry: React.FC<StatisticsSpirometryProps> = (props) => {
   return (
     <StatisticsGraphCard title={'Espirometría'}>

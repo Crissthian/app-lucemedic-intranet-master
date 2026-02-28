@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './settings.module.css'
 import Panel from '@/components/Panel'
 import { Rubik } from 'next/font/google'
@@ -16,16 +16,18 @@ const rubik = Rubik({ weight: '600', subsets: ['latin'] })
 export default function Settings() {
   const currentUser = useUserProfile()
 
-  const [dni, setDni] = useState<string>('')
-  const [firstName, setFirstName] = useState<string>('')
-  const [lastName, setLastName] = useState<string>('')
-  const [cmp, setCmp] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [phone, setPhone] = useState<string>('')
-  const [birthDate, setBirthDate] = useState<string>('')
+  const [dni] = useState<string>(currentUser?.dni || '')
+  const [firstName, setFirstName] = useState<string>(currentUser?.firstName || '')
+  const [lastName, setLastName] = useState<string>(currentUser?.lastName || '')
+  const [cmp, setCmp] = useState<string>(currentUser?.cmp || '')
+  const [email, setEmail] = useState<string>(currentUser?.email || '')
+  const [phone, setPhone] = useState<string>(currentUser?.phone || '')
+  const [birthDate, setBirthDate] = useState<string>(currentUser?.birthDate || '')
   const [selectedFile, setSelectedFile] = useState<File | undefined>()
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null)
-  const [photoUrl, setPhotoUrl] = useState<string | null>(null)
+  const [photoUrl, setPhotoUrl] = useState<string | null>(
+    currentUser?.photoUrl || null
+  )
 
   const handleFileChange = (e: any) => {
     const target = e.target as HTMLInputElement & {
@@ -178,19 +180,6 @@ export default function Settings() {
       console.log((error as Error).message)
     }
   }
-
-  useEffect(() => {
-    if (currentUser) {
-      setDni(currentUser.dni || '')
-      setFirstName(currentUser.firstName || '')
-      setLastName(currentUser.lastName || '')
-      setEmail(currentUser.email || '')
-      setPhone(currentUser.phone || '')
-      setBirthDate(currentUser.birthDate || '')
-      setCmp(currentUser.cmp || '')
-      setPhotoUrl(currentUser.photoUrl || null)
-    }
-  }, [currentUser])
 
   return (
     <Panel>

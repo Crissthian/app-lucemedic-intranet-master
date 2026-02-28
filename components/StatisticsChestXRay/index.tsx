@@ -8,7 +8,7 @@ interface StatisticsChestXRayProps {
 }
 
 const StatisticsChestXRay: React.FC<StatisticsChestXRayProps> = (props) => {
-  let data = props.data.map((item) => {
+  const data = props.data.map((item) => {
     return [item.categoria, item.cantidad]
   })
 

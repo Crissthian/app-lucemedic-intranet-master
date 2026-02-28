@@ -99,7 +99,6 @@ const MedicalHistory: React.FC = () => {
       })
 
       const result: BaseApi = await response.json()
-      console.log("🚀 ~ getAudiometryImages ~ result:", result)
 
       if (result.error) {
         alert('Error al obtener las imágenes de audiometría')

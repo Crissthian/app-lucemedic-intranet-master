@@ -8,7 +8,7 @@ interface StatisticsPsychologyProps {
 }
 
 const StatisticsPsychology: React.FC<StatisticsPsychologyProps> = (props) => {
-  let data = props.data.map((item) => {
+  const data = props.data.map((item) => {
     return [item.categoria, item.cantidad]
   })
 

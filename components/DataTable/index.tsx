@@ -279,11 +279,16 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       const workbook = XLSX.utils.book_new()
       const worksheet = XLSX.utils.json_to_sheet(result.data.sabana)
 
-      const range = XLSX.utils.decode_range('A1:GF1')
+      const worksheetRange = worksheet['!ref'] || 'A1:A1'
+      const range = XLSX.utils.decode_range(worksheetRange)
 
       for (let C = range.s.c; C <= range.e.c; ++C) {
         const cell_address = { c: C, r: range.s.r } // Dirección de la celda
         const cell_ref = XLSX.utils.encode_cell(cell_address) // Referencia de la celda
+        if (!worksheet[cell_ref]) {
+          continue
+        }
+
         worksheet[cell_ref].s = {
           // Aplicar estilo a la celda
           fill: { fgColor: { rgb: '2662F0' } }, // Color de fondo negro
@@ -375,11 +380,16 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       const workbook = XLSX.utils.book_new()
       const worksheet = XLSX.utils.json_to_sheet(result.data.interconsultations)
 
-      const range = XLSX.utils.decode_range('A1:K1')
+      const worksheetRange = worksheet['!ref'] || 'A1:A1'
+      const range = XLSX.utils.decode_range(worksheetRange)
 
       for (let C = range.s.c; C <= range.e.c; ++C) {
         const cell_address = { c: C, r: range.s.r } // Dirección de la celda
         const cell_ref = XLSX.utils.encode_cell(cell_address) // Referencia de la celda
+        if (!worksheet[cell_ref]) {
+          continue
+        }
+
         worksheet[cell_ref].s = {
           // Aplicar estilo a la celda
           fill: { fgColor: { rgb: '2662F0' } }, // Color de fondo negro
@@ -491,7 +501,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       dispatch(toggleLoading())
 
       saveAs(file)
-    } catch (error: unknown) {
+    } catch {
       toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
         position: 'top-center',
         autoClose: 5000,
@@ -591,7 +601,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
       dispatch(toggleLoading())
 
       saveAs(file)
-    } catch (error: unknown) {
+    } catch {
       toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
         position: 'top-center',
         autoClose: 5000,

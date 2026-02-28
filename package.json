@@ -6,6 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prettier": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
@@ -48,6 +50,9 @@
     "@types/nodemailer": "^7.0.10",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.3",
+    "eslint-config-next": "^16.1.6",
+    "eslint-plugin-import": "^2.32.0",
     "typescript": "^5.9.3"
   },
   "engines": {

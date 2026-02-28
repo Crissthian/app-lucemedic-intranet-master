@@ -10,7 +10,7 @@ interface StatisticsElectrocardiogramProps {
 const StatisticsElectrocardiogram: React.FC<
   StatisticsElectrocardiogramProps
 > = (props) => {
-  let data = props.data.map((item) => {
+  const data = props.data.map((item) => {
     return [item.categoria, item.cantidad]
   })
 

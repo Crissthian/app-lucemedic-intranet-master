@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFireFlameSimple, faFlask } from '@fortawesome/free-solid-svg-icons'
 import styles from './laboratory-exams.module.css'
 import { Rubik } from 'next/font/google'
-import { useDispatch } from 'react-redux'
-import { AppDispatch, useAppSelector } from '@/redux/store'
+import { useAppSelector } from '@/redux/store'
 
 const rubik300 = Rubik({ weight: '300', subsets: ['latin'] })
 const rubik500 = Rubik({ weight: '500', subsets: ['latin'] })

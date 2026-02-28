@@ -146,7 +146,7 @@ export async function handleHistoricalCardiology(
       },
       { status: 200 }
     )
-  } catch (error: unknown) {
+  } catch {
     logger.error(`Error while trying to get cardiology report for user: ${dni}`)
 
     return NextResponse.json(
@@ -188,7 +188,7 @@ export async function handleHistoricalImc(
       },
       { status: 200 }
     )
-  } catch (error: unknown) {
+  } catch {
     logger.error(`Error while trying to get IMC report for user: ${dni}`)
 
     return NextResponse.json(
@@ -231,7 +231,7 @@ export async function handleHistoricalLaboratoryExams(
       },
       { status: 200 }
     )
-  } catch (error: unknown) {
+  } catch {
     logger.error(
       `Error while trying to get laboratory exams report for user: ${dni}`
     )

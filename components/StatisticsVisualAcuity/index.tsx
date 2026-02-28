@@ -10,7 +10,7 @@ interface StatisticsVisualAcuityProps {
 const StatisticsVisualAcuity: React.FC<StatisticsVisualAcuityProps> = (
   props
 ) => {
-  let data = props.data.map((item) => {
+  const data = props.data.map((item) => {
     return [item.categoria, item.cantidad]
   })
 

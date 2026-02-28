@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react'
-import { Slide, ToastContainer, toast } from 'react-toastify'
+import { Slide, toast } from 'react-toastify'
 import moment from 'moment'
 import * as XLSX from 'xlsx-js-style'
 import { saveAs } from 'file-saver'
-import { AppDispatch, useAppSelector } from '@/redux/store'
+import { AppDispatch } from '@/redux/store'
 import { Roboto, Rubik } from 'next/font/google'
 import { formatFullName } from '@/shared/utils'
 import { faFile, faFilePdf, faUserAlt } from '@fortawesome/free-solid-svg-icons'
@@ -14,8 +14,6 @@ import styles from './data-table-rh.module.css'
 import Button from '../Button'
 import { useDispatch } from 'react-redux'
 import { toggleLoading } from '@/redux/features/global.slice'
-import { useRouter } from 'next/navigation'
-import { getDetail, toggleDetail } from '@/redux/features/medical-exams.slice'
 import { openBase64InNewWindow } from '@/shared/base64'
 
 const rubik = Rubik({ weight: '400', subsets: ['latin'] })
@@ -32,9 +30,7 @@ interface DataTableProps {
 }
 
 const DataTableRH: React.FC<DataTableProps> = (props) => {
-  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
-  const { currentUser } = useAppSelector((state) => state.authReducer)
 
   const [selecteds, setSelecteds] = useState<string[]>([])
   const [selectAll, setSelectAll] = useState(false)
@@ -67,40 +63,6 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
         'application/pdf'
       )
     }
-  }
-
-  const handleDetail = async (fmed: string) => {
-    dispatch(toggleLoading())
-    const url = `/api/medical-exams/${fmed}`
-
-    const data = await fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const result: BaseApi = await data.json()
-
-    if (result.error) {
-      localStorage.removeItem('accessToken')
-      router.push('/auth')
-    }
-
-    if (!result.status) {
-      alert('No se pudo obtener el detalle del examen médico')
-    }
-
-    if (result.status) {
-      dispatch(getDetail(result.data))
-      dispatch(toggleDetail())
-      dispatch(toggleLoading())
-    }
-  }
-
-  const showDetailView = async (fmed: string) => {
-    await handleDetail(fmed)
   }
 
   const downloadAptitud = async () => {
@@ -295,7 +257,7 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
       dispatch(toggleLoading())
 
       saveAs(file)
-    } catch (error: unknown) {
+    } catch {
       toast.error('Al parecer algo no salió bien. Contacte al administrador.', {
         position: 'top-center',
         autoClose: 5000,

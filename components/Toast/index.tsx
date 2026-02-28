@@ -1,2 +1,3 @@
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+const Toast: React.FC = () => null
+
+export default Toast

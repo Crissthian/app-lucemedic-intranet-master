@@ -32,7 +32,7 @@ export default class StatisticsService {
       masculino: '0.00',
       femenino: '0.00'
     }
-    let data = await this.repository.findGenders(query, ruc)
+    const data = await this.repository.findGenders(query, ruc)
 
     logger.info(`StatisticsService.findGenders | data: ${JSON.stringify(data)}`)
 
@@ -59,7 +59,7 @@ export default class StatisticsService {
 
   async findAges(query: StatisticsQueryDTO, ruc: string): Promise<Age[]> {
     let result: Age[] = []
-    let data = await this.repository.findAges(query, ruc)
+    const data = await this.repository.findAges(query, ruc)
 
     logger.info(`StatisticsService.findAges | data: ${JSON.stringify(data)}`)
 
@@ -79,7 +79,7 @@ export default class StatisticsService {
     query: StatisticsQueryDTO,
     ruc: string
   ): Promise<MedicalFitness[]> {
-    let data = await this.repository.findMedicalFitness(query, ruc)
+    const data = await this.repository.findMedicalFitness(query, ruc)
 
     return data
   }
@@ -88,7 +88,7 @@ export default class StatisticsService {
     query: StatisticsQueryDTO,
     ruc: string
   ): Promise<NutritionalProfile[]> {
-    let data = await this.repository.findNutritionalProfile(query, ruc)
+    const data = await this.repository.findNutritionalProfile(query, ruc)
 
     const dataFiltrada = data.filter((item) => item.categoria !== 'TOTAL')
 
@@ -113,8 +113,8 @@ export default class StatisticsService {
     query: StatisticsQueryDTO,
     ruc: string
   ): Promise<BloodPressure[]> {
-    let result: BloodPressure[] = []
-    let data = await this.repository.findBloodPressure(query, ruc)
+    const result: BloodPressure[] = []
+    const data = await this.repository.findBloodPressure(query, ruc)
 
     logger.info(
       `StatisticsService.findBloodPressure | data: ${JSON.stringify(data)}`
@@ -153,7 +153,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<OsteoMuscularPathologies[]> {
     let result: OsteoMuscularPathologies[] = []
-    let data = await this.repository.findOsteoMuscularPathologies(query, ruc)
+    const data = await this.repository.findOsteoMuscularPathologies(query, ruc)
 
     logger.info(
       `StatisticsService.findOsteoMuscularPathologies | data: ${JSON.stringify(data)}`
@@ -187,7 +187,7 @@ export default class StatisticsService {
 
   async findExams(query: StatisticsQueryDTO, ruc: string): Promise<Exam[]> {
     let result: Exam[] = []
-    let data = await this.repository.findExams(query, ruc)
+    const data = await this.repository.findExams(query, ruc)
 
     logger.info(`StatisticsService.findExams | data: ${JSON.stringify(data)}`)
 
@@ -222,7 +222,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<Audiometry[]> {
     let result: Audiometry[] = []
-    let data = await this.repository.findAudiometry(query, ruc)
+    const data = await this.repository.findAudiometry(query, ruc)
 
     logger.info(
       `StatisticsService.findAudiometry | data: ${JSON.stringify(data)}`
@@ -259,7 +259,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<Spirometry[]> {
     let result: Spirometry[] = []
-    let data = await this.repository.findSpirometry(query, ruc)
+    const data = await this.repository.findSpirometry(query, ruc)
 
     logger.info(
       `StatisticsService.findSpirometry | data: ${JSON.stringify(data)}`
@@ -296,7 +296,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<VisualAcuity[]> {
     let result: VisualAcuity[] = []
-    let data = await this.repository.findVisualAcuity(query, ruc)
+    const data = await this.repository.findVisualAcuity(query, ruc)
 
     logger.info(
       `StatisticsService.findVisualAcuity | data: ${JSON.stringify(data)}`
@@ -333,7 +333,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<OtherConditions[]> {
     let result: OtherConditions[] = []
-    let data = await this.repository.findOtherConditions(query, ruc)
+    const data = await this.repository.findOtherConditions(query, ruc)
 
     logger.info(
       `StatisticsService.findOtherConditions | data: ${JSON.stringify(data)}`
@@ -488,7 +488,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<StructuralHeight[]> {
     let result: StructuralHeight[] = []
-    let data = await this.repository.findStructuralHeight(query, ruc)
+    const data = await this.repository.findStructuralHeight(query, ruc)
 
     logger.info(
       `StatisticsService.findStructuralHeight | data: ${JSON.stringify(data)}`
@@ -511,7 +511,7 @@ export default class StatisticsService {
     ruc: string
   ): Promise<Odontology[]> {
     let result: Odontology[] = []
-    let data = await this.repository.findOdontology(query, ruc)
+    const data = await this.repository.findOdontology(query, ruc)
 
     logger.info(
       `StatisticsService.findOdontology | data: ${JSON.stringify(data)}`

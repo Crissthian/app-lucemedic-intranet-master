@@ -1,12 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
+const getStoredAccessToken = () => {
+  if (typeof window === 'undefined') {
+    return ''
+  }
+
+  return localStorage.getItem('accessToken') || ''
+}
 
 const useAccessToken = () => {
-  const [accessToken, setAccessToken] = useState<string>('')
+  const [accessToken, setAccessToken] = useState<string>(() =>
+    getStoredAccessToken()
+  )
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken') || ''
-    if (token) {
-      setAccessToken(token)
+    const handleStorageChange = () => {
+      setAccessToken(getStoredAccessToken())
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
     }
   }, [])
 

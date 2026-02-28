@@ -2,7 +2,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
-import { AppDispatch, useAppSelector } from '@/redux/store'
+import { AppDispatch } from '@/redux/store'
 import styles from './data-table-patient.module.css'
 import { Roboto, Rubik } from 'next/font/google'
 import { formatFullName } from '@/shared/utils'
@@ -28,8 +28,6 @@ interface DataTableProps {
 const DataTablePatient: React.FC<DataTableProps> = (props) => {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
-
-  const { currentUser } = useAppSelector((state) => state.authReducer)
 
   const handleDetail = async (fmed: string) => {
     dispatch(toggleLoading())

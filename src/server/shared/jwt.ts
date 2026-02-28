@@ -21,7 +21,7 @@ export default class JWT {
       })
 
       return token
-    } catch (error) {
+    } catch {
       throw new Error('Error signing JWT')
     }
   }
@@ -35,7 +35,7 @@ export default class JWT {
       }
 
       return decoded as Record<string, unknown>
-    } catch (error) {
+    } catch {
       throw new Error('Error verifying JWT')
     }
   }

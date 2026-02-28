@@ -6,7 +6,6 @@ import {
   BarChart,
   CartesianGrid,
   LabelList,
-  Legend,
   Tooltip,
   XAxis,
   YAxis
@@ -14,11 +13,6 @@ import {
 
 interface StatisticsOsteoMuscularPathologiesProps {
   data: OsteoMuscularPathologies[]
-}
-
-const size = {
-  width: 400,
-  height: 200
 }
 
 const StatisticsOsteoMuscularPathologies: React.FC<

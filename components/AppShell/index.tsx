@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import Navigation from '@/components/Navigation'
@@ -18,33 +18,37 @@ const isPublicRoute = (pathname: string) =>
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const [hasSession, setHasSession] = useState<boolean | null>(null)
+
+  const accessToken = useSyncExternalStore(
+    (onStoreChange) => {
+      if (typeof window === 'undefined') {
+        return () => {}
+      }
+
+      window.addEventListener('storage', onStoreChange)
+      return () => window.removeEventListener('storage', onStoreChange)
+    },
+    () => {
+      if (typeof window === 'undefined') {
+        return ''
+      }
+
+      return localStorage.getItem('accessToken') || ''
+    },
+    () => ''
+  )
 
   const publicRoute = isPublicRoute(pathname)
+  const hasSession = publicRoute || accessToken.length > 0
 
   useEffect(() => {
-    if (publicRoute) {
-      setHasSession(true)
-      return
-    }
-
-    const jwt = localStorage.getItem('accessToken') || ''
-
-    if (jwt.length <= 0) {
-      setHasSession(false)
+    if (!publicRoute && !hasSession) {
       router.replace('/auth')
-      return
     }
-
-    setHasSession(true)
-  }, [publicRoute, pathname, router])
+  }, [publicRoute, hasSession, router])
 
   if (publicRoute) {
     return <>{children}</>
-  }
-
-  if (hasSession === null) {
-    return null
   }
 
   if (!hasSession) {
@@ -53,7 +57,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer/>
       <Header />
       <main className={styles.main}>
         <Navigation />

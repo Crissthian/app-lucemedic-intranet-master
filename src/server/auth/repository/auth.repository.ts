@@ -41,7 +41,7 @@ export default class AuthRepository implements IAuthRepository {
       }
 
       return result.data[0]
-    } catch (error: unknown) {
+    } catch {
       throw new Error('Error al obtener los datos del usuario')
     }
   }
@@ -59,7 +59,7 @@ export default class AuthRepository implements IAuthRepository {
       }
 
       return result.data[0]
-    } catch (error: unknown) {
+    } catch {
       throw new Error('Error al obtener los datos del usuario')
     }
   }
@@ -77,7 +77,7 @@ export default class AuthRepository implements IAuthRepository {
       })
 
       return true
-    } catch (error: unknown) {
+    } catch {
       throw new Error('Error al actualizar los datos del usuario')
     }
   }
@@ -92,7 +92,7 @@ export default class AuthRepository implements IAuthRepository {
       })
 
       return true
-    } catch (error: unknown) {
+    } catch {
       throw new Error('Error al actualizar la foto del usuario')
     }
   }

@@ -17,7 +17,7 @@ export type QueryParams = Record<string, QueryParamValue>
 
 declare global {
   // Keep the SQL pool alive across hot reloads in development.
-  // eslint-disable-next-line no-var
+   
   var __lucemedicDbPool: ConnectionPool | undefined
 }
 

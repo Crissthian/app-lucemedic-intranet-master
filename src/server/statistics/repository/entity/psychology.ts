@@ -1,3 +1,3 @@
 import { BaseStatistics } from './base'
 
-export interface Psychology extends BaseStatistics {}
+export type Psychology = BaseStatistics

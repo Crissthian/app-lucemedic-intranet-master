@@ -42,7 +42,6 @@ import StatisticsOdontology from '../StatisticsOdontology'
 import ChartMultipleBars from '../ChartMultipleBars'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
-import StatisticsChestXRay from '../StatisticsChestXRay'
 
 const rubik = Rubik({ weight: '500', subsets: ['latin'] })
 

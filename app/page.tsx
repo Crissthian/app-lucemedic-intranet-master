@@ -52,7 +52,7 @@ export default function HomePage() {
   const [isEmpty, setIsEmpty] = useState<boolean>()
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState(20)
+  const [itemsPerPage] = useState(20)
 
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
