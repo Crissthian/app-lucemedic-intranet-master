@@ -21,6 +21,7 @@ export default class SabanaRepository {
       user: DB_USER,
       password: DB_PASS,
       database: DB_NAME,
+      requestTimeout: 120000,
       options: {
         encrypt: false,
         trustServerCertificate: true,
@@ -53,9 +54,9 @@ export default class SabanaRepository {
 
       ELSE ' ' END as aptitud,
 
-      RESTRICCIONES=ltrim(rtrim((SELECT stuff((SELECT '/' + b.des_obs FROM d_informes b WHERE b.cdg_fmed = a.cdg_fmed FOR XML PATH('')       ), 1, 1, '') Nombres FROM d_informes a where a.cdg_fmed=f.cdg_fmed GROUP BY a.cdg_fmed))),
+      inf.RESTRICCIONES,
 
-      RECOMENDACONES=ltrim(rtrim((SELECT stuff((SELECT '/' + b.des_recomen FROM d_informes b WHERE b.cdg_fmed = a.cdg_fmed FOR XML PATH('') ), 1, 1, '') Nombres FROM d_informes a where a.cdg_fmed=f.cdg_fmed GROUP BY a.cdg_fmed))),
+      inf.RECOMENDACONES,
 
             M.PA_SIS
 
@@ -415,13 +416,24 @@ export default class SabanaRepository {
 
             ,
 
-              (select APTITUD from m_7D a where a.cdg_fmed=f.cdg_fmed)as anexo16a,f.opcaptitu AS ALTURA
+              a7.anexo16a,f.opcaptitu AS ALTURA
 
-        FROM [dbo].[M_MSABANA] m ,m_fmed f,vclientes C,vpaciente P,D_TABLAS exa,M_CONTRATO co
+        FROM [dbo].[M_MSABANA] m
+      INNER JOIN m_fmed f ON m.cdg_fmed = f.cdg_fmed
+      INNER JOIN vclientes c ON m.ruc_SAB = c.RUC_CLI
+      INNER JOIN vpaciente p ON f.num_dni = p.NUM_DNI
+      INNER JOIN D_TABLAS exa ON f.tip_exa = exa.NUM_ITEM AND exa.CDG_TAB = 'EXA'
+      INNER JOIN M_CONTRATO co ON f.cdg_cont = co.cdg_cont
+      OUTER APPLY (
+        SELECT
+          LTRIM(RTRIM(STUFF((SELECT '/' + i.des_obs FROM d_informes i WHERE i.cdg_fmed = f.cdg_fmed FOR XML PATH('')), 1, 1, ''))) AS RESTRICCIONES,
+          LTRIM(RTRIM(STUFF((SELECT '/' + i.des_recomen FROM d_informes i WHERE i.cdg_fmed = f.cdg_fmed FOR XML PATH('')), 1, 1, ''))) AS RECOMENDACONES
+      ) inf
+      OUTER APPLY (
+        SELECT TOP 1 a.APTITUD AS anexo16a FROM m_7D a WHERE a.cdg_fmed = f.cdg_fmed
+      ) a7
 
-      where ruc_SAB=@ruc and m.cdg_fmed=f.cdg_fmed and (F.num_dni=P.NUM_DNI) AND (F.tip_exa=EXA.NUM_ITEM AND EXA.CDG_TAB='EXA')
-
-      and m.ruc_SAB=c.RUC_CLI AND f.cdg_cont=co.cdg_cont`
+      WHERE m.ruc_SAB = @ruc`
 
       if (params.startDate && params.endDate) {
         query += ' AND f.fec_fmed between @startDate AND @endDate'
