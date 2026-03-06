@@ -21,7 +21,7 @@ export default class SabanaRepository {
       user: DB_USER,
       password: DB_PASS,
       database: DB_NAME,
-      requestTimeout: 120000,
+      requestTimeout: 600000, // 10 minutes
       options: {
         encrypt: false,
         trustServerCertificate: true,
