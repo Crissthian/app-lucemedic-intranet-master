@@ -30,6 +30,7 @@ export default function Appointments() {
       const files = (e.target as HTMLInputElement).files
       if (files && files.length > 0) {
         setSelectedFile(files[0])
+        await handleUpload(files[0])
       }
     }
   }
@@ -38,13 +39,14 @@ export default function Appointments() {
     window.open('/formato-citas.xlsx', '_blank')
   }
 
-  const handleUpload = async () => {
+  const handleUpload = async (fileToUpload?: File) => {
+    const file = fileToUpload || selectedFile
+    if (!file) return
+
     dispatch(toggleLoading())
 
-    if (!selectedFile) return
-
     const formData = new FormData()
-    formData.append('file', selectedFile)
+    formData.append('file', file)
 
     const url = '/api/appointments'
 
@@ -112,7 +114,6 @@ export default function Appointments() {
         </div>
       </div>
       <div className={styles.footer}>
-        {selectedFile && <Button label='Enviar' onClick={() => handleUpload()} />}
         {success && (
           <div className={styles.message}>
             <p>

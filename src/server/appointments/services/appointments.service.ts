@@ -34,7 +34,7 @@ export default class AppointmentsService {
       const info = await transporter.sendMail({
         from: `"Citas Lucemedic" <${this.EMAIL_APPOINTMENTS}>`, // sender address
         // to: 'mvegaplm@gmail.com',
-        to: `${this.EMAIL_APPOINTMENTS}`,
+        to: 'citas@lucemedic.com',
         subject: `${this.EMAIL_APPOINTMENTS_SUBJECT}`, // Subject line
         text: 'Programación de citas', // plain text body
         html: `Programación de citas generada por el usuario: <b>DNI ${dni}</b><br/>Fecha: ${moment(new Date().toISOString()).format('MMMM Do YYYY, h:mm:ss a')}`, // html body
