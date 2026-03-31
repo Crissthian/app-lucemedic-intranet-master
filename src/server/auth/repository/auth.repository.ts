@@ -29,19 +29,28 @@ export default class AuthRepository implements IAuthRepository {
 
   async findByDniAndPass(dni: string, pass: string): Promise<User | null> {
     try {
-      const query = `SELECT UI.dni,UI.usr_apellidos,UI.usr_nombres,UI.usr_mail,UI.usr_foto,UI.usr_perfil,UI.usr_ruc,RTRIM(LTRIM(VC.DES_CLI)) AS empresa, RTRIM(LTRIM(UI.cmp)) AS cmp from m_User_Intranet UI, vclientes VC where UI.usr_ruc=VC.RUC_CLI AND UI.dni=@dni AND UI.usr_pass=@pass`
+      const query = `SELECT UI.dni,UI.usr_apellidos,UI.usr_nombres,UI.usr_mail,UI.usr_foto,UI.usr_perfil,UI.usr_ruc,RTRIM(LTRIM(VC.DES_CLI)) AS empresa, RTRIM(LTRIM(UI.cmp)) AS cmp, UI.usr_swt from m_User_Intranet UI, vclientes VC where UI.usr_ruc=VC.RUC_CLI AND UI.dni=@dni AND UI.usr_pass=@pass`
 
-      const result = await this.database.queryWithParams<User>(query, {
+      const result = await this.database.queryWithParams<User & { usr_swt: number }>(query, {
         dni,
         pass
       })
 
-      if (!result.success) {
+      if (!result.success || result.data.length === 0) {
         return null
       }
 
-      return result.data[0]
-    } catch {
+      const user = result.data[0]
+
+      if (user.usr_swt === 1) {
+        throw new Error('Account disabled')
+      }
+
+      return user
+    } catch (error: any) {
+      if (error instanceof Error && error.message === 'Account disabled') {
+        throw error
+      }
       throw new Error('Error al obtener los datos del usuario')
     }
   }

@@ -82,8 +82,19 @@ async function parseJsonBody(
 
 export async function handleLogin(request: NextRequest): Promise<NextResponse> {
   const body = await parseJsonBody(request)
-  const username = String(body.username ?? '')
+  const username = String(body.username ?? '').trim()
   const password = String(body.password ?? '')
+
+  if (!username || !password) {
+    return NextResponse.json(
+      {
+        status: false,
+        message: 'Debe ingresar usuario y contraseña.'
+      },
+      { status: 400 }
+    )
+  }
+
   const now = Date.now()
   const rateLimitKey = getRateLimitKey(request, username)
   const state = getOrCreateAttemptState(rateLimitKey, now)
@@ -124,6 +135,17 @@ export async function handleLogin(request: NextRequest): Promise<NextResponse> {
         {
           status: false,
           message: 'Credenciales inválidas'
+        },
+        { status: 401 }
+      )
+    }
+
+    if (message === 'Account disabled') {
+      return NextResponse.json(
+        {
+          status: false,
+          message:
+            'Su usuario se encuentra bloqueado por falta de pago. Por favor, regularice su situación para restablecer el acceso. Para cualquier duda, comuníquese al 980773060'
         },
         { status: 401 }
       )

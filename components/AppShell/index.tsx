@@ -48,7 +48,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, [publicRoute, hasSession, router])
 
   if (publicRoute) {
-    return <>{children}</>
+    return (
+      <>
+        <ToastContainer />
+        {children}
+      </>
+    )
   }
 
   if (!hasSession) {

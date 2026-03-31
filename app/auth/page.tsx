@@ -1,12 +1,13 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Roboto } from 'next/font/google'
-import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeadset } from '@fortawesome/free-solid-svg-icons'
 import TextField from '@/components/TextField'
 import { BaseApi } from '@/models/base'
+import { faHeadset } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Roboto } from 'next/font/google'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import styles from './auth.module.css'
 
 const roboto700 = Roboto({ weight: '700', subsets: ['latin'] })
@@ -31,7 +32,20 @@ export default function AuthPage() {
     const result: BaseApi = await data.json()
 
     if (!result.status) {
-      alert('Error al iniciar sesión')
+      toast.error(result.message || 'Error al iniciar sesión', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: true,
+        progress: undefined,
+        closeButton: false,
+        style: {
+          color: '#dc3545',
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          textAlign: 'center'
+        }
+      })
     }
 
     if (result.status) {
