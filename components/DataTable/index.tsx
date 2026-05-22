@@ -4,7 +4,9 @@ import { toggleLoading } from '@/redux/features/global.slice'
 import { getDetail, toggleDetail, toggleInterconsultas } from '@/redux/features/medical-exams.slice'
 import { AppDispatch } from '@/redux/store'
 import { openBase64InNewWindow } from '@/shared/base64'
+import { ROLES_TYPES } from '@/shared/constants'
 import { formatFullName } from '@/shared/utils'
+import useUserProfile from '@/hooks/useUserProfile'
 import {
   faCircleInfo,
   faFile,
@@ -39,6 +41,8 @@ interface DataTableProps {
 const DataTable: React.FC<DataTableProps> = (props) => {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
+  const currentUser = useUserProfile()
+  const isRH = currentUser?.profile === ROLES_TYPES.RH
 
   const [selecteds, setSelecteds] = useState<string[]>([])
   const [selectAll, setSelectAll] = useState(false)
@@ -638,12 +642,16 @@ const DataTable: React.FC<DataTableProps> = (props) => {
             <div>
               <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado
             </div>
-            <div>
-              <FontAwesomeIcon icon={faCircleInfo} width={'10px'} /> EMO
-            </div>
-            <div>
-              <FontAwesomeIcon icon={faFile} width={'15px'} /> Interconsulta
-            </div>
+            {!isRH && (
+              <div>
+                <FontAwesomeIcon icon={faCircleInfo} width={'10px'} /> EMO
+              </div>
+            )}
+            {!isRH && (
+              <div>
+                <FontAwesomeIcon icon={faFile} width={'15px'} /> Interconsulta
+              </div>
+            )}
           </div>
           <div className={styles.dataTableBody}>
             {props.data.map((item, index) => (
@@ -677,57 +685,69 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                     />
                   )}
                 </div>
-                <div className={styles.columnEMO}>
-                  {item.close_status === 1 && (
-                    <FontAwesomeIcon
-                      icon={faFilePdf}
-                      width={'28px'}
-                      onClick={() => downloadEMOFile(item.cdg_fmed)}
-                    />
-                  )}
-                </div>
-                <div className={styles.columnInterconsulta}>
-                  {item.close_status === 1 ? (
-                    consultationsMap[item.cdg_fmed] ? (
+                {!isRH && (
+                  <div className={styles.columnEMO}>
+                    {item.close_status === 1 && (
                       <FontAwesomeIcon
                         icon={faFilePdf}
                         width={'28px'}
-                        onClick={() => handleOpenInterconsultas(item)}
+                        onClick={() => downloadEMOFile(item.cdg_fmed)}
                       />
-                    ) : (
-                      <span className={styles.noInterconsulta}>—</span>
-                    )
-                  ) : null}
-                </div>
-                <div className={styles.dataTableItemActions}>
-                  <Button
-                    key={index}
-                    label='Ver más'
-                    onClick={() => showDetailView(`${item.cdg_fmed}`)}
-                    width='100px'
-                    disabled={item.chkproceso}
-                  />
-                </div>
+                    )}
+                  </div>
+                )}
+                {!isRH && (
+                  <div className={styles.columnInterconsulta}>
+                    {item.close_status === 1 ? (
+                      consultationsMap[item.cdg_fmed] ? (
+                        <FontAwesomeIcon
+                          icon={faFilePdf}
+                          width={'28px'}
+                          onClick={() => handleOpenInterconsultas(item)}
+                        />
+                      ) : (
+                        <span className={styles.noInterconsulta}>—</span>
+                      )
+                    ) : null}
+                  </div>
+                )}
+                {!isRH && (
+                  <div className={styles.dataTableItemActions}>
+                    <Button
+                      key={index}
+                      label='Ver más'
+                      onClick={() => showDetailView(`${item.cdg_fmed}`)}
+                      width='100px'
+                      disabled={item.chkproceso}
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>
           <div className={styles.dataTableFooter}>
-            <Button
-              label='DESCARGA MASIVA E.M.O.'
-              onClick={handleDownloadEMOS}
-            />
+            {!isRH && (
+              <Button
+                label='DESCARGA MASIVA E.M.O.'
+                onClick={handleDownloadEMOS}
+              />
+            )}
             <Button
               label='DESCARGA MASIVA CERTIFICADO'
               onClick={handleDownloadCertificados}
             />
-            <Button
-              label={'DESCARGAR SABANA EXCEL'}
-              onClick={() => downloadSabana()}
-            />
-            <Button
-              label={'DESCARGAR RESUMEN DE INTERCONSULTAS'}
-              onClick={() => downloadInterconsultations()}
-            />
+            {!isRH && (
+              <Button
+                label={'DESCARGAR SABANA EXCEL'}
+                onClick={() => downloadSabana()}
+              />
+            )}
+            {!isRH && (
+              <Button
+                label={'DESCARGAR RESUMEN DE INTERCONSULTAS'}
+                onClick={() => downloadInterconsultations()}
+              />
+            )}
           </div>
           <div className={styles.totalRows}>
             {selecteds.length > 0 && (
