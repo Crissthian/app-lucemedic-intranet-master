@@ -145,7 +145,9 @@ export async function handleLogin(request: NextRequest): Promise<NextResponse> {
         {
           status: false,
           message:
-            'Su usuario se encuentra bloqueado por falta de pago. Por favor, regularice su situación para restablecer el acceso. Para cualquier duda, comuníquese al 980773060'
+            'Su usuario se encuentra bloqueado por falta de pago.\n' +
+            'Por favor, regularice su situación para restablecer el acceso.\n' +
+            'Para cualquier duda, comuníquese al 980773060'
         },
         { status: 401 }
       )

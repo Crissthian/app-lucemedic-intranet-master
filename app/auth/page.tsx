@@ -18,7 +18,10 @@ export default function AuthPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e?: React.SubmitEvent<HTMLFormElement>) => {
+    if (e) {
+      e.preventDefault()
+    }
     const url = '/api/login'
 
     const data = await fetch(url, {
@@ -43,7 +46,9 @@ export default function AuthPage() {
           borderRadius: '8px',
           fontSize: '14px',
           fontWeight: 'bold',
-          textAlign: 'center'
+          textAlign: 'center',
+          width: 'fit-content',
+          whiteSpace: 'pre-line'
         }
       })
     }
@@ -94,13 +99,15 @@ export default function AuthPage() {
           <h3 className={roboto700.className}>Iniciar sesión</h3>
         </div>
         <div className={styles.formArea}>
-          <div className={styles.formAuth}>
+          <form className={styles.formAuth} onSubmit={handleSubmit}>
             <TextField
               type={'text'}
               label='Usuario'
               icon='user'
               value={username}
               onChange={handleUsernameChange}
+              name="username"
+              autoComplete="username"
             />
             <TextField
               type={'password'}
@@ -108,11 +115,13 @@ export default function AuthPage() {
               icon='lock'
               value={password}
               onChange={handlePasswordChange}
+              name="password"
+              autoComplete="current-password"
             />
-            <button className={roboto700.className} onClick={handleSubmit}>
+            <button className={roboto700.className} type="submit">
               Ingresar
             </button>
-          </div>
+          </form>
           <div className={styles.formFooter}>
             <div className={styles.formPhone}>
               <FontAwesomeIcon icon={faHeadset} width={'50px'} color='#fff' />

@@ -12,6 +12,8 @@ interface TextFieldProps {
   icon?: 'user' | 'lock'
   value?: string
   onChange?: (value: string) => void
+  name?: string
+  autoComplete?: string
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -19,7 +21,9 @@ const TextField: React.FC<TextFieldProps> = ({
   type,
   icon,
   value,
-  onChange
+  onChange,
+  name,
+  autoComplete
 }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -39,6 +43,8 @@ const TextField: React.FC<TextFieldProps> = ({
         className={roboto.className}
         value={value || ''}
         onChange={handleInputChange}
+        name={name}
+        autoComplete={autoComplete}
       />
     </div>
   )
