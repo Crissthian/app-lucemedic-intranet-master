@@ -1,5 +1,4 @@
 'use client'
-import 'moment/locale/es'
 import moment from 'moment'
 import { AppDispatch, useAppSelector } from '@/redux/store'
 import { useDispatch } from 'react-redux'

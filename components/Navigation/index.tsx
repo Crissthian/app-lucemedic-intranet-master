@@ -86,7 +86,8 @@ const Navigation: React.FC = () => {
         </>
       )}
 
-      {currentUser?.profile === ROLES_TYPES.RH && (
+      {(currentUser?.profile === ROLES_TYPES.RH ||
+        currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL) && (
         <>
           <li className={`${pathname === '/' ? styles.active : ''}`}>
             <Link href='/'>

@@ -1,6 +1,7 @@
 export enum ROLES_TYPES {
   DOCTOR = 0,
   RH = 1,
+  ASISTENTE_SOCIAL = 2,
   PATIENT = 3
 }
 

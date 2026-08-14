@@ -1,5 +1,4 @@
 'use client'
-import 'moment/locale/es'
 import moment from 'moment'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -234,150 +233,156 @@ export default function HomePage() {
           !showMedicalHistory &&
           !showInterconsultas &&
           !showRecomendaciones && (
-          <>
-            <section className={styles.searchFilters}>
-              <div className={styles.filters}>
-                {currentUser.profile === ROLES_TYPES.DOCTOR && (
-                  <>
-                    <Input
-                      placeholder='Apellidos'
-                      type='text'
-                      onChange={(e) => setFullName(e?.target.value)}
-                      value={fullName}
+            <>
+              <section className={styles.searchFilters}>
+                <div className={styles.filters}>
+                  {currentUser.profile === ROLES_TYPES.DOCTOR && (
+                    <>
+                      <Input
+                        placeholder='Apellidos'
+                        type='text'
+                        onChange={(e) => setFullName(e?.target.value)}
+                        value={fullName}
+                      />
+                      <Input
+                        placeholder='D.N.I.'
+                        type='text'
+                        onChange={(event) => setDni(event?.target.value)}
+                        value={dni}
+                      />
+                      <Select
+                        placeholder='Tipo de examen'
+                        options={EXAMS_TYPES_OPTIONS}
+                        onChange={(e) => setExamType(e.target.value)}
+                      />
+                      <Select
+                        placeholder='Sede'
+                        options={HEADQUARTERS_OPTIONS}
+                        onChange={(e) => setSede(e.target.value)}
+                      />
+                    </>
+                  )}
+                  {(currentUser.profile === ROLES_TYPES.RH ||
+                    currentUser.profile === ROLES_TYPES.ASISTENTE_SOCIAL) && (
+                    <>
+                      <Input
+                        placeholder='Nombres y Apellidos'
+                        type='text'
+                        onChange={(e) => setFullName(e?.target.value)}
+                        value={fullName}
+                      />
+                      <Input
+                        placeholder='D.N.I.'
+                        type='text'
+                        onChange={(event) => setDni(event?.target.value)}
+                        value={dni}
+                      />
+                      <Select
+                        placeholder='Tipo de examen'
+                        options={EXAMS_TYPES_OPTIONS}
+                        onChange={(e) => setExamType(e.target.value)}
+                      />
+                      <Select
+                        placeholder='Sede'
+                        options={HEADQUARTERS_OPTIONS}
+                        onChange={(e) => setSede(e.target.value)}
+                      />
+                    </>
+                  )}
+                  <Input
+                    placeholder='Desde'
+                    type='date'
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+                  <Input
+                    placeholder='Hasta'
+                    type='date'
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                  />
+                </div>
+                <div className={styles.actions}>
+                  <Button label={'Buscar'} onClick={handleSubmit} />
+                  <button
+                    className={`${rubik.className} ${styles.clearFilters}`}
+                    onClick={clearFilters}
+                  >
+                    Limpiar
+                  </button>
+                </div>
+              </section>
+              <Panel>
+                {isEmpty && (
+                  <div className={styles.emptyData}>
+                    <FontAwesomeIcon
+                      icon={faBell}
+                      color={'#1EE67D'}
+                      size='2x'
                     />
-                    <Input
-                      placeholder='D.N.I.'
-                      type='text'
-                      onChange={(event) => setDni(event?.target.value)}
-                      value={dni}
-                    />
-                    <Select
-                      placeholder='Tipo de examen'
-                      options={EXAMS_TYPES_OPTIONS}
-                      onChange={(e) => setExamType(e.target.value)}
-                    />
-                    <Select
-                      placeholder='Sede'
-                      options={HEADQUARTERS_OPTIONS}
-                      onChange={(e) => setSede(e.target.value)}
-                    />
-                  </>
+                    <p className={rubik.className}>
+                      No se han encontrado <br />
+                      resultados
+                    </p>
+                  </div>
+                )}
+                {(currentUser.profile === ROLES_TYPES.DOCTOR ||
+                  currentUser.profile === ROLES_TYPES.ASISTENTE_SOCIAL) && (
+                  <DataTable
+                    data={currentItems}
+                    startDate={startDate}
+                    endDate={endDate}
+                    lastName={fullName}
+                    dni={dni}
+                    examType={examType}
+                    sede={sede}
+                  />
                 )}
                 {currentUser.profile === ROLES_TYPES.RH && (
-                  <>
-                    <Input
-                      placeholder='Nombres y Apellidos'
-                      type='text'
-                      onChange={(e) => setFullName(e?.target.value)}
-                      value={fullName}
-                    />
-                    <Input
-                      placeholder='D.N.I.'
-                      type='text'
-                      onChange={(event) => setDni(event?.target.value)}
-                      value={dni}
-                    />
-                    <Select
-                      placeholder='Tipo de examen'
-                      options={EXAMS_TYPES_OPTIONS}
-                      onChange={(e) => setExamType(e.target.value)}
-                    />
-                    <Select
-                      placeholder='Sede'
-                      options={HEADQUARTERS_OPTIONS}
-                      onChange={(e) => setSede(e.target.value)}
-                    />
-                  </>
+                  <DataTableRH
+                    data={currentItems}
+                    startDate={moment(startDate).format('YYYY-MM-DD')}
+                    endDate={moment(endDate).format('YYYY-MM-DD')}
+                    lastName={fullName}
+                    dni={dni}
+                    examType={examType}
+                    sede={sede}
+                  />
                 )}
-                <Input
-                  placeholder='Desde'
-                  type='date'
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-                <Input
-                  placeholder='Hasta'
-                  type='date'
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </div>
-              <div className={styles.actions}>
-                <Button label={'Buscar'} onClick={handleSubmit} />
-                <button
-                  className={`${rubik.className} ${styles.clearFilters}`}
-                  onClick={clearFilters}
-                >
-                  Limpiar
-                </button>
-              </div>
-            </section>
-            <Panel>
-              {isEmpty && (
-                <div className={styles.emptyData}>
-                  <FontAwesomeIcon icon={faBell} color={'#1EE67D'} size='2x' />
-                  <p className={rubik.className}>
-                    No se han encontrado <br />
-                    resultados
-                  </p>
+                {currentUser.profile === ROLES_TYPES.PATIENT && (
+                  <DataTablePatient data={medicalExams} />
+                )}
+                <div className={styles.pagination}>
+                  {medicalExams.length > itemsPerPage && (
+                    <ul className={styles.pageNumbers}>
+                      <li>
+                        <button
+                          className={rubik.className}
+                          onClick={() => paginate(currentPage - 1)}
+                          disabled={currentPage === 1}
+                        >
+                          <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+                      </li>
+                      {renderPageNumbers()}
+                      <li>
+                        <button
+                          className={rubik.className}
+                          onClick={() => paginate(currentPage + 1)}
+                          disabled={
+                            currentPage ===
+                            Math.ceil(medicalExams.length / itemsPerPage)
+                          }
+                        >
+                          <FontAwesomeIcon icon={faChevronRight} />
+                        </button>
+                      </li>
+                    </ul>
+                  )}
                 </div>
-              )}
-              {currentUser.profile === ROLES_TYPES.DOCTOR && (
-                <DataTable
-                  data={currentItems}
-                  startDate={startDate}
-                  endDate={endDate}
-                  lastName={fullName}
-                  dni={dni}
-                  examType={examType}
-                  sede={sede}
-                />
-              )}
-              {currentUser.profile === ROLES_TYPES.RH && (
-                <DataTableRH
-                  data={currentItems}
-                  startDate={moment(startDate).format('YYYY-MM-DD')}
-                  endDate={moment(endDate).format('YYYY-MM-DD')}
-                  lastName={fullName}
-                  dni={dni}
-                  examType={examType}
-                  sede={sede}
-                />
-              )}
-              {currentUser.profile === ROLES_TYPES.PATIENT && (
-                <DataTablePatient data={medicalExams} />
-              )}
-              <div className={styles.pagination}>
-                {medicalExams.length > itemsPerPage && (
-                  <ul className={styles.pageNumbers}>
-                    <li>
-                      <button
-                        className={rubik.className}
-                        onClick={() => paginate(currentPage - 1)}
-                        disabled={currentPage === 1}
-                      >
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                      </button>
-                    </li>
-                    {renderPageNumbers()}
-                    <li>
-                      <button
-                        className={rubik.className}
-                        onClick={() => paginate(currentPage + 1)}
-                        disabled={
-                          currentPage ===
-                          Math.ceil(medicalExams.length / itemsPerPage)
-                        }
-                      >
-                        <FontAwesomeIcon icon={faChevronRight} />
-                      </button>
-                    </li>
-                  </ul>
-                )}
-              </div>
-            </Panel>
-          </>
-        )}
+              </Panel>
+            </>
+          )}
       </section>
     </>
   )

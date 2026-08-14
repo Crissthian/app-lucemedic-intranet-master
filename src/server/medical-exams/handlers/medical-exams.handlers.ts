@@ -223,6 +223,53 @@ export async function handleDownloadCertificado(
   }
 }
 
+export async function handleDownloadCertificadoEtas(
+  request: NextRequest,
+  uid: string | undefined
+): Promise<NextResponse> {
+  const auth = getAuthUser(request)
+  if (auth.response || !auth.user) {
+    return auth.response as NextResponse
+  }
+
+  if (!uid) {
+    return NextResponse.json(
+      { status: false, message: 'Missing medical exam id.' },
+      { status: 400 }
+    )
+  }
+
+  try {
+    logger.info('Executing download certificado ETAS')
+
+    const fileBuffer = await medicalExamsService.downloadCertificadoEtas(
+      auth.user,
+      uid
+    )
+
+    return NextResponse.json(
+      {
+        status: true,
+        data: {
+          file: fileBuffer.toString('base64')
+        }
+      },
+      { status: 200 }
+    )
+  } catch (error: unknown) {
+    logger.error('Error while trying download certificado ETAS')
+    logger.error((error as Error).message)
+
+    return NextResponse.json(
+      {
+        status: false,
+        message: 'El archivo de Certificado ETAS no existe.'
+      },
+      { status: 200 }
+    )
+  }
+}
+
 export async function handleFindDiagnosis(
   request: NextRequest,
   uid: string | undefined

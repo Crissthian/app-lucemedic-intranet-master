@@ -94,6 +94,32 @@ export default class MedicalExamsService {
     }
   }
 
+  async downloadCertificadoEtas(user: UserToken, uid: string): Promise<Buffer> {
+    try {
+      void user
+
+      const path = `/empresas/CETAS/${uid}.pdf`
+
+      logger.info(`Downloading certificado ETAS file: ${path}`)
+
+      try {
+        return await this.sambaClient.downloadFile(path)
+      } catch {
+        logger.warn(`Failed with ${path}, trying /EMPRESAS/CETAS/${uid}.pdf`)
+        try {
+          return await this.sambaClient.downloadFile(`/EMPRESAS/CETAS/${uid}.pdf`)
+        } catch {
+          logger.warn(`Failed with /EMPRESAS/CETAS/${uid}.pdf, trying /CETAS/${uid}.pdf`)
+          return await this.sambaClient.downloadFile(`/CETAS/${uid}.pdf`)
+        }
+      }
+    } catch (error: unknown) {
+      logger.error((error as Error).message)
+
+      throw new Error('Error while trying to download Certificado ETAS')
+    }
+  }
+
   async downloadDiagnosis(uid: string, diagnosisType: number): Promise<Buffer> {
     try {
       let path = ''

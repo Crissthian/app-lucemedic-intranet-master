@@ -1,0 +1,4 @@
+allowBuilds:
+  core-js: true
+  inferno: true
+  unrs-resolver: true

@@ -29,6 +29,8 @@ const Header: React.FC = () => {
         return 'Médico'
       case 1:
         return 'RRHH'
+      case 2:
+        return 'Asistente_social'
       case 3:
         return 'Paciente'
       default:

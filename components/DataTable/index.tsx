@@ -42,7 +42,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
   const currentUser = useUserProfile()
-  const isRH = currentUser?.profile === ROLES_TYPES.RH
+  const isRH =
+    currentUser?.profile === ROLES_TYPES.RH ||
+    currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL
+  const isSocialWorker =
+    currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL
 
   const [selecteds, setSelecteds] = useState<string[]>([])
   const [selectAll, setSelectAll] = useState(false)
@@ -157,6 +161,71 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         `certificado_${cdg_fmed}.pdf`,
         'application/pdf'
       )
+    }
+  }
+
+  const downloadCertificadoEtasFile = async (cdg_fmed: string) => {
+    try {
+      const path = `/api/medical-exams/${cdg_fmed}/certificado-etas`
+
+      const response = await fetch(path, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const result: BaseApi = await response.json()
+
+      if (result.error) {
+        toast.error(
+          'Sesión expirada o no autorizada. Por favor inicie sesión nuevamente.',
+          {
+            position: 'top-center',
+            autoClose: 5000,
+            theme: 'light',
+            transition: Slide
+          }
+        )
+        return
+      }
+
+      if (!result.status || !result.data?.file) {
+        toast.warn(
+          result.message || 'El archivo de Certificado ETAS no existe.',
+          {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            transition: Slide
+          }
+        )
+        return
+      }
+
+      openBase64InNewWindow(
+        result.data.file,
+        `certificado_etas_${cdg_fmed}.pdf`,
+        'application/pdf'
+      )
+    } catch {
+      toast.error('Ocurrió un error al obtener el Certificado ETAS.', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Slide
+      })
     }
   }
 
@@ -640,14 +709,19 @@ const DataTable: React.FC<DataTableProps> = (props) => {
               <FontAwesomeIcon icon={faFile} width={'10px'} /> Aptitud
             </div>
             <div>
-              <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado
+              <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado EMO
             </div>
+            {isSocialWorker && (
+              <div>
+                <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado ETAS
+              </div>
+            )}
             {!isRH && (
               <div>
                 <FontAwesomeIcon icon={faCircleInfo} width={'10px'} /> EMO
               </div>
             )}
-            {!isRH && (
+            {(!isRH || isSocialWorker) && (
               <div>
                 <FontAwesomeIcon icon={faFile} width={'15px'} /> Interconsulta
               </div>
@@ -676,7 +750,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                   </p>
                 </div>
                 <div className={styles.columnAptitud}>{item.aptitud}</div>
-                <div className={styles.columnCertificado}>
+                <div className={styles.columnCertificado} aria-description='boton de descargar certificado'>
                   {item.close_status === 1 && (
                     <FontAwesomeIcon
                       icon={faFilePdf}
@@ -685,6 +759,23 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                     />
                   )}
                 </div>
+                {isSocialWorker && (
+                  <div
+                    className={styles.columnCertificado}
+                    aria-description='boton de descargar certificado etas'
+                  >
+                    {item.close_status === 1 && (
+                      <FontAwesomeIcon
+                        icon={faFilePdf}
+                        width={'28px'}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          downloadCertificadoEtasFile(item.cdg_fmed)
+                        }}
+                      />
+                    )}
+                  </div>
+                )}
                 {!isRH && (
                   <div className={styles.columnEMO}>
                     {item.close_status === 1 && (
@@ -696,7 +787,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                     )}
                   </div>
                 )}
-                {!isRH && (
+                {(!isRH || isSocialWorker) && (
                   <div className={styles.columnInterconsulta}>
                     {item.close_status === 1 ? (
                       consultationsMap[item.cdg_fmed] ? (
@@ -742,7 +833,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                 onClick={() => downloadSabana()}
               />
             )}
-            {!isRH && (
+            {(!isRH || isSocialWorker) && (
               <Button
                 label={'DESCARGAR RESUMEN DE INTERCONSULTAS'}
                 onClick={() => downloadInterconsultations()}

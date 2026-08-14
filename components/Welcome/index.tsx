@@ -25,7 +25,8 @@ const Welcome: React.FC = () => {
       </h1>
 
       {currentUser?.profile === ROLES_TYPES.DOCTOR ||
-      currentUser?.profile === ROLES_TYPES.RH ? (
+      currentUser?.profile === ROLES_TYPES.RH ||
+      currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL ? (
         <p className={roboto400.className}>
           Te damos la bienvenida a nuestra nueva plataforma virtual, diseñada
           para brindarte la mejor experiencia en la gestión de la salud de tus
@@ -49,7 +50,8 @@ const Welcome: React.FC = () => {
         />
       ) : null}
 
-      {currentUser?.profile === ROLES_TYPES.RH ? (
+      {currentUser?.profile === ROLES_TYPES.RH ||
+      currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL ? (
         <Image
           src='/features-rh.png'
           alt={'Features - Lucemedic'}

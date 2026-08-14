@@ -53,8 +53,5 @@
     "eslint-config-next": "^16.1.6",
     "eslint-plugin-import": "^2.32.0",
     "typescript": "^5.9.3"
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
