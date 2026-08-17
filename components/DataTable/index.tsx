@@ -709,11 +709,11 @@ const DataTable: React.FC<DataTableProps> = (props) => {
               <FontAwesomeIcon icon={faFile} width={'10px'} /> Aptitud
             </div>
             <div>
-              <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado EMO
+              <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado
             </div>
             {isSocialWorker && (
               <div>
-                <FontAwesomeIcon icon={faFile} width={'10px'} /> Certificado ETAS
+                <FontAwesomeIcon icon={faFile} width={'10px'} /> ETAS
               </div>
             )}
             {!isRH && (
