@@ -10,12 +10,12 @@ import Button from '@/components/Button'
 import { BaseApi } from '@/models/base'
 import { ROLES_TYPES } from '@/shared/constants'
 import useUserProfile from '@/hooks/useUserProfile'
+import useAuthPhoto from '@/hooks/useAuthPhoto'
 
 const rubik = Rubik({ weight: '600', subsets: ['latin'] })
 
 export default function Settings() {
   const currentUser = useUserProfile()
-
   const [dni] = useState<string>(currentUser?.dni || '')
   const [firstName, setFirstName] = useState<string>(currentUser?.firstName || '')
   const [lastName, setLastName] = useState<string>(currentUser?.lastName || '')
@@ -28,6 +28,7 @@ export default function Settings() {
   const [photoUrl, setPhotoUrl] = useState<string | null>(
     currentUser?.photoUrl || null
   )
+  const remotePhoto = useAuthPhoto(photoUrl)
 
   const handleFileChange = (e: any) => {
     const target = e.target as HTMLInputElement & {
@@ -190,8 +191,8 @@ export default function Settings() {
           style={{
             backgroundImage: preview
               ? `url(${preview})`
-              : photoUrl
-                ? `url(/api/photos/${photoUrl})`
+              : remotePhoto
+                ? `url(${remotePhoto})`
                 : 'none',
             backgroundPosition: 'center',
             backgroundSize: 'cover'

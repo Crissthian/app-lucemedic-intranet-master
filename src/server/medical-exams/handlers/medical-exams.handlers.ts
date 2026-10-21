@@ -4,6 +4,7 @@ import { UserToken } from '@/src/server/medical-exams/dto/user-token.dto'
 import MedicalExamsService from '@/src/server/medical-exams/services/medical-exams.service'
 import { authenticateRequest } from '@/src/server/http/auth'
 import { logger } from '@/src/server/shared'
+import { ROLES_TYPES } from '@/shared/constants'
 
 const medicalExamsService = new MedicalExamsService()
 
@@ -327,6 +328,14 @@ export async function handleDownloadDiagnosis(
     return NextResponse.json(
       { status: false, message: 'Invalid diagnosis request.' },
       { status: 400 }
+    )
+  }
+
+  // El informe de Lectura (17) solo lo puede descargar un médico
+  if (diagnosisType === 17 && auth.user.profile !== ROLES_TYPES.DOCTOR) {
+    return NextResponse.json(
+      { status: false, message: 'Acceso no autorizado' },
+      { status: 403 }
     )
   }
 

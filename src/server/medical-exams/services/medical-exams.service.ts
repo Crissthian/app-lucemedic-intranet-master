@@ -107,9 +107,13 @@ export default class MedicalExamsService {
       } catch {
         logger.warn(`Failed with ${path}, trying /EMPRESAS/CETAS/${uid}.pdf`)
         try {
-          return await this.sambaClient.downloadFile(`/EMPRESAS/CETAS/${uid}.pdf`)
+          return await this.sambaClient.downloadFile(
+            `/EMPRESAS/CETAS/${uid}.pdf`
+          )
         } catch {
-          logger.warn(`Failed with /EMPRESAS/CETAS/${uid}.pdf, trying /CETAS/${uid}.pdf`)
+          logger.warn(
+            `Failed with /EMPRESAS/CETAS/${uid}.pdf, trying /CETAS/${uid}.pdf`
+          )
           return await this.sambaClient.downloadFile(`/CETAS/${uid}.pdf`)
         }
       }
@@ -174,6 +178,9 @@ export default class MedicalExamsService {
           break
         case 16:
           path = `/PSICOSENSOMETRICA/${uid}.pdf`
+          break
+        case 17:
+          path = `/lectura/${uid}.pdf`
           break
         default:
           break
@@ -311,6 +318,10 @@ export default class MedicalExamsService {
         },
         {
           type: 'Psicosensométrica',
+          data: '_'
+        },
+        {
+          type: 'Lectura',
           data: '_'
         }
       )

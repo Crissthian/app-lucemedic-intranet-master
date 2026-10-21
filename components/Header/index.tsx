@@ -1,18 +1,19 @@
 'use client'
-import Image from 'next/image'
-import { Roboto } from 'next/font/google'
-import styles from './header.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import useAuthPhoto from '@/hooks/useAuthPhoto'
+import useUserProfile from '@/hooks/useUserProfile'
 import {
   faChevronDown,
   faChevronUp,
   faSignOut,
   faUser
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Roboto } from 'next/font/google'
+import Image from 'next/image'
 import Link from 'next/link'
-import useUserProfile from '@/hooks/useUserProfile'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import styles from './header.module.css'
 
 const roboto500 = Roboto({ weight: '500', subsets: ['latin'] })
 const roboto400 = Roboto({ weight: '400', subsets: ['latin'] })
@@ -21,6 +22,7 @@ const Header: React.FC = () => {
   const router = useRouter()
 
   const currentUser = useUserProfile()
+  const photoSrc = useAuthPhoto(currentUser?.photoUrl)
   const [showActions, setShowActions] = useState<boolean>(false)
 
   const getProfile = (code: number): string => {
@@ -65,9 +67,10 @@ const Header: React.FC = () => {
       </Link>
       <div className={styles.currentUser}>
         <div className={styles.profilePicture}>
-          {currentUser?.photoUrl && (
-            <Image
-              src={`/api/photos/${currentUser.photoUrl}`}
+          {photoSrc && (
+            // blob URL: el optimizador de next/image no soporta blob:, se usa <img>
+            <img
+              src={photoSrc}
               alt='Profile'
               width={55}
               height={66}
@@ -75,7 +78,8 @@ const Header: React.FC = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                borderRadius: '10%'
+                borderRadius: '10%',
+                caretColor: 'transparent'
               }}
             />
           )}

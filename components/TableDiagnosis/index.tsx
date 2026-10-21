@@ -78,6 +78,9 @@ const TableDiagnosis: React.FC<TableDiagnosisProps> = (props) => {
       case 'Psicosensométrica':
         diagnosisType = 16
         break
+      case 'Lectura':
+        diagnosisType = 17
+        break
       default:
         diagnosisType = 1
         break

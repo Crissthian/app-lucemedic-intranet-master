@@ -86,10 +86,6 @@ const DetailExams: React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(currentUser.profile)
-  }, [currentUser.profile])
-
   return (
     <>
       <div
