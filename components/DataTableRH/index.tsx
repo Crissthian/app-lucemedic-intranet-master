@@ -298,8 +298,10 @@ const DataTableRH: React.FC<DataTableProps> = (props) => {
             {/* <div>Detalle</div> */}
           </div>
           <div className={styles.body}>
-            {props.data.map((item, index) => (
-              <div key={index} className={styles.dataTableItem}>
+            {props.data
+              .filter((item) => item.close_status === 1)
+              .map((item, index) => (
+                <div key={index} className={styles.dataTableItem}>
                 <div>
                   {item.close_status === 1 && (
                     <input

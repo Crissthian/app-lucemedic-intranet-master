@@ -1,7 +1,11 @@
 'use client'
 import { BaseApi } from '@/models/base'
 import { toggleLoading } from '@/redux/features/global.slice'
-import { getDetail, toggleDetail, toggleInterconsultas } from '@/redux/features/medical-exams.slice'
+import {
+  getDetail,
+  toggleDetail,
+  toggleInterconsultas
+} from '@/redux/features/medical-exams.slice'
 import { AppDispatch } from '@/redux/store'
 import { openBase64InNewWindow } from '@/shared/base64'
 import { ROLES_TYPES } from '@/shared/constants'
@@ -45,12 +49,13 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   const isRH =
     currentUser?.profile === ROLES_TYPES.RH ||
     currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL
-  const isSocialWorker =
-    currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL
+  const isSocialWorker = currentUser?.profile === ROLES_TYPES.ASISTENTE_SOCIAL
 
   const [selecteds, setSelecteds] = useState<string[]>([])
   const [selectAll, setSelectAll] = useState(false)
-  const [consultationsMap, setConsultationsMap] = useState<Record<string, boolean>>({})
+  const [consultationsMap, setConsultationsMap] = useState<
+    Record<string, boolean>
+  >({})
 
   useEffect(() => {
     if (!props.data || props.data.length === 0) return
@@ -61,13 +66,16 @@ const DataTable: React.FC<DataTableProps> = (props) => {
     Promise.all(
       closedItems.map(async (item) => {
         try {
-          const res = await fetch(`/api/medical-exams/${item.cdg_fmed}/consultations`, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json'
+          const res = await fetch(
+            `/api/medical-exams/${item.cdg_fmed}/consultations`,
+            {
+              method: 'GET',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              }
             }
-          })
+          )
           const result: BaseApi = await res.json()
           return {
             cdg_fmed: item.cdg_fmed,
@@ -728,8 +736,10 @@ const DataTable: React.FC<DataTableProps> = (props) => {
             )}
           </div>
           <div className={styles.dataTableBody}>
-            {props.data.map((item, index) => (
-              <div key={index} className={styles.dataTableItem}>
+            {props.data
+              .filter((item) => item.close_status === 1)
+              .map((item, index) => (
+                <div key={index} className={styles.dataTableItem}>
                 <div>
                   {item.close_status === 1 && (
                     <input
@@ -750,7 +760,10 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                   </p>
                 </div>
                 <div className={styles.columnAptitud}>{item.aptitud}</div>
-                <div className={styles.columnCertificado} aria-description='boton de descargar certificado'>
+                <div
+                  className={styles.columnCertificado}
+                  aria-description='boton de descargar certificado'
+                >
                   {item.close_status === 1 && (
                     <FontAwesomeIcon
                       icon={faFilePdf}
@@ -777,7 +790,10 @@ const DataTable: React.FC<DataTableProps> = (props) => {
                   </div>
                 )}
                 {!isRH && (
-                  <div className={styles.columnEMO}>
+                  <div
+                    className={styles.columnEMO}
+                    aria-describedby='boton de descarga EMO'
+                  >
                     {item.close_status === 1 && (
                       <FontAwesomeIcon
                         icon={faFilePdf}
