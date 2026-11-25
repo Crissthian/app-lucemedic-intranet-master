@@ -31,14 +31,18 @@ export const HEADQUARTERS_OPTIONS = [
   },
   {
     label: 'CONDORCOCHA',
-    value: '002'
+    value: '003' // 003
   },
   {
     label: 'TARMA',
-    value: '003'
+    value: '004' // 004
   },
   {
     label: 'CAMPAÑA',
-    value: '004'
+    value: '002' //002
+  },
+  {
+    label: 'CHANCAY',
+    value: '007' //007
   }
 ]
